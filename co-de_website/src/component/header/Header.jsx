@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getDictionary } from "@/lib/dictionary";
 
 import code_logo from "@/assets/others/code_logo.webp";
 import nav_logo from "@/assets/others/nav.webp";
 import thflag from "@/assets/others/thaiflag.webp";
 import ukflag from "@/assets/others/ukflag.webp";
 
-const Header = ({ toggle, rewardRef, t, currentLang = "th" }) => {
+const Header = ({ toggle, rewardRef }) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -19,6 +20,10 @@ const Header = ({ toggle, rewardRef, t, currentLang = "th" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const lang = pathname?.split("/")[1] || "th";
+  
+  const dict = getDictionary(lang);
+
+  const currentLang = lang;
 
   const langPath = (path) => {
     return `/${lang}${path}`;
@@ -95,7 +100,7 @@ const Header = ({ toggle, rewardRef, t, currentLang = "th" }) => {
                 onClick={scrollToEmail}
                 className="rounded-full bg-[#F7C94B] px-3 py-1.5 text-xs font-semibold text-[#042451] transition hover:opacity-80"
               >
-                {t?.("freetrial") || "Free Trial"}
+                {dict.freetrial}
               </button>
             )}
 
@@ -109,35 +114,33 @@ const Header = ({ toggle, rewardRef, t, currentLang = "th" }) => {
         </div>
 
         {/* Desktop Menu */}
-        <div
-          className="relative hidden w-[90%] items-center gap-[1%] md:ml-[-40px] md:flex md:text-[1.45vw] lg:text-[1.2vw]"
-        >
+        <div className="relative hidden w-[90%] items-center gap-[1%] md:ml-[-40px] md:flex md:text-[1.45vw] lg:text-[1.2vw]">
           <Link
             href={langPath("/courses")}
             className="flex-grow font-comfortaa text-white transition hover:opacity-80"
           >
-            {t?.("courses") || "คอร์ส"}
+            {dict.courses}
           </Link>
 
           <Link
             href={langPath("/playground")}
             className="flex-grow font-comfortaa text-white transition hover:opacity-80"
           >
-            {t?.("playground") || "ห้องเรียน"}
+            {dict.playground}
           </Link>
 
           <Link
             href={langPath("/blogs")}
             className="flex-grow font-comfortaa text-white transition hover:opacity-80"
           >
-            {t?.("trends") || "บทความ"}
+            {dict.trends}
           </Link>
 
           <Link
             href={langPath("/contactUs")}
             className="flex-grow font-comfortaa text-white transition hover:opacity-80"
           >
-            {t?.("contact") || "ติดต่อเรา"}
+            {dict.contact}
           </Link>
 
           {/* Language */}
@@ -168,17 +171,14 @@ const Header = ({ toggle, rewardRef, t, currentLang = "th" }) => {
       </header>
 
       {/* Floating Free Trial */}
-      {isScrolled &&
-        !isTrialPage &&
-        !isRegistrationPage &&
-        !hideFreeTrial && (
-          <button
-            onClick={scrollToEmail}
-            className="fixed right-6 top-6 z-[99999] hidden animate-bounce rounded-full bg-[#F7C94B] px-4 py-2 font-bold text-[#042451] shadow-xl transition hover:bg-yellow-400 active:scale-95 md:block"
-          >
-            {t?.("freetrial") || "Free Trial"}
-          </button>
-        )}
+      {isScrolled && !isTrialPage && !isRegistrationPage && !hideFreeTrial && (
+        <button
+          onClick={scrollToEmail}
+          className="fixed right-6 top-6 z-[99999] hidden animate-bounce rounded-full bg-[#F7C94B] px-4 py-2 font-bold text-[#042451] shadow-xl transition hover:bg-yellow-400 active:scale-95 md:block"
+        >
+          {dict.freetrial}
+        </button>
+      )}
     </>
   );
 };

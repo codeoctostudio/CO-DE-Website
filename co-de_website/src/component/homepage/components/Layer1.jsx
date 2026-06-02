@@ -48,7 +48,7 @@ const Layer1 = () => {
             <span className="mx-auto my-2 block h-[2px] w-10/12 bg-white/60" />
 
             <span className="block text-[1rem] opacity-90">
-              {t("layer1_2")}
+              {t?.("layer1_2") || "asd"}
             </span>
           </span>
 

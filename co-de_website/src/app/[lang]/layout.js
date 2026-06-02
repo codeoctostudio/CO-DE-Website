@@ -1,5 +1,6 @@
 import { Comfortaa } from "next/font/google";
 import "./globals.css";
+import I18nProvider from "@/component/I18nProvider";
 
 import CookieConsentProvider from "@/CookieConsent";
 import Cookie from "@/Cookie";
@@ -18,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
+      lang="th"
       className={`${comfortaa.variable} h-full antialiased`}
     >
       <body
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
       >
         <CookieConsentProvider>
           <Cookie>
-            {children}
+            <I18nProvider>
+              {children}
+            </I18nProvider>
           </Cookie>
         </CookieConsentProvider>
       </body>
