@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getDictionary } from "@/lib/dictionary";
+import { useLanguage } from "@/hook/useLanguage";
 
 import code_logo from "@/assets/others/code_logo.webp";
 import nav_logo from "@/assets/others/nav.webp";
@@ -12,31 +11,11 @@ import thflag from "@/assets/others/thaiflag.webp";
 import ukflag from "@/assets/others/ukflag.webp";
 
 const Header = ({ toggle, rewardRef }) => {
-  const router = useRouter();
-  const pathname = usePathname();
+  const { lang, dict, currentLang, langPath, setLanguage, pathname, router } = useLanguage();
 
   const [hideFreeTrial, setHideFreeTrial] = useState(false);
   const [headerStyle, setHeaderStyle] = useState("translate-y-0");
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const lang = pathname?.split("/")[1] || "th";
-  
-  const dict = getDictionary(lang);
-
-  const currentLang = lang;
-
-  const langPath = (path) => {
-    return `/${lang}${path}`;
-  };
-
-  const setLanguage = (newLang) => {
-    if (newLang === lang) return;
-
-    const segments = pathname.split("/");
-    segments[1] = newLang;
-
-    router.push(segments.join("/"));
-  };
 
   const isTrialPage = pathname === langPath("/trialclass");
   const isRegistrationPage = pathname === langPath("/registration");

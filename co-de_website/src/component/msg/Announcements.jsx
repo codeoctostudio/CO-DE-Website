@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-const RAW_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api";
-const API_BASE = String(RAW_BASE).replace(/\/+$/, "");
+// const RAW_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api";
+// const API_BASE = String(RAW_BASE).replace(/\/+$/, "");
 import { useLangPath } from "../../guardlang";
 
 const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
@@ -62,7 +62,7 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
   useEffect(() => {
     const fetchAnnouncement = async () => {
       try {
-        const res = await fetch(`${API_BASE}/get_website_announcements.php`);
+        const res = await fetch(`https://co-deacademy.com/api/get_website_announcements.php`);
         const data = await res.json();
 
         if (data.success && Array.isArray(data.rows)) {

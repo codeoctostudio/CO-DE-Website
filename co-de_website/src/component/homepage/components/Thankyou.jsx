@@ -1,13 +1,15 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useNavigate } from "next/navigation";
+import { useLanguage } from "@/hook/useLanguage";
 
 const ThankYou = () => {
-  const navigate = useNavigate();
+  const { router, langPath } = useLanguage();
   const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/");
+      router.push(langPath("/"));
     }, 5000);
 
     const interval = setInterval(() => {
@@ -18,7 +20,7 @@ const ThankYou = () => {
       clearTimeout(timer);
       clearInterval(interval);
     };
-  }, [navigate]);
+  }, [router, langPath]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#042451] font-comfortaa text-white">

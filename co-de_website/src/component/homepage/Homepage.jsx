@@ -8,14 +8,14 @@ import Layer2 from "./components/Layer2";
 import Layer3 from "./components/Layer3";
 import Layer4 from "./components/Layer4";
 import Nav from "../header/Nav";
-// import Message from "../msg/Message";
-// import RewardLayer from "./components/RewardLayer";
+import Message from "../msg/Message";
+import RewardLayer from "./components/RewardLayer";
 
 import BackToTop from "../msg/Backtotop";
 import AnnouncementBar from "../msg/Announcements";
 const Homepage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  // const [announcementVisible, setAnnouncementVisible] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(false);
 
   const rewardRef = useRef(null);
 
@@ -40,13 +40,13 @@ const Homepage = () => {
       <Layer2 />
       <Layer3 />
       <Layer4 />
-      {/* <div ref={rewardRef}>
+      <div ref={rewardRef}>
         <RewardLayer />
-      </div> */}
+      </div>
       <Footer />
-      {/* <AnnouncementBar onVisibleChange={setAnnouncementVisible} rewardRef={rewardRef} /> */}
-      {/* <Message announcementVisible={announcementVisible} /> */}
-      {/* <BackToTop /> */}
+      <AnnouncementBar onVisibleChange={setAnnouncementVisible} rewardRef={rewardRef} />
+      <Message announcementVisible={announcementVisible} />
+      <BackToTop />
     </div>
   );
 };

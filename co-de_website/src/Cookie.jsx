@@ -4,12 +4,17 @@ import { useContext, useState } from "react";
 import { CookieConsentContext } from "./CookieConsent";
 
 const Cookie = ({ children }) => {
-  const [consentStatus, acceptConsent] = useContext(CookieConsentContext);
+  const [consentStatus, acceptConsent, loaded] =
+    useContext(CookieConsentContext);
   const [analyticsAllowed, setAnalyticsAllowed] = useState(true);
 
   const handleAccept = () => {
     acceptConsent(analyticsAllowed);
   };
+
+  if (!loaded) {
+    return children;
+  }
 
   return (
     <>
@@ -18,13 +23,11 @@ const Cookie = ({ children }) => {
       {consentStatus === "undecided" && (
         <>
           {/* Overlay */}
-          < div className="fixed inset-0 z-[99998] bg-black/40" />
+          <div className="fixed inset-0 z-[99998] bg-black/40" />
 
           {/* Cookie Card */}
           <div className="fixed bottom-0 z-[99999] flex w-full justify-center px-4 pb-6">
-            <div
-              className="animate-slide-up w-full max-w-sm rounded-xl bg-[#29446A] p-2 font-comfortaa text-white shadow-2xl sm:max-w-md sm:p-2 md:max-w-lg md:p-3 lg:max-w-lg lg:p-4"
-            >
+            <div className="animate-slide-up w-full max-w-sm rounded-xl bg-[#29446A] p-2 font-comfortaa text-white shadow-2xl sm:max-w-md sm:p-2 md:max-w-lg md:p-3 lg:max-w-lg lg:p-4">
               {/* Icon */}
               <div className="mb-0 flex justify-center text-xl sm:text-2xl md:text-3xl lg:mb-1 lg:text-4xl">
                 🍪

@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
-import { useLangPath } from "../../../guardlang";
-// เพิ่มการ import Image
 import Image from "next/image";
+import img1 from "@/assets/about/classroom.webp"
+import img2 from "@/assets/about/team.webp"
+import img3 from "@/assets/about/stage.webp"
+import img4 from "@/assets/about/kidsproject.webp"
+import { useLanguage } from "@/hook/useLanguage";
 
 const Layer4 = () => {
-  const { t } = useTranslation();
-  const langPath = useLangPath();
+  const {dict, langPath} = useLanguage();
 
   return (
     <section>
@@ -19,7 +20,7 @@ const Layer4 = () => {
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
-              src="/assets/about/classroom.webp"
+              src={img1}
               alt="Classroom"
               width={600} // ระบุความกว้างโดยประมาณ
               height={400} // ระบุความสูงโดยประมาณ
@@ -27,7 +28,7 @@ const Layer4 = () => {
               loading="lazy"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
-              {t("layer4_1")}
+              {dict.layer4_1}
             </p>
           </Link>
 
@@ -36,7 +37,7 @@ const Layer4 = () => {
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
-              src="/assets/about/team.webp"
+              src={img2}
               alt="Team Teachers"
               width={600}
               height={400}
@@ -44,8 +45,8 @@ const Layer4 = () => {
               loading="lazy"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
-              {t("layer4_2")}<br />
-              {t("layer4_2_1")}
+              {dict.layer4_2}<br />
+              {dict.layer4_2_1}
             </p>
           </Link>
         </div>
@@ -57,7 +58,7 @@ const Layer4 = () => {
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
-              src="/assets/about/stage.webp"
+              src={img3}
               alt="Pitching Stage"
               width={600}
               height={400}
@@ -65,8 +66,8 @@ const Layer4 = () => {
               loading="lazy"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
-              {t("layer4_3")}<br />
-              {t("layer4_3_1")}
+              {dict.layer4_3}<br />
+              {dict.layer4_3_1}
             </p>
           </Link>
 
@@ -75,7 +76,7 @@ const Layer4 = () => {
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
-              src="/assets/about/kidsproject.webp"
+              src={img4}
               alt="Kids Project"
               width={600}
               height={400}
@@ -83,7 +84,7 @@ const Layer4 = () => {
               loading="lazy"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
-              {t("layer4_4")}
+              {dict.layer4_4}
             </p>
           </Link>
         </div>
