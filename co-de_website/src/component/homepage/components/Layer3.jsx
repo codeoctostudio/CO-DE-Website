@@ -123,7 +123,7 @@ const Layer3 = () => {
   return (
     <section>
       <div id="layer3" className="-mt-16 flex h-full w-full flex-col items-center bg-[#042451] py-24 font-comfortaa md:-mt-10">
-        <h2 className={`mx-auto mb-4 max-w-[90%] ${lang === "th" ? "looped-text" : ""} text-center text-xl font-bold text-white sm:text-2xl lg:text-3xl`}>
+        <h2 className={`mx-auto mb-4 max-w-[90%] ${lang === "th" ? "font-looped" : ""} text-center text-xl font-bold text-white sm:text-2xl lg:text-3xl`}>
           {dict.layer3_1}
           <br className="block sm:hidden" />
           {dict.layer3_1_0}
@@ -146,7 +146,7 @@ const Layer3 = () => {
 
         {/* Filter Section */}
         <section id="filterbutton" className="border-neutral-800 flex w-[90%] flex-col items-center rounded-3xl bg-[#f3e49a] p-8 text-black drop-shadow-2xl">
-          <p className={`mb-4 text-center text-2xl lg:text-3xl ${lang === "th" ? "looped-text" : ""}`}>
+          <p className={`mb-4 text-center text-2xl lg:text-3xl ${lang === "th" ? "font-looped" : ""}`}>
             {dict.layer3_4}
           </p>
           <p className="mb-8 text-center text-lg lg:text-xl">

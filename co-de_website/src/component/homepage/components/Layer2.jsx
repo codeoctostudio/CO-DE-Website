@@ -150,7 +150,7 @@ const Layer2 = () => {
           {/* LEFT SECTION */}
           <div className="flex w-full flex-col items-center p-3 md:w-[48%]">
             <p
-              className={`mb-6 text-center text-xl font-bold md:text-2xl ${lang === "th" ? "looped-text" : ""}`}
+              className={`mb-6 text-center text-xl font-bold md:text-2xl ${lang === "th" ? "font-looped" : ""}`}
             >
               {dict.layer2_1}
             </p>
@@ -180,7 +180,7 @@ const Layer2 = () => {
           {/* RIGHT SECTION */}
           <div className="flex w-full flex-col items-center p-3 md:w-[48%]">
             <p
-              className={`mb-6 text-center text-xl font-bold md:text-2xl md:mb-14 ${lang === "th" ? "looped-text" : ""}`}
+              className={`mb-6 text-center text-xl font-bold md:text-2xl md:mb-14 ${lang === "th" ? "font-looped" : ""}`}
             >
               {dict.layer2_4}
             </p>

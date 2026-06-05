@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* 🌟 จับคู่คลาส font-comfortaa และ font-ibm-plex-thai เข้ากับ CSS Variable ของ Next.js */
-  --font-comfortaa: var(--font-comfortaa), "Comfortaa", sans-serif;
-  --font-ibm-plex-thai: var(--font-ibm-plex-thai), "IBM Plex Sans Thai Looped", sans-serif;
+  --font-site:
+    var(--font-comfortaa),
+    var(--font-ibm-plex-thai-looped),
+    sans-serif;
+    
+  --font-looped:
+    var(--font-comfortaa),
+    var(--font-ibm-plex-thai),
+    sans-serif;
 
-  /* โค้ดอนิเมชันเดิมของคุณ */
   --animate-bounce-slow: bounce 1.5s infinite;
   --animate-alarm: alarm 5s infinite;
 

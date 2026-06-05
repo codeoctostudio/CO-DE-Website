@@ -57,7 +57,7 @@ const Header = ({ toggle, rewardRef }) => {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-[9999] flex h-[80px] items-center justify-between bg-[#29446A] px-6 shadow-lg transition duration-500 md:left-12 md:right-12 md:h-[90px] md:rounded-b-[60px] ${headerStyle}`}
+        className={`fixed font-comfortaa left-0 right-0 top-0 z-[9999] flex h-[80px] items-center justify-between bg-[#29446A] px-6 shadow-lg transition duration-500 md:left-12 md:right-12 md:h-[90px] md:rounded-b-[60px] ${headerStyle}`}
       >
         {/* Logo */}
         <Link href={`/${lang}`}>

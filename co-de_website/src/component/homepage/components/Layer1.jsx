@@ -42,7 +42,7 @@ const Layer1 = () => {
         >
           {/* Mobile */}
           <span className="block md:hidden">
-            <span className="block looped-text">{dict.layer1_1}</span>
+            <span className="block font-looped">{dict.layer1_1}</span>
 
             <span className="mx-auto my-2 block h-[2px] w-10/12 bg-white/60" />
 
@@ -53,7 +53,7 @@ const Layer1 = () => {
 
           {/* Tablet & Desktop */}
           <span className="hidden md:inline">
-            <p className={`inline ${lang === "th" ? "looped-text" : ""}`}>
+            <p className={`inline ${lang === "th" ? "font-looped" : ""}`}>
               {dict.layer1_1}
             </p>{" "}
             <span className="opacity-70">|</span>{" "}

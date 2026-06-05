@@ -253,7 +253,7 @@ const RewardLayer = () => {
       <div className="relative flex w-full flex-col items-center font-comfortaa bg-gradient-to-b from-[#fbfbfb] to-[#ffffff] py-12 md:py-20">
         <div className="flex -mt-6 w-[90%] max-w-6xl flex-col items-center text-center gap-4 md:-mt-10">
           <h2
-            className={`px-4 font-bold text-2xl md:text-4xl ${lang === "th" ? "looped-text" : ""}`}
+            className={`px-4 font-bold text-2xl md:text-4xl ${lang === "th" ? "font-looped" : ""}`}
           >
             {dict.reward_1}
           </h2>
@@ -289,7 +289,7 @@ const RewardLayer = () => {
           {/* TEXT */}
           <div className="w-full md:w-full flex flex-col justify-center gap-4">
             <h3
-              className={`text-xl md:text-2xl font-bold ${lang === "th" ? "looped-text" : ""} text-center`}
+              className={`text-xl md:text-2xl font-bold ${lang === "th" ? "font-looped" : ""} text-center`}
             >
               {dict.reward_3}
             </h3>
@@ -437,7 +437,7 @@ const RewardLayer = () => {
         {/* BOTTOM CALL TO ACTION */}
         <div className="mt-12 flex flex-col items-center text-center px-4">
           <h3
-            className={`text-lg md:text-2xl font-bold leading-snug max-w-xl md:max-w-2xl ${lang === "th" ? "looped-text" : ""}`}
+            className={`text-lg md:text-2xl font-bold leading-snug max-w-xl md:max-w-2xl ${lang === "th" ? "font-looped" : ""}`}
           >
             {dict.reward_11}
           </h3>
