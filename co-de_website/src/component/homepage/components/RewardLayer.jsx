@@ -315,8 +315,7 @@ const RewardLayer = () => {
           </div>
         </div>
 
-        {/* ─── SWIPER CAROUSEL (จุดที่มีการแก้ไขหลัก) ─── */}
-        <div className="relative w-[90%] max-w-6xl mt-14 group">
+        <div className="relative w-full max-w-full mt-14 group">
           <Swiper
             modules={[Autoplay, Pagination, Navigation]}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -403,7 +402,7 @@ const RewardLayer = () => {
         </div>
 
         {/* COUNTER BOX */}
-        <div className="w-[90%] max-w-6xl mt-12 bg-[#cce6e4] rounded-3xl shadow-xl p-6 md:p-10">
+        <div className="w-[99%] max-w-full mt-12 bg-[#cce6e4] rounded-3xl shadow-xl p-6 md:p-10">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div className="flex flex-col items-center">
               <p className="text-3xl md:text-5xl font-medium text-[#042451]">

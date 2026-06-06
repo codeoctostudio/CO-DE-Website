@@ -1,29 +1,26 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Header from "../../header/Header";
 import Nav from "../../header/Nav";
 import Footer from "../../homepage/components/Footer";
 import Message from "../../msg/Message";
 import CourseSetup from "./components/CourseSetup";
+import { useLanguage } from "@/hook/useLanguage";
 
-// Assets of Slideshow Images
-import img2 from "../../../assets/slideImages/Mechanical/img1.webp";
-import img1 from "../../../assets/slideImages/Mechanical/img2.webp";
-import img3 from "../../../assets/slideImages/Mechanical/img3.webp";
-import microbit from "../../../assets/courseDetails/microbit.webp";
-import threeDee from "../../../assets/courseDetails/3DModel.webp";
-import arduino from "../../../assets/courseDetails/arduino.webp";
-import { Helmet } from "react-helmet-async";
-
-import { useTranslation } from "react-i18next";
+import img2 from "@/assets/slideImages/Mechanical/img1.webp";
+import img1 from "@/assets/slideImages/Mechanical/img2.webp";
+import img3 from "@/assets/slideImages/Mechanical/img3.webp";
+import microbit from "@/assets/courseDetails/microbit.webp";
+import threeDee from "@/assets/courseDetails/3DModel.webp";
+import arduino from "@/assets/courseDetails/arduino.webp";
 
 import BackToTop from "../../msg/Backtotop";
 import AnnouncementBar from "../../msg/Announcements";
-import { useLangPath } from "../../../guardlang";
 
 const Mechanical = () => {
-  const { t, i18n } = useTranslation();
   const [announcementVisible, setAnnouncementVisible] = useState(false);
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   const texts = {
     p1: "Make your idea tangible",
@@ -66,19 +63,6 @@ const Mechanical = () => {
   };
   return (
     <>
-      <Helmet htmlAttributes={{ lang: i18n.language }}>
-        <title>{t("Course_mechanical_Page")}</title>
-        <meta name="description" content="คอร์สเรียน Coding สำหรับเด็ก เริ่มต้นได้ตั้งแต่อายุ 4 ปี" />
-        <meta name="keywords" content="coding เด็ก, สอน Coding, Scratch, Python" />
-
-        {/* Open Graph (Facebook) */}
-        <meta property="og:title" content="CO-DE Coding School" />
-        <meta property="og:description" content="เรียน Coding สำหรับเด็กแบบสนุก เข้าใจง่าย" />
-        <meta property="og:image" content="/cover.jpg" />
-
-        {/* SEO ภาษา */}
-        
-      </Helmet>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
       <CourseSetup

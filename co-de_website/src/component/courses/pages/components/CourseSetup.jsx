@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const CourseSetup = (props) => {
   const courses = props.coursesData.map((course, index) => (
@@ -20,7 +22,7 @@ const CourseSetup = (props) => {
           loading="lazy"
         />
         <Link
-          href={course.portal}
+          href={course.portal || "#"}
           className="absolute bottom-[3%] right-[5%] flex h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -32,12 +34,19 @@ const CourseSetup = (props) => {
   return (
     <div className="flex h-full w-full flex-col items-center bg-[#042451] pt-[150px] font-comfortaa text-white">
       <Swiper
-        modules={[Autoplay]}
+        modules={[Autoplay, Navigation, Pagination]}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
         loop={true}
+        navigation={true}
+        pagination={{ clickable: true }}
+        style={{
+          "--swiper-navigation-color": "#FDFF86",
+          "--swiper-pagination-color": "#FDFF86",
+          "--swiper-pagination-bullet-inactive-color": "#ffffff",
+        }}
         className="mb-28 w-[80%] rounded-2xl border-8 border-black md:w-[70%] xl:w-[60%]"
       >
         {props.slideshow.map((item, index) => (

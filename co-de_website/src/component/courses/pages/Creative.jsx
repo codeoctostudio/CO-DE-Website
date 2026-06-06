@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Header from "../../header/Header";
 import Nav from "../../header/Nav";
@@ -5,7 +7,6 @@ import Footer from "../../homepage/components/Footer";
 import Message from "../../msg/Message";
 import CourseSetup from "./components/CourseSetup";
 
-// Assets of Slideshow Images
 import img1 from "../../../assets/slideImages/Creative/img1.webp";
 import img2 from "../../../assets/slideImages/Creative/img2.webp";
 import img3 from "../../../assets/slideImages/Creative/img3.webp";
@@ -16,14 +17,11 @@ import mobile from "../../../assets/courseDetails/mobile.webp";
 
 import BackToTop from "../../msg/Backtotop";
 import AnnouncementBar from "../../msg/Announcements";
-import { useLangPath } from "../../../guardlang";
-import { useTranslation } from "react-i18next";
-import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/hook/useLanguage";
 
 const Creative = () => {
   const [announcementVisible, setAnnouncementVisible] = useState(false);
-  const langPath = useLangPath();
-  const { t, i18n } = useTranslation();
+  const { langPath } = useLanguage();
 
 
   const texts = {
@@ -67,16 +65,6 @@ const Creative = () => {
   };
   return (
     <>
-      <Helmet htmlAttributes={{ lang: i18n.language }}>
-        <title>{t("Course_creative_Page")}</title>
-        <meta name="description" content="คอร์สเรียน Coding สำหรับเด็ก เริ่มต้นได้ตั้งแต่อายุ 4 ปี" />
-        <meta name="keywords" content="coding เด็ก, สอน Coding, Scratch, Python" />
-
-        {/* Open Graph (Facebook) */}
-        <meta property="og:title" content="CO-DE Coding School" />
-        <meta property="og:description" content="เรียน Coding สำหรับเด็กแบบสนุก เข้าใจง่าย" />
-        <meta property="og:image" content="/cover.jpg" />
-      </Helmet>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
       <CourseSetup

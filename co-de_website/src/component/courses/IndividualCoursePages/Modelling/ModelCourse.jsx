@@ -1,19 +1,26 @@
-/* eslint-disable react/no-unescaped-entities */
-import kid from "../../../../assets/CourseLogos/Modelling/main.webp";
-import modelStat from "../../../../assets/CourseLogos/Modelling/modelStat.webp";
-import check from "../../../../assets/CourseLogos/Modelling/check.webp";
-import episodes from "../../../../assets/CourseLogos/Modelling/episodes.webp";
-import modelling from "../../../../assets/CourseLogos/Modelling/modelling.webp";
-import level1 from "../../../../assets/CourseIcons/level1.webp";
-import threedeeprint from "../../../../assets/CourseIcons/3dprint.webp";
-import laptop from "../../../../assets/CourseIcons/laptop.webp";
-import group from "../../../../assets/CourseIcons/group.webp";
-import certificate from "../../../../assets/CourseIcons/certificate.webp";
-import img1 from "../../../../assets/CourseLogos/Modelling/images/img1.webp";
-import img2 from "../../../../assets/CourseLogos/Modelling/images/img2.webp";
-import img3 from "../../../../assets/CourseLogos/Modelling/images/img3.webp";
+"use client";
 
-import { Carousel } from "@material-tailwind/react";
+import kid from "@/assets/CourseLogos/Modelling/main.webp";
+import modelStat from "@/assets/CourseLogos/Modelling/modelStat.webp";
+import check from "@/assets/CourseLogos/Modelling/check.webp";
+import episodes from "@/assets/CourseLogos/Modelling/episodes.webp";
+import modelling from "@/assets/CourseLogos/Modelling/modelling.webp";
+import level1 from "@/assets/CourseIcons/level1.webp";
+import threedeeprint from "@/assets/CourseIcons/3dprint.webp";
+import laptop from "@/assets/CourseIcons/laptop.webp";
+import group from "@/assets/CourseIcons/group.webp";
+import certificate from "@/assets/CourseIcons/certificate.webp";
+import img1 from "@/assets/CourseLogos/Modelling/images/img1.webp";
+import img2 from "@/assets/CourseLogos/Modelling/images/img2.webp";
+import img3 from "@/assets/CourseLogos/Modelling/images/img3.webp";
+
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const ModelCourse = () => {
   const listStyle = {
     listStyleImage: `url(${check})`,
@@ -24,7 +31,7 @@ const ModelCourse = () => {
     <div className="flex h-full w-full flex-col items-center bg-[#F18E43] pt-[80px] font-comfortaa text-white md:pt-[110px]">
       <section className="flex w-full flex-col lg:flex-row ">
         <div className="flex w-full flex-col items-center bg-[#F18E43]   lg:w-[70%]">
-          <img
+          <Image
             src={modelling}
             alt="3D Modelling"
             className=" w-full"
@@ -40,7 +47,7 @@ const ModelCourse = () => {
 
           {/* Scratch + Kid Pic*/}
         </div>
-        <img
+        <Image
           src={kid}
           alt="3D Modelling Project"
           className=" w-full   object-cover drop-shadow-2xl lg:w-[40%] "
@@ -51,7 +58,7 @@ const ModelCourse = () => {
       </section>
 
       <section className="flex w-full flex-col bg-[#FFAE71] md:flex-row">
-        <img
+        <Image
           src={modelStat}
           alt="3D Modelling Course"
           className="w-full object-contain md:w-[55%]"
@@ -95,7 +102,7 @@ const ModelCourse = () => {
       <section className="flex items-center justify-center bg-[#F18E43]  p-10">
         <div className=" flex w-full flex-wrap text-sm sm:text-base  lg:text-lg xl:text-3xl ">
           <div className="mb-3 flex w-[50%] items-center font-bold ">
-            <img
+            <Image
               src={level1}
               alt="Level"
               className="mr-3 w-[15%]"
@@ -104,7 +111,7 @@ const ModelCourse = () => {
             <p>Beginner</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={laptop}
               alt="Laptop"
               className="mr-3 w-[15%]"
@@ -113,7 +120,7 @@ const ModelCourse = () => {
             <p>On-site / Online </p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={group}
               alt="Group"
               className="mr-3 w-[15%]"
@@ -122,7 +129,7 @@ const ModelCourse = () => {
             <p>Private / Group Class</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={threedeeprint}
               alt="3D Printing"
               className="mr-3 w-[15%]"
@@ -131,7 +138,7 @@ const ModelCourse = () => {
             <p>3D Printing Included</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={certificate}
               alt="Certificate"
               className="mr-3 w-[15%]"
@@ -270,7 +277,7 @@ const ModelCourse = () => {
       </section>
 
       <section className="relative flex w-full  items-center justify-center bg-[#FFAE71]  p-12 ">
-        <img
+        <Image
           src={episodes}
           alt="episodes"
           className=" md:w-[80%] lg:w-[70%]"
@@ -293,23 +300,37 @@ const ModelCourse = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className=" flex h-[500px] w-full items-center justify-center border-2 border-black bg-[#6FBC87] text-[10vw] lg:w-[50%]">
-          <Carousel
-            autoplay={true}
-            autoplayDelay={3000}
+        <div className="flex h-[500px] w-full items-center justify-center border-2 border-black bg-[#6FBC87] lg:w-[50%]">
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             loop={true}
-            className="drop-shadow-2xl"
+            navigation={true}
+            pagination={{ clickable: true }}
+            style={{
+              "--swiper-navigation-color": "#FDFF86",
+              "--swiper-pagination-color": "#FDFF86",
+              "--swiper-pagination-bullet-inactive-color": "#ffffff",
+            }}
+            className="w-full h-full"
           >
             {slideShowData.map((item, index) => (
-              <img
-                className="h-full w-full object-cover"
+              <SwiperSlide
                 key={index}
-                src={item}
-                alt="3D Modelling Course"
-                loading="lazy"
-              />
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+              >
+                <Image
+                  className="w-full h-full object-cover"
+                  src={item}
+                  alt="Design Thinking Course"
+                  loading="eager"
+                />
+              </SwiperSlide>
             ))}
-          </Carousel>
+          </Swiper>
         </div>
       </section>
     </div>

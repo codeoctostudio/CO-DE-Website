@@ -11,7 +11,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  const {lang} = useLanguage
+  // const {lang} = useLanguage
+  const { lang } = await params;
 
   return (
     <html

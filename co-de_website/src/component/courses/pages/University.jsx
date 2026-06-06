@@ -1,22 +1,22 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Header from "../../header/Header";
 import Nav from "../../header/Nav";
 import Footer from "../../homepage/components/Footer";
 import Message from "../../msg/Message";
 import CourseSetup from "./components/CourseSetup";
-import img2 from "../../../assets/slideImages/Mechanical/img1.webp";
-import img1 from "../../../assets/slideImages/Mechanical/img2.webp";
-import img3 from "../../../assets/slideImages/Mechanical/img3.webp";
-import roadToUni from "../../../assets/courseDetails/roadToUni.webp";
-import { Helmet } from "react-helmet-async";
-
-import { useTranslation } from "react-i18next";
+import img2 from "@/assets/slideImages/Mechanical/img1.webp";
+import img1 from "@/assets/slideImages/Mechanical/img2.webp";
+import img3 from "@/assets/slideImages/Mechanical/img3.webp";
+import roadToUni from "@/assets/courseDetails/roadToUni.webp";
 
 import BackToTop from "../../msg/Backtotop";
 import AnnouncementBar from "../../msg/Announcements";
+import { useLanguage } from "@/hook/useLanguage";
 
 const University = () => {
-  const { t, i18n } = useTranslation();
+  const { langPath } = useLanguage();
   const [announcementVisible, setAnnouncementVisible] = useState(false);
 
   const texts = {
@@ -48,16 +48,6 @@ const University = () => {
   };
   return (
     <>
-      <Helmet htmlAttributes={{ lang: i18n.language }}>
-        <title>{t("Course_university_Page")}</title>
-        <meta name="description" content="คอร์สเรียน Coding สำหรับเด็ก เริ่มต้นได้ตั้งแต่อายุ 4 ปี" />
-        <meta name="keywords" content="coding เด็ก, สอน Coding, Scratch, Python" />
-
-        {/* Open Graph (Facebook) */}
-        <meta property="og:title" content="CO-DE Coding School" />
-        <meta property="og:description" content="เรียน Coding สำหรับเด็กแบบสนุก เข้าใจง่าย" />
-        <meta property="og:image" content="/cover.jpg" />
-      </Helmet>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
       <CourseSetup
