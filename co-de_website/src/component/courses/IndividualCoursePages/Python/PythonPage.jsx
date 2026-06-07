@@ -1,17 +1,16 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Header from "../../../header/Header";
 import Nav from "../../../header/Nav";
 import Footer from "../../../homepage/components/Footer";
 import Message from "../../../msg/Message";
 import PythonCourse from "./PythonCourse";
-import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
 
 import BackToTop from "../../../msg/Backtotop";
 import AnnouncementBar from "../../../msg/Announcements";
 
 const PythonPage = () => {
-  const { t, i18n } = useTranslation();
   const [announcementVisible, setAnnouncementVisible] = useState(false);
 
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -28,16 +27,6 @@ const PythonPage = () => {
   };
   return (
     <>
-      <Helmet htmlAttributes={{ lang: i18n.language }}>
-        <title>{t("Course_fundamental_python_Page")}</title>
-        <meta name="description" content="คอร์สเรียน Python สำหรับเด็ก" />
-        <meta name="keywords" content="python, เด็ก, สอนเขียนโปรแกรม" />
-
-        {/* Open Graph (Facebook) */}
-        <meta property="og:title" content="CO-DE Coding School" />
-        <meta property="og:description" content="เรียน Python สำหรับเด็กแบบสนุก เข้าใจง่าย" />
-        <meta property="og:image" content="/cover.jpg" />
-      </Helmet>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
       <PythonCourse />

@@ -1,20 +1,27 @@
-/* eslint-disable react/no-unescaped-entities */
-import kid from "../../../../assets/CourseLogos/Python/main.webp";
-import javaStat from "../../../../assets/CourseLogos/Java/javaStat.webp";
-import check from "../../../../assets/CourseLogos/Java/check.webp";
-import episodes from "../../../../assets/CourseLogos/Java/episodes.webp";
-import java from "../../../../assets/CourseLogos/Java/java.webp";
-import level2 from "../../../../assets/CourseIcons/level2.webp";
-import textCode from "../../../../assets/CourseIcons/textCode.webp";
-import laptop from "../../../../assets/CourseIcons/laptop.webp";
-import group from "../../../../assets/CourseIcons/group.webp";
-import certificate from "../../../../assets/CourseIcons/certificate.webp";
+"use client";
+import kid from "@/assets/CourseLogos/Python/main.webp";
+import javaStat from "@/assets/CourseLogos/Java/javaStat.webp";
+import check from "@/assets/CourseLogos/Java/check.webp";
+import episodes from "@/assets/CourseLogos/Java/episodes.webp";
+import java from "@/assets/CourseLogos/Java/java.webp";
+import level2 from "@/assets/CourseIcons/level2.webp";
+import textCode from "@/assets/CourseIcons/textCode.webp";
+import laptop from "@/assets/CourseIcons/laptop.webp";
+import group from "@/assets/CourseIcons/group.webp";
+import certificate from "@/assets/CourseIcons/certificate.webp";
 
-import img1 from "../../../../assets/CourseLogos/Python/images/img1.webp";
-import img2 from "../../../../assets/CourseLogos/Python/images/img2.webp";
-import img3 from "../../../../assets/CourseLogos/Python/images/img3.webp";
+import img1 from "@/assets/CourseLogos/Python/images/img1.webp";
+import img2 from "@/assets/CourseLogos/Python/images/img2.webp";
+import img3 from "@/assets/CourseLogos/Python/images/img3.webp";
 
-import { Carousel } from "@material-tailwind/react";
+
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const JavaCourse = () => {
   const listStyle = {
     listStyleImage: `url(${check})`,
@@ -25,7 +32,7 @@ const JavaCourse = () => {
     <div className="flex h-full w-full flex-col items-center bg-[#00AEE4] pt-[80px] font-comfortaa text-white md:pt-[110px]">
       <section className="flex w-full flex-col lg:flex-row ">
         <div className="flex w-full flex-col items-center bg-[#00AEE4]   lg:w-[70%]">
-          <img
+          <Image
             src={java}
             alt="Java"
             className=" w-full"
@@ -40,7 +47,7 @@ const JavaCourse = () => {
 
           {/* Scratch + Kid Pic*/}
         </div>
-        <img
+        <Image
           src={kid}
           alt="Java Project"
           className=" w-full   object-cover drop-shadow-2xl lg:w-[40%] "
@@ -51,7 +58,7 @@ const JavaCourse = () => {
       </section>
 
       <section className="flex w-full flex-col bg-[#71DDFF] md:flex-row">
-        <img
+        <Image
           src={javaStat}
           alt="Java Course"
           className="w-full object-contain md:w-[55%]"
@@ -95,7 +102,7 @@ const JavaCourse = () => {
       <section className="flex items-center justify-center bg-[#00AEE4] p-10">
         <div className=" flex w-full flex-wrap text-sm sm:text-base  lg:text-lg xl:text-3xl ">
           <div className="mb-3 flex w-[50%] items-center font-bold ">
-            <img
+            <Image
               src={level2}
               alt="Level 2"
               className="mr-3 w-[15%]"
@@ -104,7 +111,7 @@ const JavaCourse = () => {
             <p>Intermediate</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={textCode}
               alt="Text Code"
               className="mr-3 w-[15%]"
@@ -113,7 +120,7 @@ const JavaCourse = () => {
             <p>Text-Based Code</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={laptop}
               alt="Laptop"
               className="mr-3 w-[15%]"
@@ -122,7 +129,7 @@ const JavaCourse = () => {
             <p>On-site / Online</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={group}
               alt="Group"
               className="mr-3 w-[15%]"
@@ -131,7 +138,7 @@ const JavaCourse = () => {
             <p>Private / Group Class</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={certificate}
               alt="Certificate"
               className="mr-3 w-[15%]"
@@ -219,7 +226,7 @@ const JavaCourse = () => {
       </section>
 
       <section className="relative flex w-full  items-center justify-center bg-[#71DDFF]  p-12 ">
-        <img
+        <Image
           src={episodes}
           alt="episodes"
           className=" md:w-[80%] lg:w-[70%]"
@@ -242,23 +249,37 @@ const JavaCourse = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className=" flex h-[500px] w-full items-center justify-center border-2 border-black bg-[#6FBC87] text-[10vw] lg:w-[50%]">
-          <Carousel
-            autoplay={true}
-            autoplayDelay={3000}
+        <div className="flex h-[500px] w-full items-center justify-center border-2 border-black bg-[#6FBC87] lg:w-[50%]">
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             loop={true}
-            className="drop-shadow-2xl"
+            navigation={true}
+            pagination={{ clickable: true }}
+            style={{
+              "--swiper-navigation-color": "#FDFF86",
+              "--swiper-pagination-color": "#FDFF86",
+              "--swiper-pagination-bullet-inactive-color": "#ffffff",
+            }}
+            className="w-full h-full"
           >
             {slideShowData.map((item, index) => (
-              <img
-                className="h-full w-full object-cover"
+              <SwiperSlide
                 key={index}
-                src={item}
-                alt="Java Course"
-                loading="lazy"
-              />
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+              >
+                <Image
+                  className="w-full h-full object-cover"
+                  src={item}
+                  alt="Design Thinking Course"
+                  loading="eager"
+                />
+              </SwiperSlide>
             ))}
-          </Carousel>
+          </Swiper>
         </div>
       </section>
     </div>
