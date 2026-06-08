@@ -1,9 +1,10 @@
-import alpha from "../../../assets/playground/alpha.webp";
-import bravo from "../../../assets/playground/bravo.webp";
-import code from "../../../assets/playground/code.webp";
-import dede from "../../../assets/playground/dede.webp";
-import echo from "../../../assets/playground/echo.webp";
-import foxtrot from "../../../assets/playground/foxtrot.webp";
+import alpha from "@/assets/playground/alpha.webp";
+import bravo from "@/assets/playground/bravo.webp";
+import code from "@/assets/playground/code.webp";
+import dede from "@/assets/playground/dede.webp";
+import echo from "@/assets/playground/echo.webp";
+import foxtrot from "@/assets/playground/foxtrot.webp";
+import Image from "next/image";
 const Classrooms = () => {
   // Classroom Lists
   const classrooms = [
@@ -67,7 +68,7 @@ const Classrooms = () => {
       >
         <p className="font-bold">{classroom.sidename}</p>
       </div>
-      <img src={classroom.image} className="rounded-t-[30px]" loading="lazy" alt="Classroom" />
+      <Image src={classroom.image} className="rounded-t-[30px]" loading="lazy" alt="Classroom" />
       <div className="p-4 ">
         <p className="h-[70px] text-xl font-bold lg:text-2xl ">
           {classroom.name}

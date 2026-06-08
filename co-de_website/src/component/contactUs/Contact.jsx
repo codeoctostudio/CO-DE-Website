@@ -1,17 +1,18 @@
 "use client";
 
-import Header from "../../../header/Header";
-import Nav from "../../../header/Nav";
-import Footer from "../Footer";
-import CustomCourse from "./components/CustomCourse";
+import Header from "../header/Header.jsx";
+import Nav from "../header/Nav.jsx";
 import { useState, useEffect } from "react";
-import Message from "../../../msg/Message";
+import Information from "./components/Information";
+import Footer from "../homepage/components/Footer";
+import Message from "../msg/Message.jsx";
+import BackToTop from "../msg/Backtotop.jsx";
+import AnnouncementBar from "../msg/Announcements.jsx";
 
-import BackToTop from "../../../msg/Backtotop";
-import AnnouncementBar from "../../../msg/Announcements";
-const Custom = () => {
+const Contact = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [announcementVisible, setAnnouncementVisible] = useState(false);
+
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
@@ -21,17 +22,14 @@ const Custom = () => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "page_view",
-      page_name: "Custom Courses Page",
+      page_name: "Contact Us Page",
     });
   }, []);
-
-  
-
   return (
     <>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
-      <CustomCourse />
+      <Information />
       <Footer />
       <AnnouncementBar onVisibleChange={setAnnouncementVisible} />
       <Message announcementVisible={announcementVisible} />
@@ -40,4 +38,4 @@ const Custom = () => {
   );
 };
 
-export default Custom;
+export default Contact;

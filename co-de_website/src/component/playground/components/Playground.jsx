@@ -1,10 +1,11 @@
-import front from "../../../assets/playground/front.webp";
-import shape from "../../../assets/CourseSkills/light/shape.webp";
-import color from "../../../assets/CourseSkills/light/color.webp";
-import head from "../../../assets/CourseSkills/light/head.webp";
-import bulb from "../../../assets/CourseSkills/light/bulb.webp";
-import temp from "../../../assets/CourseSkills/light/temp.webp";
-import camera from "../../../assets/CourseSkills/light/camera.webp";
+import front from "@/assets/playground/front.webp";
+import shape from "@/assets/CourseSkills/light/shape.webp";
+import color from "@/assets/CourseSkills/light/color.webp";
+import head from "@/assets/CourseSkills/light/head.webp";
+import bulb from "@/assets/CourseSkills/light/bulb.webp";
+import temp from "@/assets/CourseSkills/light/temp.webp";
+import camera from "@/assets/CourseSkills/light/camera.webp";
+import Image from "next/image";
 
 const Playground = () => {
   const features = [
@@ -37,7 +38,7 @@ const Playground = () => {
       key={index}
       className="flex w-[35%] flex-col items-center text-center sm:w-[30%]"
     >
-      <img src={feature.logo} className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20" loading="lazy" alt="Feature" />
+      <Image src={feature.logo} className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20" loading="lazy" alt="Feature" />
       <p className="mb-5 text-sm font-bold text-[#EA587F] sm:text-base md:text-lg lg:text-xl xl:text-2xl">
         {feature.title}
       </p>
@@ -58,7 +59,7 @@ const Playground = () => {
           your child feels happy, relaxed, and stimulated for effective
           learning.
         </p>
-        <img
+        <Image
           src={front}
           alt="Front View"
           className="w-[80%] rounded-3xl md:w-[50%]"
