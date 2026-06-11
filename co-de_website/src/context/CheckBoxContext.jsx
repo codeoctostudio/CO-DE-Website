@@ -1,3 +1,5 @@
+
+"use client";
 import { useState, createContext } from "react";
 
 export const CheckBoxContext = createContext();
@@ -7,11 +9,11 @@ const CheckBoxProvider = ({ children }) => {
   const [radio, setRadio] = useState("newbie");
 
   return (
-    <CheckBoxContext.Provider value={[radio, setRadio, filter, setFilter]}>
+    // 🌟 เปลี่ยนจากครอบวงเล็บเหลี่ยม [ ] เป็นปีกกา { }
+    <CheckBoxContext.Provider value={{ radio, setRadio, filter, setFilter }}>
       {children}
     </CheckBoxContext.Provider>
   );
 };
 
 export default CheckBoxProvider;
-

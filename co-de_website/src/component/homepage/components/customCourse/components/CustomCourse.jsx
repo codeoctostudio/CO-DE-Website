@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+"use client";
 import { CheckBoxContext } from "../../../../../context/CheckBoxContext";
 import { useContext } from "react";
 import {
@@ -18,7 +18,7 @@ import {
 } from "./CoursesImports";
 
 const CustomCourse = () => {
-  const [radio, , filter] = useContext(CheckBoxContext);
+  const { radio, filter } = useContext(CheckBoxContext);
   //Container of Imported Component Banners from CourseImports.jsx
   const customCourses = {
     custom1: [

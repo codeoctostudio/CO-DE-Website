@@ -1,27 +1,28 @@
-import octoStudio from "../../../../../assets/courseDetails/octo.webp";
-import scratch from "../../../../../assets/courseDetails/scratch.webp";
+import octoStudio from "@/assets/courseDetails/octo.webp";
+import scratch from "@/assets/courseDetails/scratch.webp";
 
-import threeDeeModel from "../../../../../assets/courseDetails/3DModel.webp";
-import arduino from "../../../../../assets/courseDetails/arduino.webp";
+import threeDeeModel from "@/assets/courseDetails/3DModel.webp";
+import arduino from "@/assets/courseDetails/arduino.webp";
 
-import designThinking from "../../../../../assets/courseDetails/designThinking.webp";
-import fullstack from "../../../../../assets/courseDetails/fullstack.webp";
+import designThinking from "@/assets/courseDetails/designThinking.webp";
+import fullstack from "@/assets/courseDetails/fullstack.webp";
 
-import java from "../../../../../assets/courseDetails/java.webp";
-import microbit from "../../../../../assets/courseDetails/microbit.webp";
+import java from "@/assets/courseDetails/java.webp";
+import microbit from "@/assets/courseDetails/microbit.webp";
 
-import mobile from "../../../../../assets/courseDetails/mobile.webp";
-import python from "../../../../../assets/courseDetails/python.webp";
+import mobile from "@/assets/courseDetails/mobile.webp";
+import python from "@/assets/courseDetails/python.webp";
 
-import roadToUni from "../../../../../assets/courseDetails/roadToUni.webp";
-import roblox from "../../../../../assets/courseDetails/roblox.webp";
-import advPython from "../../../../../assets/courseDetails/advPython.webp";
+import roadToUni from "@/assets/courseDetails/roadToUni.webp";
+import roblox from "@/assets/courseDetails/roblox.webp";
+import advPython from "@/assets/courseDetails/advPython.webp";
 
-import { Link } from "next/navigation";
-import { useLangPath } from "../../../../../guardlang";
+import Link from "next/link";
+import Image from "next/image";
+import { useLanguage } from "@/hook/useLanguage";
 
 export const Scratch = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -31,7 +32,7 @@ export const Scratch = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={scratch} alt="Scratch" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/blockcode/scratch")}
+          href={langPath("/courses/blockcode/scratch")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -42,7 +43,7 @@ export const Scratch = () => {
 };
 
 export const Octo = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -52,7 +53,7 @@ export const Octo = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={octoStudio} alt="Dino Code" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/blockcode/dino")}
+          href={langPath("/courses/blockcode/dino")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -63,7 +64,7 @@ export const Octo = () => {
 };
 
 export const ThreeDeeModel = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -73,7 +74,7 @@ export const ThreeDeeModel = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={threeDeeModel} alt="3D Modelling" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/mechanical/3dmodeling")}
+          href={langPath("/courses/mechanical/3dmodeling")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -84,7 +85,7 @@ export const ThreeDeeModel = () => {
 };
 
 export const Arduino = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -94,7 +95,7 @@ export const Arduino = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={arduino} alt="Arduino" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/mechanical/arduino")}
+          href={langPath("/courses/mechanical/arduino")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -105,16 +106,20 @@ export const Arduino = () => {
 };
 
 export const DesignThinking = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
   return (
     <div className="mb-20 flex w-full flex-col items-center">
       <p className="mb-6  w-[80%] text-center text-2xl  md:text-3xl xl:text-4xl">
         Design Thinking : BunBun&#39;s Journey
       </p>
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
-        <Image src={designThinking} alt="Design Thinking" className=" rounded-xl" />
+        <Image
+          src={designThinking}
+          alt="Design Thinking"
+          className=" rounded-xl"
+        />
         <Link
-          to={langPath("/courses/noncode/designthinking")}
+          href={langPath("/courses/noncode/designthinking")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -125,7 +130,7 @@ export const DesignThinking = () => {
 };
 
 export const FullStack = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -133,9 +138,13 @@ export const FullStack = () => {
         Full-stack Web Development with Python
       </p>
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
-        <Image src={fullstack} alt="Full-stack Web Development" className=" rounded-xl" />
+        <Image
+          src={fullstack}
+          alt="Full-stack Web Development"
+          className=" rounded-xl"
+        />
         <Link
-          to={langPath("/courses/creative/fullstackweb")}
+          href={langPath("/courses/creative/fullstackweb")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -167,7 +176,7 @@ export const Java = () => {
 };
 
 export const Microbit = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -177,7 +186,7 @@ export const Microbit = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={microbit} alt="Microbit" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/mechanical/microbit")}
+          href={langPath("/courses/mechanical/microbit")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -188,7 +197,7 @@ export const Microbit = () => {
 };
 
 export const Mobile = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -196,9 +205,13 @@ export const Mobile = () => {
         Mobile App Development
       </p>
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
-        <Image src={mobile} alt="Mobile App Development" className=" rounded-xl" />
+        <Image
+          src={mobile}
+          alt="Mobile App Development"
+          className=" rounded-xl"
+        />
         <Link
-          to={langPath("/courses/creative/mobile")}
+          href={langPath("/courses/creative/mobile")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -209,7 +222,7 @@ export const Mobile = () => {
 };
 
 export const Python = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -219,7 +232,7 @@ export const Python = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={python} alt="Python" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/fundamental/python")}
+          href={langPath("/courses/fundamental/python")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -230,14 +243,23 @@ export const Python = () => {
 };
 
 export const RoadToUni = () => {
+  const { langPath } = useLanguage();
+
   return (
     <div className="mb-20 flex w-full flex-col items-center">
       <p className="mb-6  w-[80%] text-center text-2xl  md:text-3xl xl:text-4xl">
         Road to University
       </p>
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
-        <Image src={roadToUni} alt="Road to University" className=" rounded-xl" />
-        <Link className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]">
+        <Image
+          src={roadToUni}
+          alt="Road to University"
+          className=" rounded-xl"
+        />
+        <Link
+          href={langPath("/courses/noncode/roadtouni")}
+          className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
+        >
           More Details
         </Link>
       </div>
@@ -246,7 +268,7 @@ export const RoadToUni = () => {
 };
 
 export const Roblox = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -256,7 +278,7 @@ export const Roblox = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={roblox} alt="Roblox" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/creative/roblox")}
+          href={langPath("/courses/creative/roblox")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
@@ -267,7 +289,7 @@ export const Roblox = () => {
 };
 
 export const AdvPython = () => {
-  const langPath = useLangPath();
+  const { langPath } = useLanguage();
 
   return (
     <div className="mb-20 flex w-full flex-col items-center">
@@ -277,7 +299,7 @@ export const AdvPython = () => {
       <div className="relative my-2 w-[90%] rounded-xl sm:w-[85%]">
         <Image src={advPython} alt="Advanced Python" className=" rounded-xl" />
         <Link
-          to={langPath("/courses/fundamental/advpython")}
+          href={langPath("/courses/fundamental/advpython")}
           className="absolute bottom-[3%] right-[5%] flex  h-[8%] w-[20%] items-center justify-center rounded-3xl bg-[#F38E45] px-5 py-3 text-center text-[1.7vw]"
         >
           More Details
