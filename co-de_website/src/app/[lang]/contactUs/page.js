@@ -1,4 +1,4 @@
-import ContactUs from "@/component/ContactUs/Contact";
+import ContactUs from "@/component/contactUs/Contact";
 import { getDictionary } from "@/lib/dictionary";
 
 export async function generateMetadata({ params }) {
