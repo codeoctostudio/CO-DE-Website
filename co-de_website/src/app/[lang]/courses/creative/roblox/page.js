@@ -1,10 +1,27 @@
 import RobloxPage from "@/component/courses/IndividualCoursePages/Roblox/RobloxPage";
+import { getDictionary } from "@/lib/dictionary";
 
-export const metadata = {
-  title: "CO-DE | สอน Coding สำหรับเด็ก",
-  description: "คอร์สเรียน Coding สำหรับเด็ก เริ่มต้นได้ตั้งแต่อายุ 4 ปี",
-  keywords: ["coding เด็ก", "Scratch", "Python"],
-};
+export async function generateMetadata({ params }) {
+  const { lang } = await params;
+  const dict = getDictionary(lang);
+
+  return {
+    title: dict?.Course_creative_roblox_Page || "CO-DE academy",
+    description:
+      "สถาบันสอน Coding สำหรับเด็กอายุ 4-15 ปี เปลี่ยนความชอบเล่นเกมให้เป็นทักษะอนาคต เรียนสนุก เข้าใจง่าย ปูพื้นฐานตั้งแต่ Block Code (Scratch, Roblox) ไปจนถึง Text Code (Python, Java) พร้อมเสริมสร้างกระบวนการคิดอย่างเป็นระบบและความคิดสร้างสรรค์",
+    keywords: [
+      "coding เด็ก",
+      "เรียน coding เด็ก",
+      "สอนคอมพิวเตอร์เด็ก",
+      "Scratch เด็ก",
+      "Python เด็ก",
+      "เรียน Roblox",
+      "พัฒนาการเด็ก 4 ขวบ",
+      "ทักษะแห่งอนาคต",
+      "CO-DE academy",
+    ],
+  };
+}
 
 export default function RobloxPages() {
   return <RobloxPage />;

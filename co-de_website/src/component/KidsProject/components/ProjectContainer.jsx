@@ -8,6 +8,7 @@ const ProjectContainer = (props) => {
         <Image
           src={props.pic}
           alt="Our Project"
+          unoptimized
           className=" mb-5 flex h-[70%] w-[95%] items-center justify-center rounded-3xl bg-red-600 text-center"
         />
         <div className="h-[30%]">

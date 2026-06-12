@@ -1,0 +1,45 @@
+# ----- Stage 1: จัดการ Dependencies -----
+FROM node:20-alpine AS deps
+# คล้ายๆ กับการลง Linux ตัวเล็กที่ปลอดภัย
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# ก๊อบปี้ไฟล์ลงทะเบียน package ไปตรวจเช็ก
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# ----- Stage 2: ทำการบิวด์โปรเจกต์ (Build) -----
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# สั่งบิวด์โปรเจกต์ (เหมือนที่เรากด npm run build ตะกี้เลยครับ)
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+# ----- Stage 3: จังหวะเปิดใช้งานจริง (Runner) -----
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# สร้าง User ใหม่เพื่อความปลอดภัย ไม่ใช้สิทธิ์ Root รันระบบ
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# ก๊อบปี้เฉพาะไฟล์ที่บิวด์เสร็จแล้วมาใช้งาน (ทำให้อิมเมจเบามาก)
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+USER nextjs
+
+# เปิดพอร์ต 3000 ของ Container
+EXPOSE 3000
+ENV PORT 3000
+
+# สั่งรันเว็บเวอร์ชัน Production
+CMD ["npm", "run", "start"]
