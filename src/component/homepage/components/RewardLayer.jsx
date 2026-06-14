@@ -235,6 +235,7 @@ const RewardLayer = () => {
               <div className="relative w-full h-full">
                 <div id="player" className="w-full h-full" />
                 <button
+                  type="button"
                   onClick={toggleSound}
                   aria-label={isMuted ? "เปิดเสียงวิดีโอ" : "ปิดเสียงวิดีโอ"}
                   className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 backdrop-blur text-white text-lg hover:scale-110 active:scale-95 transition"
@@ -297,7 +298,7 @@ const RewardLayer = () => {
                         src={first.img}
                         alt={first.title || "ภาพรางวัล"}
                         fill
-                        sizes="(max-width: 768px) 35vw, 20vw"
+                        sizes="(max-width: 768px) 30vw, 15vw" // 👈 แก้ไขขนาดสากลป้องกันดึงภาพใหญ่เกิน
                       />
                     </div>
                     <div>
@@ -326,7 +327,7 @@ const RewardLayer = () => {
                             src={item.img}
                             alt={item.title || "ภาพรางวัล"}
                             fill
-                            sizes="(max-width: 1024px) 25vw, 20vw"
+                            sizes="(max-width: 1024px) 20vw, 15vw" // 👈 ปรับสัดส่วนการเรนเดอร์รูปให้เบาลง
                           />
                         </div>
                         <div className="flex-1">
@@ -349,12 +350,14 @@ const RewardLayer = () => {
           </Swiper>
 
           <button
+            type="button"
             aria-label="สไลด์ก่อนหน้า"
             className="custom-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
             ◀
           </button>
           <button
+            type="button"
             aria-label="สไลด์ถัดไป"
             className="custom-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
@@ -404,6 +407,7 @@ const RewardLayer = () => {
           </p>
           <div className="mt-6 w-full max-w-md">
             <button
+              type="button"
               onClick={scrollToEmail}
               className="w-full rounded-full bg-gradient-to-r from-[#F7C94B] to-[#f5b700] px-6 py-3 md:py-4 text-lg md:text-xl font-semibold text-[#042451] shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >

@@ -1,10 +1,11 @@
+"use client";
+
 import { useEffect, useState } from "react";
-// const RAW_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api";
-// const API_BASE = String(RAW_BASE).replace(/\/+$/, "");
+import Link from "next/link"; // 👈 นำเข้าแทน router เพื่อช่วยให้บ็อทกูเกิลจับข้อมูลได้
 import { useLanguage } from "@/hook/useLanguage";
 
 const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
-  const {langPath, router} = useLanguage();
+  const { langPath } = useLanguage();
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
@@ -19,14 +20,13 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
     const start = new Date(announcement.start_time);
     const end = new Date(announcement.end_time);
 
-    // ถ้าหมดเวลาแล้ว → fallback
-    if ((now > end) || (now < start)) {
+    if (now > end || now < start) {
       return "📢เริ่มต้นเรียน Coding สำหรับเด็ก 4–18 ปี พร้อมทดลองเรียนฟรี";
     }
 
-    // ถ้ายังไม่หมด → ใช้จาก API
     return "📢" + announcement.info;
   };
+
   const getLink = () => {
     if (!announcement) {
       return langPath("/trialclass");
@@ -36,46 +36,35 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
     const start = new Date(announcement.start_time);
     const end = new Date(announcement.end_time);
 
-    // ถ้าหมดเวลาแล้ว → fallback
-    if ((now > end) || (now < start)) {
+    if (now > end || now < start) {
       return langPath("/trialclass");
     }
 
-    // ถ้า Priority ว่าง / null / undefined → fallback
     if (!announcement.Priority || announcement.Priority.trim() === "") {
       return langPath("/trialclass");
     }
 
-    // ถ้ายังไม่หมด → ใช้จาก API
     return langPath(announcement.Priority);
   };
 
   const message = getMessage();
   const ctaText = "สมัครเลย";
 
-  const scrollToEmail = () => {
-    router.push(getLink());
-  };
-
   useEffect(() => {
     const fetchAnnouncement = async () => {
       try {
-        const res = await fetch(`https://co-deacademy.com/api/get_website_announcements.php`);
+        const res = await fetch(`/api-backend/get_website_announcements.php`);
         const data = await res.json();
 
         if (data.success && Array.isArray(data.rows)) {
-          // 1. filter เฉพาะ web approved
           const approved = data.rows.filter(
-            (item) => item.recipient === "web approved"
+            (item) => item.recipient === "web approved",
           );
 
           if (approved.length > 0) {
-            // 2. หา id ล่าสุด (มากสุด)
             const latest = approved.reduce((prev, current) =>
-              current.id > prev.id ? current : prev
+              current.id > prev.id ? current : prev,
             );
-
-            // 3. set name
             setAnnouncement(latest);
           }
         }
@@ -101,12 +90,10 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
       if (!rewardRef?.current) return;
 
       const rect = rewardRef.current.getBoundingClientRect();
-
       setHideFreeTrial(rect.top < window.innerHeight && rect.bottom > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, [dismissed, onVisibleChange, rewardRef]);
 
@@ -123,14 +110,16 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
       {!hideFreeTrial && (
         <div
           className={`fixed bottom-4 left-1/2 z-[99997] w-[90%] max-w-[700px] -translate-x-1/2 rounded-xl bg-[#F8E27A] px-4 py-3 text-[#0E2A47] shadow-xl transition-all duration-500 md:w-auto md:max-w-none
-            ${show
-                  ? "translate-y-0 opacity-100"
-                  : "pointer-events-none translate-y-10 opacity-0"
-                }
+            ${
+              show
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none translate-y-10 opacity-0"
+            }
             `}
         >
           {/* Close button */}
           <button
+            type="button"
             onClick={handleClose}
             aria-label="Close announcement"
             className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-black shadow hover:bg-black/10 active:scale-90 md:-right-3 md:-top-3"
@@ -139,24 +128,20 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
           </button>
 
           {/* Content */}
-          <div
-            className="flex items-center justify-center gap-3 md:flex-row"
-          >
+          <div className="flex items-center justify-center gap-3 md:flex-row">
             {/* Message */}
-            <p
-              className="whitespace-normal text-center text-xs leading-tight text-[#042451] sm:text-sm md:text-left md:text-base"
-            >
+            <p className="whitespace-normal text-center text-xs leading-tight text-[#042451] sm:text-sm md:text-left md:text-base">
               {message}
             </p>
 
-            {/* CTA */}
+            {/* CTA เปลี่ยนจาก button onClick เป็น Link เพื่อส่งผลดีต่อ SEO */}
             {ctaText && (
-              <button
-                onClick={scrollToEmail}
-                className="shrink-0 whitespace-nowrap rounded-full bg-[#0E2A47] px-3 py-1.5 text-xs font-bold text-white hover:opacity-80 active:scale-95"
+              <Link
+                href={getLink()}
+                className="shrink-0 whitespace-nowrap rounded-full bg-[#0E2A47] px-3 py-1.5 text-xs font-bold text-white hover:opacity-80 active:scale-95 transition-all"
               >
                 {ctaText}
-              </button>
+              </Link>
             )}
           </div>
         </div>

@@ -46,9 +46,16 @@ const Information = () => {
         loading="eager"
       />
       <div>
-        <a href={contact.portal}>{contact.text}</a>
+        <a href={contact.portal} rel="noopener noreferrer" target="_blank">
+          {contact.text}
+        </a>
         {contact.key == "logo5" && (
-          <a className="block" href={contact.portal}>
+          <a
+            className="block"
+            href={contact.portal}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             {contact.text2}
           </a>
         )}
@@ -67,6 +74,8 @@ const Information = () => {
             <a
               href="https://line.me/R/ti/p/@191yifch"
               className="mb-2 flex items-center p-2"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <Image
                 src={line}

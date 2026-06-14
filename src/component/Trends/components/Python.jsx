@@ -117,6 +117,8 @@ const Python = () => {
                 <a
                   href="tel:0808300899"
                   className="underline hover:text-[#F7C94B]"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   080-830-0899
                 </a>

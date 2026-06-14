@@ -21,6 +21,7 @@ const BackToTop = () => {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
       className={`

@@ -138,6 +138,7 @@ const Layer2 = () => {
                   </div>
                 )}
                 <button
+                  type="button"
                   disabled={isDisabled}
                   onClick={handleSubmit}
                   className="h-[42px] w-full rounded-md bg-[#F7C94B] font-semibold text-[#042451] transition hover:bg-[#f1cb61] disabled:cursor-not-allowed disabled:opacity-50"
@@ -203,7 +204,6 @@ const Layer2 = () => {
                 height={400}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              {/* Cat Peeking - ใช้ Fill เพื่อให้ขยายตาม Div ครอบที่มีการทำ Absolute */}
               <div className="absolute left-0 top-0 w-[22%] h-[22%] -translate-x-[35%] -translate-y-[55%]">
                 <Image
                   src={img3}

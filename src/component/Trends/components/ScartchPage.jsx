@@ -4,12 +4,12 @@ import "./style.css";
 import Link from "next/link";
 import { useLanguage } from "@/hook/useLanguage";
 import Image from "next/image";
-import cat from "../../../assets/logos/cat.webp"
-import bloxk from "../../../assets/logos/bloxk.webp"
-import move from "../../../assets/logos/move.webp"
+import cat from "../../../assets/logos/cat.webp";
+import bloxk from "../../../assets/logos/bloxk.webp";
+import move from "../../../assets/logos/move.webp";
 
 const ScratchPage = () => {
-  const {dict, lang, langPath} = useLanguage();
+  const { dict, lang, langPath } = useLanguage();
 
   return (
     <>
@@ -21,7 +21,9 @@ const ScratchPage = () => {
               {dict.Blogs_Scratch_1}
             </div>
 
-            <h1 className={`mx-auto ${lang === "th" ? "looped-text" : ""} mt-6 max-w-4xl text-3xl font-bold leading-tight text-[#042451] sm:text-4xl md:text-5xl`}>
+            <h1
+              className={`mx-auto ${lang === "th" ? "looped-text" : ""} mt-6 max-w-4xl text-3xl font-bold leading-tight text-[#042451] sm:text-4xl md:text-5xl`}
+            >
               {dict.Blogs_Scratch_2}
             </h1>
 
@@ -34,12 +36,13 @@ const ScratchPage = () => {
         {/* CONTENT */}
         <section className="px-4 pb-20 sm:px-6 md:px-10 lg:px-20">
           <div className="mx-auto max-w-6xl">
-
             {/* INTRO CARD */}
             <div className="rounded-[32px] bg-white p-6 shadow-[0_15px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:p-12">
               <div className="grid items-center gap-10 lg:grid-cols-2">
                 <div>
-                  <h2 className={`text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}>
+                  <h2
+                    className={`text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}
+                  >
                     {dict.Blogs_Scratch_4}
                   </h2>
 
@@ -65,7 +68,9 @@ const ScratchPage = () => {
                 <div className="rounded-3xl bg-gradient-to-br from-[#93d99a] to-[#b8f0be] p-8 shadow-xl">
                   <div className="space-y-5">
                     <div className="rounded-2xl bg-white/80 p-4">
-                      <p className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}>
+                      <p
+                        className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}
+                      >
                         {dict.Blogs_Scratch_9}
                       </p>
                       <p className="mt-1 text-sm text-gray-700">
@@ -74,7 +79,9 @@ const ScratchPage = () => {
                     </div>
 
                     <div className="rounded-2xl bg-white/80 p-4">
-                      <p className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}>
+                      <p
+                        className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}
+                      >
                         {dict.Blogs_Scratch_11}
                       </p>
                       <p className="mt-1 text-sm text-gray-700">
@@ -83,7 +90,9 @@ const ScratchPage = () => {
                     </div>
 
                     <div className="rounded-2xl bg-white/80 p-4">
-                      <p className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}>
+                      <p
+                        className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}
+                      >
                         {dict.Blogs_Scratch_13}
                       </p>
                       <p className="mt-1 text-sm text-gray-700">
@@ -92,7 +101,9 @@ const ScratchPage = () => {
                     </div>
 
                     <div className="rounded-2xl bg-white/80 p-4">
-                      <p className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}>
+                      <p
+                        className={`font-bold ${lang === "th" ? "looped-text" : ""} text-[#042451]`}
+                      >
                         {dict.Blogs_Scratch_15}
                       </p>
                       <p className="mt-1 text-sm text-gray-700">
@@ -106,19 +117,38 @@ const ScratchPage = () => {
 
             {/* STEP SECTION */}
             <div className="mt-14 grid gap-8 lg:grid-cols-2">
-
               {/* STEP 1 */}
               <div className="rounded-[28px] bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl md:p-8">
                 <div className="inline-flex rounded-full bg-yellow-100 px-4 py-2 text-sm font-bold text-yellow-700">
                   STEP 1
                 </div>
 
-                <h3 className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}>
+                <h3
+                  className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}
+                >
                   {dict.Blogs_Scratch_7}
                 </h3>
 
                 <p className="mt-4 leading-relaxed text-gray-700">
-                  {dict.Blogs_Scratch_18} <a className="text-light-green-600 underline" href="https://scratch.mit.edu/">scratch.mit.edu</a> {dict.Blogs_Scratch_19} <a className="text-light-green-600" href="https://scratch.mit.edu/">{dict.Blogs_Scratch_20}</a> {dict.Blogs_Scratch_21}
+                  {dict.Blogs_Scratch_18}{" "}
+                  <a
+                    className="text-light-green-600 underline"
+                    href="https://scratch.mit.edu/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    scratch.mit.edu
+                  </a>{" "}
+                  {dict.Blogs_Scratch_19}{" "}
+                  <a
+                    className="text-light-green-600"
+                    href="https://scratch.mit.edu/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {dict.Blogs_Scratch_20}
+                  </a>{" "}
+                  {dict.Blogs_Scratch_21}
                 </p>
               </div>
 
@@ -128,12 +158,13 @@ const ScratchPage = () => {
                   STEP 2
                 </div>
 
-                <h3 className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}>
+                <h3
+                  className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}
+                >
                   {dict.Blogs_Scratch_22}
                 </h3>
 
                 <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-center">
-
                   {/* TEXT */}
                   <div className="flex-auto">
                     <p className="leading-relaxed text-gray-700 text-sm md:text-base">
@@ -156,20 +187,20 @@ const ScratchPage = () => {
                       </span>
                     </p>
                   </div>
-
                 </div>
               </div>
 
               {/* STEP 3 */}
               <div className="rounded-[28px] bg-gradient-to-br from-[#93d99a] to-[#bff1c4] p-6 shadow-xl md:p-8 lg:col-span-2">
                 <div className="grid items-center gap-10 lg:grid-cols-2">
-
                   <div>
                     <div className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-green-700">
                       STEP 3
                     </div>
 
-                    <h3 className={`mt-5 text-3xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}>
+                    <h3
+                      className={`mt-5 text-3xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}
+                    >
                       {dict.Blogs_Scratch_26}
                     </h3>
 
@@ -210,7 +241,9 @@ const ScratchPage = () => {
                   STEP 4
                 </div>
 
-                <h3 className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}>
+                <h3
+                  className={`mt-5 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451]`}
+                >
                   {dict.Blogs_Scratch_30}
                 </h3>
 
@@ -222,7 +255,9 @@ const ScratchPage = () => {
 
             {/* CHALLENGE */}
             <div className="mt-14 rounded-[32px] bg-gradient-to-r from-[#7ea9ff] to-[#9bc0ff] p-8 text-white shadow-2xl md:p-12">
-              <h3 className={`text-3xl ${lang === "th" ? "looped-text" : ""} font-bold`}>
+              <h3
+                className={`text-3xl ${lang === "th" ? "looped-text" : ""} font-bold`}
+              >
                 {dict.Blogs_Scratch_32}
               </h3>
 
@@ -233,12 +268,13 @@ const ScratchPage = () => {
 
             {/* FAQ */}
             <div className="mt-16 rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-10">
-              <h3 className={`flex items-center gap-3 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}>
+              <h3
+                className={`flex items-center gap-3 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}
+              >
                 {dict.Blogs_Scratch_34}
               </h3>
 
               <div className="mt-10 space-y-8">
-
                 <div className="rounded-2xl border border-gray-100 bg-[#fafcff] p-5">
                   <p className="text-lg font-bold text-[#042451]">
                     {dict.Blogs_Scratch_35}
@@ -273,7 +309,9 @@ const ScratchPage = () => {
 
             {/* CTA */}
             <div className="mt-20 text-center">
-              <h2 className={`text-3xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-5xl`}>
+              <h2
+                className={`text-3xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-5xl`}
+              >
                 {dict.Blogs_Scratch_41}
               </h2>
 
@@ -297,11 +335,12 @@ const ScratchPage = () => {
                 </Link>
               </div>
 
-              <p className={`mt-8 text-xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#F7C94B]`}>
+              <p
+                className={`mt-8 text-xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#F7C94B]`}
+              >
                 {dict.Blogs_Scratch_45}
               </p>
             </div>
-
           </div>
         </section>
       </div>

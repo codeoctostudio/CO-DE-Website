@@ -78,6 +78,7 @@ const Nav = (props) => {
         <div className="flex items-center gap-4 ml-3 mt-2">
           {/* TH Flag */}
           <button
+            type="button"
             onClick={() => setLanguage("th")}
             aria-label="เปลี่ยนเป็นภาษาไทย"
             className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${
@@ -97,6 +98,7 @@ const Nav = (props) => {
 
           {/* EN Flag */}
           <button
+            type="button"
             onClick={() => setLanguage("en")}
             aria-label="Change to English"
             className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${

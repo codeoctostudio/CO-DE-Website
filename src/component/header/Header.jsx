@@ -64,7 +64,7 @@ const Header = ({ toggle, rewardRef }) => {
         <Link href={`/${lang}`}>
           <Image
             src={code_logo}
-            alt="CO-DE"
+            alt="CO-DE Academy โลโก้"
             priority
             className="relative right-10 h-[120px] w-[120px] object-contain md:right-14 md:h-[170px] md:w-[170px]"
           />
@@ -77,6 +77,7 @@ const Header = ({ toggle, rewardRef }) => {
             !isRegistrationPage &&
             !hideFreeTrial && (
               <button
+                type="button"
                 onClick={scrollToEmail}
                 className="rounded-full bg-[#F7C94B] px-3 py-1.5 text-xs font-semibold text-[#042451] transition hover:opacity-80"
               >
@@ -94,7 +95,7 @@ const Header = ({ toggle, rewardRef }) => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="relative hidden w-[90%] items-center gap-[1%] md:ml-[-40px] md:flex md:text-[1.45vw] lg:text-[1.2vw]">
+        <nav className="relative hidden w-[90%] items-center gap-[1%] md:ml-[-40px] md:flex md:text-[1.45vw] lg:text-[1.2vw]">
           <Link
             href={langPath("/courses")}
             className="flex-grow font-comfortaa text-white transition hover:opacity-80"
@@ -126,12 +127,14 @@ const Header = ({ toggle, rewardRef }) => {
           {/* Language */}
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => setLanguage("th")}
-              className={` rounded-md p-1 transition ${currentLang === "th" ? "border border-white/50 bg-white/20" : "opacity-70 hover:opacity-100"}`}
+              aria-label="เปลี่ยนเป็นภาษาไทย"
+              className={`rounded-md p-1 transition ${currentLang === "th" ? "border border-white/50 bg-white/20" : "opacity-70 hover:opacity-100"}`}
             >
               <Image
                 src={thflag}
-                alt="ภาษาไทย"
+                alt="ธงชาติไทย"
                 width={26}
                 height={18}
                 className="h-[18px] w-[26px] object-cover"
@@ -139,24 +142,27 @@ const Header = ({ toggle, rewardRef }) => {
             </button>
 
             <button
+              type="button"
               onClick={() => setLanguage("en")}
+              aria-label="Switch to English"
               className={`rounded-md p-1 transition ${currentLang === "en" ? "border border-white/50 bg-white/20" : "opacity-70 hover:opacity-100"}`}
             >
               <Image
                 src={ukflag}
-                alt="English"
+                alt="UK Flag"
                 width={26}
                 height={18}
                 className="h-[18px] w-[26px] object-cover"
               />
             </button>
           </div>
-        </div>
+        </nav>
       </header>
 
       {/* Floating Free Trial */}
       {isScrolled && !isTrialPage && !isRegistrationPage && !hideFreeTrial && (
         <button
+          type="button"
           onClick={scrollToEmail}
           className="fixed right-6 top-6 z-[99999] hidden animate-bounce rounded-full bg-[#F7C94B] px-4 py-2 font-bold text-[#042451] shadow-xl transition hover:bg-yellow-400 active:scale-95 md:block"
         >

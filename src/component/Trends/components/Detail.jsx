@@ -194,6 +194,7 @@ const TrendsContent = () => {
         <div className="mt-8 flex flex-wrap justify-center gap-2 sm:justify-start sm:gap-3">
           {tabs.map((tab) => (
             <button
+              type="button"
               key={tab.key}
               onClick={() => handleTabChange(tab.key)}
               className={`rounded-lg border px-4 py-2 text-sm font-bold transition sm:px-5 sm:text-base
@@ -396,6 +397,7 @@ const TrendsContent = () => {
                 <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {/* Prev */}
                   <button
+                    type="button"
                     onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                     className="rounded-lg bg-gray-200 px-3 py-1 hover:bg-gray-300"
                   >
@@ -405,6 +407,7 @@ const TrendsContent = () => {
                   {/* Numbers */}
                   {[...Array(totalPages)].map((_, i) => (
                     <button
+                      type="button"
                       key={i}
                       onClick={() => {
                         setCurrentPage(i + 1);
@@ -422,6 +425,7 @@ const TrendsContent = () => {
 
                   {/* Next */}
                   <button
+                    type="button"
                     onClick={() =>
                       setCurrentPage((p) => Math.min(p + 1, totalPages))
                     }
@@ -476,6 +480,7 @@ const TrendsContent = () => {
                 <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {/* Prev */}
                   <button
+                    type="button"
                     onClick={() => setStudentPage((p) => Math.max(p - 1, 1))}
                     className="rounded-lg bg-gray-200 px-3 py-1 hover:bg-gray-300"
                   >
@@ -485,6 +490,7 @@ const TrendsContent = () => {
                   {/* Numbers */}
                   {[...Array(totalStudentPages)].map((_, i) => (
                     <button
+                      type="button"
                       key={i}
                       onClick={() => setStudentPage(i + 1)}
                       className={`rounded-lg px-3 py-1 font-bold transition
@@ -500,6 +506,7 @@ const TrendsContent = () => {
 
                   {/* Next */}
                   <button
+                    type="button"
                     onClick={() =>
                       setStudentPage((p) => Math.min(p + 1, totalStudentPages))
                     }

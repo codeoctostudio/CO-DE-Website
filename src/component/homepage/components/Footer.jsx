@@ -1,10 +1,10 @@
 import Image from "next/image";
-import img1 from "@/assets/logos/facebook2.webp"
-import img2 from "@/assets/logos/line2.webp"
-import img3 from "@/assets/logos/phone2.webp"
-import img4 from "@/assets/logos/email.webp"
-import img5 from "@/assets/logos/location.webp"
-import img6 from "@/assets/others/code_logo.webp"
+import img1 from "@/assets/logos/facebook2.webp";
+import img2 from "@/assets/logos/line2.webp";
+import img3 from "@/assets/logos/phone2.webp";
+import img4 from "@/assets/logos/email.webp";
+import img5 from "@/assets/logos/location.webp";
+import img6 from "@/assets/others/code_logo.webp";
 
 const Footer = () => {
   const contacts = [
@@ -33,7 +33,8 @@ const Footer = () => {
       key: "logo4",
     },
     {
-      portal: "https://www.google.com/maps/dir//Mille+Malle+Mall,+Sukhumvit+20+Alley,+Khlong+Toei,+Bangkok+10110/@13.730056,100.4810962,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x30e29ff6f10ee8f3:0x76076b242bf23d09!2m2!1d100.5634996!2d13.7301107?entry=ttu",
+      portal:
+        "https://www.google.com/maps/dir//Mille+Malle+Mall,+Sukhumvit+20+Alley,+Khlong+Toei,+Bangkok+10110/@13.730056,100.4810962,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x30e29ff6f10ee8f3:0x76076b242bf23d09!2m2!1d100.5634996!2d13.7301107?entry=ttu",
       logo: img5,
       text: "CO-DE academy ",
       text2: "Floor 3. Mille Malle , Sukhumvit 20",
@@ -76,8 +77,8 @@ const Footer = () => {
           <Image
             src={img6}
             alt="CO-DE Academy Logo"
-            fill // ใช้ fill เพื่อให้รูปขยายเต็ม div container
-            className="object-contain" // ป้องกันรูปเบี้ยว
+            fill
+            className="object-contain"
             sizes="300px"
             loading="lazy"
           />
@@ -94,6 +95,8 @@ const Footer = () => {
         <a
           href="mailto:codeonline.charlie@gmail.com"
           className="text-base text-[#FFAC1C] sm:text-xl "
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Work with Us
         </a>
