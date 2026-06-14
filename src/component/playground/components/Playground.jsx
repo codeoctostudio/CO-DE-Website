@@ -49,7 +49,7 @@ const Playground = () => {
   ));
   return (
     <>
-      <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-[150px] font-comfortaa text-white ">
+      <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white ">
         <p className=" w-[80%] text-center text-3xl md:text-4xl">
           Environment that creates creative thinking
         </p>

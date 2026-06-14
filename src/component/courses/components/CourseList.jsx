@@ -45,7 +45,7 @@ const CourseList = (props) => {
   ));
 
   return (
-    <div className="flex h-full w-full flex-col items-center overflow-x-hidden bg-[#042451] pt-[150px] font-comfortaa text-white">
+    <div className="flex h-full w-full flex-col items-center overflow-x-hidden bg-[#042451] pt-37.5 font-comfortaa text-white">
       <p className="mb-10 text-center text-4xl">Our Courses</p>
       <Image
         src={menu}

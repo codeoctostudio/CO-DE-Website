@@ -7,7 +7,7 @@ const Python = () => {
 
   return (
     <>
-      <div className="font-comfortaa trends-thai min-h-screen bg-gradient-to-b from-[#0B2545] to-[#071f3d] px-4 py-12 sm:px-6 md:px-12 md:py-16 lg:px-20 lg:py-20">
+      <div className="font-comfortaa trends-thai min-h-screen bg-linear-to-b from-[#0B2545] to-[#071f3d] px-4 py-12 sm:px-6 md:px-12 md:py-16 lg:px-20 lg:py-20">
         <div className="mx-auto max-w-5xl mt-10 rounded-3xl bg-[#122A5E] p-6 text-white shadow-2xl sm:p-10 md:p-12 lg:p-16">
           {/* TITLE */}
           <h1

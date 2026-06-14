@@ -63,14 +63,14 @@ const Message = ({ announcementVisible }) => {
       <div
         ref={wrapperRef}
         className={`
-          fixed right-1 z-[99999]
+          fixed right-1 z-99999
           transition-all duration-300
           ${
             isMobile
               ? consentStatus === "undecided"
                 ? "bottom-72"
                 : announcementVisible
-                  ? "bottom-[115px]"
+                  ? "bottom-28.75"
                   : "bottom-6"
               : "bottom-6"
           }
@@ -85,7 +85,7 @@ const Message = ({ announcementVisible }) => {
         {open && (
           <div
             onClick={() => setOpen(false)}
-            className="absolute bottom-full left-5 z-[100000] mb-[-5%] flex flex-col items-center gap-[5px] md:left-8"
+            className="absolute bottom-full left-5 z-100000 mb-[-5%] flex flex-col items-center gap-1.25 md:left-8"
           >
             <a
               href="tel:0808300899"
@@ -171,7 +171,7 @@ const Message = ({ announcementVisible }) => {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className={`w-[80px] md:w-[110px] ${
+          className={`w-20 md:w-27.5 ${
             !open ? "origin-bottom animate-alarm" : ""
           }`}
         >

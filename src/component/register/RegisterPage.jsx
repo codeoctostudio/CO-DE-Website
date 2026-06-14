@@ -130,10 +130,10 @@ const RegisterPage = () => {
         </div>
       )}
 
-      <div className="mx-auto mt-20 w-full max-w-3xl gap-10 md:mt-20 md:grid md:gap-16 md:w-[32rem]">
+      <div className="mx-auto mt-20 w-full max-w-3xl gap-10 md:mt-20 md:grid md:gap-16 md:w-lg">
         {/* Title */}
         <h1
-          className={`w-full max-w-[32rem] -mt-3 text-center text-xl md:text-left md:text-3xl ${
+          className={`w-full max-w-lg -mt-3 text-center text-xl md:text-left md:text-3xl ${
             lang === "th" ? "looped-text" : ""
           }`}
         >
@@ -172,10 +172,10 @@ const RegisterPage = () => {
                 value={birthDate}
                 name="DOB"
                 onChange={handleChange}
-                className="flex-1 min-w-[140px] rounded-md bg-white px-3 py-2 text-sm text-black md:flex-none md:px-4 md:text-base"
+                className="flex-1 min-w-35 rounded-md bg-white px-3 py-2 text-sm text-black md:flex-none md:px-4 md:text-base"
               />
 
-              <p className="flex-1 min-w-[120px] text-center rounded-full bg-[#79bc6b] px-4 py-2 text-sm text-white md:flex-none md:text-base">
+              <p className="flex-1 min-w-30 text-center rounded-full bg-[#79bc6b] px-4 py-2 text-sm text-white md:flex-none md:text-base">
                 {age
                   ? `${age.years} ${dict.register_5_1} ${age.months} ${dict.register_5_2}`
                   : // ? `${age.years} ${dict.register_5_1} ${age.months} ${dict.register_5_2} ${age.days} ${dict.register_5_3}`

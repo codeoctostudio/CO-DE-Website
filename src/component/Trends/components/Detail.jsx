@@ -171,7 +171,7 @@ const TrendsContent = () => {
   return (
     <main className="font-comfortaa">
       {/* HEADER */}
-      <div className="bg-gradient-to-b from-[#0B2545] to-[#071f3d] px-4 py-10 sm:px-6 md:px-12 lg:px-20">
+      <div className="bg-linear-to-b from-[#0B2545] to-[#071f3d] px-4 py-10 sm:px-6 md:px-12 lg:px-20">
         {/* BADGE */}
         <div className="mb-4 mt-16 w-fit rounded-full bg-[#F7C94B] px-4 py-1 text-sm font-bold text-[#042451] shadow-md transition hover:bg-[#EA5880] sm:text-base">
           Imagination Insight
@@ -261,7 +261,7 @@ const TrendsContent = () => {
 
               {/* คำถาม */}
               {/* FAQ */}
-              <div className="mt-16 rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-10">
+              <div className="mt-16 rounded-4xl bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-10">
                 <h3
                   className={`flex items-center gap-3 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}
                 >
@@ -317,7 +317,7 @@ const TrendsContent = () => {
                       <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
                         {/* TOP */}
                         <div
-                          className={`flex h-24 items-center justify-center bg-gradient-to-r sm:h-28 ${cat.color}`}
+                          className={`flex h-24 items-center justify-center bg-linear-to-r sm:h-28 ${cat.color}`}
                         >
                           <div className="text-2xl sm:text-3xl">{cat.icon}</div>
                         </div>
@@ -365,7 +365,7 @@ const TrendsContent = () => {
                         <div className="flex items-center gap-4">
                           {/* ICON */}
                           <div
-                            className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r ${cat.color}`}
+                            className={`flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-r ${cat.color}`}
                           >
                             <span className="text-xl">{cat.icon}</span>
                           </div>
@@ -452,7 +452,7 @@ const TrendsContent = () => {
                     {/* LEFT */}
                     <div className="flex items-center gap-4">
                       {/* ICON (รางวัล) */}
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-yellow-100 to-yellow-200">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-r from-yellow-100 to-yellow-200">
                         <span className="text-xl">🏆</span>
                       </div>
 
@@ -521,7 +521,7 @@ const TrendsContent = () => {
 
           {/* TAB 2 */}
           {activeTab === "parents" && (
-            <div className="bg-gradient-to-b from-[#ffecf8] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
+            <div className="bg-linear-to-b from-[#ffecf8] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
               <div className="mx-auto mb-5 max-w-6xl">
                 {/* HEADER */}
                 <div className="mb-10 text-center">
@@ -547,7 +547,7 @@ const TrendsContent = () => {
                   .filter((article) => article.featured)
                   .map((item) => (
                     <Link key={item.slug} href={langPath(item.slug)}>
-                      <div className="group relative overflow-hidden rounded-[32px] bg-gradient-to-r from-[#042451] via-[#12396b] to-[#0B2545] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                      <div className="group relative overflow-hidden rounded-4xl bg-linear-to-r from-[#042451] via-[#12396b] to-[#0B2545] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
                         {/* BG */}
                         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-pink-400/20 blur-3xl"></div>
 
@@ -594,7 +594,7 @@ const TrendsContent = () => {
                       <Link key={item.slug} href={langPath(item.slug)}>
                         <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-pink-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                           {/* TOP */}
-                          <div className="via-rose-50 relative overflow-hidden bg-gradient-to-br from-pink-100 to-white p-8">
+                          <div className="via-rose-50 relative overflow-hidden bg-linear-to-br from-pink-100 to-white p-8">
                             <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-pink-200/40 blur-2xl"></div>
 
                             <div className="relative z-10 flex items-center justify-between">
@@ -657,7 +657,7 @@ const TrendsContent = () => {
 
           {/* TAB 3 */}
           {activeTab === "tutorials" && (
-            <div className="bg-gradient-to-b from-[#eeffec] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
+            <div className="bg-linear-to-b from-[#eeffec] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
               <div className="mx-auto mb-5 max-w-6xl">
                 {/* HEADER */}
                 <div className="mb-10 text-center">
@@ -683,7 +683,7 @@ const TrendsContent = () => {
                   .filter((article) => article.featured)
                   .map((item) => (
                     <Link key={item.slug} href={langPath(item.slug)}>
-                      <div className="group relative overflow-hidden rounded-[32px] bg-gradient-to-r from-[#042451] via-[#12396b] to-[#0B2545] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                      <div className="group relative overflow-hidden rounded-4xl bg-linear-to-r from-[#042451] via-[#12396b] to-[#0B2545] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
                         {/* BG */}
                         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-pink-400/20 blur-3xl"></div>
 
@@ -730,7 +730,7 @@ const TrendsContent = () => {
                       <Link key={item.slug} href={langPath(item.slug)}>
                         <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-pink-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                           {/* TOP */}
-                          <div className="via-rose-50 relative overflow-hidden bg-gradient-to-br from-pink-100 to-white p-8">
+                          <div className="via-rose-50 relative overflow-hidden bg-linear-to-br from-pink-100 to-white p-8">
                             <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-pink-200/40 blur-2xl"></div>
 
                             <div className="relative z-10 flex items-center justify-between">

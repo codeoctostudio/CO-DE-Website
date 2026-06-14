@@ -32,7 +32,7 @@ const CourseSetup = (props) => {
   ));
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-[#042451] pt-[150px] font-comfortaa text-white">
+    <div className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{

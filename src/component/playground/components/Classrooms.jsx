@@ -70,7 +70,7 @@ const Classrooms = () => {
       </div>
       <Image src={classroom.image} className="rounded-t-[30px]" loading="lazy" alt="Classroom" />
       <div className="p-4 ">
-        <p className="h-[70px] text-xl font-bold lg:text-2xl ">
+        <p className="h-17.5 text-xl font-bold lg:text-2xl ">
           {classroom.name}
         </p>
         <p className=" text-xl font-bold">{classroom.count}</p>
@@ -79,7 +79,7 @@ const Classrooms = () => {
   ));
   return (
     <>
-      <div className="flex h-full w-full flex-col items-center bg-[#042451] py-[150px] font-comfortaa   ">
+      <div className="flex h-full w-full flex-col items-center bg-[#042451] py-37.5 font-comfortaa   ">
         <p className="mb-10 text-center text-3xl text-white">Our Classrooms</p>
         <div className="flex w-[85%] flex-col flex-wrap items-center md:flex-row md:justify-between">
           {classroomContainers}

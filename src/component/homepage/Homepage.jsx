@@ -36,7 +36,7 @@ const Homepage = () => {
       <Header toggle={toggleNav} rewardRef={rewardRef} />
       <Nav isVisible={isNavOpen} toggle={toggleNav} />
 
-      <div className="flex-grow">
+      <div className="grow">
         <Layer1 />
         <Layer2 />
         <Layer3 />

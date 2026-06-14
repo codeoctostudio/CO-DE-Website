@@ -58,7 +58,7 @@ const Footer = () => {
         href={contact.portal}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col justify-center text-xs font-bold [overflow-wrap:anywhere] sm:text-base md:flex-row md:items-center md:gap-1"
+        className="flex flex-col justify-center text-xs font-bold wrap-anywhere sm:text-base md:flex-row md:items-center md:gap-1"
       >
         <span>{contact.text}</span>
         {contact.text2 && (
@@ -73,7 +73,7 @@ const Footer = () => {
   return (
     <footer className="h-full w-full font-comfortaa">
       <section className=" flex  flex-col items-center bg-[#042451]  md:flex-row">
-        <div className="relative h-[300px] w-[300px]">
+        <div className="relative h-75 w-75">
           <Image
             src={img6}
             alt="CO-DE Academy Logo"

@@ -212,7 +212,7 @@ const RewardLayer = () => {
 
   return (
     <section aria-labelledby="reward-main-heading">
-      <div className="relative flex w-full flex-col items-center font-comfortaa bg-gradient-to-b from-[#fbfbfb] to-[#ffffff] py-12 md:py-20">
+      <div className="relative flex w-full flex-col items-center font-comfortaa bg-linear-to-b from-[#fbfbfb] to-[#ffffff] py-12 md:py-20">
         <div className="flex -mt-6 w-[90%] max-w-6xl flex-col items-center text-center gap-4 md:-mt-10">
           <h2
             id="reward-main-heading"
@@ -230,7 +230,7 @@ const RewardLayer = () => {
           <div className="w-full flex justify-center">
             <div
               ref={videoRef}
-              className={`w-full max-w-[550px] max-h-[688px] aspect-[9/16] overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+              className={`w-full max-w-137.5 max-h-172 aspect-9/16 overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
             >
               <div className="relative w-full h-full">
                 <div id="player" className="w-full h-full" />
@@ -291,14 +291,14 @@ const RewardLayer = () => {
               return (
                 <SwiperSlide key={index} className="p-4 md:p-8 bg-transparent">
                   {/* MOBILE VIEW */}
-                  <div className="flex md:hidden gap-4 items-center bg-white p-4 rounded-2xl shadow-md min-h-[140px]">
-                    <div className="relative w-[35%] h-[100px] flex-shrink-0">
+                  <div className="flex md:hidden gap-4 items-center bg-white p-4 rounded-2xl shadow-md min-h-35">
+                    <div className="relative w-[35%] h-25 shrink-0">
                       <Image
                         className="object-cover rounded-xl"
                         src={first.img}
                         alt={first.title || "ภาพรางวัล"}
                         fill
-                        sizes="(max-width: 768px) 30vw, 15vw" // 👈 แก้ไขขนาดสากลป้องกันดึงภาพใหญ่เกิน
+                        sizes="(max-width: 768px) 30vw, 15vw"
                       />
                     </div>
                     <div>
@@ -319,15 +319,15 @@ const RewardLayer = () => {
                     {[first, second].map((item, i) => (
                       <div
                         key={i}
-                        className="flex w-1/2 gap-4 items-center bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition duration-300 min-h-[200px]"
+                        className="flex w-1/2 gap-4 items-center bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition duration-300 min-h-50"
                       >
-                        <div className="relative w-[35%] h-[140px] flex-shrink-0">
+                        <div className="relative w-[35%] h-35 shrink-0">
                           <Image
                             className="object-cover rounded-xl"
                             src={item.img}
                             alt={item.title || "ภาพรางวัล"}
                             fill
-                            sizes="(max-width: 1024px) 20vw, 15vw" // 👈 ปรับสัดส่วนการเรนเดอร์รูปให้เบาลง
+                            sizes="(max-width: 1024px) 20vw, 15vw"
                           />
                         </div>
                         <div className="flex-1">
@@ -409,7 +409,7 @@ const RewardLayer = () => {
             <button
               type="button"
               onClick={scrollToEmail}
-              className="w-full rounded-full bg-gradient-to-r from-[#F7C94B] to-[#f5b700] px-6 py-3 md:py-4 text-lg md:text-xl font-semibold text-[#042451] shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              className="w-full rounded-full bg-linear-to-r from-[#F7C94B] to-[#f5b700] px-6 py-3 md:py-4 text-lg md:text-xl font-semibold text-[#042451] shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
               {dict.freetrial_1}
             </button>

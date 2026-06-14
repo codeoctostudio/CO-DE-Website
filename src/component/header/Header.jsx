@@ -58,7 +58,7 @@ const Header = ({ toggle, rewardRef }) => {
   return (
     <>
       <header
-        className={`fixed font-comfortaa left-0 right-0 top-0 z-[9999] flex h-[80px] items-center justify-between bg-[#29446A] px-6 shadow-lg transition duration-500 md:left-12 md:right-12 md:h-[90px] md:rounded-b-[60px] ${headerStyle}`}
+        className={`fixed font-comfortaa left-0 right-0 top-0 z-9999 flex h-20 items-center justify-between bg-[#29446A] px-6 shadow-lg transition duration-500 md:left-12 md:right-12 md:h-22.5 md:rounded-b-[60px] ${headerStyle}`}
       >
         {/* Logo */}
         <Link href={`/${lang}`}>
@@ -66,7 +66,7 @@ const Header = ({ toggle, rewardRef }) => {
             src={code_logo}
             alt="CO-DE Academy โลโก้"
             priority
-            className="relative right-10 h-[120px] w-[120px] object-contain md:right-14 md:h-[170px] md:w-[170px]"
+            className="relative right-10 h-30 w-30 object-contain md:right-14 md:h-42.5 md:w-42.5"
           />
         </Link>
 
@@ -90,36 +90,36 @@ const Header = ({ toggle, rewardRef }) => {
             alt="เปิดเมนูนำทาง"
             priority
             onClick={toggle}
-            className="h-[36px] w-[36px] cursor-pointer object-contain transition hover:opacity-90"
+            className="h-9 w-9 cursor-pointer object-contain transition hover:opacity-90"
           />
         </div>
 
         {/* Desktop Menu */}
-        <nav className="relative hidden w-[90%] items-center gap-[1%] md:ml-[-40px] md:flex md:text-[1.45vw] lg:text-[1.2vw]">
+        <nav className="relative hidden w-[90%] items-center gap-[1%] md:-ml-10 md:flex md:text-[1.45vw] lg:text-[1.2vw]">
           <Link
             href={langPath("/courses")}
-            className="flex-grow font-comfortaa text-white transition hover:opacity-80"
+            className="grow font-comfortaa text-white transition hover:opacity-80"
           >
             {dict.courses}
           </Link>
 
           <Link
             href={langPath("/playground")}
-            className="flex-grow font-comfortaa text-white transition hover:opacity-80"
+            className="grow font-comfortaa text-white transition hover:opacity-80"
           >
             {dict.playground}
           </Link>
 
           <Link
             href={langPath("/blogs")}
-            className="flex-grow font-comfortaa text-white transition hover:opacity-80"
+            className="grow font-comfortaa text-white transition hover:opacity-80"
           >
             {dict.trends}
           </Link>
 
           <Link
             href={langPath("/contactUs")}
-            className="flex-grow font-comfortaa text-white transition hover:opacity-80"
+            className="grow font-comfortaa text-white transition hover:opacity-80"
           >
             {dict.contact}
           </Link>
@@ -137,7 +137,7 @@ const Header = ({ toggle, rewardRef }) => {
                 alt="ธงชาติไทย"
                 width={26}
                 height={18}
-                className="h-[18px] w-[26px] object-cover"
+                className="h-4.5 w-6.5 object-cover"
               />
             </button>
 
@@ -152,7 +152,7 @@ const Header = ({ toggle, rewardRef }) => {
                 alt="UK Flag"
                 width={26}
                 height={18}
-                className="h-[18px] w-[26px] object-cover"
+                className="h-4.5 w-6.5 object-cover"
               />
             </button>
           </div>
@@ -164,7 +164,7 @@ const Header = ({ toggle, rewardRef }) => {
         <button
           type="button"
           onClick={scrollToEmail}
-          className="fixed right-6 top-6 z-[99999] hidden animate-bounce rounded-full bg-[#F7C94B] px-4 py-2 font-bold text-[#042451] shadow-xl transition hover:bg-yellow-400 active:scale-95 md:block"
+          className="fixed right-6 top-6 z-99999 hidden animate-bounce rounded-full bg-[#F7C94B] px-4 py-2 font-bold text-[#042451] shadow-xl transition hover:bg-yellow-400 active:scale-95 md:block"
         >
           {dict.freetrial}
         </button>

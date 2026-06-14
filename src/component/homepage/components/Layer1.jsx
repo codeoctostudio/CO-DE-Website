@@ -20,21 +20,21 @@ const Layer1 = () => {
 
   return (
     <main
-      className="flex min-h-screen w-full flex-col items-center justify-start bg-[#042451] pb-[3rem] pt-[0rem] md:pt-[8rem]"
+      className="flex min-h-screen w-full flex-col items-center justify-start bg-[#042451] pb-12 pt-0 md:pt-32"
     >
       {isClient ? (
         <LottiePlayer
           src="/lottie/intro.json"
           autoplay
           keepLastFrame
-          className="h-[65dvh] min-h-[400px] w-full max-w-7xl md:h-[55dvh] lg:h-[60dvh]"
+          className="h-[65dvh] min-h-100 w-full max-w-7xl md:h-[55dvh] lg:h-[60dvh]"
         />
       ) : (
-        <div className="h-[65dvh] min-h-[400px] w-full" />
+        <div className="h-[65dvh] min-h-100 w-full" />
       )}
       {/* Content */}
       <div
-        className="relative z-10 mt-[-5rem] flex flex-col items-center px-6 font-comfortaa text-white md:-mt-10"
+        className="relative z-10 -mt-20 flex flex-col items-center px-6 font-comfortaa text-white md:-mt-10"
       >
         {/* Title */}
         <h1
@@ -44,7 +44,7 @@ const Layer1 = () => {
           <span className="block md:hidden">
             <span className="block font-looped">{dict.layer1_1}</span>
 
-            <span className="mx-auto my-2 block h-[2px] w-10/12 bg-white/60" />
+            <span className="mx-auto my-2 block h-0.5 w-10/12 bg-white/60" />
 
             <span className="block text-[1rem] opacity-90">
               {dict.layer1_2}

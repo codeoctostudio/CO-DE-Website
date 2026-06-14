@@ -12,7 +12,7 @@ import Image from "next/image";
 const Detail = () => {
   const {dict } = useLanguage();
   return (
-    <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-[150px] font-comfortaa text-white ">
+    <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white ">
       <p className="mb-8 w-[80%] text-center text-xl md:text-3xl">
         {dict.aboutUs_1}
       </p>

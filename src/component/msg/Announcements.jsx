@@ -109,7 +109,7 @@ const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
     <>
       {!hideFreeTrial && (
         <div
-          className={`fixed bottom-4 left-1/2 z-[99997] w-[90%] max-w-[700px] -translate-x-1/2 rounded-xl bg-[#F8E27A] px-4 py-3 text-[#0E2A47] shadow-xl transition-all duration-500 md:w-auto md:max-w-none
+          className={`fixed bottom-4 left-1/2 z-99997 w-[90%] max-w-175 -translate-x-1/2 rounded-xl bg-[#F8E27A] px-4 py-3 text-[#0E2A47] shadow-xl transition-all duration-500 md:w-auto md:max-w-none
             ${
               show
                 ? "translate-y-0 opacity-100"

@@ -13,7 +13,7 @@ const ScratchPage = () => {
 
   return (
     <>
-      <div className="font-comfortaa trends-thai min-h-screen bg-gradient-to-b from-[#eeffec] via-[#f8fffa] to-white overflow-hidden">
+      <div className="font-comfortaa trends-thai min-h-screen bg-linear-to-b from-[#eeffec] via-[#f8fffa] to-white overflow-hidden">
         {/* HERO */}
         <section className="relative px-4 pt-24 pb-14 sm:px-6 md:px-10 lg:px-20">
           <div className="mx-auto max-w-6xl text-center">
@@ -37,7 +37,7 @@ const ScratchPage = () => {
         <section className="px-4 pb-20 sm:px-6 md:px-10 lg:px-20">
           <div className="mx-auto max-w-6xl">
             {/* INTRO CARD */}
-            <div className="rounded-[32px] bg-white p-6 shadow-[0_15px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:p-12">
+            <div className="rounded-4xl bg-white p-6 shadow-[0_15px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:p-12">
               <div className="grid items-center gap-10 lg:grid-cols-2">
                 <div>
                   <h2
@@ -65,7 +65,7 @@ const ScratchPage = () => {
                   </div>
                 </div>
 
-                <div className="rounded-3xl bg-gradient-to-br from-[#93d99a] to-[#b8f0be] p-8 shadow-xl">
+                <div className="rounded-3xl bg-linear-to-br from-[#93d99a] to-[#b8f0be] p-8 shadow-xl">
                   <div className="space-y-5">
                     <div className="rounded-2xl bg-white/80 p-4">
                       <p
@@ -175,7 +175,7 @@ const ScratchPage = () => {
                       <Image
                         src={move}
                         alt="move 10 steps block"
-                        className="h-auto w-full max-w-[260px] object-contain"
+                        className="h-auto w-full max-w-65 object-contain"
                       />
                     </div>
 
@@ -191,7 +191,7 @@ const ScratchPage = () => {
               </div>
 
               {/* STEP 3 */}
-              <div className="rounded-[28px] bg-gradient-to-br from-[#93d99a] to-[#bff1c4] p-6 shadow-xl md:p-8 lg:col-span-2">
+              <div className="rounded-[28px] bg-linear-to-br from-[#93d99a] to-[#bff1c4] p-6 shadow-xl md:p-8 lg:col-span-2">
                 <div className="grid items-center gap-10 lg:grid-cols-2">
                   <div>
                     <div className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-green-700">
@@ -229,7 +229,7 @@ const ScratchPage = () => {
                     <Image
                       src={bloxk}
                       alt="Scratch Block"
-                      className="w-full max-w-[260px] rounded-2xl shadow-md"
+                      className="w-full max-w-65 rounded-2xl shadow-md"
                     />
                   </div>
                 </div>
@@ -254,7 +254,7 @@ const ScratchPage = () => {
             </div>
 
             {/* CHALLENGE */}
-            <div className="mt-14 rounded-[32px] bg-gradient-to-r from-[#7ea9ff] to-[#9bc0ff] p-8 text-white shadow-2xl md:p-12">
+            <div className="mt-14 rounded-4xl bg-linear-to-r from-[#7ea9ff] to-[#9bc0ff] p-8 text-white shadow-2xl md:p-12">
               <h3
                 className={`text-3xl ${lang === "th" ? "looped-text" : ""} font-bold`}
               >
@@ -267,7 +267,7 @@ const ScratchPage = () => {
             </div>
 
             {/* FAQ */}
-            <div className="mt-16 rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-10">
+            <div className="mt-16 rounded-4xl bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-10">
               <h3
                 className={`flex items-center gap-3 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}
               >
@@ -322,14 +322,14 @@ const ScratchPage = () => {
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href={langPath("/courses/blockcode/scratch")}
-                  className="w-full max-w-[350px] rounded-full bg-[#F7C94B] px-6 py-4 text-center text-lg font-bold text-[#042451] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#ffd86f]"
+                  className="w-full max-w-87.5 rounded-full bg-[#F7C94B] px-6 py-4 text-center text-lg font-bold text-[#042451] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#ffd86f]"
                 >
                   {dict.Blogs_Scratch_43}
                 </Link>
 
                 <Link
                   href={langPath("/courses")}
-                  className="w-full max-w-[280px] rounded-full bg-[#042451] px-6 py-4 text-center text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#06346d]"
+                  className="w-full max-w-70 rounded-full bg-[#042451] px-6 py-4 text-center text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#06346d]"
                 >
                   {dict.Blogs_Scratch_44}
                 </Link>

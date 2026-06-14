@@ -28,7 +28,7 @@ const DesignCourse = () => {
   const slideShowData = [img1, img2, img3, img4];
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-[#F9E5AC] pt-[80px] font-comfortaa text-white md:pt-[110px]">
+    <div className="flex h-full w-full flex-col items-center bg-[#F9E5AC] pt-20 font-comfortaa text-white md:pt-27.5">
       <section className="flex w-full flex-col lg:flex-row ">
         <div className="flex w-full flex-col items-center bg-[#F6C94B]   lg:w-[70%]">
           <Image
@@ -254,7 +254,7 @@ const DesignCourse = () => {
       </section>
 
       <section className="flex w-full flex-col bg-white text-black lg:flex-row">
-        <div className="flex h-[500px] w-full  lg:w-[50%]">
+        <div className="flex h-125 w-full  lg:w-[50%]">
           <iframe
             width="100%"
             height="100%"
@@ -266,7 +266,7 @@ const DesignCourse = () => {
           ></iframe>
         </div>
 
-        <div className="flex h-[500px] w-full items-center justify-center border-2 border-black bg-[#6FBC87] lg:w-[50%]">
+        <div className="flex h-125 w-full items-center justify-center border-2 border-black bg-[#6FBC87] lg:w-[50%]">
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             autoplay={{

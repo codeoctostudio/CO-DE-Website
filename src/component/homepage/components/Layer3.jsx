@@ -103,7 +103,7 @@ const Layer3 = () => {
       />
 
       <div
-        className={`flex flex-1 flex-col justify-center p-3 bg-gradient-to-b from-white ${course.color} rounded-br-[30px]`}
+        className={`flex flex-1 flex-col justify-center p-3 bg-linear-to-b from-white ${course.color} rounded-br-[30px]`}
       >
         <div>
           <p className="mb-2 text-center font-semibold text-sm leading-relaxed sm:text-base md:text-base lg:text-lg xl:text-xl">
@@ -146,7 +146,7 @@ const Layer3 = () => {
 
         <Link
           href={langPath("/courses")}
-          className="bold mb-16 w-full max-w-[280px] cursor-pointer rounded-full bg-[#F7C94B] px-4 py-2 text-center font-comfortaa text-sm text-[#042451] font-bold drop-shadow-lg transition-all duration-300 hover:bg-[#EA5880] hover:text-white active:opacity-80 sm:max-w-[300px] sm:text-base md:px-6 md:py-3 md:text-lg md:hover:scale-105"
+          className="bold mb-16 w-full max-w-70 cursor-pointer rounded-full bg-[#F7C94B] px-4 py-2 text-center font-comfortaa text-sm text-[#042451] font-bold drop-shadow-lg transition-all duration-300 hover:bg-[#EA5880] hover:text-white active:opacity-80 sm:max-w-75 sm:text-base md:px-6 md:py-3 md:text-lg md:hover:scale-105"
         >
           {dict.layer3_3}
         </Link>
@@ -250,7 +250,7 @@ const Layer3 = () => {
                   >
                     <Image src={img9} alt="" width={20} height={20} />
                     <div
-                      className={`absolute bottom-5 left-[20px] h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showNewbie ? "flex" : "hidden"}`}
+                      className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showNewbie ? "flex" : "hidden"}`}
                     >
                       <p className="text-xs text-black font-normal">
                         {dict.layer3_7_1_1}
@@ -287,7 +287,7 @@ const Layer3 = () => {
                   >
                     <Image src={img9} alt="" width={20} height={20} />
                     <div
-                      className={`absolute bottom-5 left-[20px] h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showExplorer ? "flex" : "hidden"}`}
+                      className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showExplorer ? "flex" : "hidden"}`}
                     >
                       <p className="text-xs text-black font-normal">
                         {dict.layer3_7_2_1}
@@ -324,7 +324,7 @@ const Layer3 = () => {
                   >
                     <Image src={img9} alt="" width={20} height={20} />
                     <div
-                      className={`absolute bottom-5 left-[20px] h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showMaster ? "flex" : "hidden"}`}
+                      className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showMaster ? "flex" : "hidden"}`}
                     >
                       <p className="text-xs text-black font-normal">
                         {dict.layer3_7_3_1}
@@ -352,7 +352,7 @@ const Layer3 = () => {
               <Link
                 href={langPath("/customCourse")}
                 onClick={googleEvent}
-                className="bold w-[150px] cursor-pointer rounded-[50px] bg-[#F7C94B] p-2 text-center font-comfortaa text-[#042451] font-bold drop-shadow-lg transition-transform duration-500 hover:bg-[#EA5880] hover:text-white active:opacity-80 md:p-4 md:hover:scale-105"
+                className="bold w-37.5 cursor-pointer rounded-[50px] bg-[#F7C94B] p-2 text-center font-comfortaa text-[#042451] font-bold drop-shadow-lg transition-transform duration-500 hover:bg-[#EA5880] hover:text-white active:opacity-80 md:p-4 md:hover:scale-105"
               >
                 {dict.layer3_9}
               </Link>

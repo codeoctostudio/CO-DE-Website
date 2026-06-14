@@ -11,7 +11,7 @@ const ParentsPage = () => {
 
   return (
     <>
-      <div className="trends-thai min-h-screen overflow-x-hidden bg-gradient-to-b from-[#ffecf8] via-[#f8fffa] to-white font-comfortaa">
+      <div className="trends-thai min-h-screen overflow-x-hidden bg-linear-to-b from-[#ffecf8] via-[#f8fffa] to-white font-comfortaa">
         {/* HERO */}
         <section className="relative px-4 pb-12 pt-16 sm:px-6 sm:pt-20 md:px-10 md:pt-24 lg:px-16 xl:px-20">
           <div className="mx-auto mt-8 w-full max-w-5xl text-center md:mt-0">
@@ -67,7 +67,7 @@ const ParentsPage = () => {
                 </div>
 
                 {/* CHECKLIST SIDE */}
-                <div className="rounded-3xl bg-gradient-to-br from-[#d993c0] to-[#f0b8e4] p-5 shadow-xl sm:p-6 md:p-8">
+                <div className="rounded-3xl bg-linear-to-br from-[#d993c0] to-[#f0b8e4] p-5 shadow-xl sm:p-6 md:p-8">
                   <div className="space-y-3">
                     <div className="rounded-2xl bg-white/90 p-4 text-center shadow-sm">
                       <p
@@ -144,7 +144,7 @@ const ParentsPage = () => {
               </div>
 
               {/* CHECK 2 */}
-              <div className="flex flex-col justify-between rounded-[28px] bg-gradient-to-br from-[#ffe7f6] to-[#fbcbf3] p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8">
+              <div className="flex flex-col justify-between rounded-[28px] bg-linear-to-br from-[#ffe7f6] to-[#fbcbf3] p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8">
                 <div>
                   <div className="inline-flex rounded-full bg-white px-4 py-1 text-xs font-bold uppercase tracking-wider text-pink-700 shadow-sm">
                     Check 2
@@ -169,9 +169,9 @@ const ParentsPage = () => {
               </div>
 
               {/* CHECK 3 */}
-              <div className="group overflow-hidden rounded-[32px] bg-white p-6 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-8 md:col-span-2">
+              <div className="group overflow-hidden rounded-4xl bg-white p-6 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-8 md:col-span-2">
                 {/* Badge */}
-                <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-blue-700 shadow-sm">
+                <div className="inline-flex items-center rounded-full bg-linear-to-r from-blue-100 to-cyan-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-blue-700 shadow-sm">
                   Check 3
                 </div>
 
@@ -202,7 +202,7 @@ const ParentsPage = () => {
                   </div>
 
                   {/* Right Image */}
-                  <div className="relative w-full max-w-[180px] flex-shrink-0">
+                  <div className="relative w-full max-w-45 shrink-0">
                     <div className="overflow-hidden rounded-3xl shadow-lg">
                       <Image
                         src={fun}
@@ -262,7 +262,7 @@ const ParentsPage = () => {
             </div>
 
             {/* CHALLENGE */}
-            <div className="mt-14 rounded-[32px] bg-gradient-to-r from-[#d24163] to-[#ffb19b] p-8 text-center text-white shadow-xl md:p-12">
+            <div className="mt-14 rounded-4xl bg-linear-to-r from-[#d24163] to-[#ffb19b] p-8 text-center text-white shadow-xl md:p-12">
               <h3
                 className={`text-2xl sm:text-3xl ${lang === "th" ? "looped-text" : ""} font-bold`}
               >
@@ -271,7 +271,7 @@ const ParentsPage = () => {
             </div>
 
             {/* FAQ */}
-            <div className="mt-16 rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-10">
+            <div className="mt-16 rounded-4xl bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-10">
               <h3
                 className={`flex items-center gap-3 text-2xl ${lang === "th" ? "looped-text" : ""} font-bold text-[#042451] md:text-3xl`}
               >
@@ -324,7 +324,7 @@ const ParentsPage = () => {
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href={langPath("/contactUs")}
-                  className="w-full min-w-[280px] rounded-full bg-[#F7C94B] px-8 py-4 text-center text-lg font-bold text-[#042451] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#ffd86f] hover:shadow-xl active:translate-y-0 sm:w-auto sm:min-w-[340px]"
+                  className="w-full min-w-70 rounded-full bg-[#F7C94B] px-8 py-4 text-center text-lg font-bold text-[#042451] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#ffd86f] hover:shadow-xl active:translate-y-0 sm:w-auto sm:min-w-85"
                 >
                   {dict.Blogs_Parent_44}
                 </Link>

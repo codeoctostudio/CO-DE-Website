@@ -42,7 +42,7 @@ const Information = () => {
       <Image
         src={contact.logo}
         alt="logo"
-        className={`mr-3  h-[35px] w-[35px]`}
+        className={`mr-3  h-8.75 w-8.75`}
         loading="eager"
       />
       <div>
@@ -65,7 +65,7 @@ const Information = () => {
 
   return (
     <>
-      <main className="flex h-full w-full flex-col items-center bg-[#042451] py-10 pt-[150px] font-comfortaa text-white ">
+      <main className="flex h-full w-full flex-col items-center bg-[#042451] py-10 pt-37.5 font-comfortaa text-white ">
         <p className="mb-12 w-[80%] text-center text-3xl md:text-4xl">
           Plan your study with us!
         </p>
@@ -80,7 +80,7 @@ const Information = () => {
               <Image
                 src={line}
                 alt="linelogo"
-                className="mr-2 w-[40px]"
+                className="mr-2 w-10"
                 loading="eager"
                 decoding="async"
                 //{...{ fetchPriority: "high" }}
@@ -95,7 +95,7 @@ const Information = () => {
               decoding="async"
             />
           </div>
-          <div className="flex w-[90%] flex-col rounded-2xl bg-[#29446A]  py-4 pl-4 drop-shadow-xl sm:w-[60%] md:w-[450px] md:py-10">
+          <div className="flex w-[90%] flex-col rounded-2xl bg-[#29446A]  py-4 pl-4 drop-shadow-xl sm:w-[60%] md:w-112.5 md:py-10">
             {contactList}
           </div>
         </div>

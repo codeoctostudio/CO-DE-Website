@@ -45,7 +45,7 @@ const Layer2 = () => {
         </div>
       )}
 
-      <div className="relative flex h-full w-full flex-col items-center bg-[#E8FBFB] py-[70px] font-comfortaa">
+      <div className="relative flex h-full w-full flex-col items-center bg-[#E8FBFB] py-17.5 font-comfortaa">
         <div className="-mt-11 flex w-[90%] flex-col items-center text-base md:w-[70%] md:text-xl md:-mt-8">
           <div className="flex flex-col text-center text-sm md:flex-row md:gap-2 md:text-xl md:whitespace-nowrap">
             <span>👩‍💻{dict.layer2_6_1}</span>
@@ -141,7 +141,7 @@ const Layer2 = () => {
                   type="button"
                   disabled={isDisabled}
                   onClick={handleSubmit}
-                  className="h-[42px] w-full rounded-md bg-[#F7C94B] font-semibold text-[#042451] transition hover:bg-[#f1cb61] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="h-10.5 w-full rounded-md bg-[#F7C94B] font-semibold text-[#042451] transition hover:bg-[#f1cb61] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {dict.layer2_6_5}
                 </button>
@@ -154,7 +154,7 @@ const Layer2 = () => {
         </div>
       </div>
 
-      <div className="relative flex w-full flex-col items-center bg-[#FFFFFF] pb-[50px] pt-[30px] font-comfortaa">
+      <div className="relative flex w-full flex-col items-center bg-[#FFFFFF] pb-12.5 pt-7.5 font-comfortaa">
         <div className="mx-auto flex w-[90%] max-w-6xl flex-col items-center gap-16 md:flex-row md:items-start md:justify-between">
           {/* LEFT SECTION */}
           <div className="flex w-full flex-col items-center p-3 md:w-[48%]">
@@ -204,7 +204,7 @@ const Layer2 = () => {
                 height={400}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute left-0 top-0 w-[22%] h-[22%] -translate-x-[35%] -translate-y-[55%]">
+              <div className="absolute left-0 top-0 w-[22%] h-[22%] translate-x-[-35%] translate-y-[-55%]">
                 <Image
                   src={img3}
                   alt="แมวสีส้มแอบดู"

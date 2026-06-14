@@ -3,7 +3,7 @@ const Detail = () => {
   const { dict } = useLanguage();
 
   return (
-    <div className="flex flex-col items-center justify-center bg-[#042451] pt-[150px] font-comfortaa  text-white">
+    <div className="flex flex-col items-center justify-center bg-[#042451] pt-37.5 font-comfortaa  text-white">
       <p className="mb-8 text-center  text-4xl">{dict.aboutCoding_1}</p>
       <section className="mb-16 flex w-[80%] flex-col items-center rounded-2xl bg-[#29446A]  px-5 py-10 drop-shadow-xl">
         <p className="mb-8  text-center text-xl md:text-3xl">

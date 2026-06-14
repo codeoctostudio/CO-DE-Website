@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
-// 🌟 อิมพอร์ตพจนานุกรม และ รูปภาพให้ถูกต้องตามสถาปัตยกรรม
 import { getDictionary } from "@/lib/dictionary";
 import img1 from "@/assets/others/thaiflag.webp";
 import img2 from "@/assets/others/ukflag.webp";
@@ -42,8 +40,8 @@ const Nav = (props) => {
   return (
     <>
       <div
-        className={`fixed left-0 right-0 top-0 z-50 flex h-[370px] flex-col rounded-b-[20px] bg-[#00B0E6] py-4 pl-10 pt-[80px] transition-transform duration-500 md:hidden ${
-          props.isVisible ? "translate-y-0" : "-translate-y-[500px]"
+        className={`fixed left-0 right-0 top-0 z-50 flex h-92.5 flex-col rounded-b-[20px] bg-[#00B0E6] py-4 pl-10 pt-20 transition-transform duration-500 md:hidden ${
+          props.isVisible ? "translate-y-0" : "-translate-y-125"
         }`}
       >
         <Link
@@ -81,7 +79,7 @@ const Nav = (props) => {
             type="button"
             onClick={() => setLanguage("th")}
             aria-label="เปลี่ยนเป็นภาษาไทย"
-            className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${
+            className={`relative h-6 w-8.5 rounded-md overflow-hidden transition ${
               currentLang === "th"
                 ? "border-2 border-white bg-white/20"
                 : "opacity-70 hover:opacity-100"
@@ -101,7 +99,7 @@ const Nav = (props) => {
             type="button"
             onClick={() => setLanguage("en")}
             aria-label="Change to English"
-            className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${
+            className={`relative h-6 w-8.5 rounded-md overflow-hidden transition ${
               currentLang === "en"
                 ? "border-2 border-white bg-white/20"
                 : "opacity-70 hover:opacity-100"

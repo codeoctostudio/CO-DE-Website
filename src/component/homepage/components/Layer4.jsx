@@ -11,7 +11,7 @@ const Layer4 = () => {
 
   return (
     <section aria-label="Activities and About Us">
-      <div className="flex h-full w-full flex-col items-center justify-between bg-[#cce6e4] py-[70px] font-comfortaa text-white">
+      <div className="flex h-full w-full flex-col items-center justify-between bg-[#cce6e4] py-17.5 font-comfortaa text-white">
         
         {/* Row 1 */}
         <div className="flex w-[85%] flex-col items-center bg-transparent md:flex-row md:justify-around">
