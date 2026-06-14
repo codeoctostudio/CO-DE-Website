@@ -11,7 +11,8 @@ import thflag from "@/assets/others/thaiflag.webp";
 import ukflag from "@/assets/others/ukflag.webp";
 
 const Header = ({ toggle, rewardRef }) => {
-  const { lang, dict, currentLang, langPath, setLanguage, pathname, router } = useLanguage();
+  const { lang, dict, currentLang, langPath, setLanguage, pathname, router } =
+    useLanguage();
 
   const [hideFreeTrial, setHideFreeTrial] = useState(false);
   const [headerStyle, setHeaderStyle] = useState("translate-y-0");
@@ -85,7 +86,7 @@ const Header = ({ toggle, rewardRef }) => {
 
           <Image
             src={nav_logo}
-            alt="menu"
+            alt="เปิดเมนูนำทาง"
             priority
             onClick={toggle}
             className="h-[36px] w-[36px] cursor-pointer object-contain transition hover:opacity-90"
@@ -130,7 +131,9 @@ const Header = ({ toggle, rewardRef }) => {
             >
               <Image
                 src={thflag}
-                alt="TH"
+                alt="ภาษาไทย"
+                width={26}
+                height={18}
                 className="h-[18px] w-[26px] object-cover"
               />
             </button>
@@ -141,7 +144,9 @@ const Header = ({ toggle, rewardRef }) => {
             >
               <Image
                 src={ukflag}
-                alt="EN"
+                alt="English"
+                width={26}
+                height={18}
                 className="h-[18px] w-[26px] object-cover"
               />
             </button>

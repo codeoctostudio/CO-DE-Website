@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 // const RAW_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api";
 // const API_BASE = String(RAW_BASE).replace(/\/+$/, "");
-import { useLangPath } from "../../guardlang";
+import { useLanguage } from "@/hook/useLanguage";
 
 const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {
-  const langPath = useLangPath();
+  const {langPath, router} = useLanguage();
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
-  const router = useRouter();
   const [hideFreeTrial, setHideFreeTrial] = useState(false);
 
   const getMessage = () => {

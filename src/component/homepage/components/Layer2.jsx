@@ -9,7 +9,7 @@ import img3 from "@/assets/others/catpeek.webp";
 import { useLanguage } from "@/hook/useLanguage";
 
 const Layer2 = () => {
-  const {dict, lang, langPath} = useLanguage();
+  const { dict, lang, langPath } = useLanguage();
   const router = useRouter();
 
   const [contactType, setContactType] = useState("phone");
@@ -56,9 +56,7 @@ const Layer2 = () => {
           <div className="mt-4 flex w-full max-w-4xl items-center gap-2 font-comfortaa">
             <div className="w-full space-y-4">
               <div className="flex w-full flex-col gap-4 rounded-xl bg-white p-6 shadow-lg">
-                <div className="text-center font-semibold">
-                  {dict.layer2_6_4}
-                </div>
+                <h2 className="text-center font-semibold">{dict.layer2_6_4}</h2>
                 <div className="flex gap-2">
                   <button
                     type="button"
@@ -85,49 +83,59 @@ const Layer2 = () => {
                 </div>
 
                 {contactType === "phone" ? (
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    value={phone}
-                    onChange={(e) => {
-                      const value = e.target.value
-                        .replace(/\D/g, "")
-                        .slice(0, 10);
-                      setPhone(value);
-                      setPhoneError(
-                        value && value.length !== 10
-                          ? "กรุณากรอกเบอร์โทรให้ครบ 10 หลัก"
-                          : "",
-                      );
-                    }}
-                    placeholder={dict.trialcall_4_1}
-                    className={`w-full rounded-md border px-4 py-2 text-black focus:outline-none focus:ring-2 ${
-                      phoneError
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-gray-300 focus:ring-[#F7C94B]"
-                    } placeholder:text-gray-400 md:placeholder:text-base`}
-                  />
+                  <div className="w-full flex flex-col gap-1">
+                    <label htmlFor="phone-input" className="sr-only">
+                      เบอร์โทรศัพท์ติดต่อ
+                    </label>
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      value={phone}
+                      onChange={(e) => {
+                        const value = e.target.value
+                          .replace(/\D/g, "")
+                          .slice(0, 10);
+                        setPhone(value);
+                        setPhoneError(
+                          value && value.length !== 10
+                            ? "กรุณากรอกเบอร์โทรให้ครบ 10 หลัก"
+                            : "",
+                        );
+                      }}
+                      placeholder={dict.trialcall_4_1}
+                      className={`w-full rounded-md border px-4 py-2 text-black focus:outline-none focus:ring-2 ${
+                        phoneError
+                          ? "border-red-500 focus:ring-red-500"
+                          : "border-gray-300 focus:ring-[#F7C94B]"
+                      } placeholder:text-gray-400 md:placeholder:text-base`}
+                    />
+                  </div>
                 ) : (
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setEmail(value);
-                      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                      setEmailError(
-                        value && !emailRegex.test(value)
-                          ? "รูปแบบอีเมลไม่ถูกต้อง"
-                          : "",
-                      );
-                    }}
-                    placeholder={dict.trialcall_5_1}
-                    className={`w-full rounded-md border px-4 py-2 text-black focus:outline-none focus:ring-2 ${
-                      emailError
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-gray-300 focus:ring-[#F7C94B]"
-                    } placeholder:text-gray-400 md:placeholder:text-base`}
-                  />
+                  <div className="w-full flex flex-col gap-1">
+                    <label htmlFor="email-input" className="sr-only">
+                      อีเมลติดต่อ
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setEmail(value);
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        setEmailError(
+                          value && !emailRegex.test(value)
+                            ? "รูปแบบอีเมลไม่ถูกต้อง"
+                            : "",
+                        );
+                      }}
+                      placeholder={dict.trialcall_5_1}
+                      className={`w-full rounded-md border px-4 py-2 text-black focus:outline-none focus:ring-2 ${
+                        emailError
+                          ? "border-red-500 focus:ring-red-500"
+                          : "border-gray-300 focus:ring-[#F7C94B]"
+                      } placeholder:text-gray-400 md:placeholder:text-base`}
+                    />
+                  </div>
                 )}
                 <button
                   disabled={isDisabled}
@@ -190,16 +198,18 @@ const Layer2 = () => {
               <Image
                 className="rounded-2xl drop-shadow-xl h-auto w-full"
                 src={img2}
-                alt="Why Choose Us"
+                alt="เหตุผลที่ควรเลือกเรียนคอร์สสร้างสรรค์ที่ CO-DE academy"
                 width={600}
                 height={400}
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Cat Peeking - ใช้ Fill เพื่อให้ขยายตาม Div ครอบที่มีการทำ Absolute */}
               <div className="absolute left-0 top-0 w-[22%] h-[22%] -translate-x-[35%] -translate-y-[55%]">
                 <Image
                   src={img3}
-                  alt="Cat peeking"
+                  alt="แมวสีส้มแอบดู"
                   fill
+                  sizes="(max-width: 768px) 25vw, 15vw"
                   className="object-contain"
                 />
               </div>

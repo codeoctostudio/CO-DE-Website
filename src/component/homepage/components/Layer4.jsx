@@ -10,20 +10,21 @@ const Layer4 = () => {
   const {dict, langPath} = useLanguage();
 
   return (
-    <section>
+    <section aria-label="Activities and About Us">
       <div className="flex h-full w-full flex-col items-center justify-between bg-[#cce6e4] py-[70px] font-comfortaa text-white">
         
         {/* Row 1 */}
         <div className="flex w-[85%] flex-col items-center bg-transparent md:flex-row md:justify-around">
           <Link
             href={langPath("/playground")}
+            aria-label={`${dict.layer4_1} - ดูบรรยากาศห้องเรียน`}
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
               src={img1}
-              alt="Classroom"
-              width={600} // ระบุความกว้างโดยประมาณ
-              height={400} // ระบุความสูงโดยประมาณ
+              alt="บรรยากาศการเรียนการสอนในห้องเรียน CO-DE academy"
+              width={600} 
+              height={400} 
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
               loading="lazy"
             />
@@ -34,11 +35,12 @@ const Layer4 = () => {
 
           <Link
             href={langPath("/aboutUs")}
+            aria-label={`${dict.layer4_2} ${dict.layer4_2_1}`}
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
               src={img2}
-              alt="Team Teachers"
+              alt="ทีมงานคุณครูผู้เชี่ยวชาญจาก CO-DE academy"
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
@@ -55,11 +57,12 @@ const Layer4 = () => {
         <div className="flex w-[85%] flex-col items-center bg-transparent md:flex-row md:justify-around">
           <Link
             href={langPath("/pitchingStage")}
+            aria-label={`${dict.layer4_3} ${dict.layer4_3_1}`}
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
               src={img3}
-              alt="Pitching Stage"
+              alt="เวทีนำเสนอผลงาน Pitching Stage ของนักเรียน"
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
@@ -73,11 +76,12 @@ const Layer4 = () => {
 
           <Link
             href={langPath("/kidsproject")}
+            aria-label={dict.layer4_4}
             className="relative my-5 flex w-[90%] cursor-pointer items-center justify-center drop-shadow-xl transition-transform duration-500 hover:scale-105 active:opacity-[0.9] md:w-[45%]"
           >
             <Image
               src={img4}
-              alt="Kids Project"
+              alt="ตัวอย่างผลงานสร้างสรรค์ของนักเรียนโค้ดดิ้ง"
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"

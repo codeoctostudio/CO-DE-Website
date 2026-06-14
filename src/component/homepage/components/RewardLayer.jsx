@@ -16,7 +16,7 @@ import img3 from "@/assets/reward/Reward_3.webp";
 import img4 from "@/assets/reward/Reward_Show.webp";
 
 const RewardLayer = () => {
-  const {dict, lang, langPath} = useLanguage();
+  const { dict, lang, langPath } = useLanguage();
   const router = useRouter();
 
   const scrollToEmail = () => {
@@ -54,15 +54,9 @@ const RewardLayer = () => {
       },
       { threshold: 0.6 },
     );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
-
+    if (videoRef.current) observer.observe(videoRef.current);
     return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current);
-      }
+      if (videoRef.current) observer.unobserve(videoRef.current);
     };
   }, []);
 
@@ -73,15 +67,12 @@ const RewardLayer = () => {
 
   const useAutoIncrement = (initialValue) => {
     const [value, setValue] = useState(initialValue);
-
     useEffect(() => {
       const startDate = new Date("2026-04-17");
       const now = new Date();
       const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-
       let current = initialValue;
       let dayCursor = 0;
-
       while (dayCursor < diffDays) {
         const randomGap = 5 + Math.floor(seededRandom(dayCursor) * 6);
         dayCursor += randomGap;
@@ -92,86 +83,68 @@ const RewardLayer = () => {
       }
       setValue(current);
     }, [initialValue]);
-
     return value;
   };
 
-  const easeOutExpo = (t) => {
-    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-  };
+  const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
   const Counter = ({ target }) => {
     const [count, setCount] = useState(0);
-
     useEffect(() => {
       let startTime = null;
       const duration = 3500;
-
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp;
         const progress = timestamp - startTime;
         const percent = Math.min(progress / duration, 1);
-        const eased = easeOutExpo(percent);
-        const value = Math.floor(eased * target);
-
-        setCount(value);
-        if (percent < 1) {
-          requestAnimationFrame(animate);
-        }
+        const Collegeeased = easeOutExpo(percent);
+        setCount(Math.floor(Collegeeased * target));
+        if (percent < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
     }, [target]);
-
     return <span>{count}+</span>;
   };
 
   const CounterPercent = ({ target }) => {
     const [count, setCount] = useState(0);
-
     useEffect(() => {
       let startTime = null;
       const duration = 3500;
-
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp;
         const progress = timestamp - startTime;
         const percent = Math.min(progress / duration, 1);
-        const eased = easeOutExpo(percent);
-        const value = Math.floor(eased * target);
-
-        setCount(value);
-        if (percent < 1) {
-          requestAnimationFrame(animate);
-        }
+        const Collegeeased = easeOutExpo(percent);
+        setCount(Math.floor(Collegeeased * target));
+        if (percent < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
     }, [target]);
-
     return <span>{count}%</span>;
   };
+
   const ContinuePercent = ({ target }) => {
     const [count, setCount] = useState(0);
-
     useEffect(() => {
       let startTime = null;
       const duration = 3500;
-
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp;
         const progress = timestamp - startTime;
         const percent = Math.min(progress / duration, 1);
-        const eased = easeOutExpo(percent);
-        const value = Math.floor(eased * target);
-
-        setCount(value);
-        if (percent < 1) {
-          requestAnimationFrame(animate);
-        }
+        const Collegeeased = easeOutExpo(percent);
+        setCount(Math.floor(Collegeeased * target));
+        if (percent < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
     }, [target]);
-
-    return <span>{'>'}{count}%</span>;
+    return (
+      <span>
+        {">"}
+        {count}%
+      </span>
+    );
   };
 
   const studentCount = useAutoIncrement(1200);
@@ -195,9 +168,7 @@ const RewardLayer = () => {
             tag.src = "https://www.youtube.com/iframe_api";
             document.body.appendChild(tag);
           }
-          window.onYouTubeIframeAPIReady = () => {
-            resolve(window.YT);
-          };
+          window.onYouTubeIframeAPIReady = () => resolve(window.YT);
         }
       });
     };
@@ -221,38 +192,30 @@ const RewardLayer = () => {
         },
       });
     });
-
     return () => {
-      if (player) {
-        player.destroy();
-      }
+      if (player) player.destroy();
     };
   }, []);
 
   const toggleSound = () => {
     if (!playerRef.current) return;
-    if (isMuted) {
-      playerRef.current.unMute();
-    } else {
-      playerRef.current.mute();
-    }
+    if (isMuted) playerRef.current.unMute();
+    else playerRef.current.mute();
     setIsMuted(!isMuted);
   };
 
   useEffect(() => {
     if (!playerRef.current) return;
-    if (isVisible) {
-      playerRef.current.playVideo();
-    } else {
-      playerRef.current.pauseVideo();
-    }
+    if (isVisible) playerRef.current.playVideo();
+    else playerRef.current.pauseVideo();
   }, [isVisible]);
 
   return (
-    <section>
+    <section aria-labelledby="reward-main-heading">
       <div className="relative flex w-full flex-col items-center font-comfortaa bg-gradient-to-b from-[#fbfbfb] to-[#ffffff] py-12 md:py-20">
         <div className="flex -mt-6 w-[90%] max-w-6xl flex-col items-center text-center gap-4 md:-mt-10">
           <h2
+            id="reward-main-heading"
             className={`px-4 font-bold text-2xl md:text-4xl ${lang === "th" ? "font-looped" : ""}`}
           >
             {dict.reward_1}
@@ -267,17 +230,13 @@ const RewardLayer = () => {
           <div className="w-full flex justify-center">
             <div
               ref={videoRef}
-              className={`
-                w-full max-w-[550px] max-h-[688px] aspect-[9/16]
-                overflow-hidden rounded-3xl shadow-2xl
-                transition-all duration-700 transform
-                ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}
-              `}
+              className={`w-full max-w-[550px] max-h-[688px] aspect-[9/16] overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
             >
               <div className="relative w-full h-full">
                 <div id="player" className="w-full h-full" />
                 <button
                   onClick={toggleSound}
+                  aria-label={isMuted ? "เปิดเสียงวิดีโอ" : "ปิดเสียงวิดีโอ"}
                   className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 backdrop-blur text-white text-lg hover:scale-110 active:scale-95 transition"
                 >
                   {isMuted ? "🔇" : "🔊"}
@@ -298,9 +257,9 @@ const RewardLayer = () => {
             </p>
 
             <Image
-              className="rounded-2xl shadow-xl mt-2 hover:scale-105 transition duration-300"
+              className="rounded-2xl shadow-xl mt-2 hover:scale-105 transition duration-300 w-full h-auto"
               src={img4}
-              alt="Gold Medal – INTARG 2025"
+              alt="เหรียญทองระดับนานาชาติ – เวที INTARG 2025"
               width={800}
               height={450}
               priority
@@ -321,10 +280,7 @@ const RewardLayer = () => {
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
             pagination={{ clickable: true }}
-            navigation={{
-              prevEl: ".custom-prev",
-              nextEl: ".custom-next",
-            }}
+            navigation={{ prevEl: ".custom-prev", nextEl: ".custom-next" }}
             className="rounded-3xl"
           >
             {slides.map((_, index) => {
@@ -339,15 +295,15 @@ const RewardLayer = () => {
                       <Image
                         className="object-cover rounded-xl"
                         src={first.img}
-                        alt={first.title || "Award Image"}
+                        alt={first.title || "ภาพรางวัล"}
                         fill
-                        sizes="35vw"
+                        sizes="(max-width: 768px) 35vw, 20vw"
                       />
                     </div>
                     <div>
-                      <h3 className="font-bold text-sm line-clamp-1">
+                      <h4 className="font-bold text-sm line-clamp-1">
                         {first.title}
-                      </h3>
+                      </h4>
                       <p className="text-xs opacity-70 line-clamp-2 mt-0.5">
                         {first.desc}
                       </p>
@@ -368,15 +324,15 @@ const RewardLayer = () => {
                           <Image
                             className="object-cover rounded-xl"
                             src={item.img}
-                            alt={item.title || "Award Image"}
+                            alt={item.title || "ภาพรางวัล"}
                             fill
-                            sizes="20vw"
+                            sizes="(max-width: 1024px) 25vw, 20vw"
                           />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-bold text-lg line-clamp-1">
+                          <h4 className="font-bold text-lg line-clamp-1">
                             {item.title}
-                          </h3>
+                          </h4>
                           <p className="opacity-70 text-sm mt-1 line-clamp-2">
                             {item.desc}
                           </p>
@@ -392,11 +348,16 @@ const RewardLayer = () => {
             })}
           </Swiper>
 
-          {/* ปุ่มลูกศรควบคุมความคุมสไลด์แบบกำหนดคลาสเอง */}
-          <button className="custom-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button
+            aria-label="สไลด์ก่อนหน้า"
+            className="custom-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
             ◀
           </button>
-          <button className="custom-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button
+            aria-label="สไลด์ถัดไป"
+            className="custom-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
             ▶
           </button>
         </div>
@@ -412,7 +373,6 @@ const RewardLayer = () => {
                 {dict.reward_8}
               </p>
             </div>
-
             <div className="flex flex-col items-center border-x border-black/10">
               <p className="text-3xl md:text-5xl font-medium text-[#042451]">
                 <ContinuePercent target={continuouslyCount} />
@@ -421,7 +381,6 @@ const RewardLayer = () => {
                 {dict.reward_9}
               </p>
             </div>
-
             <div className="flex flex-col items-center">
               <p className="text-3xl md:text-5xl font-medium text-[#042451]">
                 <CounterPercent target={projectCount} />

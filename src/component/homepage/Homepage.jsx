@@ -10,13 +10,12 @@ import Layer4 from "./components/Layer4";
 import Nav from "../header/Nav";
 import Message from "../msg/Message";
 import RewardLayer from "./components/RewardLayer";
-
 import BackToTop from "../msg/Backtotop";
 import AnnouncementBar from "../msg/Announcements";
+
 const Homepage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [announcementVisible, setAnnouncementVisible] = useState(false);
-
   const rewardRef = useRef(null);
 
   const toggleNav = () => {
@@ -33,16 +32,20 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
       <Header toggle={toggleNav} rewardRef={rewardRef} />
-      <Nav isVisible={isNavOpen} />
-      <Layer1 />
-      <Layer2 />
-      <Layer3 />
-      <Layer4 />
-      <div ref={rewardRef}>
-        <RewardLayer />
+      <Nav isVisible={isNavOpen} toggle={toggleNav} />
+
+      <div className="flex-grow">
+        <Layer1 />
+        <Layer2 />
+        <Layer3 />
+        <Layer4 />
+        <div ref={rewardRef}>
+          <RewardLayer />
+        </div>
       </div>
+
       <Footer />
       <AnnouncementBar onVisibleChange={setAnnouncementVisible} rewardRef={rewardRef} />
       <Message announcementVisible={announcementVisible} />

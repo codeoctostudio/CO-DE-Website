@@ -79,25 +79,39 @@ const Nav = (props) => {
           {/* TH Flag */}
           <button
             onClick={() => setLanguage("th")}
+            aria-label="เปลี่ยนเป็นภาษาไทย"
             className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${
               currentLang === "th"
                 ? "border-2 border-white bg-white/20"
                 : "opacity-70 hover:opacity-100"
             }`}
           >
-            <Image src={img1} alt="TH" fill className="object-cover" />
+            <Image
+              src={img1}
+              alt="TH"
+              fill
+              sizes="34px"
+              className="object-cover"
+            />
           </button>
 
           {/* EN Flag */}
           <button
             onClick={() => setLanguage("en")}
+            aria-label="Change to English"
             className={`relative h-[24px] w-[34px] rounded-md overflow-hidden transition ${
               currentLang === "en"
                 ? "border-2 border-white bg-white/20"
                 : "opacity-70 hover:opacity-100"
             }`}
           >
-            <Image src={img2} alt="EN" fill className="object-cover" />
+            <Image
+              src={img2}
+              alt="EN"
+              fill
+              sizes="34px"
+              className="object-cover"
+            />
           </button>
         </div>
       </div>
