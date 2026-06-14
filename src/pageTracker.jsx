@@ -1,24 +1,34 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+"use client";
 
-const PageTracker = () => {
-  const location = useLocation();
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, Suspense } from "react";
+
+function TrackerComponent() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!window.gtmInitialized) return;
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-      event: "page_view",   // ✅ ใช้ของ Google
+      event: "page_view",
       page_location: window.location.href,
-      page_path: location.pathname,
+      page_path: pathname + searchParams.toString(),
       page_title: document.title,
     });
-
-    console.log("page_view:", location.pathname);
-  }, [location]);
+  }, [pathname, searchParams]);
 
   return null;
+}
+
+// ต้องครอบด้วย Suspense เสมอเมื่อใช้ useSearchParams ใน Next.js Client Component
+const PageTracker = () => {
+  return (
+    <Suspense fallback={null}>
+      <TrackerComponent />
+    </Suspense>
+  );
 };
 
 export default PageTracker;

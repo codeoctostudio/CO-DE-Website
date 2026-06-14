@@ -1,9 +1,8 @@
 import "./globals.css";
-import I18nProvider from "@/component/I18nProvider";
 import CookieConsentProvider from "@/CookieConsent";
+import PageTracker from "@/pageTracker";
 import Cookie from "@/Cookie";
 import { comfortaa, ibmThai, ibmThaiLooped } from "@/lib/fonts";
-import { useLanguage } from "@/hook/useLanguage";
 
 export const metadata = {
   title: "CO-DE | สอน Coding สำหรับเด็ก",
@@ -21,9 +20,9 @@ export default async function RootLayout({ children, params }) {
     >
       <body className="min-h-full flex flex-col font-site">
         <CookieConsentProvider>
-          <Cookie>
-            <I18nProvider>{children}</I18nProvider>
-          </Cookie>
+          <PageTracker />
+          <Cookie />
+          {children}
         </CookieConsentProvider>
       </body>
     </html>
