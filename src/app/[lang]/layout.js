@@ -10,12 +10,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  // const {lang} = useLanguage
-  const { lang } = await params;
+  const resolvedParams = await params;
+
+  const currentLang = resolvedParams?.lang;
+
+  const supportedLocales = ["th", "en"];
+  const locale = supportedLocales.includes(currentLang) ? currentLang : "th";
 
   return (
     <html
-      lang={lang}
+      lang={locale}
       className={`${comfortaa.variable} ${ibmThai.variable} ${ibmThaiLooped.variable}`}
     >
       <body className="min-h-full flex flex-col font-site">
