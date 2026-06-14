@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
-import { getDictionary } from "@/lib/dictionary";
+import { useLanguage } from "@/hook/useLanguage";
 import img1 from "@/assets/others/thaiflag.webp";
 import img2 from "@/assets/others/ukflag.webp";
 
@@ -13,7 +13,7 @@ const Nav = (props) => {
   const pathname = usePathname();
 
   const lang = pathname?.split("/")[1] || "th";
-  const dict = getDictionary(lang);
+  const { dict } = useLanguage();
   const currentLang = lang;
 
   const langPath = (path) => {

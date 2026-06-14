@@ -1,20 +1,25 @@
-/* eslint-disable react/no-unescaped-entities */
-import kid from "../../../../assets/CourseLogos/Microbit/main.webp";
-import arduinoStat from "../../../../assets/CourseLogos/Arduino/arduinoStat.webp";
-import check from "../../../../assets/CourseLogos/Arduino/check.webp";
-import episodes from "../../../../assets/CourseLogos/Arduino/episodes.webp";
-import arduino from "../../../../assets/CourseLogos/Arduino/arduino.webp";
-import level2 from "../../../../assets/CourseIcons/level2.webp";
-import textCode from "../../../../assets/CourseIcons/textCode.webp";
-import laptop from "../../../../assets/CourseIcons/laptop.webp";
-import group from "../../../../assets/CourseIcons/group.webp";
-import certificate from "../../../../assets/CourseIcons/certificate.webp";
+import kid from "@/assets/CourseLogos/Microbit/main.webp";
+import arduinoStat from "@/assets/CourseLogos/Arduino/arduinoStat.webp";
+import check from "@/assets/CourseLogos/Arduino/check.webp";
+import episodes from "@/assets/CourseLogos/Arduino/episodes.webp";
+import arduino from "@/assets/CourseLogos/Arduino/arduino.webp";
+import level2 from "@/assets/CourseIcons/level2.webp";
+import textCode from "@/assets/CourseIcons/textCode.webp";
+import laptop from "@/assets/CourseIcons/laptop.webp";
+import group from "@/assets/CourseIcons/group.webp";
+import certificate from "@/assets/CourseIcons/certificate.webp";
 
-import img1 from "../../../../assets/CourseLogos/Microbit/images/img1.webp";
-import img2 from "../../../../assets/CourseLogos/Microbit/images/img2.webp";
-import img3 from "../../../../assets/CourseLogos/Microbit/images/img3.webp";
+import img1 from "@/assets/CourseLogos/Microbit/images/img1.webp";
+import img2 from "@/assets/CourseLogos/Microbit/images/img2.webp";
+import img3 from "@/assets/CourseLogos/Microbit/images/img3.webp";
 
-import { Carousel } from "@material-tailwind/react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const ArduinoCourse = () => {
   const listStyle = {
     listStyleImage: `url(${check})`,
@@ -25,7 +30,7 @@ const ArduinoCourse = () => {
     <div className="flex h-full w-full flex-col items-center bg-[#F18E43] pt-20 font-comfortaa text-white md:pt-27.5">
       <section className="flex w-full flex-col lg:flex-row ">
         <div className="flex w-full flex-col items-center bg-[#F18E43]   lg:w-[70%]">
-          <img
+          <Image
             src={arduino}
             alt="Arduino"
             className=" w-full"
@@ -41,7 +46,7 @@ const ArduinoCourse = () => {
 
           {/* Scratch + Kid Pic*/}
         </div>
-        <img
+        <Image
           src={kid}
           alt="Micrinbit"
           className="w-full   object-cover drop-shadow-2xl lg:w-[40%] "
@@ -52,7 +57,7 @@ const ArduinoCourse = () => {
       </section>
 
       <section className="flex w-full flex-col bg-[#FFAE71] md:flex-row">
-        <img
+        <Image
           src={arduinoStat}
           alt="Arduino Course"
           className="w-full object-contain md:w-[55%]"
@@ -71,7 +76,7 @@ const ArduinoCourse = () => {
       <section className="flex items-center justify-center bg-[#F18E43]  p-10">
         <div className=" flex w-full flex-wrap text-sm sm:text-base  lg:text-lg xl:text-3xl ">
           <div className="mb-3 flex w-[50%] items-center font-bold ">
-            <img
+            <Image
               src={level2}
               alt="Level"
               className="mr-3 w-[15%]"
@@ -81,7 +86,7 @@ const ArduinoCourse = () => {
           </div>
 
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={textCode}
               alt="Text Code"
               className="mr-3 w-[15%]"
@@ -90,7 +95,7 @@ const ArduinoCourse = () => {
             <p>Text-Based Code</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={laptop}
               alt="Laptop"
               className="mr-3 w-[15%]"
@@ -99,7 +104,7 @@ const ArduinoCourse = () => {
             <p>On-site</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={group}
               alt="Group"
               className="mr-3 w-[15%]"
@@ -108,7 +113,7 @@ const ArduinoCourse = () => {
             <p>Private / Group Class</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
-            <img
+            <Image
               src={certificate}
               alt="Certificate"
               className="mr-3 w-[15%]"
@@ -128,7 +133,7 @@ const ArduinoCourse = () => {
       </section>
 
       <section className="relative flex w-full  items-center justify-center bg-[#FFAE71]  p-12 ">
-        <img
+        <Image
           src={episodes}
           alt="episodes"
           className=" md:w-[80%] lg:w-[70%]"
@@ -151,23 +156,37 @@ const ArduinoCourse = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className=" flex h-125 w-full items-center justify-center border-2 border-black bg-[#6FBC87] text-[10vw] lg:w-[50%]">
-          <Carousel
-            autoplay={true}
-            autoplayDelay={3000}
+        <div className="flex h-125 w-full items-center justify-center border-2 border-black bg-[#6FBC87] lg:w-[50%]">
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             loop={true}
-            className="drop-shadow-2xl"
+            navigation={true}
+            pagination={{ clickable: true }}
+            style={{
+              "--swiper-navigation-color": "#FDFF86",
+              "--swiper-pagination-color": "#FDFF86",
+              "--swiper-pagination-bullet-inactive-color": "#ffffff",
+            }}
+            className="w-full h-full"
           >
             {slideShowData.map((item, index) => (
-              <img
-                className="h-full w-full object-cover"
+              <SwiperSlide
                 key={index}
-                src={item}
-                alt="Arduino"
-                loading="lazy"
-              />
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+              >
+                <Image
+                  className="w-full h-full object-cover"
+                  src={item}
+                  alt="Design Thinking Course"
+                  loading="eager"
+                />
+              </SwiperSlide>
             ))}
-          </Carousel>
+          </Swiper>
         </div>
       </section>
     </div>

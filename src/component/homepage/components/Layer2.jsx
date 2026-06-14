@@ -89,6 +89,7 @@ const Layer2 = () => {
                     </label>
                     <input
                       type="tel"
+                      id="phone-input"
                       inputMode="numeric"
                       value={phone}
                       onChange={(e) => {
@@ -117,6 +118,7 @@ const Layer2 = () => {
                     </label>
                     <input
                       type="email"
+                      id="email-input"
                       value={email}
                       onChange={(e) => {
                         const value = e.target.value;
@@ -167,8 +169,8 @@ const Layer2 = () => {
             <Image
               className="my-4 rounded-2xl drop-shadow-xl h-auto w-full"
               src={img1}
-              alt="Studying"
-              width={600} // ระบุขนาดเพื่อให้สอดคล้องกับ Layout
+              alt="เด็กกำลังเรียน Coding อย่างสนุกสนาน"
+              width={600}
               height={400}
               priority
             />

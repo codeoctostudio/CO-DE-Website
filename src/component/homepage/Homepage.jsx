@@ -47,7 +47,10 @@ const Homepage = () => {
       </div>
 
       <Footer />
-      <AnnouncementBar onVisibleChange={setAnnouncementVisible} rewardRef={rewardRef} />
+      <AnnouncementBar
+        onVisibleChange={setAnnouncementVisible}
+        rewardRef={rewardRef}
+      />
       <Message announcementVisible={announcementVisible} />
       <BackToTop />
     </div>
