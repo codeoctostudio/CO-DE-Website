@@ -153,8 +153,11 @@ const RewardLayer = () => {
 
   const playerRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isApiLoaded, setIsApiLoaded] = useState(false);
 
   useEffect(() => {
+    if (!isVisible || isApiLoaded) return;
+
     const loadYouTubeAPI = () => {
       return new Promise((resolve) => {
         if (window.YT && window.YT.Player) {
@@ -173,10 +176,12 @@ const RewardLayer = () => {
       });
     };
 
-    let player;
     loadYouTubeAPI().then((YT) => {
-      player = new YT.Player("player", {
+      setIsApiLoaded(true);
+
+      new YT.Player("player", {
         videoId: "StcSyRYzpuU",
+        host: "https://www.youtube-nocookie.com",
         playerVars: {
           autoplay: 1,
           controls: 0,
@@ -188,14 +193,12 @@ const RewardLayer = () => {
         events: {
           onReady: (event) => {
             playerRef.current = event.target;
+            event.target.playVideo();
           },
         },
       });
     });
-    return () => {
-      if (player) player.destroy();
-    };
-  }, []);
+  }, [isVisible, isApiLoaded]);
 
   const toggleSound = () => {
     if (!playerRef.current) return;
