@@ -88,6 +88,7 @@ const Nav = (props) => {
             <Image
               src={img1}
               alt="TH"
+              priority
               fill
               sizes="34px"
               className="object-cover"
@@ -108,6 +109,7 @@ const Nav = (props) => {
             <Image
               src={img2}
               alt="EN"
+              priority
               fill
               sizes="34px"
               className="object-cover"

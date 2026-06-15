@@ -311,7 +311,8 @@ const RewardLayer = () => {
                         src={first.img}
                         alt={first.title || "ภาพรางวัล"}
                         fill
-                        sizes="(max-width: 768px) 30vw, 15vw"
+                        priority
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                     <div>
@@ -340,7 +341,8 @@ const RewardLayer = () => {
                             src={item.img}
                             alt={item.title || "ภาพรางวัล"}
                             fill
-                            sizes="(max-width: 1024px) 20vw, 15vw"
+                            priority
+                            sizes="(max-width: 768px) 100vw, 50vw"
                           />
                         </div>
                         <div className="flex-1">

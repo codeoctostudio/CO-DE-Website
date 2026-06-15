@@ -99,7 +99,8 @@ const Layer3 = () => {
         width={400}
         height={400}
         className="rounded-tl-[30px] w-full h-auto"
-        loading="lazy"
+        priority
+        sizes="(max-width: 768px) 100vw, 50vw"
       />
 
       <div
@@ -169,10 +170,12 @@ const Layer3 = () => {
               <div className="flex flex-col items-center">
                 <Image
                   src={img7}
-                  alt=""
+                  alt="อายุของน้องๆ ที่เหมาะสมในการเรียนในแต่คอร์ส"
                   width={80}
                   height={80}
                   className="mb-4"
+                  priority
+                  sizes="50px"
                 />
                 <label
                   htmlFor="age-select"
@@ -211,10 +214,12 @@ const Layer3 = () => {
               <div className="flex flex-col items-center">
                 <Image
                   src={img8}
-                  alt=""
+                  alt="กราฟข้อมูลเปรียนเทียบอายุเด็กที่เหมาะสมในการเริ่มเรียนในแต่ละคอร์ส"
                   width={80}
                   height={80}
                   className="mb-4"
+                  priority
+                  sizes="40px"
                 />
                 <p className="text-center text-lg font-normal lg:text-xl">
                   {dict.layer3_7}
@@ -248,7 +253,14 @@ const Layer3 = () => {
                     aria-label="ข้อมูลเพิ่มเติมเกี่ยวกับระดับเริ่มต้น"
                     className="relative h-5 w-5 focus:outline-none"
                   >
-                    <Image src={img9} alt="" width={20} height={20} />
+                    <Image
+                      src={img9}
+                      alt="สงสัยสามารถติดต่อได้เพิ่มเติม"
+                      width={20}
+                      height={20}
+                      priority
+                      sizes="34"
+                    />
                     <div
                       className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showNewbie ? "flex" : "hidden"}`}
                     >
@@ -285,7 +297,14 @@ const Layer3 = () => {
                     aria-label="ข้อมูลเพิ่มเติมเกี่ยวกับระดับเรียนรู้"
                     className="relative h-5 w-5 focus:outline-none"
                   >
-                    <Image src={img9} alt="" width={20} height={20} />
+                    <Image
+                      src={img9}
+                      alt="สงสัยสามารถติดต่อเพิ่มได้"
+                      width={20}
+                      height={20}
+                      priority
+                      sizes="34px"
+                    />
                     <div
                       className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showExplorer ? "flex" : "hidden"}`}
                     >
@@ -322,7 +341,14 @@ const Layer3 = () => {
                     aria-label="ข้อมูลเพิ่มเติมเกี่ยวกับระดับเชี่ยวชาญ"
                     className="relative h-5 w-5 focus:outline-none"
                   >
-                    <Image src={img9} alt="" width={20} height={20} />
+                    <Image
+                      src={img9}
+                      alt="สงสัยสามารถสอบถามได้"
+                      width={20}
+                      height={20}
+                      priority
+                      sizes="34px"
+                    />
                     <div
                       className={`absolute bottom-5 left-5 h-40 w-40 items-center justify-center rounded-t-full rounded-br-full bg-[#FFEDB3] px-5 text-center drop-shadow-xl z-20 ${showMaster ? "flex" : "hidden"}`}
                     >
@@ -340,10 +366,12 @@ const Layer3 = () => {
               <div className="flex flex-col items-center">
                 <Image
                   src={img10}
-                  alt=""
+                  alt="โน้ตบุ๊กที่เหมาะสำหรับการเขียนโค้ดควรมี CPU ระดับ Core i5 / Ryzen 5 ขึ้นไป, RAM ขั้นต่ำ 16GB, และ SSD แบบ NVMe เพื่อการเปิด-ปิดเครื่องและการคอมไพล์โค้ดที่รวดเร็ว ควรหลีกเลี่ยงเครื่องที่ใช้ RAM 8GB หรือ eMMC เพราะอาจกระตุกเมื่อเปิดโปรแกรมจำลอง (Docker) หรือเปิดหลายแท็บพร้อมกัน"
                   width={80}
                   height={80}
                   className="mb-4"
+                  priority
+                  sizes="50px"
                 />
                 <p className="text-center text-lg font-normal lg:text-xl">
                   {dict.layer3_8}

@@ -50,8 +50,9 @@ const Footer = () => {
         alt={`${contact.text} logo`}
         width={35}
         height={35}
-        className="mr-3 shrink-0" // ปล่อยให้ความกว้างคุมโดย props แทน
-        loading="lazy"
+        className="mr-3 shrink-0"
+        priority
+        sizes="34px"
       />
 
       <a
@@ -79,8 +80,8 @@ const Footer = () => {
             alt="CO-DE Academy Logo"
             fill
             className="object-contain"
-            sizes="300px"
-            loading="lazy"
+            priority
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="auto mb-10 flex w-[80%] flex-col justify-center  md:mb-0">

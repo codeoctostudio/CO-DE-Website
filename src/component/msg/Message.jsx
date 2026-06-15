@@ -101,6 +101,7 @@ const Message = ({ announcementVisible }) => {
                 height={400}
                 priority
                 className="h-full w-full scale-[1.4] object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </a>
 
@@ -127,6 +128,7 @@ const Message = ({ announcementVisible }) => {
                 width={400}
                 height={400}
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full w-full scale-[1.4] object-contain"
               />
             </a>
@@ -144,6 +146,7 @@ const Message = ({ announcementVisible }) => {
                 width={400}
                 height={400}
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full w-full scale-[1.4] object-contain"
               />
             </a>
@@ -161,6 +164,7 @@ const Message = ({ announcementVisible }) => {
                 width={400}
                 height={400}
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full w-full scale-[1.4] object-contain"
               />
             </a>
@@ -181,6 +185,7 @@ const Message = ({ announcementVisible }) => {
             width={400}
             height={400}
             priority
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="h-full w-full scale-[1.6] object-contain"
           />
         </button>

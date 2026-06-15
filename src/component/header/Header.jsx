@@ -67,6 +67,7 @@ const Header = ({ toggle, rewardRef }) => {
             alt="CO-DE Academy โลโก้"
             priority
             className="relative right-10 h-30 w-30 object-contain md:right-14 md:h-42.5 md:w-42.5"
+            sizes="34px"
           />
         </Link>
 
@@ -90,6 +91,7 @@ const Header = ({ toggle, rewardRef }) => {
             alt="เปิดเมนูนำทาง"
             priority
             onClick={toggle}
+            sizes="34px"
             className="h-9 w-9 cursor-pointer object-contain transition hover:opacity-90"
           />
         </div>
@@ -135,9 +137,11 @@ const Header = ({ toggle, rewardRef }) => {
               <Image
                 src={thflag}
                 alt="ธงชาติไทย"
+                priority
                 width={26}
                 height={18}
                 className="h-4.5 w-6.5 object-cover"
+                sizes="34px"
               />
             </button>
 
@@ -151,7 +155,9 @@ const Header = ({ toggle, rewardRef }) => {
                 src={ukflag}
                 alt="UK Flag"
                 width={26}
+                sizes="34px"
                 height={18}
+                priority
                 className="h-4.5 w-6.5 object-cover"
               />
             </button>

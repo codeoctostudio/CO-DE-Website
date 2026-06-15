@@ -173,6 +173,7 @@ const Layer2 = () => {
               width={600}
               height={400}
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
 
             <p className="mb-3 text-start leading-relaxed">{dict.layer2_2}</p>
@@ -204,6 +205,7 @@ const Layer2 = () => {
                 alt="เหตุผลที่ควรเลือกเรียนคอร์สสร้างสรรค์ที่ CO-DE academy"
                 width={600}
                 height={400}
+                priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute left-0 top-0 w-[22%] h-[22%] translate-x-[-35%] translate-y-[-55%]">
@@ -211,7 +213,8 @@ const Layer2 = () => {
                   src={img3}
                   alt="แมวสีส้มแอบดู"
                   fill
-                  sizes="(max-width: 768px) 25vw, 15vw"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain"
                 />
               </div>
