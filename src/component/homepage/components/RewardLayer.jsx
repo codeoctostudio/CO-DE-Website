@@ -51,8 +51,11 @@ const RewardLayer = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setLoadVideo(true);
+        }
       },
-      { threshold: 0.6 },
+      { threshold: 0.1 },
     );
     if (videoRef.current) observer.observe(videoRef.current);
     return () => {
@@ -154,6 +157,7 @@ const RewardLayer = () => {
   const playerRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isApiLoaded, setIsApiLoaded] = useState(false);
+  const [loadVideo, setLoadVideo] = useState(false);
 
   useEffect(() => {
     if (!isVisible || isApiLoaded) return;
@@ -236,7 +240,13 @@ const RewardLayer = () => {
               className={`w-full max-w-137.5 max-h-172 aspect-9/16 overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
             >
               <div className="relative w-full h-full">
-                <div id="player" className="w-full h-full" />
+                {loadVideo ? (
+                  <div id="player" className="w-full h-full" />
+                ) : (
+                  <div className="w-full h-full bg-black flex items-center justify-center text-white/40 text-sm">
+                    Loading...
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={toggleSound}
