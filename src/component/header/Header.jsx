@@ -67,7 +67,7 @@ const Header = ({ toggle, rewardRef }) => {
             alt="CO-DE Academy โลโก้"
             priority
             className="relative right-10 h-30 w-30 object-contain md:right-14 md:h-42.5 md:w-42.5"
-            sizes="34px"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </Link>
 
