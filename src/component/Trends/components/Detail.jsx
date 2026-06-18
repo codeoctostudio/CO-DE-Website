@@ -230,7 +230,7 @@ const TrendsContent = () => {
                     <div
                       className={`w-full p-4 md:w-[75%] md:p-5 ${lang === "th" ? "looped-text" : ""}`}
                     >
-                      <div className="inline-block rounded-full bg-pink-400 px-3 py-1 text-xs">
+                      <div className="inline-block rounded-full bg-pink-400 text-[#042451] px-3 py-1 text-xs">
                         {dict.category_parents}
                       </div>
 
