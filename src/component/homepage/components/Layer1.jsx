@@ -6,11 +6,11 @@ import { useLanguage } from "@/hook/useLanguage";
 
 const LottiePlayer = dynamic(
   () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
-  { ssr: false }
+  { ssr: false },
 );
 
 const Layer1 = () => {
-  const {dict, lang} = useLanguage();
+  const { dict, lang } = useLanguage();
 
   const [isClient, setIsClient] = useState(false);
 
@@ -19,27 +19,23 @@ const Layer1 = () => {
   }, []);
 
   return (
-    <main
-      className="flex min-h-screen w-full flex-col items-center justify-start bg-[#042451] pb-12 pt-0 md:pt-32"
-    >
-      {isClient ? (
-        <LottiePlayer
-          src="/lottie/intro.json"
-          autoplay
-          keepLastFrame
-          className="h-[65dvh] min-h-100 w-full max-w-7xl md:h-[55dvh] lg:h-[60dvh]"
-        />
-      ) : (
-        <div className="h-[65dvh] min-h-100 w-full" />
-      )}
+    <main className="flex min-h-screen w-full flex-col items-center justify-start bg-[#042451] pb-12 pt-0 md:pt-32">
+      <div className="h-[65dvh] min-h-100 w-full max-w-4xl md:h-[55dvh] lg:h-[60dvh] flex items-center justify-center">
+        {isClient ? (
+          <LottiePlayer
+            src="/lottie/intro.json"
+            autoplay
+            keepLastFrame
+            className="h-full w-full"
+          />
+        ) : (
+          <div className="h-full w-full" />
+        )}
+      </div>
       {/* Content */}
-      <div
-        className="relative z-10 -mt-20 flex flex-col items-center px-6 font-comfortaa text-white md:-mt-10"
-      >
+      <div className="relative z-10 -mt-20 flex flex-col items-center px-6 font-comfortaa text-white md:-mt-10">
         {/* Title */}
-        <h1
-          className="mb-4 text-center text-[1.1rem] leading-snug sm:text-[1.3rem] md:text-[1.7rem] lg:text-[2.3rem]"
-        >
+        <h1 className="mb-4 text-center text-[1.1rem] leading-snug sm:text-[1.3rem] md:text-[1.7rem] lg:text-[2.3rem]">
           {/* Mobile */}
           <span className="block md:hidden">
             <span className="block font-looped">{dict.layer1_1}</span>
@@ -62,9 +58,7 @@ const Layer1 = () => {
         </h1>
 
         {/* Description */}
-        <section
-          className="mx-auto max-w-5xl text-center text-[0.95rem] leading-relaxed text-white/90 sm:text-[1rem] md:text-[1.25rem] lg:text-[1.4rem]"
-        >
+        <section className="mx-auto max-w-5xl text-center text-[0.95rem] leading-relaxed text-white/90 sm:text-[1rem] md:text-[1.25rem] lg:text-[1.4rem]">
           <span className="block md:hidden">
             {dict.layer1_3} {dict.layer1_4}
           </span>
