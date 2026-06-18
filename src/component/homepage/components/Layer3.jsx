@@ -189,7 +189,7 @@ const Layer3 = () => {
                 name="filter"
                 value={filter}
                 onChange={(event) => setFilter(event.target.value)}
-                className="rounded-lg border-2 border-[#F7C94B] bg-[#F7C94B] p-2 text-lg font-bold text-white drop-shadow-lg focus:outline-none focus:ring-2 focus:ring-[#042451]"
+                className="rounded-lg border-2 border-[#F7C94B] bg-[#F7C94B] p-2 text-lg font-bold text-[#042451] drop-shadow-lg focus:outline-none focus:ring-2 focus:ring-[#042451]"
               >
                 {[
                   "4+",
