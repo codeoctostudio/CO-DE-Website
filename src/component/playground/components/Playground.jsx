@@ -38,7 +38,7 @@ const Playground = () => {
       key={index}
       className="flex w-[35%] flex-col items-center text-center sm:w-[30%]"
     >
-      <Image src={feature.logo} className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20" loading="lazy" alt="Feature" />
+      <Image src={feature.logo} className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20" loading="lazy" alt="Feature" sizes="(max-width: 768px) 100vw, 50vw" />
       <p className="mb-5 text-sm font-bold text-[#EA587F] sm:text-base md:text-lg lg:text-xl xl:text-2xl">
         {feature.title}
       </p>

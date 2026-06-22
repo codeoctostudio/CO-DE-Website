@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link"; // 👈 นำเข้าแทน router เพื่อช่วยให้บ็อทกูเกิลจับข้อมูลได้
+import Link from "next/link";
 import { useLanguage } from "@/hook/useLanguage";
 
 const AnnouncementBar = ({ onVisibleChange, rewardRef }) => {

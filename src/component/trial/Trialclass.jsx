@@ -106,7 +106,7 @@ const TrialClass = () => {
       <div className="mx-auto mt-24 grid w-full max-w-full gap-16 md:grid-cols-[1fr_1.2fr] md:items-center md:gap-24">
         {/* LEFT */}
         <div className="order-2 flex justify-center px-4 md:order-1 md:px-0">
-          <div className="w-full max-w-xs rounded-xl bg-white p-4 text-[#042451] shadow-xl sm:max-w-sm sm:p-5 md:-mt-16 md:max-w-xs md:p-5 lg:max-w-[300px]">
+          <div className="w-full max-w-xs rounded-xl bg-white p-4 text-[#042451] shadow-xl sm:max-w-sm sm:p-5 md:-mt-16 md:max-w-xs md:p-5 lg:max-w-75">
             {randomStudent?.image && (
               <Image
                 src={randomStudent.image}

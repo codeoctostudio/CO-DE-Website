@@ -68,7 +68,7 @@ const Classrooms = () => {
       >
         <p className="font-bold">{classroom.sidename}</p>
       </div>
-      <Image src={classroom.image} className="rounded-t-[30px]" loading="lazy" alt="Classroom" />
+      <Image src={classroom.image} className="rounded-t-[30px]" loading="lazy" alt="Classroom" sizes="(max-width: 768px) 100vw, 50vw" />
       <div className="p-4 ">
         <p className="h-17.5 text-xl font-bold lg:text-2xl ">
           {classroom.name}
