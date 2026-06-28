@@ -16,7 +16,7 @@ export function proxy(request) {
 
   if (pathname.startsWith("/api-backend/")) {
     const targetPath = pathname.replace("/api-backend/", "");
-    const backendUrl = new URL(`https://co-deacademy.com/api/${targetPath}`);
+    const backendUrl = new URL(`https://admin.co-deacademy.com/api/${targetPath}`);
     backendUrl.search = request.nextUrl.search;
 
     return NextResponse.rewrite(backendUrl);
