@@ -3,6 +3,7 @@ import CookieConsentProvider from "@/CookieConsent";
 import PageTracker from "@/pageTracker";
 import Cookie from "@/Cookie";
 import { comfortaa, ibmThai, ibmThaiLooped } from "@/lib/fonts";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }) {
 
   return {
     title: {
-      default: isEn ? "CO-DE | Coding Academy for Kids" : "CO-DE | สอน Coding สำหรับเด็ก",
+      default: isEn
+        ? "CO-DE | Coding Academy for Kids"
+        : "CO-DE | สอน Coding สำหรับเด็ก",
       template: "%s | CO-DE Academy",
     },
 
@@ -22,13 +25,15 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: `https://co-de.academy/${currentLang}`,
       languages: {
-        "th": "https://co-de.academy/th",
-        "en": "https://co-de.academy/en",
+        th: "https://co-de.academy/th",
+        en: "https://co-de.academy/en",
       },
     },
 
     openGraph: {
-      title: isEn ? "CO-DE | Coding Academy for Kids" : "CO-DE | สอน Coding สำหรับเด็ก",
+      title: isEn
+        ? "CO-DE | Coding Academy for Kids"
+        : "CO-DE | สอน Coding สำหรับเด็ก",
       description: isEn
         ? "Learn coding for kids with fun and creative courses."
         : "เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
@@ -48,7 +53,9 @@ export async function generateMetadata({ params }) {
 
     twitter: {
       card: "summary_large_image",
-      title: isEn ? "CO-DE | Coding Academy for Kids" : "CO-DE | สอน Coding สำหรับเด็ก",
+      title: isEn
+        ? "CO-DE | Coding Academy for Kids"
+        : "CO-DE | สอน Coding สำหรับเด็ก",
       description: isEn
         ? "Learn coding for kids with fun and creative courses."
         : "เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
@@ -89,6 +96,7 @@ export default async function RootLayout({ children, params }) {
           <PageTracker />
           <Cookie />
           {children}
+          <SpeedInsights />
         </CookieConsentProvider>
       </body>
     </html>
