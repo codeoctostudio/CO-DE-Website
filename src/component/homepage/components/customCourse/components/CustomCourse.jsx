@@ -170,7 +170,7 @@ const CustomCourse = () => {
   const filteredCourse = testContent();
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white">
+    <div className="flex h-full w-full flex-col items-center bg-[#042451] font-comfortaa text-white">
       <p className="mb-14 mt-28 w-[80%] text-center text-3xl md:text-4xl">
         Reccommended Courses
       </p>
