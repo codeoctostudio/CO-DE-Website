@@ -1,17 +1,32 @@
 "use client";
 
 import "./style.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/hook/useLanguage";
 
 const TrendsContent = () => {
-  const { langPath, dict, lang, router, searchParams } = useLanguage();
+  const { langPath, dict, lang, router } = useLanguage();
   const isThai = lang === "th";
-  const activeTab = searchParams.get("tab") || "all";
+  // const activeTab = searchParams.get("tab") || "all";
+
+  // const handleTabChange = (key) => {
+  //   router.push(`?tab=${key}`, { scroll: false });
+  // };
+  const [activeTab, setActiveTab] = useState("all");
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const savedTab = localStorage.getItem("active_trend_tab");
+    if (savedTab) {
+      setActiveTab(savedTab);
+    }
+    setIsReady(true);
+  }, []);
 
   const handleTabChange = (key) => {
-    router.push(`?tab=${key}`, { scroll: false });
+    setActiveTab(key);
+    localStorage.setItem("active_trend_tab", key);
   };
 
   const tabs = [
@@ -167,6 +182,14 @@ const TrendsContent = () => {
     startStudentIndex,
     startStudentIndex + STUDENT_PER_PAGE,
   );
+
+  if (!isReady) {
+    return (
+      <div className="min-h-[50vh] flex items-center justify-center bg-[#071f3d]">
+        <div className="text-white font-medium animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <main className="font-comfortaa">

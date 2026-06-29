@@ -6,11 +6,11 @@ import { getDictionary } from "@/lib/dictionary";
 export const useLanguage = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const lang = pathname?.split("/")[1] || "th";
   const dict = getDictionary(lang);
   const currentLang = lang;
-  
+
   const langPath = (path) => {
     return `/${lang}${path}`;
   };
@@ -30,8 +30,14 @@ export const useLanguage = () => {
     segments[1] = newLang;
     const newPathname = segments.join("/");
 
-    const currentQueries = searchParams?.toString();
-    const finalUrl = currentQueries ? `${newPathname}?${currentQueries}` : newPathname;
+    // const currentQueries = searchParams?.toString();
+    // const finalUrl = currentQueries ? `${newPathname}?${currentQueries}` : newPathname;
+    // router.push(finalUrl);
+    const currentQueries =
+      typeof window !== "undefined" ? window.location.search : "";
+    const finalUrl = currentQueries
+      ? `${newPathname}${currentQueries}`
+      : newPathname;
     router.push(finalUrl);
   };
 
@@ -43,7 +49,7 @@ export const useLanguage = () => {
     setLanguage,
     pathname,
     router,
-    searchParams
+    // searchParams,
   };
 };
 
@@ -62,7 +68,7 @@ export const useLanguage = () => {
 
 //   // 🌟 ป้องกันขั้นสุด: เช็กให้ชัวร์ว่า searchParams มีอยู่จริงและแปลงเป็น string ได้ ไม่ใช่ Object เปล่าๆ
 //   const currentQueries = searchParams ? searchParams.toString() : "";
-  
+
 //   // ถ้า currentQueries ดันหลุดคำว่า "[object" มา ให้ตัดทิ้งไปเลย
 //   const safeQueries = (currentQueries && !currentQueries.includes("[object")) ? currentQueries : "";
 

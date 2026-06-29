@@ -1,10 +1,9 @@
 import Advice from "@/component/Trends/Advice";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Blog_python || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AdvicePage() {
-  return (
-    <Suspense>
-      <Advice />
-    </Suspense>
-  );
+  return <Advice />;
 }

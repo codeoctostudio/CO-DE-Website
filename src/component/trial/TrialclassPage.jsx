@@ -6,6 +6,7 @@ import BackToTop from "../msg/Backtotop.jsx";
 import Header from "../header/Header.jsx";
 import TrialClass from "./Trialclass.jsx";
 import Nav from "../header/Nav.jsx";
+import { Suspense } from "react";
 
 const TrialclassPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -22,14 +23,15 @@ const TrialclassPage = () => {
       event: "page_view",
       page_name: "Free Trial Class Page",
     });
-
   }, []);
 
   return (
     <>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
-      <TrialClass />
+      <Suspense>
+        <TrialClass />
+      </Suspense>
       <Footer />
       <BackToTop />
     </>

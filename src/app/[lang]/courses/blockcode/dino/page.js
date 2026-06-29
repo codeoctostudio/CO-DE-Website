@@ -1,10 +1,9 @@
 import OctoPage from "@/component/courses/IndividualCoursePages/Octo/OctoPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_blockcode_dino_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function OctoPages() {
-  return (
-    <Suspense>
-      <OctoPage />
-    </Suspense>
-  );
+  return <OctoPage />;
 }

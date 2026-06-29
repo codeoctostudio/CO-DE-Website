@@ -1,10 +1,9 @@
 import Custom from "@/component/homepage/components/customCourse/Custom";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Home_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function CustomPage() {
-  return (
-    <Suspense>
-      <Custom />
-    </Suspense>
-  );
+  return <Custom />;
 }

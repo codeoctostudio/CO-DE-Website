@@ -1,10 +1,9 @@
 import Register from "@/component/register/Register";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Registration_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function RegisterPage() {
-  return (
-    <Suspense>
-      <Register />
-    </Suspense>
-  );
+  return <Register />;
 }

@@ -1,10 +1,9 @@
 import DesignPage from "@/component/courses/IndividualCoursePages/Design/DesignPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_noncode_designthinking_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function DesignPages() {
-  return (
-    <Suspense>
-      <DesignPage />
-    </Suspense>
-  );
+  return <DesignPage />;
 }

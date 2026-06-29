@@ -1,10 +1,9 @@
 import MicroPage from "@/component/courses/IndividualCoursePages/Microbit/MicroPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_mechanical_microbit_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function MicrobitPage() {
-  return (
-    <Suspense>
-      <MicroPage />
-    </Suspense>
-  );
+  return <MicroPage />;
 }

@@ -1,10 +1,9 @@
 import Fundamental from "@/component/courses/pages/Fundamental";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_fundamental_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function FundamentalPage() {
-  return (
-    <Suspense>
-      <Fundamental />
-    </Suspense>
-  );
+  return <Fundamental />;
 }

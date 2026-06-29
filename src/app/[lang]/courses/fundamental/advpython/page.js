@@ -1,10 +1,9 @@
 import AdvPythonPage from "@/component/courses/IndividualCoursePages/AdvPython/AdvPythonPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_advanced_python_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AdvPythonPages() {
-  return (
-    <Suspense>
-      <AdvPythonPage />
-    </Suspense>
-  );
+  return <AdvPythonPage />;
 }

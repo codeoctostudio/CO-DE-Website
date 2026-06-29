@@ -1,10 +1,9 @@
 import RobloxPage from "@/component/courses/IndividualCoursePages/Roblox/RobloxPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_creative_roblox_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function RobloxPages() {
-  return (
-    <Suspense>
-      <RobloxPage />
-    </Suspense>
-  );
+  return <RobloxPage />;
 }

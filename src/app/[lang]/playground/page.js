@@ -1,10 +1,9 @@
 import OurPlayground from "@/component/playground/OurPlayground";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Playground_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function OurPlaygroundPage() {
-  return (
-    <Suspense>
-      <OurPlayground />
-    </Suspense>
-  );
+  return <OurPlayground />;
 }

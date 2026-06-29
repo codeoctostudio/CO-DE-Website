@@ -1,10 +1,9 @@
 import WebPage from "@/component/courses/IndividualCoursePages/Web/WebPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_creative_fullstackweb_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function WebPages() {
-  return (
-    <Suspense>
-      <WebPage />
-    </Suspense>
-  );
+  return <WebPage />;
 }

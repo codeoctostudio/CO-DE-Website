@@ -1,10 +1,9 @@
 import TrialclassPage from "@/component/trial/TrialclassPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Trialclass_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function TrialClass() {
-  return (
-    <Suspense>
-      <TrialclassPage />
-    </Suspense>
-  );
+  return <TrialclassPage />;
 }

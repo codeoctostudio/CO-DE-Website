@@ -1,10 +1,9 @@
 import Parents from "@/component/Trends/Parents";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Blog_Parent_1 || "CO-DE academy",
@@ -24,10 +23,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function BlogsPage() {
-  return (
-    <Suspense>
-      <Parents />
-    </Suspense>
-  );
+export default function BlogPage() {
+  return <Parents />;
 }

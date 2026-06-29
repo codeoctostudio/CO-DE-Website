@@ -1,10 +1,9 @@
 import ModelPage from "@/component/courses/IndividualCoursePages/Modelling/ModelPage";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Course_creative_3dmodeling_Page || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function ModellingPage() {
-  return (
-    <Suspense>
-      <ModelPage />
-    </Suspense>
-  );
+  return <ModelPage />;
 }

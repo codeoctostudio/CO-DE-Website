@@ -1,10 +1,9 @@
 import Scratch from "@/component/Trends/Scratch";
 import { getDictionary } from "@/lib/dictionary";
-import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const dict = getDictionary(lang);
+  const dict = await getDictionary(lang);
 
   return {
     title: dict?.Blog_scratch || "CO-DE academy",
@@ -25,9 +24,5 @@ export async function generateMetadata({ params }) {
 }
 
 export default function ScratchPage() {
-  return (
-    <Suspense>
-      <Scratch />
-    </Suspense>
-  );
+  return <Scratch />;
 }

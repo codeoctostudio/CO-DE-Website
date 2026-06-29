@@ -8,13 +8,14 @@ import { useState, useEffect } from "react";
 import Message from "../../../msg/Message";
 import BackToTop from "../../../msg/Backtotop";
 import AnnouncementBar from "../../../msg/Announcements";
+import { Suspense } from "react";
 
-import CheckBoxProvider from "@/context/CheckBoxContext"; 
+import CheckBoxProvider from "@/context/CheckBoxContext";
 
 const Custom = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [announcementVisible, setAnnouncementVisible] = useState(false);
-  
+
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
@@ -32,9 +33,11 @@ const Custom = () => {
     <CheckBoxProvider>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
-      
-      <CustomCourse />
-      
+
+      <Suspense>
+        <CustomCourse />
+      </Suspense>
+
       <Footer />
       <AnnouncementBar onVisibleChange={setAnnouncementVisible} />
       <Message announcementVisible={announcementVisible} />
