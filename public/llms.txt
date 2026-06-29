@@ -4,13 +4,13 @@
 
 ## ลิงก์ข้อมูลสำคัญ
 
-- [หน้าแรก](https://co-dewebsite.vercel.app/th)
-- [เกี่ยวกับเรา](https://co-dewebsite.vercel.app/th/aboutUs)
-- [หลักสูตรทั้งหมด](https://co-dewebsite.vercel.app/th/courses)
-- [บทความ](https://co-dewebsite.vercel.app/th/blogs)
-- [ติดต่อเรา](https://co-dewebsite.vercel.app/th/contactUs)
-- [Home Page](https://co-dewebsite.vercel.app/en)
-- [About Us](https://co-dewebsite.vercel.app/en/aboutUs)
-- [All Course](https://co-dewebsite.vercel.app/en/courses)
-- [Blogs](https://co-dewebsite.vercel.app/en/blogs)
-- [ContactUs](https://co-dewebsite.vercel.app/en/contactUs)
+- [หน้าแรก](https://www.co-deacademy.com/th)
+- [เกี่ยวกับเรา](https://www.co-deacademy.com/th/aboutUs)
+- [หลักสูตรทั้งหมด](https://www.co-deacademy.com/th/courses)
+- [บทความ](https://www.co-deacademy.com/th/blogs)
+- [ติดต่อเรา](https://www.co-deacademy.com/th/contactUs)
+- [Home Page](https://www.co-deacademy.com/en)
+- [About Us](https://www.co-deacademy.com/en/aboutUs)
+- [All Course](https://www.co-deacademy.com/en/courses)
+- [Blogs](https://www.co-deacademy.com/en/blogs)
+- [ContactUs](https://www.co-deacademy.com/en/contactUs)
