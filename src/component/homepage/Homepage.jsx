@@ -12,6 +12,7 @@ import Message from "../msg/Message";
 import RewardLayer from "./components/RewardLayer";
 import BackToTop from "../msg/Backtotop";
 import AnnouncementBar from "../msg/Announcements";
+import CheckBoxProvider from "@/context/CheckBoxContext";
 
 const Homepage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -32,28 +33,30 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
-      <Header toggle={toggleNav} rewardRef={rewardRef} />
-      <Nav isVisible={isNavOpen} toggle={toggleNav} />
+    <CheckBoxProvider>
+      <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+        <Header toggle={toggleNav} rewardRef={rewardRef} />
+        <Nav isVisible={isNavOpen} toggle={toggleNav} />
 
-      <div className="grow">
-        <Layer1 />
-        <Layer2 />
-        <Layer3 />
-        <Layer4 />
-        <div ref={rewardRef}>
-          <RewardLayer />
+        <div className="grow">
+          <Layer1 />
+          <Layer2 />
+          <Layer3 />
+          <Layer4 />
+          <div ref={rewardRef}>
+            <RewardLayer />
+          </div>
         </div>
-      </div>
 
-      <Footer />
-      <AnnouncementBar
-        onVisibleChange={setAnnouncementVisible}
-        rewardRef={rewardRef}
-      />
-      <Message announcementVisible={announcementVisible} />
-      <BackToTop />
-    </div>
+        <Footer />
+        <AnnouncementBar
+          onVisibleChange={setAnnouncementVisible}
+          rewardRef={rewardRef}
+        />
+        <Message announcementVisible={announcementVisible} />
+        <BackToTop />
+      </div>
+    </CheckBoxProvider>
   );
 };
 

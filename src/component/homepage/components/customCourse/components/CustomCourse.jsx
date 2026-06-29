@@ -1,6 +1,7 @@
 "use client";
 import { CheckBoxContext } from "../../../../../context/CheckBoxContext";
 import { useContext } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Scratch,
   Octo,
@@ -18,7 +19,11 @@ import {
 } from "./CoursesImports";
 
 const CustomCourse = () => {
-  const { radio, filter } = useContext(CheckBoxContext);
+  // const { radio, filter } = useContext(CheckBoxContext);
+  const contextValues = useContext(CheckBoxContext) || {};
+  const searchParams = useSearchParams();
+  const radio = searchParams.get("skill") || contextValues.radio || "newbie";
+  const filter = searchParams.get("age") || contextValues.filter || "4+";
   //Container of Imported Component Banners from CourseImports.jsx
   const customCourses = {
     custom1: [
@@ -28,7 +33,7 @@ const CustomCourse = () => {
     ],
     custom2: [
       <Microbit key={0} />,
-      <Roblox key={2} />, 
+      <Roblox key={2} />,
       <ThreeDeeModel key={3} />,
       <Python key={4} />,
     ],
@@ -170,7 +175,11 @@ const CustomCourse = () => {
         Reccommended Courses
       </p>
 
-      {filteredCourse.map((item) => item)}
+      {/* {filteredCourse.map((item) => item)} */}
+
+      {filteredCourse.map((item, index) => (
+        <div key={index}>{item}</div>
+      ))}
     </div>
   );
 };

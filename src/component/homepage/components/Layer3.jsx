@@ -16,8 +16,8 @@ import { useLanguage } from "@/hook/useLanguage";
 
 const Layer3 = () => {
   const { dict, lang, langPath } = useLanguage();
-  const [radio, setRadio, filter, setFilter] =
-    useContext(CheckBoxContext) || [];
+  const { radio, setRadio, filter, setFilter } =
+    useContext(CheckBoxContext) || {};
 
   const [showNewbie, setShowNewbie] = useState(false);
   const [showExplorer, setShowExplorer] = useState(false);
@@ -378,7 +378,10 @@ const Layer3 = () => {
                 </p>
               </div>
               <Link
-                href={langPath("/customCourse")}
+                href={{
+                  pathname: langPath("/customCourse"),
+                  query: { skill: radio, age: filter },
+                }}
                 onClick={googleEvent}
                 className="bold w-37.5 cursor-pointer rounded-[50px] bg-[#F7C94B] p-2 text-center font-comfortaa text-[#042451] font-bold drop-shadow-lg transition-transform duration-500 hover:bg-[#EA5880] hover:text-white active:opacity-80 md:p-4 md:hover:scale-105"
               >
