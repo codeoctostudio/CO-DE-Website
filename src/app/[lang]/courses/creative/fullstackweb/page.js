@@ -1,5 +1,6 @@
 import WebPage from "@/component/courses/IndividualCoursePages/Web/WebPage";
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,5 +25,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default function WebPages() {
-  return <WebPage />;
+  return (
+    <Suspense>
+      <WebPage />
+    </Suspense>
+  );
 }

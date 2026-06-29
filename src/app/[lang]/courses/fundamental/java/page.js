@@ -1,5 +1,6 @@
 import JavaPage from "@/component/courses/IndividualCoursePages/Java/JavaPage";
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,5 +25,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default function JavaPages() {
-  return <JavaPage />;
+  return (
+    <Suspense>
+      <JavaPage />
+    </Suspense>
+  );
 }

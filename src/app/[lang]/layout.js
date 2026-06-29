@@ -23,10 +23,10 @@ export async function generateMetadata({ params }) {
       : "CO-DE Academy – เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
 
     alternates: {
-      canonical: `https://co-de.academy/${currentLang}`,
+      canonical: `https://www.co-deacademy.com/${currentLang}`,
       languages: {
-        th: "https://co-de.academy/th",
-        en: "https://co-de.academy/en",
+        th: "https://www.co-deacademy.com/th",
+        en: "https://www.co-deacademy.com/en",
       },
     },
 
@@ -37,11 +37,11 @@ export async function generateMetadata({ params }) {
       description: isEn
         ? "Learn coding for kids with fun and creative courses."
         : "เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
-      url: `https://co-de.academy/${currentLang}`,
+      url: `https://www.co-deacademy.com/${currentLang}`,
       siteName: "CO-DE Academy",
       images: [
         {
-          url: "https://co-de.academy/og-image.png", // ใส่ path รูป OG จริง
+          url: "https://www.co-deacademy.com/og-image.png", // ใส่ path รูป OG จริง
           width: 1200,
           height: 630,
           alt: "CO-DE Academy",
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
       description: isEn
         ? "Learn coding for kids with fun and creative courses."
         : "เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
-      images: ["https://co-de.academy/og-image.png"],
+      images: ["https://www.co-deacademy.com/og-image.png"],
     },
 
     robots: {
@@ -76,8 +76,15 @@ export async function generateMetadata({ params }) {
       apple: "/apple-touch-icon.png",
     },
 
-    metadataBase: new URL("https://co-de.academy"),
+    metadataBase: new URL("https://www.co-deacademy.com"),
   };
+}
+
+export async function generateStaticParams() {
+  return [
+    { lang: 'th' },
+    { lang: 'en' }
+  ];
 }
 
 export default async function RootLayout({ children, params }) {

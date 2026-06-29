@@ -1,5 +1,6 @@
 import ScratchPage from "@/component/courses/IndividualCoursePages/Scratch/ScratchPage";
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,5 +25,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default function ScratchPages() {
-  return <ScratchPage />;
+  return (
+    <Suspense>
+      <ScratchPage />
+    </Suspense>
+  );
 }

@@ -1,5 +1,6 @@
 import DesignPage from "@/component/courses/IndividualCoursePages/Design/DesignPage";
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,5 +25,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default function DesignPages() {
-  return <DesignPage />;
+  return (
+    <Suspense>
+      <DesignPage />
+    </Suspense>
+  );
 }

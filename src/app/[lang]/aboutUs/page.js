@@ -1,5 +1,6 @@
 import AboutUs from "@/component/aboutUs/AboutUs";
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,5 +25,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AboutUsPage() {
-  return <AboutUs />;
+  return (
+    <Suspense>
+      <AboutUs />
+    </Suspense>
+  );
 }

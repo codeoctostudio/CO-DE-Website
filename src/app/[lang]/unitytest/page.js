@@ -1,4 +1,5 @@
 import { getDictionary } from "@/lib/dictionary";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -24,13 +25,15 @@ export async function generateMetadata({ params }) {
 
 export default function UnityPage() {
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
-      <iframe
-        title="Unity WebGL"
-        src="/UnityTest/index.html"
-        style={{ border: "none", width: "100%", height: "100%" }}
-        allow="fullscreen; autoplay; xr-spatial-tracking; clipboard-read; clipboard-write"
-      />
-    </div>
+    <Suspense>
+      <div style={{ height: "100vh", width: "100%" }}>
+        <iframe
+          title="Unity WebGL"
+          src="/UnityTest/index.html"
+          style={{ border: "none", width: "100%", height: "100%" }}
+          allow="fullscreen; autoplay; xr-spatial-tracking; clipboard-read; clipboard-write"
+        />
+      </div>
+    </Suspense>
   );
 }
