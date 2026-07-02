@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useLanguage } from "@/hook/useLanguage";
 
 const TrendsContent = () => {
-  const { langPath, dict, lang, router } = useLanguage();
+  const { langPath, dict, lang } = useLanguage();
   const isThai = lang === "th";
   // const activeTab = searchParams.get("tab") || "all";
 
