@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function BlogsPage({ params }) {
-  const { lang } = params;
+  const lang = params;
   const dict = getDictionary(lang);
   const faqSchema = {
     "@context": "https://schema.org",
