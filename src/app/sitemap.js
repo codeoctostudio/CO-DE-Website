@@ -20,7 +20,7 @@ export default async function sitemap() {
       sitemapEntries.push({
         url: `${baseUrl}/${lang}${route}`,
         lastModified: new Date().toISOString(),
-        changeFrequency: "monthly", // บอก Google ว่าหน้าเหล่านี้อาจอัปเดตทุกเดือน
+        changeFrequency: "weekly", // บอก Google ว่าหน้าเหล่านี้อาจอัปเดตทุกสัปดาห์
         priority: route === "" ? 1.0 : 0.8, // หน้าแรกให้ความสำคัญสูงสุด (1.0) หน้าอื่นรองลงมา
       });
     });
