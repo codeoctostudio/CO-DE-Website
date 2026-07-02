@@ -8,7 +8,8 @@ export default async function sitemap() {
   const staticRoutes = [
     "",                     // หน้าแรก (Homepage)
     "/blogs",               // หน้าบทความ (Trends/Blogs)
-    "/courses",            // หน้าคอร์สแนะนำ
+    "/courses",             // หน้าคอร์สแนะนำ
+    "/playground",          // หน้า Playground
   ];
 
   // 2. เจนเนอเรต URL แยกตามภาษาอัตโนมัติ (เช่น /th/blogs และ /en/blogs)

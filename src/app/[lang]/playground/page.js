@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   return {
     title: dict?.Playground_Page || "CO-DE academy",
     description:
-      "สถาบันสอน Coding สำหรับเด็กอายุ 4-15 ปี เปลี่ยนความชอบเล่นเกมให้เป็นทักษะอนาคต เรียนสนุก เข้าใจง่าย ปูพื้นฐานตั้งแต่ Block Code (Scratch, Roblox) ไปจนถึง Text Code (Python, Java) พร้อมเสริมสร้างกระบวนการคิดอย่างเป็นระบบและความคิดสร้างสรรค์",
+      dict?.Des_Playground_Page + "Read More" || "แนะนำสถานที่เรียน Coding สำหรับเด็กที่ CO-DE Academy กรุงเทพ พื้นที่สร้างสรรค์ดีไซน์ล้ำที่ช่วยจุดประกายจินตนาการและการเรียนรู้แบบลงมือทำ (Project-based) ของลูกคุณ Read More",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",
