@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   return {
     title: dict?.Playground_Page || "CO-DE academy",
     description:
-      dict?.Des_Playground_Page + "Read More" || "แนะนำสถานที่เรียน Coding สำหรับเด็กที่ CO-DE Academy กรุงเทพ พื้นที่สร้างสรรค์ดีไซน์ล้ำที่ช่วยจุดประกายจินตนาการและการเรียนรู้แบบลงมือทำ (Project-based) ของลูกคุณ Read More",
+      dict?.Des_Playground_Page || "แนะนำสถานที่เรียน Coding สำหรับเด็กที่ CO-DE Academy กรุงเทพ พื้นที่สร้างสรรค์ดีไซน์ล้ำที่ช่วยจุดประกายจินตนาการและการเรียนรู้แบบลงมือทำ (Project-based) ของลูกคุณ Read More",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",
