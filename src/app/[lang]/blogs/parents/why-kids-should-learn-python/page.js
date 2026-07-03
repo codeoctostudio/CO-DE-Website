@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AdvicePage({ params }) {
-  const { lang } = params;
+  const lang = params;
   const dict = getDictionary(lang);
   const articleSchema = {
     "@context": "https://schema.org",

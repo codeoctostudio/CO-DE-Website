@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
       siteName: "CO-DE Academy",
       images: [
         {
-          url: "https://www.co-deacademy.com/og-image.png", // ใส่ path รูป OG จริง
+          url: "https://www.co-deacademy.com/og-image.webp",
           width: 1200,
           height: 630,
           alt: "CO-DE Academy",
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
       description: isEn
         ? "Learn coding for kids with fun and creative courses."
         : "เรียนโค้ดดิ้งสำหรับเด็ก ด้วยหลักสูตรสนุกและสร้างสรรค์",
-      images: ["https://www.co-deacademy.com/og-image.png"],
+      images: ["https://www.co-deacademy.com/og-image.webp"],
     },
 
     robots: {
@@ -73,7 +73,7 @@ export async function generateMetadata({ params }) {
 
     icons: {
       icon: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
+      apple: "/apple-touch-icon.webp",
     },
 
     metadataBase: new URL("https://www.co-deacademy.com"),
