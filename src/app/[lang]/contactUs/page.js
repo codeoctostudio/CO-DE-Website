@@ -4,11 +4,13 @@ import { getDictionary } from "@/lib/dictionary";
 export async function generateMetadata({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const currentLang = lang || "th";
 
   return {
     title: dict?.ContactUs_Page || "CO-DE academy",
     description:
-      "สถาบันสอน Coding สำหรับเด็กอายุ 4-15 ปี เปลี่ยนความชอบเล่นเกมให้เป็นทักษะอนาคต เรียนสนุก เข้าใจง่าย ปูพื้นฐานตั้งแต่ Block Code (Scratch, Roblox) ไปจนถึง Text Code (Python, Java) พร้อมเสริมสร้างกระบวนการคิดอย่างเป็นระบบและความคิดสร้างสรรค์",
+      dict?.Des_ContactUs_Page ||
+      "สนใจให้ลูกเรียน Coding? ติดต่อ CO-DE Academy โทร 0808300899 หรือ LINE: @co-de ทักสอบถามคอร์สเรียน วางแผนการเรียน และรับสิทธิ์ทดลองเรียนฟรี! Read more",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",
@@ -20,6 +22,17 @@ export async function generateMetadata({ params }) {
       "ทักษะแห่งอนาคต",
       "CO-DE academy",
     ],
+    alternates: {
+      canonical: `https://www.co-deacademy.com/${currentLang}/contactUs`,
+      languages: {
+        th: "https://www.co-deacademy.com/th/contactUs",
+        en: "https://www.co-deacademy.com/en/contactUs",
+      },
+    },
+
+    openGraph: {
+      url: `https://www.co-deacademy.com/${currentLang}/contactUs`,
+    },
   };
 }
 

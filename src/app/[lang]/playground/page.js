@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/dictionary";
 export async function generateMetadata({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const currentLang = lang || "th";
 
   return {
     title: dict?.Playground_Page || "CO-DE academy",
@@ -20,6 +21,17 @@ export async function generateMetadata({ params }) {
       "ทักษะแห่งอนาคต",
       "CO-DE academy",
     ],
+    alternates: {
+      canonical: `https://www.co-deacademy.com/${currentLang}/playground`,
+      languages: {
+        th: "https://www.co-deacademy.com/th/playground",
+        en: "https://www.co-deacademy.com/en/playground",
+      },
+    },
+
+    openGraph: {
+      url: `https://www.co-deacademy.com/${currentLang}/playground`,
+    },
   };
 }
 
