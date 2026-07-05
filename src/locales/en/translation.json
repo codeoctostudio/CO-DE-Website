@@ -45,13 +45,13 @@
   "Blog_Parent_1": "5 Things to Check Before Enrolling Your Child in a Coding School",
   "Blog_Parent_1_1": "Not all coding schools for kids actually teach kids to code. Here's what to look for — and what to ask — before you sign your child up.",
 
-  "Des_Home_Page": "Bangkok’s leading English-taught coding school for kids aged 4 to Uni prep. Scratch, Python, Roblox—project-based, after-school & weekends. Onsite & Online. Read more",
-  "Des_Course_Page": "Not sure where your child should start with coding? CO-DE Academy offers age-based English courses—from Scratch & Python to Roblox & university prep in Bangkok & Online. Read more",
-  "Des_Playground_Page": "Discover our innovative coding playground in Bangkok. Built on \"Imagination Insights,\" we inspire kids to create, learn, and code through project-based learning. Read more",
-  "Des_Blogs_Page": "Looking for kids' coding guides? CO-DE Academy’s blog answers your questions with tech trends, programming guides for beginners & student projects. Read more",
-  "Des_ContactUs_Page": "Launch your child’s coding future at CO-DE Academy Bangkok. Call 0808300899 or LINE: @code to customize their learning pathway & book a free trial. Read more",
-  "Des_aboutCoding_Page": "Why is coding important for kids? Discover how CO-DE Academy builds logical thinking, future digital skills, and tech confidence through fun learning. Read more",
-  "Des_aboutUs_Page": "Fun learning meets a strong coding foundation at CO-DE Academy. Taught by real software engineers who understand kids, we offer the ultimate digital courses. Read more",
+  "Des_Home_Page": "Bangkok’s leading English-taught coding school for kids aged 4 to Uni prep. Scratch, Python, Roblox—project-based, after-school & weekends. Onsite & Online. ",
+  "Des_Course_Page": "Not sure where your child should start with coding? CO-DE Academy offers age-based English courses—from Scratch & Python to Roblox & university prep in Bangkok & Online. ",
+  "Des_Playground_Page": "Discover our innovative coding playground in Bangkok. Built on \"Imagination Insights,\" we inspire kids to create, learn, and code through project-based learning. ",
+  "Des_Blogs_Page": "Looking for kids' coding guides? CO-DE Academy’s blog answers your questions with tech trends, programming guides for beginners & student projects. ",
+  "Des_ContactUs_Page": "Launch your child’s coding future at CO-DE Academy Bangkok. Call 0808300899 or LINE: @code to customize their learning pathway & book a free trial. ",
+  "Des_aboutCoding_Page": "Why is coding important for kids? Discover how CO-DE Academy builds logical thinking, future digital skills, and tech confidence through fun learning. ",
+  "Des_aboutUs_Page": "Fun learning meets a strong coding foundation at CO-DE Academy. Taught by real software engineers who understand kids, we offer the ultimate digital courses. ",
 
   "category_tutorials": "Tutorials",
   "category_parents": "For Parents",
@@ -324,7 +324,7 @@
   "Tab_Parent_1": "Articles for Parents",
   "Tab_Parent_2": "This collection of articles, techniques, and guidelines for choosing coding courses helps Parents understand the learning style of modern children.",
   "Tab_Parent_3": "Read the article",
-  "Tab_Parent_4": "Read more",
+  "Tab_Parent_4": "",
   
   "Tab_Tutorials_1": "Articles for Tutorials",
 

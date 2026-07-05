@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
     title: dict?.ContactUs_Page || "CO-DE academy",
     description:
       dict?.Des_ContactUs_Page ||
-      "สนใจให้ลูกเรียน Coding? ติดต่อ CO-DE Academy โทร 0808300899 หรือ LINE: @co-de ทักสอบถามคอร์สเรียน วางแผนการเรียน และรับสิทธิ์ทดลองเรียนฟรี! Read more",
+      "สนใจให้ลูกเรียน Coding? ติดต่อ CO-DE Academy โทร 0808300899 หรือ LINE: @co-de ทักสอบถามคอร์สเรียน วางแผนการเรียน และรับสิทธิ์ทดลองเรียนฟรี! ",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",

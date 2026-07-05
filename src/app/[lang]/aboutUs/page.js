@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
     title: dict?.AboutUs_Page || "CO-DE academy",
     description:
       dict?.Des_AboutUs_Page ||
-      "สถาบัน CO-DE Academy สอน Coding เด็กโดยทีมวิศวกรซอฟต์แวร์และครูผู้เชี่ยวชาญ ที่เข้าใจเด็ก สอนสนุก ปูพื้นฐานแน่น และมีระบบทบทวนออนไลน์ได้ตลอดเวลา Read more",
+      "สถาบัน CO-DE Academy สอน Coding เด็กโดยทีมวิศวกรซอฟต์แวร์และครูผู้เชี่ยวชาญ ที่เข้าใจเด็ก สอนสนุก ปูพื้นฐานแน่น และมีระบบทบทวนออนไลน์ได้ตลอดเวลา ",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",

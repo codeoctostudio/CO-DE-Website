@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
     title: dict?.AboutCoding_Page || "CO-DE academy",
     description:
       dict?.Des_AboutCoding_Page ||
-      "ทำไมเด็กยุคนี้ต้องเรียน Coding? ร่วมหาคำตอบกับ CO-DE Academy ว่าการเขียนโปรแกรมช่วยพัฒนาความคิดเชิงตรรกะ จินตนาการ และเตรียมลูกให้พร้อมสู่ยุคดิจิทัลอย่างไร Read more",
+      "ทำไมเด็กยุคนี้ต้องเรียน Coding? ร่วมหาคำตอบกับ CO-DE Academy ว่าการเขียนโปรแกรมช่วยพัฒนาความคิดเชิงตรรกะ จินตนาการ และเตรียมลูกให้พร้อมสู่ยุคดิจิทัลอย่างไร ",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",

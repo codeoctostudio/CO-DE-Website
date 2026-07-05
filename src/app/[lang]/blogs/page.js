@@ -9,7 +9,7 @@ export async function generateMetadata({ params }) {
   return {
     title: dict?.Blogs_Page || "CO-DE academy",
     description:
-      dict?.Des_Blogs_Page ||"คลังคู่มือเรียน Coding สำหรับเด็ก อัปเดตเทรนด์เทค และเทคนิคสไตล์เจาะลึกที่พ่อแม่ต้องรู้ ชวนส่องผลงานและจุดประกายจินตนาการลูกคุณไปกับ CO-DE Academy Read more",
+      dict?.Des_Blogs_Page ||"คลังคู่มือเรียน Coding สำหรับเด็ก อัปเดตเทรนด์เทค และเทคนิคสไตล์เจาะลึกที่พ่อแม่ต้องรู้ ชวนส่องผลงานและจุดประกายจินตนาการลูกคุณไปกับ CO-DE Academy ",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",

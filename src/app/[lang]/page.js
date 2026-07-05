@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   return {
     title: dict?.Home_Page || "CO-DE academy",
     description:
-      dict?.Des_Home_Page || "โรงเรียนสอน coding สำหรับเด็กในกรุงเทพ เรียนแบบ Project-based สอนโดยครูจบด้าน Computer Science ตั้งแต่ 4 ปีถึงเตรียมเข้ามหาวิทยาลัย ทั้ง Online และ Onsite Read More",
+      dict?.Des_Home_Page || "โรงเรียนสอน coding สำหรับเด็กในกรุงเทพ เรียนแบบ Project-based สอนโดยครูจบด้าน Computer Science ตั้งแต่ 4 ปีถึงเตรียมเข้ามหาวิทยาลัย ทั้ง Online และ Onsite ",
     keywords: [
       "coding เด็ก",
       "เรียน coding เด็ก",
