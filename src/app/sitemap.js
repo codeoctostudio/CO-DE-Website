@@ -7,9 +7,12 @@ export default async function sitemap() {
   // 1. ลิสต์หน้าเว็บหลักๆ ของคุณที่มีในโปรเจกต์
   const staticRoutes = [
     "",                     // หน้าแรก (Homepage)
+    "/aboutUs",
     "/blogs",               // หน้าบทความ (Trends/Blogs)
     "/courses",             // หน้าคอร์สแนะนำ
     "/playground",          // หน้า Playground
+    "/contactUs",           // หน้าติดต่อเรา
+    "/playground",
   ];
 
   // 2. เจนเนอเรต URL แยกตามภาษาอัตโนมัติ (เช่น /th/blogs และ /en/blogs)

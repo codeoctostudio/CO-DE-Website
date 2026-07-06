@@ -54,7 +54,7 @@ const TrendsContent = () => {
     tech: {
       label: dict.category_tech,
       color: "from-blue-100 to-blue-200",
-      tag: "bg-blue-100 text-blue-700",
+      tag: "bg-blue-300 text-blue-700",
       icon: "🤖",
     },
     guide: {
@@ -67,6 +67,14 @@ const TrendsContent = () => {
 
   // บทความ
   const articles = [
+    {
+      title: dict.Blogs_Tech_1,
+      content: dict.Blogs_Tech_2 + dict.Blogs_Tech_3,
+      meta: dict.Blogs_Tech_5,
+      category: "tech",
+      slug: "/blogs/technology-trends/what-is-ai-why-kids-need-coding",
+      featured: true,
+    },
     {
       title: (
         <>
@@ -253,8 +261,11 @@ const TrendsContent = () => {
                     <div
                       className={`w-full p-4 md:w-[75%] md:p-5 ${lang === "th" ? "looped-text" : ""}`}
                     >
-                      <div className="inline-block rounded-full bg-pink-400 text-[#042451] px-3 py-1 text-xs">
-                        {dict.category_parents}
+                      <div
+                        className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${categories[featuredArticle.category]?.tag || "bg-blue-100 text-blue-700"}`}
+                      >
+                        {categories[featuredArticle.category]?.label ||
+                          featuredArticle.category}
                       </div>
 
                       <div className="mt-4  line-clamp-2 font-semibold leading-relaxed">
@@ -265,7 +276,7 @@ const TrendsContent = () => {
                     {/* IMOGI 25% */}
                     <div className="flex w-full items-center justify-center p-4 md:w-[25%]">
                       <div className="flex aspect-square w-24 items-center justify-center overflow-hidden rounded-lg text-4xl sm:w-16 md:w-28 md:text-6xl">
-                        👨‍👩‍👧
+                        {categories[featuredArticle.category]?.icon}
                       </div>
                     </div>
                   </div>
@@ -816,8 +827,137 @@ const TrendsContent = () => {
 
           {/* TAB 4 */}
           {activeTab === "tech" && (
-            <div className="py-20 text-center">
-              <h2 className="text-2xl font-bold text-[#F7C94B]">Coming Soon</h2>
+            <div className="bg-linear-to-b from-[#eeffec] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
+              <div className="mx-auto mb-5 max-w-6xl">
+                {/* HEADER */}
+                <div className="mb-10 text-center">
+                  <div className="mt-5 inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-bold text-blue-700 shadow-sm">
+                    🤖 {dict.category_tech}
+                  </div>
+
+                  <h2
+                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${
+                      lang === "th" ? "looped-text" : ""
+                    }`}
+                  >
+                    {dict.Tab_Tutorials_2}
+                  </h2>
+
+                  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-500 md:text-base">
+                    {dict.Tab_Parent_2}
+                  </p>
+                </div>
+
+                {/* FEATURED */}
+                {techArticles
+                  .filter((article) => article.featured)
+                  .map((item) => (
+                    <Link key={item.slug} href={langPath(item.slug)}>
+                      <div className="group relative overflow-hidden rounded-4xl bg-linear-to-r from-[#042451] via-[#12396b] to-[#0B2545] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                        {/* BG */}
+                        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-pink-400/20 blur-3xl"></div>
+
+                        <div className="relative z-10 flex flex-col items-center gap-8 md:flex-row">
+                          {/* LEFT */}
+                          <div className="flex-1 text-white">
+                            <div className="inline-flex items-center rounded-full bg-blue-400 px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                              {dict.category_tech}
+                            </div>
+
+                            <h3
+                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${
+                                lang === "th" ? "looped-text" : ""
+                              }`}
+                            >
+                              {item.title}
+                            </h3>
+
+                            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
+                              {item.meta}
+                            </p>
+
+                            <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#F7C94B]">
+                              {dict.Tab_Parent_3} →
+                            </div>
+                          </div>
+
+                          {/* RIGHT */}
+                          <div className="flex items-center justify-center">
+                            <div className="flex h-36 w-36 items-center justify-center rounded-[30px] bg-white/10 text-7xl backdrop-blur-md transition-transform duration-500 group-hover:scale-110">
+                              🤖
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+
+                {/* GRID */}
+                <div className="mt-12 grid gap-8 sm:grid-cols-2">
+                  {techArticles
+                    .filter((article) => !article.featured)
+                    .map((item, index) => (
+                      <Link key={item.slug} href={langPath(item.slug)}>
+                        <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-pink-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                          {/* TOP */}
+                          <div className="via-rose-50 relative overflow-hidden bg-linear-to-br from-pink-100 to-white p-8">
+                            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-pink-200/40 blur-2xl"></div>
+
+                            <div className="relative z-10 flex items-center justify-between">
+                              <div className="rounded-full bg-pink-500 px-4 py-1 text-xs font-bold text-white shadow">
+                                {dict.category_parents}
+                              </div>
+
+                              <div className="text-5xl transition-transform duration-300 group-hover:scale-110">
+                                {index % 2 === 0 ? "🧠" : "🚀"}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* CONTENT */}
+                          <div className="flex flex-1 flex-col p-6">
+                            <h3
+                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${
+                                lang === "th" ? "looped-text" : ""
+                              }`}
+                            >
+                              {item.title}
+                            </h3>
+
+                            <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-gray-600">
+                              {item.meta}
+                            </p>
+
+                            <div className="mt-6 flex items-center justify-between">
+                              <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-700">
+                                {dict.category_parents}
+                              </span>
+
+                              <span className="text-sm font-bold text-[#042451] transition-transform duration-300 group-hover:translate-x-1">
+                                {dict.Tab_Parent_4} →
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                </div>
+
+                {/* EMPTY */}
+                {techArticles.length === 0 && (
+                  <div className="rounded-3xl bg-white p-14 text-center shadow-lg">
+                    <div className="text-6xl">📚</div>
+
+                    <h3 className="mt-5 text-2xl font-bold text-[#042451]">
+                      ยังไม่มีบทความ
+                    </h3>
+
+                    <p className="mt-3 text-gray-500">
+                      ระบบกำลังอัปเดตบทความใหม่เร็ว ๆ นี้
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 

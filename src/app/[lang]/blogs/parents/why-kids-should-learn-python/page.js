@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${dict?.Blog_python || "ทำไมเด็กๆ ควรเรียน Python?"} | CO-DE academy`,
     description:
-      "เจาะลึกเหตุผลสำคัญที่ทำไมภาษา Python ถึงเป็นภาษาเขียนโค้ดรูปแบบตัวอักษร (Text-Based) ที่ดีที่สุดและเหมาะสมที่สุดสำหรับเด็กอายุ 9 ปีขึ้นไป ... ",
+      "เจาะลึกเหตุผลสำคัญที่ทำไมภาษา Python ถึงเป็นภาษาเขียนโค้ดรูปแบบตัวอักษร (Text-Based) ที่ดีที่สุดและเหมาะสมที่สุดสำหรับเด็กอายุ 9 ปีขึ้นไป",
     keywords: [
       "Python เด็ก",
       "เรียน python",

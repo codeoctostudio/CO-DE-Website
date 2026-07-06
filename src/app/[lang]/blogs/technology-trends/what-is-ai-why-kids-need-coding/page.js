@@ -1,4 +1,4 @@
-import Scratch from "@/component/Trends/Scratch";
+import WhatIsAI from "@/component/Trends/WhatIsAI";
 import { getDictionary } from "@/lib/dictionary";
 
 export async function generateMetadata({ params }) {
@@ -6,9 +6,10 @@ export async function generateMetadata({ params }) {
   const dict = await getDictionary(lang);
 
   return {
-    title: `${dict?.Blog_scratch || "เริ่มเรียน Scratch ยังไงให้สนุก"} | CO-DE academy`,
+    title: `${dict?.Blogs_Tech_2 || "AI คืออะไร และทำไมเด็กไทยต้องรู้ในศตวรรษที่ 21"} | CO-DE academy`,
     description:
-      "คู่มือเริ่มต้นสำหรับเด็ก ๆ และผู้ปกครอง เรียนรู้วิธีการสร้างเกมและแอนิเมชันด้วยตัวเองผ่านโปรแกรม Scratch บล็อกโค้ดที่เข้าใจง่ายที่สุด",
+      dict?.Des_What_is_AI_Page ||
+      "AI คืออะไร? ทำไมเด็กต้องเรียน Coding? หาคำตอบว่าทำไมโค้ดดิ้งคือพื้นฐานสำคัญแห่งอนาคต พร้อมส่องโปรเจกต์ AI ระดับโลกของนักเรียนที่ CO-DE Academy",
     keywords: [
       "Scratch เด็ก",
       "เรียน coding เด็ก",
@@ -24,7 +25,7 @@ export default function ScratchPage({ params }) {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: dict?.Blogs_Scratch || "เริ่มเรียน Scratch ยังไงให้สนุก",
+    headline: dict?.Blogs_Tech_1 || "AI คืออะไร และทำไมเด็กไทยต้องรู้ในศตวรรษที่ 21",
     // image: [
     //   "https://www.co-deacademy.com/images/blog-python.jpg", // รูปหน้าปกบทความ
     // ],
@@ -37,7 +38,7 @@ export default function ScratchPage({ params }) {
   };
   return (
     <>
-      <Scratch />
+      <WhatIsAI />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
