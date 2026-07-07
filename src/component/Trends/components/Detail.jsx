@@ -68,14 +68,6 @@ const TrendsContent = () => {
   // บทความ
   const articles = [
     {
-      title: dict.Blogs_Tech_1,
-      content: dict.Blogs_Tech_2 + dict.Blogs_Tech_3,
-      meta: dict.Blogs_Tech_5,
-      category: "tech",
-      slug: "/blogs/technology-trends/what-is-ai-why-kids-need-coding",
-      featured: true,
-    },
-    {
       title: (
         <>
           {dict.Blogs_Parent_2}
@@ -88,6 +80,14 @@ const TrendsContent = () => {
       meta: dict.blogs_8,
       category: "parents",
       slug: "/blogs/parents/how-to-choose-coding-school-for-kids",
+      featured: true,
+    },
+    {
+      title: dict.Blogs_Tech_2,
+      content: dict.Blogs_Tech_2 + dict.Blogs_Tech_3,
+      meta: dict.Blogs_Tech_5,
+      category: "tech",
+      slug: "/blogs/technology-trends/what-is-ai-why-kids-need-coding",
       featured: true,
     },
     {
@@ -229,10 +229,9 @@ const TrendsContent = () => {
               key={tab.key}
               onClick={() => handleTabChange(tab.key)}
               className={`rounded-lg border px-4 py-2 text-sm font-bold transition sm:px-5 sm:text-base
-                ${
-                  activeTab === tab.key
-                    ? "border-[#0B2545] bg-[#F7C94B] text-[#0B2545] shadow-md"
-                    : "border-[#1E3A8A] bg-white/10 text-white hover:bg-white/20"
+                ${activeTab === tab.key
+                  ? "border-[#0B2545] bg-[#F7C94B] text-[#0B2545] shadow-md"
+                  : "border-[#1E3A8A] bg-white/10 text-white hover:bg-white/20"
                 }`}
             >
               {tab.label}
@@ -447,10 +446,9 @@ const TrendsContent = () => {
                         setCurrentPage(i + 1);
                       }}
                       className={`rounded-lg px-3 py-1 font-bold transition
-                        ${
-                          currentPage === i + 1
-                            ? "bg-[#F7C94B] text-[#0B2545]"
-                            : "border bg-white hover:bg-gray-100"
+                        ${currentPage === i + 1
+                          ? "bg-[#F7C94B] text-[#0B2545]"
+                          : "border bg-white hover:bg-gray-100"
                         }`}
                     >
                       {i + 1}
@@ -528,10 +526,9 @@ const TrendsContent = () => {
                       key={i}
                       onClick={() => setStudentPage(i + 1)}
                       className={`rounded-lg px-3 py-1 font-bold transition
-                        ${
-                          studentPage === i + 1
-                            ? "bg-[#F7C94B] text-[#0B2545]"
-                            : "border bg-white hover:bg-gray-100"
+                        ${studentPage === i + 1
+                          ? "bg-[#F7C94B] text-[#0B2545]"
+                          : "border bg-white hover:bg-gray-100"
                         }`}
                     >
                       {i + 1}
@@ -564,9 +561,8 @@ const TrendsContent = () => {
                   </div>
 
                   <h2
-                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${
-                      lang === "th" ? "looped-text" : ""
-                    }`}
+                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${lang === "th" ? "looped-text" : ""
+                      }`}
                   >
                     {dict.Tab_Parent_1}
                   </h2>
@@ -593,9 +589,8 @@ const TrendsContent = () => {
                             </div>
 
                             <h3
-                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>
@@ -645,9 +640,8 @@ const TrendsContent = () => {
                           {/* CONTENT */}
                           <div className="flex flex-1 flex-col p-6">
                             <h3
-                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>
@@ -700,9 +694,8 @@ const TrendsContent = () => {
                   </div>
 
                   <h2
-                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${
-                      lang === "th" ? "looped-text" : ""
-                    }`}
+                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${lang === "th" ? "looped-text" : ""
+                      }`}
                   >
                     {dict.Tab_Tutorials_1}
                   </h2>
@@ -729,9 +722,8 @@ const TrendsContent = () => {
                             </div>
 
                             <h3
-                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>
@@ -781,9 +773,8 @@ const TrendsContent = () => {
                           {/* CONTENT */}
                           <div className="flex flex-1 flex-col p-6">
                             <h3
-                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>
@@ -836,9 +827,8 @@ const TrendsContent = () => {
                   </div>
 
                   <h2
-                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${
-                      lang === "th" ? "looped-text" : ""
-                    }`}
+                    className={`mt-5 text-3xl font-extrabold text-[#042451] md:text-5xl ${lang === "th" ? "looped-text" : ""
+                      }`}
                   >
                     {dict.Tab_Tutorials_2}
                   </h2>
@@ -865,9 +855,8 @@ const TrendsContent = () => {
                             </div>
 
                             <h3
-                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`mt-5 text-2xl font-bold leading-snug md:text-4xl ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>
@@ -917,9 +906,8 @@ const TrendsContent = () => {
                           {/* CONTENT */}
                           <div className="flex flex-1 flex-col p-6">
                             <h3
-                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${
-                                lang === "th" ? "looped-text" : ""
-                              }`}
+                              className={`line-clamp-2 text-xl font-bold leading-snug text-[#042451] transition-colors group-hover:text-pink-600 ${lang === "th" ? "looped-text" : ""
+                                }`}
                             >
                               {item.title}
                             </h3>

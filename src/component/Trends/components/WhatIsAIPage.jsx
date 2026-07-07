@@ -221,7 +221,7 @@ const WhatIsAIPage = () => {
                     {dict.Blogs_Tech_25}
                   </p>
                   <div className="space-y-2">
-                    <p>
+                    <p className="p-4 rounded-2xl bg-pink-50/50 border border-pink-100">
                       📌{" "}
                       <span className="font-bold text-[#042451]">
                         {dict.Blogs_Tech_26}
@@ -229,7 +229,7 @@ const WhatIsAIPage = () => {
                       {dict.Blogs_Tech_27} <b>{dict.Blogs_Tech_28}</b>{" "}
                       {dict.Blogs_Tech_29}
                     </p>
-                    <p>
+                    <p className="p-4 rounded-2xl bg-green-50/50 border border-green-100">
                       📌{" "}
                       <span className="font-bold text-[#042451]">
                         {dict.Blogs_Tech_30}
@@ -237,7 +237,7 @@ const WhatIsAIPage = () => {
                       {dict.Blogs_Tech_31}{" "}<b>{dict.Blogs_Tech_32}</b>{" "}
                       {dict.Blogs_Tech_33}
                     </p>
-                    <p>
+                    <p className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100">
                       📌{" "}
                       <span className="font-bold text-[#042451]">
                         {dict.Blogs_Tech_34}
