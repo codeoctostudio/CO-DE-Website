@@ -818,7 +818,7 @@ const TrendsContent = () => {
 
           {/* TAB 4 */}
           {activeTab === "tech" && (
-            <div className="bg-linear-to-b from-[#eeffec] via-[#f8fffa] to-white px-4 md:px-12 lg:px-20">
+            <div className="bg-linear-to-b from-[#ecf7ff] via-[#f8fcff] to-white px-4 md:px-12 lg:px-20">
               <div className="mx-auto mb-5 max-w-6xl">
                 {/* HEADER */}
                 <div className="mb-10 text-center">
