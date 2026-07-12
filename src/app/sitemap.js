@@ -14,7 +14,7 @@ export default async function sitemap() {
     "/contactUs",           // หน้าติดต่อเรา
     "/playground",
     "/aboutCoding",
-    "/blogs/parents/how-to-choose-coding-course-for-kids",
+    "/blogs/parents/how-to-choose-coding-school-for-kids",
     "/blogs/parents/why-kids-should-learn-python",
     "/blogs/technology-trends/what-is-ai-why-kids-need-coding",
     "/blogs/tutorials/why-kids-should-learn-scratch",
