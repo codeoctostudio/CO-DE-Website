@@ -1,16 +1,52 @@
 # CO-DE | สอน Coding สำหรับเด็ก
 
-> โรงเรียนสอนเขียนโปรแกรมและพัฒนาทักษะคอมพิวเตอร์สำหรับเด็ก (CO-DE Academy)
+> (CO-DE Academy) | โรงเรียนสอน coding สำหรับเด็กในกรุงเทพ เรียนแบบ Project-based สอนโดยครูจบด้าน Computer Science ตั้งแต่ 4 ปีถึงเตรียมเข้ามหาวิทยาลัย ทั้ง Online และ Onsite
 
-## ลิงก์ข้อมูลสำคัญ
+## Base URLs
+- TH: https://www.co-deacademy.com/th
+- EN: https://www.co-deacademy.com/en
 
-- [หน้าแรก](https://www.co-deacademy.com/th)
-- [เกี่ยวกับเรา](https://www.co-deacademy.com/th/aboutUs)
-- [หลักสูตรทั้งหมด](https://www.co-deacademy.com/th/courses)
-- [บทความ](https://www.co-deacademy.com/th/blogs)
-- [ติดต่อเรา](https://www.co-deacademy.com/th/contactUs)
-- [Home Page](https://www.co-deacademy.com/en)
-- [About Us](https://www.co-deacademy.com/en/aboutUs)
-- [All Course](https://www.co-deacademy.com/en/courses)
-- [Blogs](https://www.co-deacademy.com/en/blogs)
-- [ContactUs](https://www.co-deacademy.com/en/contactUs)
+## Core Pages
+- [/aboutUs](/aboutUs) - เกี่ยวกับเรา (About Us)
+- [/aboutCoding](/aboutCoding) - ทำความรู้จักกับการเรียน Coding (About Coding)
+- [/contactUs](/contactUs) - ติดต่อเรา (Contact Us)
+- [/playground](/playground) - หน้าสำหรับทดลองเล่น/ฝึกเขียนโค้ด (Playground)
+- [/kidsproject](/kidsproject) - ผลงานของเด็กๆ (Kids Projects)
+- [/pitchingStage](/pitchingStage) - เวทีนำเสนอผลงาน (Pitching Stage)
+
+## Academic & Onboarding
+- [/trialclass](/trialclass) - ลงทะเบียนทดลองเรียนฟรี (Free Trial Class)
+- [/registration](/registration) - หน้าสมัครเรียน (Registration Form)
+- [/customCourse](/customCourse) - ออกแบบคอร์สเรียนเฉพาะบุคคล (Custom Course Design)
+- [/thankyoupage](/thankyoupage) - หน้าขอบคุณหลังจากลงทะเบียน (Thank You Page)
+- [/unitytest](/unitytest) - หน้าทดสอบระบบ Unity / ระบบเรียน (Unity Test Page)
+
+## Courses (/courses)
+- [/courses](/courses) - รายชื่อคอร์สเรียนทั้งหมด (All Courses Overview)
+- [/courses/noncoding](/courses/noncoding) - คอร์สเรียนแบบไม่ใช้คอมพิวเตอร์ / พัฒนากระบวนการคิด
+  - [/courses/noncoding/designthinking](/courses/noncoding/designthinking) - Design Thinking สำหรับเด็ก
+- [/courses/blockcode](/courses/blockcode) - คอร์สเรียนเขียนโปรแกรมแบบบล็อก (Block-based Coding)
+  - [/courses/blockcode/dino](/courses/blockcode/dino) - คอร์ส Dino Block Coding
+  - [/courses/blockcode/scratch](/courses/blockcode/scratch) - คอร์ส Scratch
+- [/courses/creative](/courses/creative) - คอร์สเรียนเชิงสร้างสรรค์และเทคโนโลยี (Creative Technology)
+  - [/courses/creative/mobile](/courses/creative/mobile) - คอร์สพัฒนา Mobile App
+  - [/courses/creative/roblox](/courses/creative/roblox) - คอร์สพัฒนาเกมบน Roblox
+  - [/courses/creative/fullstackweb](/courses/creative/fullstackweb) - คอร์ส Full-stack Web Development
+- [/courses/fundamental](/courses/fundamental) - คอร์สปูพื้นฐานการเขียนโค้ดภาษาจริง (Text-based Programming)
+  - [/courses/fundamental/python](/courses/fundamental/python) - คอร์ส Python พื้นฐาน
+  - [/courses/fundamental/advpython](/courses/fundamental/advpython) - คอร์ส Python ระดับสูง
+  - [/courses/fundamental/java](/courses/fundamental/java) - คอร์ส Java
+- [/courses/mechanical](/courses/mechanical) - คอร์สเรียนด้านหุ่นยนต์และฮาร์ดแวร์ (Robotics & Hardware)
+  - [/courses/mechanical/microbit](/courses/mechanical/microbit) - คอร์ส Micro:bit
+  - [/courses/mechanical/3dmodeling](/courses/mechanical/3dmodeling) - คอร์สออกแบบ 3D Modeling
+- [/courses/university](/courses/university) - คอร์สเตรียมความพร้อมสำหรับระดับมหาวิทยาลัย (University Prep)
+
+## Blogs & Resources (/blogs)
+- [/blogs](/blogs) - บทความ ข่าวสาร และคลังความรู้สำหรับผู้ปกครอง (Trends, Blogs, and Resources)
+- **Parents Guide**
+  - [/blogs/parents/how-to-choose-coding-course-for-kids](/blogs/parents/how-to-choose-coding-course-for-kids) - วิธีเลือกคอร์สเรียน Coding ให้เหมาะกับลูกน้อย
+  - [/blogs/parents/why-kids-should-learn-python](/blogs/parents/why-kids-should-learn-python) - ทำไมเด็กๆ ยุคนี้ถึงควรเริ่มเรียนภาษา Python
+- **Technology Trends**
+  - [/blogs/technology-trends/what-is-ai-why-kids-need-coding](/blogs/technology-trends/what-is-ai-why-kids-need-coding) - AI คืออะไร? และทำไมการเรียน Coding ถึงจำเป็นในยุค AI
+- **Tutorials**
+  - [/blogs/tutorials/why-kids-should-learn-scratch](/blogs/tutorials/why-kids-should-learn-scratch) - ทำไม Scratch ถึงเป็นจุดเริ่มต้นที่ดีที่สุดในการเรียนโค้ดดิ้ง
