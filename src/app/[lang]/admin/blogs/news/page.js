@@ -1,0 +1,1525 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function NewBlogPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("https://admin.co-deacademy.com/api/me.php", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          window.location.href = "https://admin.co-deacademy.com/manage/login";
+          return;
+        }
+
+        setAuthChecking(false);
+      } catch (err) {
+        window.location.href = "https://admin.co-deacademy.com/manage/login";
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  const [formData, setFormData] = useState({
+    slug: "",
+    categoryType: "tech",
+    mediaType: "image",
+    imageUrl: "",
+    videoUrl: "",
+    ctaLink: "/contactUs",
+    th: {
+      introTitle: "",
+      introDesc1: "",
+      introDesc2: "",
+      introChecklistTitle: "",
+      introChecklist: "",
+      introTags: "",
+      ctaTitle: "",
+      ctaText3: "",
+      ctaButtonText: "",
+      ctaFooterText: "",
+    },
+    en: {
+      introTitle: "",
+      introDesc1: "",
+      introDesc2: "",
+      introChecklistTitle: "",
+      introChecklist: "",
+      introTags: "",
+      ctaTitle: "",
+      ctaText3: "",
+      ctaButtonText: "",
+      ctaFooterText: "",
+    },
+  });
+
+  const [steps, setSteps] = useState([
+    {
+      type: "sub-points",
+      isFullWidth: false,
+      th: { title: "", content: "", subPointsTitle: "" },
+      en: { title: "", content: "", subPointsTitle: "" },
+      subPoints: [
+        {
+          borderColor: "border-blue-400",
+          th: { label: "", text: "" },
+          en: { label: "", text: "" },
+        },
+      ],
+      boxes: [
+        {
+          bgClass: "bg-blue-50/50 border-blue-100",
+          th: { title: "", text: "", bold: "", suffix: "" },
+          en: { title: "", text: "", bold: "", suffix: "" },
+        },
+      ],
+      columns: [
+        {
+          bgClass: "bg-gray-50/50 border-gray-100",
+          th: { title: "", desc: "" },
+          en: { title: "", desc: "" },
+        },
+      ],
+      th_mediaTitle1: "",
+      th_mediaTitle2: "",
+      th_textKey2: "",
+      en_mediaTitle1: "",
+      en_mediaTitle2: "",
+      en_textKey2: "",
+    },
+  ]);
+
+  const [faqs, setFaqs] = useState([
+    {
+      th: { q: "", a: "" },
+      en: { q: "", a: "" },
+    },
+  ]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLangChange = (lang, field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [lang]: { ...prev[lang], [field]: value },
+    }));
+  };
+
+  const handleStepChange = (index, field, value) => {
+    const updatedSteps = [...steps];
+    updatedSteps[index][field] = value;
+    setSteps(updatedSteps);
+  };
+
+  const handleStepLangChange = (index, lang, field, value) => {
+    const updatedSteps = [...steps];
+    updatedSteps[index][lang][field] = value;
+    setSteps(updatedSteps);
+  };
+
+  const addStep = () => {
+    setSteps([
+      ...steps,
+      {
+        type: "sub-points",
+        isFullWidth: false,
+        th: { title: "", content: "", subPointsTitle: "" },
+        en: { title: "", content: "", subPointsTitle: "" },
+        subPoints: [
+          {
+            borderColor: "border-blue-400",
+            th: { label: "", text: "" },
+            en: { label: "", text: "" },
+          },
+        ],
+        boxes: [
+          {
+            bgClass: "bg-blue-50/50 border-blue-100",
+            th: { title: "", text: "", bold: "", suffix: "" },
+            en: { title: "", text: "", bold: "", suffix: "" },
+          },
+        ],
+        columns: [
+          {
+            bgClass: "bg-gray-50/50 border-gray-100",
+            th: { title: "", desc: "" },
+            en: { title: "", desc: "" },
+          },
+        ],
+        th_mediaTitle1: "",
+        th_mediaTitle2: "",
+        th_textKey2: "",
+        en_mediaTitle1: "",
+        en_mediaTitle2: "",
+        en_textKey2: "",
+      },
+    ]);
+  };
+
+  const removeStep = (index) => {
+    setSteps(steps.filter((_, i) => i !== index));
+  };
+
+  const handleSubItemLangChange = (
+    stepIndex,
+    type,
+    itemIndex,
+    lang,
+    field,
+    value,
+  ) => {
+    const updatedSteps = [...steps];
+    updatedSteps[stepIndex][type][itemIndex][lang][field] = value;
+    setSteps(updatedSteps);
+  };
+
+  const handleSubItemClassChange = (
+    stepIndex,
+    type,
+    itemIndex,
+    field,
+    value,
+  ) => {
+    const updatedSteps = [...steps];
+    updatedSteps[stepIndex][type][itemIndex][field] = value;
+    setSteps(updatedSteps);
+  };
+
+  const addSubItem = (stepIndex, type, template) => {
+    const updatedSteps = [...steps];
+    if (!updatedSteps[stepIndex][type]) updatedSteps[stepIndex][type] = [];
+    updatedSteps[stepIndex][type].push(template);
+    setSteps(updatedSteps);
+  };
+
+  const removeSubItem = (stepIndex, type, itemIndex) => {
+    const updatedSteps = [...steps];
+    updatedSteps[stepIndex][type] = updatedSteps[stepIndex][type].filter(
+      (_, i) => i !== itemIndex,
+    );
+    setSteps(updatedSteps);
+  };
+
+  const handleFaqLangChange = (index, lang, field, value) => {
+    const updatedFaqs = [...faqs];
+    updatedFaqs[index][lang][field] = value;
+    setFaqs(updatedFaqs);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    const cleanedSteps = steps.map((step) => {
+      const baseStep = { type: step.type, isFullWidth: step.isFullWidth };
+
+      if (step.type === "sub-points") {
+        return {
+          ...baseStep,
+          th: step.th,
+          en: step.en,
+          subPoints: step.subPoints,
+        };
+      }
+      if (step.type === "highlight-boxes") {
+        return {
+          ...baseStep,
+          th: { title: step.th.title, content: step.th.content },
+          en: { title: step.en.title, content: step.en.content },
+          boxes: step.boxes,
+        };
+      }
+      if (step.type === "media-layout") {
+        return {
+          ...baseStep,
+          th: {
+            mediaTitle1: step.th_mediaTitle1,
+            mediaTitle2: step.th_mediaTitle2,
+            text2: step.th_textKey2,
+          },
+          en: {
+            mediaTitle1: step.en_mediaTitle1,
+            mediaTitle2: step.en_mediaTitle2,
+            text2: step.en_textKey2,
+          },
+        };
+      }
+      if (step.type === "columns-3") {
+        return {
+          ...baseStep,
+          th: { title: step.th.title, desc: step.th.content },
+          en: { title: step.en.title, desc: step.en.content },
+          columns: step.columns,
+        };
+      }
+      return baseStep;
+    });
+
+    const payload = {
+      slug: formData.slug,
+      categoryType: formData.categoryType,
+      mediaType: formData.mediaType,
+      imageUrl: formData.mediaType === "image" ? formData.imageUrl : "",
+      videoUrl: formData.mediaType === "video" ? formData.videoUrl : "",
+      ctaLink: formData.ctaLink,
+      th: {
+        ...formData.th,
+        introTags: formData.th.introTags
+          ? formData.th.introTags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : [],
+        introChecklist: formData.th.introChecklist
+          ? formData.th.introChecklist
+              .split("\n")
+              .map((i) => i.trim())
+              .filter(Boolean)
+          : [],
+      },
+      en: {
+        ...formData.en,
+        introTags: formData.en.introTags
+          ? formData.en.introTags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : [],
+        introChecklist: formData.en.introChecklist
+          ? formData.en.introChecklist
+              .split("\n")
+              .map((i) => i.trim())
+              .filter(Boolean)
+          : [],
+      },
+      steps: cleanedSteps,
+      faqs: faqs.filter((f) => f.th.q || f.en.q),
+    };
+
+    try {
+      const res = await fetch("/api/blogs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok)
+        throw new Error(data.error || "มีบางอย่างผิดพลาดในการบันทึกข้อมูล");
+
+      setSuccess("สร้างบทความสำเร็จ! ระบบกำลังนำทาง...");
+      setTimeout(() => {
+        router.push(`/th/blogs/${formData.categoryType}/${data.slug}`);
+      }, 2000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  if (authChecking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-700 font-semibold text-sm">
+        🔒 กำลังตรวจสอบสิทธิ์การใช้งาน...
+      </div>
+    );
+  }
+  return (
+    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl rounded-3xl bg-white p-6 shadow-md sm:p-10">
+        <h1 className="text-2xl font-bold text-[#042451] mb-6 border-b pb-4">
+          ✍️ สร้างบทความแบบระบุข้อความ 2 ภาษาตรง
+        </h1>
+
+        {error && (
+          <div className="mb-4 rounded-xl bg-red-50 p-4 text-sm text-red-600 border border-red-100">
+            ❌ {error}
+          </div>
+        )}
+        {success && (
+          <div className="mb-4 rounded-xl bg-green-50 p-4 text-sm text-green-600 border border-green-100">
+            🎉 {success}
+          </div>
+        )}
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-8 text-sm text-gray-700"
+        >
+          {/* SECTION 1: ข้อมูล Metadata ทั่วไป */}
+          <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
+            <h2 className="text-base font-bold text-[#042451]">
+              📦 ข้อมูลโครงสร้างหลัก
+            </h2>
+            <div>
+              <label className="block font-semibold mb-1 text-[#042451]">
+                URL Slug *
+              </label>
+              <input
+                type="text"
+                name="slug"
+                required
+                placeholder="เช่น scratch-vs-python"
+                value={formData.slug}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 p-3 outline-hidden focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-[#042451]">
+                หมวดหมู่ (เพื่อปรับโทนสี UI) *
+              </label>
+              <select
+                name="categoryType"
+                value={formData.categoryType}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 p-3 outline-hidden"
+              >
+                <option value="technology-trends">
+                  Technology Trends (🤖 สีฟ้า)
+                </option>
+                <option value="tutorials">Tutorials (🧩 สีเขียว)</option>
+                <option value="parents">Parents (👨‍👩‍👧 สีชมพู)</option>
+                <option value="guide">Guide (🎓 สีส้ม)</option>
+                <option value="reward">Reward (🎁 สีทอง)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* SECTION 2: สื่อหลักประกอบฉาก */}
+          <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
+            <h2 className="text-base font-bold text-[#042451]">
+              📺 สื่อหลักหน้ารายละเอียด
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label className="block font-semibold mb-1 text-[#042451]">
+                  ชนิดของสื่อ
+                </label>
+                <select
+                  name="mediaType"
+                  value={formData.mediaType}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-gray-300 p-3 outline-hidden"
+                >
+                  <option value="image">
+                    รูปภาพภาพหน้าปก (Web URL / Google / FB / IG)
+                  </option>
+                  <option value="video">
+                    วิดีโอ (YouTube / Facebook / TikTok / IG)
+                  </option>
+                </select>
+              </div>
+
+              {formData.mediaType === "image" ? (
+                <div>
+                  <label className="block font-semibold mb-1 text-[#042451]">
+                    Image URL
+                  </label>
+                  <input
+                    type="url"
+                    name="imageUrl"
+                    placeholder="https://... หรือ /images/blogs/banner.webp"
+                    value={formData.imageUrl}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border border-gray-300 p-3 outline-hidden text-sm"
+                  />
+                  <p className="text-[11px] text-gray-500 mt-1">
+                    * รองรับ URL รูปภาพจาก Google, Facebook, IG หรือ Path
+                    รูปภาพในระบบ
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <label className="block font-semibold mb-1 text-[#042451]">
+                    Video Link / URL
+                  </label>
+                  <input
+                    type="url"
+                    name="videoUrl"
+                    placeholder="วางลิงก์วิดีโอจาก YouTube, TikTok, FB หรือ IG"
+                    value={formData.videoUrl}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border border-gray-300 p-3 outline-hidden text-sm"
+                  />
+                  <p className="text-[11px] text-gray-500 mt-1">
+                    * วาง ลิงก์เต็ม (Full URL) ของวิดีโอ เช่น
+                    https://www.youtube.com/watch?v=... หรือ
+                    https://www.tiktok.com/@user/video/...
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* SECTION 3: Intro Tags & Checklist (จัดกลุ่ม TH/EN) */}
+          <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-6">
+            <h2 className="text-base font-bold text-[#042451]">
+              📝 ส่วนแนะนำตัวบนสุด (Intro Content)
+            </h2>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* ภาษาไทย */}
+              <div className="p-4 bg-blue-50/30 rounded-xl border border-blue-100 space-y-3">
+                <h3 className="font-bold text-blue-900 border-b pb-1">
+                  🇹🇭 ข้อมูลภาษาไทย
+                </h3>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    หัวข้อบทความ (Intro Title)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="เช่น แนะนำการเขียนโค้ดสำหรับเด็ก"
+                    value={formData.th.introTitle}
+                    onChange={(e) => {
+                      handleLangChange("th", "introTitle", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    คำอธิบายย่อส่วนที่ 1 (Intro Desc 1)
+                  </label>
+                  <textarea
+                    rows="2"
+                    placeholder="เนื้อความเกริ่นนำวรรคแรก..."
+                    value={formData.th.introDesc1}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+
+                      handleLangChange("th", "introDesc1", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    คำอธิบายย่อส่วนที่ 2 (Intro Desc 2)
+                  </label>
+                  <textarea
+                    rows="2"
+                    placeholder="เนื้อความเกริ่นนำวรรคสอง..."
+                    value={formData.th.introDesc2}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("th", "introDesc2", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Tags ภาษาไทย (คั่นด้วยจุลภาค `,` )
+                  </label>
+                  <textarea
+                    type="text"
+                    placeholder="เช่น โรนัลโด้, เมสซี่"
+                    value={formData.th.introTags}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("th", "introTags", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    หัวข้อรายการเช็คลิสต์ (Checklist Title)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="เช่น สิ่งที่ต้องเตรียม"
+                    value={formData.th.introChecklistTitle}
+                    onChange={(e) =>
+                      handleLangChange(
+                        "th",
+                        "introChecklistTitle",
+                        e.target.value,
+                      )
+                    }
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    รายการเช็คลิสต์ (1 บรรทัด = 1 ข้อ)
+                  </label>
+                  <textarea
+                    rows="3"
+                    placeholder="ข้อที่หนึ่ง&#10;ข้อที่สอง"
+                    value={formData.th.introChecklist}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("th", "introChecklist", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+              </div>
+
+              {/* ภาษาอังกฤษ */}
+              <div className="p-4 bg-red-50/30 rounded-xl border border-red-100 space-y-3">
+                <h3 className="font-bold text-red-900 border-b pb-1">
+                  🇺🇸 English Content
+                </h3>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Intro Title
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Coding for Kids"
+                    value={formData.en.introTitle}
+                    onChange={(e) =>
+                      handleLangChange("en", "introTitle", e.target.value)
+                    }
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Intro Desc 1
+                  </label>
+                  <textarea
+                    rows="2"
+                    placeholder="First introductory paragraph..."
+                    value={formData.en.introDesc1}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("en", "introDesc1", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Intro Desc 2
+                  </label>
+                  <textarea
+                    rows="2"
+                    placeholder="Second introductory paragraph..."
+                    value={formData.en.introDesc2}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("en", "introDesc2", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Tags (Comma-separated `,` )
+                  </label>
+                  <textarea
+                    type="text"
+                    placeholder="e.g. Ronaldo, Messi"
+                    value={formData.en.introTags}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("en", "introTags", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Checklist Title
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Requirements"
+                    value={formData.en.introChecklistTitle}
+                    onChange={(e) =>
+                      handleLangChange(
+                        "en",
+                        "introChecklistTitle",
+                        e.target.value,
+                      )
+                    }
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-xs mb-1">
+                    Checklist Items (1 line per item)
+                  </label>
+                  <textarea
+                    rows="3"
+                    placeholder="Item 1&#10;Item 2"
+                    value={formData.en.introChecklist}
+                    onChange={(e) => {
+                      e.target.style.height = "auto";
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                      handleLangChange("en", "introChecklist", e.target.value);
+                    }}
+                    className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 4: DYNAMIC STEPS ENGINE */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between border-b pb-2">
+              <h2 className="text-lg font-bold text-[#042451]">
+                🧩 ส่วนบล็อกเนื้อหาหลัก (Dynamic Steps)
+              </h2>
+              <button
+                type="button"
+                onClick={addStep}
+                className="rounded-xl bg-blue-50 px-4 py-2 text-xs font-bold text-blue-600 hover:bg-blue-100 transition-all"
+              >
+                + เพิ่มบล็อกเนื้อหา
+              </button>
+            </div>
+
+            {steps.map((step, sIdx) => (
+              <div
+                key={sIdx}
+                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-xs space-y-4"
+              >
+                <div className="flex items-center justify-between bg-gray-50 p-2.5 rounded-xl">
+                  <span className="font-bold text-gray-700">
+                    บล็อกเนื้อหาที่ #{sIdx + 1}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <label className="inline-flex items-center gap-1.5 text-xs text-gray-600">
+                      <input
+                        type="checkbox"
+                        checked={step.isFullWidth}
+                        onChange={(e) =>
+                          handleStepChange(
+                            sIdx,
+                            "isFullWidth",
+                            e.target.checked,
+                          )
+                        }
+                        className="rounded border-gray-300 text-blue-600"
+                      />
+                      ขยายเต็มหน้าจอ
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => removeStep(sIdx)}
+                      className="text-xs text-red-500 hover:underline"
+                    >
+                      ลบบล็อกนี้
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-xs mb-1 text-gray-600">
+                    ประเภทดีไซน์บล็อก
+                  </label>
+                  <select
+                    value={step.type}
+                    onChange={(e) =>
+                      handleStepChange(sIdx, "type", e.target.value)
+                    }
+                    className="w-full rounded-xl border border-gray-300 p-2 text-xs outline-hidden bg-white"
+                  >
+                    <option value="sub-points">
+                      แบบมีหัวข้อย่อยซ้าย-ขวา (sub-points)
+                    </option>
+                    <option value="highlight-boxes">
+                      แบบกล่องเน้นความสำคัญ (highlight-boxes)
+                    </option>
+                    <option value="media-layout">
+                      แบบแบนเนอร์/วิดีโอเข้าบล็อก (media-layout)
+                    </option>
+                    <option value="columns-3">
+                      แบบเปรียบเทียบ 3 คอลัมน์ (columns-3)
+                    </option>
+                  </select>
+                </div>
+
+                {/* FIELDS ปรับตามประเภทบล็อก (มีกล่องกรอกคู่ TH / EN) */}
+                {step.type !== "media-layout" ? (
+                  <div className="grid gap-4 md:grid-cols-2 border-t pt-3">
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold text-blue-700">
+                        🇹🇭 ข้อความภาษาไทย
+                      </span>
+                      <input
+                        type="text"
+                        value={step.th.title}
+                        onChange={(e) =>
+                          handleStepChange(sIdx, "th", {
+                            ...step.th,
+                            title: e.target.value,
+                          })
+                        }
+                        placeholder="หัวข้อบล็อก (TH)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                      <textarea
+                        rows="2"
+                        value={step.th.content}
+                        onChange={(e) => {
+                          e.target.style.height = "auto";
+                          e.target.style.height = `${e.target.scrollHeight}px`;
+                          handleStepChange(sIdx, "th", {
+                            ...step.th,
+                            content: e.target.value,
+                          });
+                        }}
+                        placeholder="คำอธิบายเนื้อหา (TH)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold text-red-700">
+                        🇺🇸 English Text
+                      </span>
+                      <input
+                        type="text"
+                        value={step.en.title}
+                        onChange={(e) =>
+                          handleStepChange(sIdx, "en", {
+                            ...step.en,
+                            title: e.target.value,
+                          })
+                        }
+                        placeholder="Block Title (EN)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                      <textarea
+                        rows="2"
+                        value={step.en.content}
+                        onChange={(e) => {
+                          e.target.style.height = "auto";
+                          e.target.style.height = `${e.target.scrollHeight}px`;
+                          handleStepChange(sIdx, "en", {
+                            ...step.en,
+                            content: e.target.value,
+                          });
+                        }}
+                        placeholder="Description Content (EN)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                {/* โครงสร้างย่อย: Sub Points */}
+                {step.type === "sub-points" && (
+                  <div className="bg-blue-50/30 p-4 rounded-xl border border-dashed border-blue-200 space-y-3">
+                    <div className="grid grid-cols-2 gap-2">
+                      <input
+                        type="text"
+                        value={step.th.subPointsTitle}
+                        onChange={(e) =>
+                          handleStepLangChange(
+                            sIdx,
+                            "th",
+                            "subPointsTitle",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="หัวข้อกลุ่มจุดย่อย (TH)"
+                        className="rounded border bg-white p-2 text-xs"
+                      />
+                      <input
+                        type="text"
+                        value={step.en.subPointsTitle}
+                        onChange={(e) =>
+                          handleStepLangChange(
+                            sIdx,
+                            "en",
+                            "subPointsTitle",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Sub Points Group Title (EN)"
+                        className="rounded border bg-white p-2 text-xs"
+                      />
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addSubItem(sIdx, "subPoints", {
+                            borderColor: "border-blue-400",
+                            th: { label: "", text: "" },
+                            en: { label: "", text: "" },
+                          })
+                        }
+                        className="text-xs text-blue-600 font-bold"
+                      >
+                        + เพิ่มจุดย่อย
+                      </button>
+                    </div>
+                    {step.subPoints?.map((pt, pIdx) => (
+                      <div
+                        key={pIdx}
+                        className="bg-white p-3 rounded-lg border space-y-2 relative"
+                      >
+                        <div className="grid grid-cols-2 gap-2 text-xs pr-6">
+                          <div>
+                            <input
+                              type="text"
+                              value={pt.th.label}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "subPoints",
+                                  pIdx,
+                                  "th",
+                                  "label",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="คำเน้นหนา (TH)"
+                              className="w-full border p-1 rounded mb-1"
+                            />
+                            <textarea
+                              type="text"
+                              value={pt.th.text}
+                              onChange={(e) => {
+                                e.target.style.height = "auto";
+                                e.target.style.height = `${e.target.scrollHeight}px`;
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "subPoints",
+                                  pIdx,
+                                  "th",
+                                  "text",
+                                  e.target.value,
+                                );
+                              }}
+                              placeholder="เนื้อความ (TH)"
+                              className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                            />
+                          </div>
+                          <div>
+                            <input
+                              type="text"
+                              value={pt.en.label}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "subPoints",
+                                  pIdx,
+                                  "en",
+                                  "label",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="Label Bold (EN)"
+                              className="w-full border p-1 rounded mb-1"
+                            />
+                            <textarea
+                              type="text"
+                              value={pt.en.text}
+                              onChange={(e) => {
+                                e.target.style.height = "auto";
+                                e.target.style.height = `${e.target.scrollHeight}px`;
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "subPoints",
+                                  pIdx,
+                                  "en",
+                                  "text",
+                                  e.target.value,
+                                );
+                              }}
+                              placeholder="Text (EN)"
+                              className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                            />
+                          </div>
+                        </div>
+                        <select
+                          value={pt.borderColor}
+                          onChange={(e) =>
+                            handleSubItemClassChange(
+                              sIdx,
+                              "subPoints",
+                              pIdx,
+                              "borderColor",
+                              e.target.value,
+                            )
+                          }
+                          className="w-full border p-1 rounded text-xs bg-white"
+                        >
+                          <option value="border-blue-400">ขอบสีฟ้า</option>
+                          <option value="border-green-400">ขอบสีเขียว</option>
+                        </select>
+                        <button
+                          type="button"
+                          onClick={() => removeSubItem(sIdx, "subPoints", pIdx)}
+                          className="absolute top-2 right-2 text-red-500"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* โครงสร้างย่อย: Highlight Boxes */}
+                {step.type === "highlight-boxes" && (
+                  <div className="bg-amber-50/30 p-4 rounded-xl border border-dashed border-amber-200 space-y-3">
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addSubItem(sIdx, "boxes", {
+                            bgClass: "bg-blue-50/50 border-blue-100",
+                            th: { title: "", text: "", bold: "", suffix: "" },
+                            en: { title: "", text: "", bold: "", suffix: "" },
+                          })
+                        }
+                        className="text-xs text-amber-600 font-bold"
+                      >
+                        + เพิ่มกล่องไฮไลท์
+                      </button>
+                    </div>
+                    {step.boxes?.map((box, bIdx) => (
+                      <div
+                        key={bIdx}
+                        className="bg-white p-3 rounded-lg border space-y-2 relative text-xs"
+                      >
+                        <div className="grid grid-cols-2 gap-4 pr-6">
+                          <div className="space-y-1">
+                            <span className="font-semibold text-blue-600">
+                              ไทย
+                            </span>
+                            <input
+                              type="text"
+                              value={box.th.title}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "th",
+                                  "title",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="หัวข้อกล่อง"
+                              className="w-full border p-1 rounded"
+                            />
+                            <input
+                              type="text"
+                              value={box.th.text}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "th",
+                                  "text",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="เนื้อความกล่อง"
+                              className="w-full border p-1 rounded"
+                            />
+                            <input
+                              type="text"
+                              value={box.th.bold}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "th",
+                                  "bold",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="คำหนาปิดท้าย"
+                              className="w-full border p-1 rounded"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <span className="font-semibold text-red-600">
+                              EN
+                            </span>
+                            <input
+                              type="text"
+                              value={box.en.title}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "en",
+                                  "title",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="Box Title"
+                              className="w-full border p-1 rounded"
+                            />
+                            <input
+                              type="text"
+                              value={box.en.text}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "en",
+                                  "text",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="Box Text"
+                              className="w-full border p-1 rounded"
+                            />
+                            <input
+                              type="text"
+                              value={box.en.bold}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "boxes",
+                                  bIdx,
+                                  "en",
+                                  "bold",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="Bold Suffix"
+                              className="w-full border p-1 rounded"
+                            />
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeSubItem(sIdx, "boxes", bIdx)}
+                          className="absolute top-2 right-2 text-red-500"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* โครงสร้างย่อย: Media Layout */}
+                {step.type === "media-layout" && (
+                  <div className="bg-purple-50/30 p-4 rounded-xl border border-dashed border-purple-200 grid gap-4 md:grid-cols-2 text-xs">
+                    <div className="space-y-2 bg-white p-3 rounded-lg border">
+                      <span className="font-bold text-blue-700">
+                        🇹🇭 ข้อความภาษาไทย บน Layout
+                      </span>
+                      <input
+                        type="text"
+                        value={step.th_mediaTitle1}
+                        onChange={(e) =>
+                          handleStepChange(
+                            sIdx,
+                            "th_mediaTitle1",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="หัวข้อบนสื่อ 1 (TH)"
+                        className="w-full border p-2 rounded"
+                      />
+                      <input
+                        type="text"
+                        value={step.th_mediaTitle2}
+                        onChange={(e) =>
+                          handleStepChange(
+                            sIdx,
+                            "th_mediaTitle2",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="หัวข้อบนสื่อ 2 (TH)"
+                        className="w-full border p-2 rounded"
+                      />
+                      <textarea
+                        type="text"
+                        value={step.th_textKey2}
+                        onChange={(e) =>
+                          handleStepChange(sIdx, "th_textKey2", e.target.value)
+                        }
+                        placeholder="คำอธิบายประกอบ (TH)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                    </div>
+                    <div className="space-y-2 bg-white p-3 rounded-lg border">
+                      <span className="font-bold text-red-700">
+                        🇺🇸 English Text on Layout
+                      </span>
+                      <input
+                        type="text"
+                        value={step.en_mediaTitle1}
+                        onChange={(e) =>
+                          handleStepChange(
+                            sIdx,
+                            "en_mediaTitle1",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Media Title 1 (EN)"
+                        className="w-full border p-2 rounded"
+                      />
+                      <input
+                        type="text"
+                        value={step.en_mediaTitle2}
+                        onChange={(e) =>
+                          handleStepChange(
+                            sIdx,
+                            "en_mediaTitle2",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Media Title 2 (EN)"
+                        className="w-full border p-2 rounded"
+                      />
+                      <textarea
+                        type="text"
+                        value={step.en_textKey2}
+                        onChange={(e) =>
+                          handleStepChange(sIdx, "en_textKey2", e.target.value)
+                        }
+                        placeholder="Description Layout (EN)"
+                        className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* โครงสร้างย่อย: Columns-3 */}
+                {step.type === "columns-3" && (
+                  <div className="bg-emerald-50/30 p-4 rounded-xl border border-dashed border-emerald-200 space-y-3">
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addSubItem(sIdx, "columns", {
+                            bgClass: "bg-gray-50/50 border-gray-100",
+                            th: { title: "", desc: "" },
+                            en: { title: "", desc: "" },
+                          })
+                        }
+                        className="text-xs text-emerald-600 font-bold"
+                      >
+                        + เพิ่มคอลัมน์
+                      </button>
+                    </div>
+                    {step.columns?.map((col, cIdx) => (
+                      <div
+                        key={cIdx}
+                        className="bg-white p-3 rounded-lg border relative text-xs space-y-2"
+                      >
+                        <div className="grid grid-cols-2 gap-4 pr-6">
+                          <div>
+                            <input
+                              type="text"
+                              value={col.th.title}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "columns",
+                                  cIdx,
+                                  "th",
+                                  "title",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="หัวข้อคอลัมน์ (TH)"
+                              className="w-full border p-1 rounded mb-1"
+                            />
+                            <textarea
+                              type="text"
+                              value={col.th.desc}
+                              onChange={(e) => {
+                                e.target.style.height = "auto";
+                                e.target.style.height = `${e.target.scrollHeight}px`;
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "columns",
+                                  cIdx,
+                                  "th",
+                                  "desc",
+                                  e.target.value,
+                                );
+                              }}
+                              placeholder="รายละเอียดคอลัมน์ (TH)"
+                              className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                            />
+                          </div>
+                          <div>
+                            <input
+                              type="text"
+                              value={col.en.title}
+                              onChange={(e) =>
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "columns",
+                                  cIdx,
+                                  "en",
+                                  "title",
+                                  e.target.value,
+                                )
+                              }
+                              placeholder="Column Title (EN)"
+                              className="w-full border p-1 rounded mb-1"
+                            />
+                            <textarea
+                              type="text"
+                              value={col.en.desc}
+                              onChange={(e) => {
+                                e.target.style.height = "auto";
+                                e.target.style.height = `${e.target.scrollHeight}px`;
+                                handleSubItemLangChange(
+                                  sIdx,
+                                  "columns",
+                                  cIdx,
+                                  "en",
+                                  "desc",
+                                  e.target.value,
+                                );
+                              }}
+                              placeholder="Column Desc (EN)"
+                              className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
+                            />
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeSubItem(sIdx, "columns", cIdx)}
+                          className="absolute top-2 right-2 text-red-500"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* SECTION 5: FAQs (กรอกคู่) */}
+          <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-base font-bold text-[#042451]">
+                ❓ คำถามที่พบบ่อย (FAQs)
+              </h2>
+              <button
+                type="button"
+                onClick={() =>
+                  setFaqs([
+                    ...faqs,
+                    { th: { q: "", a: "" }, en: { q: "", a: "" } },
+                  ])
+                }
+                className="text-xs text-blue-600 font-bold"
+              >
+                + เพิ่มคำถาม
+              </button>
+            </div>
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="bg-white p-4 rounded-xl border relative space-y-3 text-xs"
+              >
+                <div className="grid gap-4 md:grid-cols-2 pr-6">
+                  <div className="space-y-1">
+                    <span className="font-bold text-blue-600">ภาษาไทย</span>
+                    <input
+                      type="text"
+                      value={faq.th.q}
+                      onChange={(e) =>
+                        handleFaqLangChange(idx, "th", "q", e.target.value)
+                      }
+                      placeholder="คำถาม (TH)"
+                      className="w-full border p-2 rounded-lg"
+                    />
+                    <input
+                      type="text"
+                      value={faq.th.a}
+                      onChange={(e) =>
+                        handleFaqLangChange(idx, "th", "a", e.target.value)
+                      }
+                      placeholder="คำตอบ (TH)"
+                      className="w-full border p-2 rounded-lg"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="font-bold text-red-600">English</span>
+                    <input
+                      type="text"
+                      value={faq.en.q}
+                      onChange={(e) =>
+                        handleFaqLangChange(idx, "en", "q", e.target.value)
+                      }
+                      placeholder="Question (EN)"
+                      className="w-full border p-2 rounded-lg"
+                    />
+                    <input
+                      type="text"
+                      value={faq.en.a}
+                      onChange={(e) =>
+                        handleFaqLangChange(idx, "en", "a", e.target.value)
+                      }
+                      placeholder="Answer (EN)"
+                      className="w-full border p-2 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFaqs(faqs.filter((_, i) => i !== idx))}
+                  className="absolute top-2 right-2 text-red-500"
+                >
+                  ✖
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* SECTION 6: CALL TO ACTION (CTA) (กรอกคู่) */}
+          <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
+            <h2 className="text-base font-bold text-[#042451]">
+              🚀 ส่วนท้ายปิดการขาย (Call To Action - CTA)
+            </h2>
+            <div>
+              <label className="block font-semibold mb-1 text-xs">
+                CTA Link (URL ปลายทางใช้ร่วมกัน)
+              </label>
+              <input
+                type="text"
+                name="ctaLink"
+                value={formData.ctaLink}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 p-2.5 text-xs"
+              />
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="p-3 bg-blue-50/30 rounded-xl border space-y-2">
+                <span className="font-bold text-blue-700 text-xs">
+                  🇹🇭 ข้อความปุ่ม CTA ภาษาไทย
+                </span>
+                <input
+                  type="text"
+                  placeholder="หัวข้อ CTA (TH)"
+                  value={formData.th.ctaTitle}
+                  onChange={(e) =>
+                    handleLangChange("th", "ctaTitle", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="รายละเอียด CTA (TH)"
+                  value={formData.th.ctaText3}
+                  onChange={(e) =>
+                    handleLangChange("th", "ctaText3", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="ข้อความบนปุ่ม (TH)"
+                  value={formData.th.ctaButtonText}
+                  onChange={(e) =>
+                    handleLangChange("th", "ctaButtonText", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="ฟุตเตอร์ใต้ปุ่ม (TH)"
+                  value={formData.th.ctaFooterText}
+                  onChange={(e) =>
+                    handleLangChange("th", "ctaFooterText", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+              </div>
+              <div className="p-3 bg-red-50/30 rounded-xl border space-y-2">
+                <span className="font-bold text-red-700 text-xs">
+                  🇺🇸 CTA English Text
+                </span>
+                <input
+                  type="text"
+                  placeholder="CTA Title (EN)"
+                  value={formData.en.ctaTitle}
+                  onChange={(e) =>
+                    handleLangChange("en", "ctaTitle", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="CTA Description (EN)"
+                  value={formData.en.ctaText3}
+                  onChange={(e) =>
+                    handleLangChange("en", "ctaText3", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="Button Text (EN)"
+                  value={formData.en.ctaButtonText}
+                  onChange={(e) =>
+                    handleLangChange("en", "ctaButtonText", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="Footer text (EN)"
+                  value={formData.en.ctaFooterText}
+                  onChange={(e) =>
+                    handleLangChange("en", "ctaFooterText", e.target.value)
+                  }
+                  className="w-full border p-2 text-xs rounded"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-xl bg-[#042451] p-4 text-base font-bold text-white hover:bg-[#083575] disabled:bg-gray-400"
+          >
+            {loading ? "กำลังบันทึกข้อมูล..." : "🚀 บันทึกและเผยแพร่บล็อกทันที"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}

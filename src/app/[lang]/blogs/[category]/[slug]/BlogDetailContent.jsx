@@ -9,7 +9,7 @@ import BackToTop from "@/component/msg/Backtotop";
 import AnnouncementBar from "@/component/msg/Announcements";
 import { useLanguage } from "@/hook/useLanguage";
 
-// ใช้ Component นี้ตัวเดียวสำหรับทุกบทความย่อย
+// Component หลักในการวาดบล็อกแบบ Dynamic
 import DynamicBlogContent from "./components/DynamicBlogContent";
 
 export default function BlogDetailContent({ lang, dict, blogData }) {
@@ -23,25 +23,35 @@ export default function BlogDetailContent({ lang, dict, blogData }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // ดึง Title หรือข้อมูลตามภาษา (Fall back ไปภาษาไทยถ้าภาษาปัจจุบันไม่มีข้อมูล)
+    const currentLang = lang === "th" || lang === "en" ? lang : "th";
+    const blogTitle = blogData?.[currentLang]?.ctaTitle || blogData?.["th"]?.ctaTitle || "Blog Detail";
+
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "page_view",
       page_name: `Blog: ${blogData?.slug}`,
+      blog_title: blogTitle, // ส่งชื่อบทความจริงเข้า DataLayer แทนคีย์ i18n
+      blog_category: blogData?.categoryType,
     });
-  }, [blogData?.slug]);
+  }, [blogData, lang]);
 
   return (
     <>
       <Header toggle={toggleNav} />
       <Nav isVisible={isNavOpen} />
-      {/* ส่งข้อมูลบทความเข้าไปใน Component ตัวเดียวเลย ไม่ต้อง switch-case แล้ว */}
-      {/* // ตัวอย่างการเรียกใน BlogDetailContent */}
+      
+      {/* ส่งข้อมูล blogData ที่มีโครงสร้าง th และ en เข้าไปตรงๆ 
+        เพื่อให้ DynamicBlogContent นำไปแกะเรนเดอร์ตาม lang ได้เลย
+      */}
       <DynamicBlogContent
         dict={dict}
         lang={lang}
         blogData={blogData}
         langPath={langPath}
       />
+      
       <Footer />
       <AnnouncementBar onVisibleChange={setAnnouncementVisible} />
       <Message announcementVisible={announcementVisible} />
