@@ -81,10 +81,7 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return [
-    { lang: 'th' },
-    { lang: 'en' }
-  ];
+  return [{ lang: "th" }, { lang: "en" }];
 }
 
 export default async function RootLayout({ children, params }) {
@@ -98,6 +95,9 @@ export default async function RootLayout({ children, params }) {
       lang={locale}
       className={`${comfortaa.variable} ${ibmThai.variable} ${ibmThaiLooped.variable}`}
     >
+      <head>
+        <meta charSet="utf-8" />
+      </head>
       <body className="min-h-full flex flex-col font-site">
         <CookieConsentProvider>
           <PageTracker />
