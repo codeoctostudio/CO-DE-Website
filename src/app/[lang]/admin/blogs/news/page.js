@@ -1,48 +1,67 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import BlogPreviewModal from "../components/BlogPreviewModal";
 
 export default function NewBlogPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const editSlug = searchParams.get("slug");
+
   const [loading, setLoading] = useState(false);
-  const [authChecking, setAuthChecking] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // State สำหรับ Modal Preview
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewPayload, setPreviewPayload] = useState(null);
+  const [previewLang, setPreviewLang] = useState("th");
+
+  const [userData, setUserData] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
   useEffect(() => {
-    const checkAuth = async () => {
+    const fetchUserData = async () => {
       try {
         const res = await fetch("https://admin.co-deacademy.com/api/me.php", {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           credentials: "include",
         });
 
-        const data = await res.json();
-        if (!res.ok || !data.ok) {
-          window.location.href = "https://admin.co-deacademy.com/manage/login";
-          return;
-        }
+        if (!res.ok) throw new Error("Failed to fetch user");
 
-        setAuthChecking(false);
+        const data = await res.json();
+
+        if (data.ok) {
+          setUserData(data);
+
+          const loggedInAuthor = data.Nickname || data.user || "Admin";
+
+          setFormData((prev) => ({
+            ...prev,
+            author: prev.author ? prev.author : loggedInAuthor,
+          }));
+        }
       } catch (err) {
-        window.location.href = "https://admin.co-deacademy.com/manage/login";
+        console.error("Error fetching user session:", err);
+      } finally {
+        setLoadingUser(false);
       }
     };
 
-    checkAuth();
+    fetchUserData();
   }, []);
 
   const [formData, setFormData] = useState({
     slug: "",
-    categoryType: "tech",
+    categoryType: "technology-trends",
     mediaType: "image",
     imageUrl: "",
     videoUrl: "",
     ctaLink: "/contactUs",
+    author: "",
     th: {
       introTitle: "",
       introDesc1: "",
@@ -111,6 +130,130 @@ export default function NewBlogPage() {
       en: { q: "", a: "" },
     },
   ]);
+
+  // Fetch Existing Blog for Edit Mode
+  useEffect(() => {
+    if (editSlug) {
+      const fetchBlogData = async () => {
+        setError("");
+        try {
+          const res = await fetch(`/api/blogs?slug=${editSlug}`);
+          const data = await res.json();
+
+          if (res.ok && data.blog) {
+            const b = data.blog;
+
+            // Map Form Metadata & Intro
+            setFormData({
+              slug: b.slug || "",
+              categoryType: b.categoryType || "technology-trends",
+              mediaType: b.mediaType || "image",
+              imageUrl: b.imageUrl || "",
+              videoUrl: b.videoUrl || "",
+              ctaLink: b.ctaLink || "/contactUs",
+              author: b.author || "",
+              th: {
+                introTitle: b.th?.introTitle || "",
+                introDesc1: b.th?.introDesc1 || "",
+                introDesc2: b.th?.introDesc2 || "",
+                introChecklistTitle: b.th?.introChecklistTitle || "",
+                introChecklist: Array.isArray(b.th?.introChecklist)
+                  ? b.th.introChecklist.join("\n")
+                  : b.th?.introChecklist || "",
+                introTags: Array.isArray(b.th?.introTags)
+                  ? b.th.introTags.join(", ")
+                  : b.th?.introTags || "",
+                ctaTitle: b.th?.ctaTitle || "",
+                ctaText3: b.th?.ctaText3 || "",
+                ctaButtonText: b.th?.ctaButtonText || "",
+                ctaFooterText: b.th?.ctaFooterText || "",
+              },
+              en: {
+                introTitle: b.en?.introTitle || "",
+                introDesc1: b.en?.introDesc1 || "",
+                introDesc2: b.en?.introDesc2 || "",
+                introChecklistTitle: b.en?.introChecklistTitle || "",
+                introChecklist: Array.isArray(b.en?.introChecklist)
+                  ? b.en.introChecklist.join("\n")
+                  : b.en?.introChecklist || "",
+                introTags: Array.isArray(b.en?.introTags)
+                  ? b.en.introTags.join(", ")
+                  : b.en?.introTags || "",
+                ctaTitle: b.en?.ctaTitle || "",
+                ctaText3: b.en?.ctaText3 || "",
+                ctaButtonText: b.en?.ctaButtonText || "",
+                ctaFooterText: b.en?.ctaFooterText || "",
+              },
+            });
+
+            // Map Dynamic Steps
+            if (b.steps && b.steps.length > 0) {
+              const mappedSteps = b.steps.map((st) => ({
+                type: st.type || "sub-points",
+                isFullWidth: Boolean(st.isFullWidth),
+                th: {
+                  title: st.th?.title || st.th?.desc || "",
+                  content: st.th?.content || "",
+                  subPointsTitle:
+                    st.subPointsTitle || st.th?.subPointsTitle || "",
+                },
+                en: {
+                  title: st.en?.title || st.en?.desc || "",
+                  content: st.en?.content || "",
+                  subPointsTitle:
+                    st.subPointsTitle || st.en?.subPointsTitle || "",
+                },
+                subPoints: st.subPoints || [
+                  {
+                    borderColor: "border-blue-400",
+                    th: { label: "", text: "" },
+                    en: { label: "", text: "" },
+                  },
+                ],
+                boxes: st.boxes || [
+                  {
+                    bgClass: "bg-blue-50/50 border-blue-100",
+                    th: { title: "", text: "", bold: "", suffix: "" },
+                    en: { title: "", text: "", bold: "", suffix: "" },
+                  },
+                ],
+                columns: st.columns || [
+                  {
+                    bgClass: "bg-gray-50/50 border-gray-100",
+                    th: { title: "", desc: "" },
+                    en: { title: "", desc: "" },
+                  },
+                ],
+                th_mediaTitle1: st.th?.mediaTitle1 || "",
+                th_mediaTitle2: st.th?.mediaTitle2 || "",
+                th_textKey2: st.th?.text2 || "",
+                en_mediaTitle1: st.en?.mediaTitle1 || "",
+                en_mediaTitle2: st.en?.mediaTitle2 || "",
+                en_textKey2: st.en?.text2 || "",
+              }));
+              setSteps(mappedSteps);
+            }
+
+            // Map FAQs
+            if (b.faqs && b.faqs.length > 0) {
+              const mappedFaqs = b.faqs.map((f) => ({
+                th: { q: f.th?.q || f.q || "", a: f.th?.a || f.a || "" },
+                en: { q: f.en?.q || f.q || "", a: f.en?.a || f.a || "" },
+              }));
+              setFaqs(mappedFaqs);
+            }
+          } else {
+            setError(data.error || "ไม่พบข้อมูลบทความที่ต้องการแก้ไข");
+          }
+        } catch (err) {
+          console.error("Fetch blog error:", err);
+          setError("เกิดข้อผิดพลาดในการดึงข้อมูลบทความ");
+        }
+      };
+
+      fetchBlogData();
+    }
+  }, [editSlug]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -225,12 +368,7 @@ export default function NewBlogPage() {
     setFaqs(updatedFaqs);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess("");
-
+  const preparePayload = () => {
     const cleanedSteps = steps.map((step) => {
       const baseStep = { type: step.type, isFullWidth: step.isFullWidth };
 
@@ -239,6 +377,7 @@ export default function NewBlogPage() {
           ...baseStep,
           th: step.th,
           en: step.en,
+          subPointsTitle: step.th.subPointsTitle,
           subPoints: step.subPoints,
         };
       }
@@ -276,13 +415,14 @@ export default function NewBlogPage() {
       return baseStep;
     });
 
-    const payload = {
+    return {
       slug: formData.slug,
       categoryType: formData.categoryType,
       mediaType: formData.mediaType,
       imageUrl: formData.mediaType === "image" ? formData.imageUrl : "",
       videoUrl: formData.mediaType === "video" ? formData.videoUrl : "",
       ctaLink: formData.ctaLink,
+      author: formData.author,
       th: {
         ...formData.th,
         introTags: formData.th.introTags
@@ -316,10 +456,30 @@ export default function NewBlogPage() {
       steps: cleanedSteps,
       faqs: faqs.filter((f) => f.th.q || f.en.q),
     };
+  };
+
+  const handleOpenPreview = (e) => {
+    e.preventDefault();
+    const payload = preparePayload();
+    setPreviewPayload(payload);
+    setShowPreview(true);
+  };
+
+  const handleConfirmSave = async () => {
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    const payload = previewPayload || preparePayload();
+
+    // เช็กว่าถ้าเป็นการแก้ไข ให้ส่ง PUT และแนบ slug เดิมไปอัปเดต
+    const isEditMode = Boolean(editSlug);
+    const apiUrl = isEditMode ? `/api/blogs?slug=${editSlug}` : "/api/blogs";
+    const apiMethod = isEditMode ? "PUT" : "POST";
 
     try {
-      const res = await fetch("/api/blogs", {
-        method: "POST",
+      const res = await fetch(apiUrl, {
+        method: apiMethod,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
@@ -328,28 +488,32 @@ export default function NewBlogPage() {
       if (!res.ok)
         throw new Error(data.error || "มีบางอย่างผิดพลาดในการบันทึกข้อมูล");
 
-      setSuccess("สร้างบทความสำเร็จ! ระบบกำลังนำทาง...");
+      setSuccess(
+        isEditMode
+          ? "แก้ไขบทความสำเร็จ! กำลังนำทาง..."
+          : "สร้างบทความสำเร็จ! กำลังนำทาง...",
+      );
+      setShowPreview(false);
       setTimeout(() => {
-        router.push(`/th/blogs/${formData.categoryType}/${data.slug}`);
-      }, 2000);
+        router.push(
+          `/th/blogs/${formData.categoryType}/${data.slug || formData.slug}`,
+        );
+      }, 1500);
     } catch (err) {
       setError(err.message);
+      setShowPreview(false);
     } finally {
       setLoading(false);
     }
   };
-  if (authChecking) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-700 font-semibold text-sm">
-        🔒 กำลังตรวจสอบสิทธิ์การใช้งาน...
-      </div>
-    );
-  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl rounded-3xl bg-white p-6 shadow-md sm:p-10">
         <h1 className="text-2xl font-bold text-[#042451] mb-6 border-b pb-4">
-          ✍️ สร้างบทความแบบระบุข้อความ 2 ภาษาตรง
+          {editSlug
+            ? `✏️ แก้ไขบทความ (${editSlug})`
+            : "✍️ สร้างบทความแบบระบุข้อความ 2 ภาษาตรง"}
         </h1>
 
         {error && (
@@ -364,7 +528,7 @@ export default function NewBlogPage() {
         )}
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleOpenPreview}
           className="space-y-8 text-sm text-gray-700"
         >
           {/* SECTION 1: ข้อมูล Metadata ทั่วไป */}
@@ -445,10 +609,6 @@ export default function NewBlogPage() {
                     onChange={handleChange}
                     className="w-full rounded-xl border border-gray-300 p-3 outline-hidden text-sm"
                   />
-                  <p className="text-[11px] text-gray-500 mt-1">
-                    * รองรับ URL รูปภาพจาก Google, Facebook, IG หรือ Path
-                    รูปภาพในระบบ
-                  </p>
                 </div>
               ) : (
                 <div>
@@ -463,17 +623,12 @@ export default function NewBlogPage() {
                     onChange={handleChange}
                     className="w-full rounded-xl border border-gray-300 p-3 outline-hidden text-sm"
                   />
-                  <p className="text-[11px] text-gray-500 mt-1">
-                    * วาง ลิงก์เต็ม (Full URL) ของวิดีโอ เช่น
-                    https://www.youtube.com/watch?v=... หรือ
-                    https://www.tiktok.com/@user/video/...
-                  </p>
                 </div>
               )}
             </div>
           </div>
 
-          {/* SECTION 3: Intro Tags & Checklist (จัดกลุ่ม TH/EN) */}
+          {/* SECTION 3: Intro Tags & Checklist */}
           <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-6">
             <h2 className="text-base font-bold text-[#042451]">
               📝 ส่วนแนะนำตัวบนสุด (Intro Content)
@@ -493,9 +648,9 @@ export default function NewBlogPage() {
                     type="text"
                     placeholder="เช่น แนะนำการเขียนโค้ดสำหรับเด็ก"
                     value={formData.th.introTitle}
-                    onChange={(e) => {
-                      handleLangChange("th", "introTitle", e.target.value);
-                    }}
+                    onChange={(e) =>
+                      handleLangChange("th", "introTitle", e.target.value)
+                    }
                     className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                   />
                 </div>
@@ -510,7 +665,6 @@ export default function NewBlogPage() {
                     onChange={(e) => {
                       e.target.style.height = "auto";
                       e.target.style.height = `${e.target.scrollHeight}px`;
-
                       handleLangChange("th", "introDesc1", e.target.value);
                     }}
                     className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
@@ -537,7 +691,6 @@ export default function NewBlogPage() {
                     Tags ภาษาไทย (คั่นด้วยจุลภาค `,` )
                   </label>
                   <textarea
-                    type="text"
                     placeholder="เช่น โรนัลโด้, เมสซี่"
                     value={formData.th.introTags}
                     onChange={(e) => {
@@ -640,7 +793,6 @@ export default function NewBlogPage() {
                     Tags (Comma-separated `,` )
                   </label>
                   <textarea
-                    type="text"
                     placeholder="e.g. Ronaldo, Messi"
                     value={formData.en.introTags}
                     onChange={(e) => {
@@ -765,8 +917,7 @@ export default function NewBlogPage() {
                   </select>
                 </div>
 
-                {/* FIELDS ปรับตามประเภทบล็อก (มีกล่องกรอกคู่ TH / EN) */}
-                {step.type !== "media-layout" ? (
+                {step.type !== "media-layout" && (
                   <div className="grid gap-4 md:grid-cols-2 border-t pt-3">
                     <div className="space-y-2">
                       <span className="text-xs font-bold text-blue-700">
@@ -831,9 +982,9 @@ export default function NewBlogPage() {
                       />
                     </div>
                   </div>
-                ) : null}
+                )}
 
-                {/* โครงสร้างย่อย: Sub Points */}
+                {/* Sub Points */}
                 {step.type === "sub-points" && (
                   <div className="bg-blue-50/30 p-4 rounded-xl border border-dashed border-blue-200 space-y-3">
                     <div className="grid grid-cols-2 gap-2">
@@ -905,7 +1056,6 @@ export default function NewBlogPage() {
                               className="w-full border p-1 rounded mb-1"
                             />
                             <textarea
-                              type="text"
                               value={pt.th.text}
                               onChange={(e) => {
                                 e.target.style.height = "auto";
@@ -941,7 +1091,6 @@ export default function NewBlogPage() {
                               className="w-full border p-1 rounded mb-1"
                             />
                             <textarea
-                              type="text"
                               value={pt.en.text}
                               onChange={(e) => {
                                 e.target.style.height = "auto";
@@ -988,7 +1137,7 @@ export default function NewBlogPage() {
                   </div>
                 )}
 
-                {/* โครงสร้างย่อย: Highlight Boxes */}
+                {/* Highlight Boxes */}
                 {step.type === "highlight-boxes" && (
                   <div className="bg-amber-50/30 p-4 rounded-xl border border-dashed border-amber-200 space-y-3">
                     <div className="flex justify-end">
@@ -1131,7 +1280,7 @@ export default function NewBlogPage() {
                   </div>
                 )}
 
-                {/* โครงสร้างย่อย: Media Layout */}
+                {/* Media Layout */}
                 {step.type === "media-layout" && (
                   <div className="bg-purple-50/30 p-4 rounded-xl border border-dashed border-purple-200 grid gap-4 md:grid-cols-2 text-xs">
                     <div className="space-y-2 bg-white p-3 rounded-lg border">
@@ -1165,11 +1314,12 @@ export default function NewBlogPage() {
                         className="w-full border p-2 rounded"
                       />
                       <textarea
-                        type="text"
                         value={step.th_textKey2}
-                        onChange={(e) =>
-                          handleStepChange(sIdx, "th_textKey2", e.target.value)
-                        }
+                        onChange={(e) => {
+                          e.target.style.height = "auto";
+                          e.target.style.height = `${e.target.scrollHeight}px`;
+                          handleStepChange(sIdx, "th_textKey2", e.target.value);
+                        }}
                         placeholder="คำอธิบายประกอบ (TH)"
                         className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                       />
@@ -1205,11 +1355,12 @@ export default function NewBlogPage() {
                         className="w-full border p-2 rounded"
                       />
                       <textarea
-                        type="text"
                         value={step.en_textKey2}
-                        onChange={(e) =>
-                          handleStepChange(sIdx, "en_textKey2", e.target.value)
-                        }
+                        onChange={(e) => {
+                          e.target.style.height = "auto";
+                          e.target.style.height = `${e.target.scrollHeight}px`;
+                          handleStepChange(sIdx, "en_textKey2", e.target.value);
+                        }}
                         placeholder="Description Layout (EN)"
                         className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                       />
@@ -1217,7 +1368,7 @@ export default function NewBlogPage() {
                   </div>
                 )}
 
-                {/* โครงสร้างย่อย: Columns-3 */}
+                {/* Columns-3 */}
                 {step.type === "columns-3" && (
                   <div className="bg-emerald-50/30 p-4 rounded-xl border border-dashed border-emerald-200 space-y-3">
                     <div className="flex justify-end">
@@ -1259,7 +1410,6 @@ export default function NewBlogPage() {
                               className="w-full border p-1 rounded mb-1"
                             />
                             <textarea
-                              type="text"
                               value={col.th.desc}
                               onChange={(e) => {
                                 e.target.style.height = "auto";
@@ -1295,7 +1445,6 @@ export default function NewBlogPage() {
                               className="w-full border p-1 rounded mb-1"
                             />
                             <textarea
-                              type="text"
                               value={col.en.desc}
                               onChange={(e) => {
                                 e.target.style.height = "auto";
@@ -1329,7 +1478,7 @@ export default function NewBlogPage() {
             ))}
           </div>
 
-          {/* SECTION 5: FAQs (กรอกคู่) */}
+          {/* SECTION 5: FAQs */}
           <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold text-[#042451]">
@@ -1356,44 +1505,48 @@ export default function NewBlogPage() {
                 <div className="grid gap-4 md:grid-cols-2 pr-6">
                   <div className="space-y-1">
                     <span className="font-bold text-blue-600">ภาษาไทย</span>
-                    <input
-                      type="text"
+                    <textarea
                       value={faq.th.q}
-                      onChange={(e) =>
-                        handleFaqLangChange(idx, "th", "q", e.target.value)
-                      }
+                      onChange={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = `${e.target.scrollHeight}px`;
+                        handleFaqLangChange(idx, "th", "q", e.target.value);
+                      }}
                       placeholder="คำถาม (TH)"
-                      className="w-full border p-2 rounded-lg"
+                      className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                     />
-                    <input
-                      type="text"
+                    <textarea
                       value={faq.th.a}
-                      onChange={(e) =>
-                        handleFaqLangChange(idx, "th", "a", e.target.value)
-                      }
+                      onChange={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = `${e.target.scrollHeight}px`;
+                        handleFaqLangChange(idx, "th", "a", e.target.value);
+                      }}
                       placeholder="คำตอบ (TH)"
-                      className="w-full border p-2 rounded-lg"
+                      className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                     />
                   </div>
                   <div className="space-y-1">
                     <span className="font-bold text-red-600">English</span>
-                    <input
-                      type="text"
+                    <textarea
                       value={faq.en.q}
-                      onChange={(e) =>
-                        handleFaqLangChange(idx, "en", "q", e.target.value)
-                      }
+                      onChange={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = `${e.target.scrollHeight}px`;
+                        handleFaqLangChange(idx, "en", "q", e.target.value);
+                      }}
                       placeholder="Question (EN)"
-                      className="w-full border p-2 rounded-lg"
+                      className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                     />
-                    <input
-                      type="text"
+                    <textarea
                       value={faq.en.a}
-                      onChange={(e) =>
-                        handleFaqLangChange(idx, "en", "a", e.target.value)
-                      }
+                      onChange={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = `${e.target.scrollHeight}px`;
+                        handleFaqLangChange(idx, "en", "a", e.target.value);
+                      }}
                       placeholder="Answer (EN)"
-                      className="w-full border p-2 rounded-lg"
+                      className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                     />
                   </div>
                 </div>
@@ -1408,7 +1561,7 @@ export default function NewBlogPage() {
             ))}
           </div>
 
-          {/* SECTION 6: CALL TO ACTION (CTA) (กรอกคู่) */}
+          {/* SECTION 6: CALL TO ACTION (CTA) */}
           <div className="bg-gray-50/50 p-5 rounded-2xl border border-gray-100 space-y-4">
             <h2 className="text-base font-bold text-[#042451]">
               🚀 ส่วนท้ายปิดการขาย (Call To Action - CTA)
@@ -1439,14 +1592,15 @@ export default function NewBlogPage() {
                   }
                   className="w-full border p-2 text-xs rounded"
                 />
-                <input
-                  type="text"
+                <textarea
                   placeholder="รายละเอียด CTA (TH)"
                   value={formData.th.ctaText3}
-                  onChange={(e) =>
-                    handleLangChange("th", "ctaText3", e.target.value)
-                  }
-                  className="w-full border p-2 text-xs rounded"
+                  onChange={(e) => {
+                    e.target.style.height = "auto";
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                    handleLangChange("th", "ctaText3", e.target.value);
+                  }}
+                  className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                 />
                 <input
                   type="text"
@@ -1480,22 +1634,25 @@ export default function NewBlogPage() {
                   }
                   className="w-full border p-2 text-xs rounded"
                 />
-                <input
-                  type="text"
+                <textarea
                   placeholder="CTA Description (EN)"
                   value={formData.en.ctaText3}
-                  onChange={(e) =>
-                    handleLangChange("en", "ctaText3", e.target.value)
-                  }
-                  className="w-full border p-2 text-xs rounded"
+                  onChange={(e) => {
+                    e.target.style.height = "auto";
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                    handleLangChange("en", "ctaText3", e.target.value);
+                  }}
+                  className="w-full resize-none overflow-hidden rounded-lg border bg-white p-2 text-xs"
                 />
                 <input
                   type="text"
                   placeholder="Button Text (EN)"
                   value={formData.en.ctaButtonText}
-                  onChange={(e) =>
-                    handleLangChange("en", "ctaButtonText", e.target.value)
-                  }
+                  onChange={(e) => {
+                    e.target.style.height = "auto";
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                    handleLangChange("en", "ctaButtonText", e.target.value);
+                  }}
                   className="w-full border p-2 text-xs rounded"
                 />
                 <input
@@ -1511,15 +1668,62 @@ export default function NewBlogPage() {
             </div>
           </div>
 
+          <div>
+            <label className="block font-semibold mb-1 text-[#042451]">
+              ผู้เขียน / บันทึก (Author)
+            </label>
+            <input
+              type="text"
+              name="author"
+              value={
+                formData.author || (loadingUser ? "กำลังโหลด..." : "Admin")
+              }
+              readOnly
+              placeholder="ระบบจะระบุชื่อผู้บันทึกให้อัตโนมัติ"
+              className="w-full rounded-xl border border-gray-300 p-3 bg-gray-100 text-gray-600 cursor-not-allowed outline-none"
+            />
+          </div>
+
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md flex items-center justify-between">
+            <div>
+              <span className="text-xs text-blue-600 font-semibold uppercase tracking-wider block">
+                ผู้ใช้งานปัจจุบัน
+              </span>
+              <h3 className="text-sm font-bold text-gray-800">
+                {loadingUser
+                  ? "🔄 กำลังโหลดข้อมูลผู้ใช้..."
+                  : userData
+                    ? `👤 ${userData.Nickname || userData.user} (${userData.role})`
+                    : "❌ ไม่พบข้อมูลผู้ใช้"}
+              </h3>
+            </div>
+            {userData?.uid && (
+              <span className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">
+                UID: {userData.uid}
+              </span>
+            )}
+          </div>
+
+          {/* Action Button */}
           <button
             type="submit"
-            disabled={loading}
-            className="w-full rounded-xl bg-[#042451] p-4 text-base font-bold text-white hover:bg-[#083575] disabled:bg-gray-400"
+            className="w-full rounded-xl bg-blue-600 p-4 text-base font-bold text-white hover:bg-blue-700 transition-all shadow-md"
           >
-            {loading ? "กำลังบันทึกข้อมูล..." : "🚀 บันทึกและเผยแพร่บล็อกทันที"}
+            👁️ ดูตัวอย่างบล็อก (Preview) ก่อนบันทึก
           </button>
         </form>
       </div>
+
+      {/* Preview Modal */}
+      <BlogPreviewModal
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        onConfirm={handleConfirmSave}
+        loading={loading}
+        previewPayload={previewPayload}
+        previewLang={previewLang}
+        setPreviewLang={setPreviewLang}
+      />
     </div>
   );
 }

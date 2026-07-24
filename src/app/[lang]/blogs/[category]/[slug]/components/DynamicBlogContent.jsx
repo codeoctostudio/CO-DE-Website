@@ -5,13 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/hook/useLanguage";
 
-const DynamicBlogContent = ({ dict, lang, blogData }) => {
+const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
   const { langPath } = useLanguage();
-  const videoRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [loadVideo, setLoadVideo] = useState(false);
 
-  // ระบบดึงข้อมูลโครงสีตายตัวแยกตามหมวดหมู่ประเภทบทความ
+  // ระบบดึงข้อมูลโครงสีแยกตามหมวดหมู่
   const categories = {
     tutorials: {
       label: dict?.category_tutorials || "Tutorials",
@@ -55,72 +52,86 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
     },
   };
 
+  // Safe Fallback สำหรับ Theme
   const currentTheme =
     categories[blogData?.categoryType] || categories["technology-trends"];
 
   const currentLang = lang === "en" ? "en" : "th";
-  const localizedContent = blogData?.[currentLang] || blogData?.["th"] || {};
 
-  const stepsData = blogData?.steps || [];
+  // Safe Fallback Content สำหรับพรีวิว real-time
+  const localizedContent =
+    blogData?.[currentLang] || blogData?.["th"] || blogData?.["en"] || {};
+
+  const stepsData = Array.isArray(blogData?.steps) ? blogData.steps : [];
 
   const getEmbedUrl = (step) => {
-    // ดึง URL จาก step ก่อน หากไม่มีให้ดึงจาก blogData
-    const url = step?.videoUrl || blogData?.videoUrl || "";
-    const videoId = step?.videoId || blogData?.videoId || "";
-    const platform = (step?.platform || blogData?.platform || "").toLowerCase();
+    try {
+      const url = step?.videoUrl || blogData?.videoUrl || "";
+      const videoId = step?.videoId || blogData?.videoId || "";
+      const platform = (
+        step?.platform ||
+        blogData?.platform ||
+        ""
+      ).toLowerCase();
 
-    // 1. YouTube
-    if (
-      platform === "youtube" ||
-      url.includes("youtube.com") ||
-      url.includes("youtu.be")
-    ) {
-      let id = videoId;
-      if (!id && url) {
-        if (url.includes("shorts/")) {
-          id = url.split("shorts/")[1]?.split("?")[0];
-        } else if (url.includes("watch?v=")) {
-          id = url.split("watch?v=")[1]?.split("&")[0];
-        } else if (url.includes("youtu.be/")) {
-          id = url.split("youtu.be/")[1]?.split("?")[0];
+      if (!url && !videoId) return null;
+
+      // 1. YouTube
+      if (
+        platform === "youtube" ||
+        url.includes("youtube.com") ||
+        url.includes("youtu.be")
+      ) {
+        let id = videoId;
+        if (!id && url) {
+          if (url.includes("shorts/")) {
+            id = url.split("shorts/")[1]?.split("?")[0];
+          } else if (url.includes("watch?v=")) {
+            id = url.split("watch?v=")[1]?.split("&")[0];
+          } else if (url.includes("youtu.be/")) {
+            id = url.split("youtu.be/")[1]?.split("?")[0];
+          }
+        }
+        return id
+          ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1`
+          : null;
+      }
+
+      // 2. TikTok
+      if (platform === "tiktok" || url.includes("tiktok.com")) {
+        let id = videoId;
+        if (!id && url) {
+          const match = url.match(/\/video\/(\d+)/);
+          if (match) id = match[1];
+        }
+        return id ? `https://www.tiktok.com/embed/v2/${id}` : null;
+      }
+
+      // 3. Instagram
+      if (platform === "instagram" || url.includes("instagram.com")) {
+        if (url) {
+          const cleanUrl = url.split("?")[0].replace(/\/$/, "");
+          return `${cleanUrl}/embed`;
         }
       }
-      return id
-        ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1`
-        : null;
-    }
 
-    // 2. TikTok
-    if (platform === "tiktok" || url.includes("tiktok.com")) {
-      let id = videoId;
-      if (!id && url) {
-        const match = url.match(/\/video\/(\d+)/);
-        if (match) id = match[1];
+      // 4. Facebook
+      if (platform === "facebook" || url.includes("facebook.com")) {
+        if (url) {
+          return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+            url,
+          )}&show_text=false&autoplay=true`;
+        }
       }
-      return id ? `https://www.tiktok.com/embed/v2/${id}` : null;
-    }
 
-    // 3. Instagram (Reels or Post)
-    if (platform === "instagram" || url.includes("instagram.com")) {
-      if (url) {
-        const cleanUrl = url.split("?")[0].replace(/\/$/, "");
-        return `${cleanUrl}/embed`;
-      }
+      return url || null;
+    } catch {
+      return null;
     }
-
-    // 4. Facebook (Video or Reels)
-    if (platform === "facebook" || url.includes("facebook.com")) {
-      if (url) {
-        return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&autoplay=true`;
-      }
-    }
-
-    // กรณีส่งเป็น Direct Embed Link หรือ iframe src มาอยู่แล้ว
-    return url || null;
   };
 
   /**
-   * ฟังก์ชันสำหรับ Render Media (รองรับรูปภาพ และ วิดีโอ Multi-Platform)
+   * ฟังก์ชันสำหรับ Render Media
    */
   const renderMediaContent = (step) => {
     const mediaType = step?.mediaType || blogData?.mediaType || "image";
@@ -129,13 +140,16 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
     // กรณีเป็นรูปภาพ
     if (mediaType === "image" || !mediaType) {
       return (
-        <div className="w-full max-w-70 sm:max-w-[320px] aspect-9/16 overflow-hidden rounded-2xl shadow-lg relative bg-gray-50 border">
+        <div className="w-full max-w-70 sm:max-w-[320px] aspect-9/16 overflow-hidden rounded-2xl shadow-lg relative bg-gray-100 border flex items-center justify-center">
           <Image
             src={imageUrl || "/images/fallback.webp"}
             alt="Blog media illustration"
             fill
             sizes="(max-width: 320px) 100vw, 320px"
             className="object-cover"
+            unoptimized={
+              imageUrl?.startsWith("blob:") || imageUrl?.startsWith("data:")
+            } // รองรับการ Preview รูปภาพแบบ Instant Upload
           />
         </div>
       );
@@ -147,8 +161,8 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
 
       if (!embedUrl) {
         return (
-          <div className="w-full max-w-70 sm:max-w-[320px] aspect-9/16 overflow-hidden rounded-2xl shadow-lg relative bg-black flex items-center justify-center text-white/50 text-xs text-center p-4">
-            ไม่พบลิงก์วิดีโอ หรือรูปแบบลิงก์ไม่ถูกต้อง
+          <div className="w-full max-w-70 sm:max-w-[320px] aspect-9/16 overflow-hidden rounded-2xl shadow-lg relative bg-gray-800 flex items-center justify-center text-white/70 text-xs text-center p-4">
+            กรุณาใส่ลิงก์วิดีโอที่ถูกต้องเพื่อดูตัวอย่าง
           </div>
         );
       }
@@ -184,9 +198,11 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
             <span className="wrap-break-word">{currentTheme.label}</span>
           </div>
           <h1
-            className={`mx-auto mt-6 max-w-4xl text-2xl font-bold leading-tight text-[#042451] sm:text-4xl md:text-5xl wrap-break-word whitespace-pre-line ${lang === "th" ? "looped-text" : ""}`}
+            className={`mx-auto mt-6 max-w-4xl text-2xl font-bold leading-tight text-[#042451] sm:text-4xl md:text-5xl wrap-break-word whitespace-pre-line ${
+              lang === "th" ? "looped-text" : ""
+            }`}
           >
-            {localizedContent?.introTitle}
+            {localizedContent?.introTitle || "ชื่อหัวข้อบทความ (Preview)"}
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-lg md:text-xl wrap-break-word whitespace-pre-line">
             {localizedContent?.introDesc1}
@@ -203,7 +219,7 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
             <div className="grid items-start gap-8 lg:grid-cols-12">
               <div className="lg:col-span-7 w-full min-w-0">
                 <div className="mt-6 flex flex-wrap gap-2.5">
-                  {localizedContent?.introTags?.map((tagText, idx) => {
+                  {(localizedContent?.introTags || []).map((tagText, idx) => {
                     const colors = [
                       "bg-[#eaf8ec] text-green-700",
                       "bg-[#eef4ff] text-blue-700",
@@ -212,7 +228,9 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                     return (
                       <span
                         key={idx}
-                        className={`rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-semibold wrap-break-word max-w-full ${colors[idx % 3]}`}
+                        className={`rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-semibold wrap-break-word max-w-full ${
+                          colors[idx % 3]
+                        }`}
                       >
                         {tagText}
                       </span>
@@ -221,33 +239,38 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                 </div>
               </div>
 
-              {/* ป้องกันการ์ด checklist ทะลุขอบในจอเล็ก */}
               <div
                 className={`lg:col-span-5 w-full min-w-0 rounded-2xl bg-linear-to-br ${currentTheme.introCardBg} p-4 sm:p-6 shadow-lg`}
               >
                 <div className="space-y-3">
                   <div className="rounded-xl bg-white/90 p-3 sm:p-3.5 text-center shadow-xs">
                     <p
-                      className={`text-sm sm:text-base font-bold text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                      className={`text-sm sm:text-base font-bold text-[#042451] wrap-break-word ${
+                        lang === "th" ? "looped-text" : ""
+                      }`}
                     >
-                      {localizedContent?.introChecklistTitle}
+                      {localizedContent?.introChecklistTitle || "Checklist"}
                     </p>
                   </div>
-                  {localizedContent?.introChecklist?.map((itemText, idx) => (
-                    <div
-                      key={idx}
-                      className="rounded-xl bg-white/80 p-3 sm:p-3.5 shadow-xs transition-all hover:bg-white wrap-break-word"
-                    >
-                      <p
-                        className={`text-xs sm:text-sm font-medium text-[#042451] flex items-start gap-2 ${lang === "th" ? "looped-text" : ""}`}
+                  {(localizedContent?.introChecklist || []).map(
+                    (itemText, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-xl bg-white/80 p-3 sm:p-3.5 shadow-xs transition-all hover:bg-white wrap-break-word"
                       >
-                        <span className="shrink-0">✅</span>
-                        <span className="wrap-break-word w-full">
-                          {itemText}
-                        </span>
-                      </p>
-                    </div>
-                  ))}
+                        <p
+                          className={`text-xs sm:text-sm font-medium text-[#042451] flex items-start gap-2 ${
+                            lang === "th" ? "looped-text" : ""
+                          }`}
+                        >
+                          <span className="shrink-0">✅</span>
+                          <span className="wrap-break-word w-full">
+                            {itemText}
+                          </span>
+                        </p>
+                      </div>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -255,9 +278,10 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
 
           {/* DYNAMIC STEPS ENGINE */}
           <div className="grid gap-6 lg:grid-cols-2">
-            {(blogData?.steps || []).map((step, index) => {
-              const isFullWidth = step.isFullWidth;
-              const stepLang = step?.[currentLang] || step?.["th"] || {};
+            {stepsData.map((step, index) => {
+              const isFullWidth = step?.isFullWidth;
+              const stepLang =
+                step?.[currentLang] || step?.["th"] || step?.["en"] || {};
               const stepTitle = stepLang?.title || "";
               const stepContentText = stepLang?.content || "";
 
@@ -266,18 +290,25 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                   key={index}
                   className={`rounded-3xl bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 flex flex-col justify-between overflow-hidden min-w-0 w-full ${
                     isFullWidth ? "lg:col-span-2" : ""
-                  } ${step.type === "media-layout" && blogData.mediaType === "video" ? "bg-linear-to-br from-[#bae0e9] to-[#a5bdf0]" : ""} ${
-                    step.type === "media-layout" &&
-                    blogData.mediaType === "image"
+                  } ${
+                    step?.type === "media-layout" &&
+                    blogData?.mediaType === "video"
+                      ? "bg-linear-to-br from-[#bae0e9] to-[#a5bdf0]"
+                      : ""
+                  } ${
+                    step?.type === "media-layout" &&
+                    blogData?.mediaType === "image"
                       ? "bg-linear-to-br from-[#ffe6df] to-[#fcd0ba]"
                       : ""
                   }`}
                 >
                   {/* layout 1: sub-points */}
-                  {step.type === "sub-points" && (
+                  {step?.type === "sub-points" && (
                     <div className="w-full min-w-0">
                       <h3
-                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${
+                          lang === "th" ? "looped-text" : ""
+                        }`}
                       >
                         {stepTitle}
                       </h3>
@@ -285,7 +316,7 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                         {stepContentText}
                       </p>
 
-                      {step.subPoints && (
+                      {Array.isArray(step?.subPoints) && (
                         <div className="mt-4 p-4 rounded-2xl bg-gray-50/70 space-y-2 text-sm sm:text-base text-gray-700 border border-gray-100 wrap-break-word w-full overflow-hidden">
                           <p className="font-semibold text-[#042451] wrap-break-word">
                             {step?.subPointsTitle}
@@ -296,7 +327,9 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                             return (
                               <p
                                 key={pIdx}
-                                className={`pl-3 border-l-2 wrap-break-word ${pt.borderColor || "border-blue-400"}`}
+                                className={`pl-3 border-l-2 wrap-break-word ${
+                                  pt?.borderColor || "border-blue-400"
+                                }`}
                               >
                                 {(ptLang?.label || pt?.label) && (
                                   <b className="wrap-break-word">
@@ -315,10 +348,12 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                   )}
 
                   {/* layout 2: highlight boxes */}
-                  {step.type === "highlight-boxes" && (
+                  {step?.type === "highlight-boxes" && (
                     <div className="w-full min-w-0">
                       <h3
-                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${
+                          lang === "th" ? "looped-text" : ""
+                        }`}
                       >
                         {stepTitle}
                       </h3>
@@ -327,7 +362,7 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                           {stepContentText}
                         </p>
 
-                        {step.boxes && (
+                        {Array.isArray(step?.boxes) && (
                           <div className="grid gap-2.5 mt-2 w-full">
                             {step.boxes.map((box, bIdx) => {
                               const boxLang =
@@ -335,7 +370,10 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                               return (
                                 <div
                                   key={bIdx}
-                                  className={`p-4 rounded-2xl border wrap-break-word w-full overflow-hidden ${box.bgClass || "bg-blue-50/50 border-blue-100"}`}
+                                  className={`p-4 rounded-2xl border wrap-break-word w-full overflow-hidden ${
+                                    box?.bgClass ||
+                                    "bg-blue-50/50 border-blue-100"
+                                  }`}
                                 >
                                   📌{" "}
                                   <span className="font-bold text-[#042451] wrap-break-word">
@@ -362,11 +400,13 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                   )}
 
                   {/* layout 3: media-layout */}
-                  {step.type === "media-layout" && (
+                  {step?.type === "media-layout" && (
                     <div className="grid items-start lg:items-center gap-6 lg:grid-cols-12 w-full min-w-0">
                       <div className="lg:col-span-7 w-full min-w-0">
                         <h3
-                          className={`mt-4 text-xl font-bold text-[#042451] sm:text-2xl wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                          className={`mt-4 text-xl font-bold text-[#042451] sm:text-2xl wrap-break-word ${
+                            lang === "th" ? "looped-text" : ""
+                          }`}
                         >
                           {stepTitle || stepLang?.mediaTitle2}
                         </h3>
@@ -376,11 +416,12 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                         </p>
                       </div>
 
-                      {/* ส่วนแสดงสื่อ (Media Container) */}
                       <div className="lg:col-span-5 flex flex-col items-center justify-center gap-4 rounded-2xl bg-white p-4 shadow-sm w-full min-w-0">
                         {stepLang?.mediaTitle1 && (
                           <p
-                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${
+                              lang === "th" ? "looped-text" : ""
+                            }`}
                           >
                             {stepLang.mediaTitle1}
                           </p>
@@ -388,23 +429,26 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
 
                         {stepLang?.mediaTitle2 && (
                           <p
-                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${
+                              lang === "th" ? "looped-text" : ""
+                            }`}
                           >
                             {stepLang.mediaTitle2}
                           </p>
                         )}
 
-                        {/* แสดงผล Dynamic Media ตามฟังก์ชัน renderMediaContent */}
                         {renderMediaContent(step)}
                       </div>
                     </div>
                   )}
 
                   {/* layout 4: columns-3 */}
-                  {step.type === "columns-3" && (
+                  {step?.type === "columns-3" && (
                     <div className="w-full min-w-0">
                       <h3
-                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                        className={`mt-4 text-lg sm:text-xl font-bold text-[#042451] wrap-break-word ${
+                          lang === "th" ? "looped-text" : ""
+                        }`}
                       >
                         {stepTitle}
                       </h3>
@@ -414,7 +458,7 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                         </p>
                       )}
 
-                      {step.columns && (
+                      {Array.isArray(step?.columns) && (
                         <div className="grid gap-4 mt-5 grid-cols-1 sm:grid-cols-3 w-full">
                           {step.columns.map((col, cIdx) => {
                             const colLang =
@@ -422,7 +466,10 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                             return (
                               <div
                                 key={cIdx}
-                                className={`p-4 sm:p-5 rounded-2xl border transition-all wrap-break-word ${col.bgClass || "bg-gray-50/50 border-gray-100"}`}
+                                className={`p-4 sm:p-5 rounded-2xl border transition-all wrap-break-word ${
+                                  col?.bgClass ||
+                                  "bg-gray-50/50 border-gray-100"
+                                }`}
                               >
                                 <p className="font-bold text-center text-sm sm:text-base mb-2 wrap-break-word">
                                   {colLang?.title || col?.title}
@@ -443,37 +490,42 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
           </div>
 
           {/* FAQ */}
-          {localizedContent?.faqs && localizedContent.faqs.length > 0 && (
-            <div className="rounded-3xl bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] sm:p-8 md:p-10 overflow-hidden">
-              <h3
-                className={`text-xl font-bold text-[#042451] sm:text-2xl wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
-              >
-                {localizedContent?.faqSectionTitle || "FAQs"}
-              </h3>
-              <div className="mt-6 space-y-4">
-                {localizedContent.faqs.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-xl border border-gray-100 bg-[#fafcff] p-4 sm:p-5 wrap-break-word"
-                  >
-                    <p className="text-sm sm:text-base font-bold text-[#042451] wrap-break-word">
-                      {item.q}
-                    </p>
-                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600 wrap-break-word">
-                      {item.a}
-                    </p>
-                  </div>
-                ))}
+          {Array.isArray(localizedContent?.faqs) &&
+            localizedContent.faqs.length > 0 && (
+              <div className="rounded-3xl bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] sm:p-8 md:p-10 overflow-hidden">
+                <h3
+                  className={`text-xl font-bold text-[#042451] sm:text-2xl wrap-break-word ${
+                    lang === "th" ? "looped-text" : ""
+                  }`}
+                >
+                  {localizedContent?.faqSectionTitle || "FAQs"}
+                </h3>
+                <div className="mt-6 space-y-4">
+                  {localizedContent.faqs.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-xl border border-gray-100 bg-[#fafcff] p-4 sm:p-5 wrap-break-word"
+                    >
+                      <p className="text-sm sm:text-base font-bold text-[#042451] wrap-break-word">
+                        {item?.q}
+                      </p>
+                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600 wrap-break-word">
+                        {item?.a}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {/* CTA */}
           <div
             className={`rounded-3xl bg-linear-to-b ${currentTheme.ctaBg} p-5 text-center text-white sm:p-10 lg:p-14 shadow-xl overflow-hidden`}
           >
             <h2
-              className={`text-xl font-bold sm:text-3xl lg:text-4xl wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+              className={`text-xl font-bold sm:text-3xl lg:text-4xl wrap-break-word ${
+                lang === "th" ? "looped-text" : ""
+              }`}
             >
               {localizedContent?.ctaTitle}
             </h2>
@@ -485,12 +537,14 @@ const DynamicBlogContent = ({ dict, lang, blogData }) => {
                 href={langPath(blogData?.ctaLink || "/contactUs")}
                 className="w-full max-w-md rounded-full bg-[#F7C94B] px-6 py-3.5 text-center text-sm sm:text-lg font-bold text-[#042451] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ffd86f] wrap-break-word"
               >
-                {localizedContent?.ctaButtonText}
+                {localizedContent?.ctaButtonText || "ติดต่อเรา"}
               </Link>
             </div>
             {localizedContent?.ctaFooterText && (
               <p
-                className={`mt-6 text-sm sm:text-lg font-semibold text-[#F7C94B] wrap-break-word ${lang === "th" ? "looped-text" : ""}`}
+                className={`mt-6 text-sm sm:text-lg font-semibold text-[#F7C94B] wrap-break-word ${
+                  lang === "th" ? "looped-text" : ""
+                }`}
               >
                 {localizedContent?.ctaFooterText}
               </p>
