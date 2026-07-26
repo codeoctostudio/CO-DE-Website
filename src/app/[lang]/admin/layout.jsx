@@ -39,7 +39,7 @@ export default function AdminLayout({ children }) {
     };
 
     checkAuth();
-  }, [pathname]); // ← ทุกครั้งที่เปลี่ยน Route
+  }, [pathname]);
 
   if (loading) {
     return (
