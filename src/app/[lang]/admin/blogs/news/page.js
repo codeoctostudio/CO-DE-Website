@@ -146,7 +146,7 @@ export default function NewBlogPage() {
             // Map Form Metadata & Intro
             setFormData({
               slug: b.slug || "",
-              categoryType: b.categoryType || "technology-trends",
+              categoryType: b.category_type || b.categoryType || "technology-trends",
               mediaType: b.mediaType || "image",
               imageUrl: b.imageUrl || "",
               videoUrl: b.videoUrl || "",
