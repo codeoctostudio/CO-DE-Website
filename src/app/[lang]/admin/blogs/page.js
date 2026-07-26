@@ -44,16 +44,22 @@ export default function BlogManagementPage() {
     fetchUserData();
   }, []);
 
-  // ดึงข้อมูลบล็อกทั้งหมดจาก API
+  // 🟢 1. ปรับฟังก์ชันดึงข้อมูลบล็อกทั้งหมดให้ยิงไปที่ PHP API บน Server
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/blogs");
+      const res = await fetch("https://admin.co-deacademy.com/api/blogs.php", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // แนบ Session Cookie
+        cache: "no-store",
+      });
+
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok && data.ok) {
         setBlogs(data.blogs || []);
       } else {
-        console.error(data.error);
+        console.error(data.error || "ไม่สามารถดึงข้อมูลบทความได้");
       }
     } catch (error) {
       console.error("Fetch Blogs Error:", error);
@@ -89,30 +95,37 @@ export default function BlogManagementPage() {
       slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
       author.toLowerCase().includes(searchTerm.toLowerCase());
 
+    // 🟢 รองรับทั้ง categoryType (camelCase) และ category_type (snake_case จาก MySQL)
+    const category = blog.categoryType || blog.category_type || "";
     const matchesCategory =
-      selectedCategory === "all" || blog.categoryType === selectedCategory;
+      selectedCategory === "all" || category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
 
-  // ฟังก์ชันลบบล็อกผ่าน API
+  // 🟢 2. ปรับฟังก์ชันลบบล็อกให้ยิงไปที่ PHP API
   const handleDeleteConfirm = async () => {
     if (!deleteModal.blog?.slug) return;
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/blogs?slug=${deleteModal.blog.slug}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://admin.co-deacademy.com/api/blogs.php?slug=${deleteModal.blog.slug}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
 
-      if (res.ok) {
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
         setBlogs((prev) =>
           prev.filter((b) => b.slug !== deleteModal.blog.slug),
         );
         setDeleteModal({ open: false, blog: null });
       } else {
-        const errorData = await res.json();
-        alert(errorData.error || "เกิดข้อผิดพลาดในการลบบทความ");
+        alert(data.error || "เกิดข้อผิดพลาดในการลบบทความ");
       }
     } catch (error) {
       console.error("Delete Blog Error:", error);
@@ -186,7 +199,7 @@ export default function BlogManagementPage() {
                   <th className="py-4 px-6">บทความ</th>
                   <th className="py-4 px-4">หมวดหมู่</th>
                   <th className="py-4 px-4">ผู้บันทึก</th>
-                  <th className="py-4 px-4">สร้างเมื่อ</th>
+                  <th className="py-4 px-4">สร้างเมื่อ / แก้ไขล่าสุด</th>
                   <th className="py-4 px-6 text-right">การจัดการ</th>
                 </tr>
               </thead>
@@ -206,6 +219,32 @@ export default function BlogManagementPage() {
                         blog.author.trim().toLowerCase() ===
                           activeUserName.trim().toLowerCase());
 
+                    // 🟢 ดึงข้อมูลหมวดหมู่ (รองรับทั้ง 2 แบบ)
+                    const categoryDisplay =
+                      blog.categoryType || blog.category_type || "ไม่ระบุ";
+
+                    // 🟢 ดึงข้อมูลวันที่ (รองรับ created_at, updated_at และ createdAt)
+                    const rawDate =
+                      blog.updated_at ||
+                      blog.createdAt ||
+                      blog.created_at ||
+                      null;
+                    const formattedDate = rawDate
+                      ? new Date(rawDate).toLocaleDateString("th-TH", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : "-";
+
+                    // 🟢 ดึงรูปภาพประกอบบทความ
+                    const displayImage =
+                      blog.imageUrl ||
+                      blog.image_url ||
+                      "/images/fallback.webp";
+
                     return (
                       <tr
                         key={blog.slug}
@@ -216,13 +255,13 @@ export default function BlogManagementPage() {
                           <div className="flex items-center gap-3">
                             <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-gray-100 border">
                               <Image
-                                src={blog.imageUrl || "/images/fallback.webp"}
+                                src={displayImage}
                                 alt={blog.th?.introTitle || "Blog Image"}
                                 fill
                                 className="object-cover"
                                 unoptimized={
-                                  blog.imageUrl?.startsWith("blob:") ||
-                                  blog.imageUrl?.startsWith("data:")
+                                  displayImage.startsWith("blob:") ||
+                                  displayImage.startsWith("data:")
                                 }
                               />
                             </div>
@@ -241,8 +280,8 @@ export default function BlogManagementPage() {
 
                         {/* Category */}
                         <td className="py-4 px-4">
-                          <span className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-100">
-                            {blog.categoryType}
+                          <span className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-100 capitalize">
+                            {categoryDisplay}
                           </span>
                         </td>
 
@@ -253,18 +292,14 @@ export default function BlogManagementPage() {
                           </span>
                         </td>
 
-                        {/* Created Date */}
+                        {/* Created / Updated Date */}
                         <td className="py-4 px-4 text-xs text-gray-500">
-                          {blog.createdAt
-                            ? new Date(blog.createdAt).toLocaleDateString(
-                                "th-TH",
-                              )
-                            : "-"}
+                          {formattedDate}
                         </td>
 
                         {/* Actions */}
                         <td className="py-4 px-6 text-right space-x-2">
-                          {/* ดูหน้า Live/Preview (ดูได้ทุกคน) */}
+                          {/* ดูหน้า Preview */}
                           <Link
                             href={`/admin/blogs/preview/${blog.slug}`}
                             className="inline-flex items-center p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
@@ -273,7 +308,7 @@ export default function BlogManagementPage() {
                             👁️
                           </Link>
 
-                          {/* แก้ไข (เปิดใช้เฉพาะผู้มีสิทธิ์) */}
+                          {/* แก้ไข */}
                           {canManage ? (
                             <Link
                               href={`/th/admin/blogs/news?slug=${blog.slug}`}
@@ -292,7 +327,7 @@ export default function BlogManagementPage() {
                             </button>
                           )}
 
-                          {/* ลบ (เปิดใช้เฉพาะผู้มีสิทธิ์) */}
+                          {/* ลบ */}
                           {canManage ? (
                             <button
                               onClick={() =>
