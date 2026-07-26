@@ -8,46 +8,45 @@ import { useLanguage } from "@/hook/useLanguage";
 const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
   const { langPath } = useLanguage();
 
-  // ระบบดึงข้อมูลโครงสีแยกตามหมวดหมู่
   const categories = {
     tutorials: {
       label: dict?.category_tutorials || "Tutorials",
-      color: "from-green-50 via-green-100/30 to-white",
-      tag: "bg-green-100 text-green-700",
-      introCardBg: "from-green-500 to-emerald-600",
-      ctaBg: "from-green-600 to-emerald-700",
+      color: "from-[#93d99a]/10 via-[#93d99a]/5 to-white",
+      tag: "bg-[#93d99a]/20 text-[#2e6834]",
+      introCardBg: "from-[#93d99a] to-[#b8f0be]",
+      ctaBg: "from-[#7bc882] to-[#a3e5ab]",
       icon: "🧩",
     },
     parents: {
       label: dict?.category_parents || "Parents Guide",
-      color: "from-pink-50 via-pink-100/30 to-white",
-      tag: "bg-pink-100 text-pink-700",
-      introCardBg: "from-pink-500 to-rose-600",
-      ctaBg: "from-pink-600 to-rose-700",
+      color: "from-[#d993c0]/10 via-[#d993c0]/5 to-white",
+      tag: "bg-[#d993c0]/20 text-[#6d2f57]",
+      introCardBg: "from-[#d993c0] to-[#f0b8e4]",
+      ctaBg: "from-[#c57bb1] to-[#e89fdc]",
       icon: "👨‍👩‍👧",
     },
     "technology-trends": {
       label: dict?.category_technology_trends || "Technology Trends",
-      color: "from-blue-50 via-blue-100/30 to-white",
-      tag: "bg-blue-300 text-blue-700",
-      introCardBg: "from-blue-600 to-indigo-700",
-      ctaBg: "from-blue-600 to-indigo-700",
+      color: "from-[#718fdd]/10 via-[#718fdd]/5 to-white",
+      tag: "bg-[#718fdd]/20 text-[#2c3e80]",
+      introCardBg: "from-[#718fdd] to-[#7e8ff1]",
+      ctaBg: "from-[#5d7bc8] to-[#6a7be0]",
       icon: "🤖",
     },
     guide: {
-      label: dict?.category_guide || "Learning Roadmap",
-      color: "from-orange-50 via-orange-100/30 to-white",
-      tag: "bg-orange-100 text-orange-700",
-      introCardBg: "from-orange-500 to-amber-600",
-      ctaBg: "from-orange-600 to-amber-700",
+      label: dict?.category_guide || "Guide",
+      color: "from-[#e09371]/10 via-[#e09371]/5 to-white",
+      tag: "bg-[#e09371]/20 text-[#712d11]",
+      introCardBg: "from-[#e09371] to-[#f1b89e]",
+      ctaBg: "from-[#ca7a57] to-[#e4a185]",
       icon: "🎓",
     },
     reward: {
       label: dict?.category_reward || "Reward",
-      color: "from-amber-50 via-yellow-100/40 to-white",
-      tag: "bg-gradient-to-r from-yellow-200 to-amber-300 text-amber-900",
-      introCardBg: "from-amber-400 via-yellow-500 to-amber-600",
-      ctaBg: "from-amber-500 to-yellow-600",
+      color: "from-[#e2b85a]/10 via-[#e2b85a]/5 to-white",
+      tag: "bg-[#e2b85a]/20 text-[#694f11]",
+      introCardBg: "from-[#e2b85a] to-[#f5d98b]",
+      ctaBg: "from-[#cd9f3f] to-[#e7c76e]",
       icon: "🏆",
     },
   };
@@ -408,7 +407,7 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
                             lang === "th" ? "looped-text" : ""
                           }`}
                         >
-                          {stepTitle || stepLang?.mediaTitle2}
+                          {stepTitle || stepLang?.mediaTitle1}
                         </h3>
 
                         <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#183153] wrap-break-word">
@@ -417,19 +416,9 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
                       </div>
 
                       <div className="lg:col-span-5 flex flex-col items-center justify-center gap-4 rounded-2xl bg-white p-4 shadow-sm w-full min-w-0">
-                        {stepLang?.mediaTitle1 && (
-                          <p
-                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${
-                              lang === "th" ? "looped-text" : ""
-                            }`}
-                          >
-                            {stepLang.mediaTitle1}
-                          </p>
-                        )}
-
                         {stepLang?.mediaTitle2 && (
                           <p
-                            className={`text-sm font-bold text-center text-[#042451] wrap-break-word ${
+                            className={`text-xl font-bold text-center text-[#042451] wrap-break-word ${
                               lang === "th" ? "looped-text" : ""
                             }`}
                           >

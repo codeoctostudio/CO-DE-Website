@@ -1,23 +1,28 @@
-// เพิ่มบรรทัดนี้ไว้ด้านบนสุดของไฟล์
 import { notFound } from "next/navigation"; 
-import fs from "fs";
-import path from "path";
 import { getDictionary } from "@/lib/dictionary";
 import BlogDetailContent from "./BlogDetailContent";
 
-// ... โค้ดส่วนอื่นๆ ของคุณ ...
-
-// ฟังก์ชันอ่านข้อมูลจาก JSON ที่เราเขียนขึ้นใหม่
-function getBlogBySlug(slug) {
+// ฟังก์ชันดึงข้อมูลบทความตาม Slug จาก Database ผ่าน PHP API
+async function getBlogBySlug(slug) {
   try {
-    const filePath = path.join(process.cwd(), "data", "blogs.json");
-    if (!fs.existsSync(filePath)) return null;
+    const res = await fetch(`https://admin.co-deacademy.com/api/blogs.php?slug=${slug}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // แนะนำใช้ cache: "no-store" เพื่อให้ได้ข้อมูลล่าสุดจาก Database เสมอ
+      // หรือ revalidate ตามความเหมาะสม เช่น { next: { revalidate: 60 } }
+      cache: "no-store", 
+    });
+
+    if (!res.ok) return null;
+
+    const data = await res.json();
     
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const db = JSON.parse(fileContent || "{}");
-    return db[slug] || null;
+    // PHP API จะคืนค่ารูปแบบ { ok: true, blog: {...} }
+    return data.ok ? data.blog : null;
   } catch (error) {
-    console.error(error);
+    console.error("Fetch Blog Detail Error:", error);
     return null;
   }
 }
@@ -25,11 +30,11 @@ function getBlogBySlug(slug) {
 export default async function DynamicBlogPage({ params }) {
   const { lang, slug } = await params;
   
-  // เรียกข้อมูลบทความแบบ Dynamic จากฐานข้อมูล JSON ท้องถิ่น
-  const blogData = getBlogBySlug(slug);
+  // ดึงข้อมูลบทความจาก Database ผ่าน PHP API
+  const blogData = await getBlogBySlug(slug);
 
   if (!blogData) {
-    notFound(); // ถ้าไม่มี Slug นี้ในระบบ ให้ขึ้น 404
+    notFound(); // ถ้าไม่พบข้อมูลใน DB ให้แสดงหน้า 404
   }
 
   const dict = await getDictionary(lang);
