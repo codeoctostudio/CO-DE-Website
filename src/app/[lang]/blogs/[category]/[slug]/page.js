@@ -13,6 +13,7 @@ async function getBlogBySlug(slug) {
       // แนะนำใช้ cache: "no-store" เพื่อให้ได้ข้อมูลล่าสุดจาก Database เสมอ
       // หรือ revalidate ตามความเหมาะสม เช่น { next: { revalidate: 60 } }
       cache: "no-store", 
+      credentials: "include",
     });
 
     if (!res.ok) return null;

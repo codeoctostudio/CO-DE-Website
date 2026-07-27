@@ -25,6 +25,7 @@ export async function GET(request) {
       method: "GET",
       headers: getForwardHeaders(request),
       cache: "no-store",
+      credentials: "include",
     });
 
     const data = await res.json();
@@ -48,6 +49,7 @@ export async function POST(request) {
       method: "POST",
       headers: getForwardHeaders(request),
       body: JSON.stringify(body),
+      credentials: "include",
     });
 
     const data = await res.json();
@@ -76,6 +78,7 @@ export async function PUT(request) {
         ...body,
         originalSlug: originalSlug, // ส่ง originalSlug ไปให้ PHP กรณีเปลี่ยน Slug ใหม่
       }),
+      credentials: "include",
     });
 
     const data = await res.json();
@@ -106,6 +109,7 @@ export async function DELETE(request) {
     const res = await fetch(`${PHP_API_URL}?slug=${slug}`, {
       method: "DELETE",
       headers: getForwardHeaders(request),
+      credentials: "include",
     });
 
     const data = await res.json();

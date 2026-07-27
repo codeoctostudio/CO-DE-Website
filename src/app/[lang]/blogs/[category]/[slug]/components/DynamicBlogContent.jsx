@@ -51,9 +51,25 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
     },
   };
 
+  // 1. แปลง Category Key ให้อยู่ใน รูปแบบ Standard (รองรับทั้ง categoryType และ category_type)
+  const rawCategory =
+    blogData?.categoryType ||
+    blogData?.category_type ||
+    blogData?.category ||
+    "";
+
+  // Clean String (แปลงเป็นตัวพิมพ์เล็ก และตัด 's' ต่อท้ายถ้ามี เช่น guides -> guide)
+  const normalizedCategory = rawCategory
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/s$/, "");
+
   // Safe Fallback สำหรับ Theme
   const currentTheme =
-    categories[blogData?.categoryType] || categories["technology-trends"];
+    categories[normalizedCategory] ||
+    categories[rawCategory] ||
+    categories["technology-trends"];
 
   const currentLang = lang === "en" ? "en" : "th";
 
@@ -133,8 +149,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
    * ฟังก์ชันสำหรับ Render Media
    */
   const renderMediaContent = (step) => {
-    const mediaType = step?.mediaType || blogData?.mediaType || "image";
-    const imageUrl = step?.imageUrl || blogData?.imageUrl;
+    const mediaType = step?.mediaType || blogData?.video_url || "image";
+    const imageUrl = step?.imageUrl || blogData?.image_url;
 
     // กรณีเป็นรูปภาพ
     if (mediaType === "image" || !mediaType) {
@@ -282,6 +298,7 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
               const stepLang =
                 step?.[currentLang] || step?.["th"] || step?.["en"] || {};
               const stepTitle = stepLang?.title || "";
+              const stepDesc = stepLang?.desc || "";
               const stepContentText = stepLang?.content || "";
 
               return (
@@ -441,11 +458,9 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
                       >
                         {stepTitle}
                       </h3>
-                      {step?.desc && (
-                        <p className="mt-2 text-sm text-gray-500 wrap-break-word">
-                          {step.desc}
-                        </p>
-                      )}
+                      <p className="mt-2 text-sm text-gray-500 wrap-break-word">
+                        {stepDesc}
+                      </p>
 
                       {Array.isArray(step?.columns) && (
                         <div className="grid gap-4 mt-5 grid-cols-1 sm:grid-cols-3 w-full">

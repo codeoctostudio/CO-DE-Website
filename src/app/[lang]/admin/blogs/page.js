@@ -104,6 +104,7 @@ export default function BlogManagementPage() {
     try {
       const res = await fetch(`/api/blogs?slug=${deleteModal.blog.slug}`, {
         method: "DELETE",
+        credentials: "include",
       });
 
       if (res.ok) {
