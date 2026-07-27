@@ -193,13 +193,13 @@ export default function NewBlogPage() {
                 isFullWidth: Boolean(st.isFullWidth),
                 th: {
                   title: st.th?.title || st.th?.desc || "",
-                  content: st.th?.content || "",
+                  content: st.th?.desc || st.th?.content || "",
                   subPointsTitle:
                     st.subPointsTitle || st.th?.subPointsTitle || "",
                 },
                 en: {
                   title: st.en?.title || st.en?.desc || "",
-                  content: st.en?.content || "",
+                  content: st.en?.desc || st.en?.content || "",
                   subPointsTitle:
                     st.subPointsTitle || st.en?.subPointsTitle || "",
                 },
