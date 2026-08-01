@@ -16,6 +16,9 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
       introCardBg: "from-[#93d99a] to-[#b8f0be]",
       ctaBg: "from-[#7bc882] to-[#a3e5ab]",
       icon: "🧩",
+      // เพิ่มสีเฉพาะหมวดหมู่สำหรับ highlightBox และ mediaLayout
+      highlightBoxBg: "bg-[#93d99a]/15 border-[#93d99a]/30",
+      mediaLayoutBg: "bg-linear-to-br from-[#93d99a]/20 to-[#b8f0be]/30",
     },
     parents: {
       label: dict?.category_parents || "Parents Guide",
@@ -24,6 +27,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
       introCardBg: "from-[#d993c0] to-[#f0b8e4]",
       ctaBg: "from-[#c57bb1] to-[#e89fdc]",
       icon: "👨‍👩‍👧",
+      highlightBoxBg: "bg-[#d993c0]/15 border-[#d993c0]/30",
+      mediaLayoutBg: "bg-linear-to-br from-[#d993c0]/20 to-[#f0b8e4]/30",
     },
     "technology-trends": {
       label: dict?.category_technology_trends || "Technology Trends",
@@ -32,6 +37,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
       introCardBg: "from-[#718fdd] to-[#7e8ff1]",
       ctaBg: "from-[#5d7bc8] to-[#6a7be0]",
       icon: "🤖",
+      highlightBoxBg: "bg-[#718fdd]/15 border-[#718fdd]/30",
+      mediaLayoutBg: "bg-linear-to-br from-[#718fdd]/20 to-[#7e8ff1]/30",
     },
     guide: {
       label: dict?.category_guide || "Guide",
@@ -40,6 +47,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
       introCardBg: "from-[#e09371] to-[#f1b89e]",
       ctaBg: "from-[#ca7a57] to-[#e4a185]",
       icon: "🎓",
+      highlightBoxBg: "bg-[#e09371]/15 border-[#e09371]/30",
+      mediaLayoutBg: "bg-linear-to-br from-[#e09371]/20 to-[#f1b89e]/30",
     },
     reward: {
       label: dict?.category_reward || "Reward",
@@ -48,6 +57,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
       introCardBg: "from-[#e2b85a] to-[#f5d98b]",
       ctaBg: "from-[#cd9f3f] to-[#e7c76e]",
       icon: "🏆",
+      highlightBoxBg: "bg-[#e2b85a]/15 border-[#e2b85a]/30",
+      mediaLayoutBg: "bg-linear-to-br from-[#e2b85a]/20 to-[#f5d98b]/30",
     },
   };
 
@@ -235,16 +246,13 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
               <div className="lg:col-span-7 w-full min-w-0">
                 <div className="mt-6 flex flex-wrap gap-2.5">
                   {(localizedContent?.introTags || []).map((tagText, idx) => {
-                    const colors = [
-                      "bg-[#eaf8ec] text-green-700",
-                      "bg-[#eef4ff] text-blue-700",
-                      "bg-[#fff2df] text-orange-600",
-                    ];
                     return (
                       <span
                         key={idx}
-                        className={`rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-semibold wrap-break-word max-w-full ${
-                          colors[idx % 3]
+                        className={`rounded-full px-3.5 py-1.5 font-semibold wrap-break-word max-w-full ${
+                          idx === 0
+                            ? "text-lg sm:text-xl"
+                            : "text-xs sm:text-sm"
                         }`}
                       >
                         {tagText}
@@ -304,18 +312,17 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
               return (
                 <div
                   key={index}
-                  className={`rounded-3xl bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 flex flex-col justify-between overflow-hidden min-w-0 w-full ${
+                  className={`rounded-3xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 flex flex-col justify-between overflow-hidden min-w-0 w-full ${
                     isFullWidth ? "lg:col-span-2" : ""
                   } ${
-                    step?.type === "media-layout" &&
-                    blogData?.mediaType === "video"
-                      ? "bg-linear-to-br from-[#bae0e9] to-[#a5bdf0]"
-                      : ""
-                  } ${
-                    step?.type === "media-layout" &&
-                    blogData?.mediaType === "image"
-                      ? "bg-linear-to-br from-[#ffe6df] to-[#fcd0ba]"
-                      : ""
+                    step?.type === "media-layout"
+                      ? currentTheme.mediaLayoutBg
+                      : "bg-white"
+                  }
+                  ${
+                    step?.type === "highlight-boxes"
+                      ? currentTheme.mediaLayoutBg
+                      : "bg-white"
                   }`}
                 >
                   {/* layout 1: sub-points */}
@@ -387,8 +394,7 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
                                 <div
                                   key={bIdx}
                                   className={`p-4 rounded-2xl border wrap-break-word w-full overflow-hidden ${
-                                    box?.bgClass ||
-                                    "bg-blue-50/50 border-blue-100"
+                                    box?.bgClass || currentTheme.highlightBoxBg
                                   }`}
                                 >
                                   📌{" "}

@@ -14,37 +14,44 @@ const TrendsContent = () => {
   const [apiBlogs, setApiBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. ดึงข้อมูลจาก API
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await fetch("/api-proxy/blogs.php");
         const data = await res.json();
+
         if (data.ok && Array.isArray(data.blogs)) {
-          // แปลงโครงสร้าง API ให้อยู่ในรูปแบบ Object เดียวกับ Hardcode Articles
-          const formattedBlogs = data.blogs.map((item) => {
+          const sortedBlogs = data.blogs.sort((a, b) => {
+            const dateA = new Date(a.updated_at || 0);
+            const dateB = new Date(b.updated_at || 0);
+            return dateB - dateA;
+          });
+
+          const formattedBlogs = sortedBlogs.map((item) => {
             const localized =
               item[lang] && item[lang].introTitle ? item[lang] : item.th; // Fallback ใช้ th
 
-            // Map หมวดหมู่จาก API
             let cat = "tech";
-            if (item.category_type.includes("parent")) cat = "parents";
-            else if (item.category_type.includes("tutorial")) cat = "tutorials";
-            else if (item.category_type.includes("guide")) cat = "guide";
+            if (item.category_type?.includes("parent")) cat = "parents";
+            else if (item.category_type?.includes("tutorial"))
+              cat = "tutorials";
+            else if (item.category_type?.includes("guide")) cat = "guide";
 
             return {
-              title: localized.introTitle || "ไม่มีหัวข้อ",
-              content: localized.introDesc1 || "",
+              title: localized?.introTitle || "ไม่มีหัวข้อ",
+              content: localized?.introDesc1 || "",
               meta:
-                localized.introDesc2 ||
-                localized.introDesc1?.slice(0, 80) ||
+                localized?.introDesc2 ||
+                localized?.introDesc1?.slice(0, 80) ||
                 "",
               category: cat,
               slug: `/blogs/${item.category_type}/${item.slug}`,
-              featured: false, // สามารถกำหนดเงื่อนไขเพิ่มเติมได้
+              featured: false,
               isFromApi: true,
+              updatedAt: item.updated_at,
             };
           });
+
           setApiBlogs(formattedBlogs);
         }
       } catch (err) {
