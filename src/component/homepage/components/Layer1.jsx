@@ -21,15 +21,19 @@ const Layer1 = () => {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-start bg-[#042451] pb-12 pt-0 md:pt-32">
       <div className="h-[65dvh] min-h-100 w-full max-w-4xl md:h-[55dvh] lg:h-[60dvh] flex items-center justify-center">
-        {isClient ? (
+        {!isClient && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* ไว้ใส่ภาพในอนาคต */}
+            <div className="text-white opacity-50">Loading animation...</div>
+          </div>
+        )}
+        {isClient && (
           <LottiePlayer
             src="/lottie/intro.json"
             autoplay
             keepLastFrame
             className="h-full w-full"
           />
-        ) : (
-          <div className="h-full w-full" />
         )}
       </div>
       {/* Content */}

@@ -25,7 +25,6 @@ const Layer4 = () => {
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
-              priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
@@ -44,7 +43,6 @@ const Layer4 = () => {
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
-              priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
@@ -68,7 +66,6 @@ const Layer4 = () => {
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
-              priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">
@@ -89,7 +86,6 @@ const Layer4 = () => {
               width={600}
               height={400}
               className="rounded-3xl opacity-[0.95] brightness-75 w-full h-auto object-cover"
-              priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <p className="absolute w-[80%] text-center text-xl leading-relaxed underline underline-offset-[5px] md:text-2xl md:underline-offset-[7px] md:leading-relaxed">

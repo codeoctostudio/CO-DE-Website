@@ -99,7 +99,6 @@ const Layer3 = () => {
         width={400}
         height={400}
         className="rounded-tl-[30px] w-full h-auto"
-        priority
         sizes="(max-width: 768px) 100vw, 50vw"
       />
 
@@ -174,7 +173,6 @@ const Layer3 = () => {
                   width={80}
                   height={80}
                   className="mb-4"
-                  priority
                   sizes="50px"
                 />
                 <label
@@ -218,7 +216,6 @@ const Layer3 = () => {
                   width={80}
                   height={80}
                   className="mb-4"
-                  priority
                   sizes="40px"
                 />
                 <p className="text-center text-lg font-normal lg:text-xl">
@@ -258,7 +255,6 @@ const Layer3 = () => {
                       alt="สงสัยสามารถติดต่อได้เพิ่มเติม"
                       width={20}
                       height={20}
-                      priority
                       sizes="34"
                     />
                     <div
@@ -302,7 +298,6 @@ const Layer3 = () => {
                       alt="สงสัยสามารถติดต่อเพิ่มได้"
                       width={20}
                       height={20}
-                      priority
                       sizes="34px"
                     />
                     <div
@@ -346,7 +341,6 @@ const Layer3 = () => {
                       alt="สงสัยสามารถสอบถามได้"
                       width={20}
                       height={20}
-                      priority
                       sizes="34px"
                     />
                     <div
@@ -370,7 +364,6 @@ const Layer3 = () => {
                   width={80}
                   height={80}
                   className="mb-4"
-                  priority
                   sizes="50px"
                 />
                 <p className="text-center text-lg font-normal lg:text-xl">
