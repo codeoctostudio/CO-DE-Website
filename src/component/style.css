@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&display=swap');
+
+/* style.css */
+
+.trends-thai {
+    /* เอา Comfortaa ไว้ข้างหน้า! */
+    /* Browser จะใช้ Comfortaa กับ A-Z และใช้ IBM Plex กับ ก-ฮ */
+    font-family: 'Comfortaa', 'IBM Plex Sans Thai Looped', sans-serif;
+}
+
+.looped-text {
+    font-family: 'Comfortaa', 'IBM Plex Sans Thai', sans-serif;
+}
+  

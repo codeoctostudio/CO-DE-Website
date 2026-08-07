@@ -249,7 +249,7 @@ const RewardLayer = () => {
 
   return (
     <section aria-labelledby="reward-main-heading" ref={sectionRef}>
-      <div className="relative flex w-full flex-col items-center font-comfortaa bg-gradient-to-b from-[#fbfbfb] to-[#ffffff] py-8 md:py-20 px-4">
+      <div className="relative flex w-full flex-col items-center font-comfortaa bg-linear-to-b from-[#fbfbfb] to-[#ffffff] py-8 md:py-20 px-4">
         {/* HEADER */}
         <div className="flex w-full max-w-6xl flex-col items-center text-center gap-3 md:gap-4">
           <h2

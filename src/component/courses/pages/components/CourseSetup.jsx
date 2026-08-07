@@ -7,8 +7,11 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "@/component/style.css";
+import { useLanguage } from "@/hook/useLanguage";
 
 const CourseSetup = (props) => {
+  const { lang } = useLanguage();
   const courses = props.coursesData.map((course, index) => (
     <div key={index} className="mb-20 flex w-full flex-col items-center">
       <p className="mb-6 w-[80%] text-center text-2xl text-[#FDFF86] md:text-3xl xl:text-4xl">
@@ -61,7 +64,9 @@ const CourseSetup = (props) => {
         ))}
       </Swiper>
 
-      <p className="w-[80%] text-center text-2xl text-[#FDFF86] md:text-3xl xl:text-4xl">
+      <p
+        className={`w-[80%] text-center text-2xl text-[#FDFF86] ${lang === "th" ? "looped-text" : ""} md:text-3xl xl:text-4xl`}
+      >
         {props.texts.p1}
       </p>
 
@@ -69,9 +74,12 @@ const CourseSetup = (props) => {
         {props.texts.p2}
       </p>
 
-      <p className="w-[80%] text-center text-2xl text-[#FDFF86] md:text-3xl xl:text-4xl">
+      <p
+        className={`w-[80%] text-center text-2xl text-[#FDFF86] ${lang === "th" ? "looped-text" : ""} md:text-3xl xl:text-4xl`}
+      >
         {props.texts.p3}
       </p>
+
       <p className="mb-28 mt-8 w-[80%] text-center text-base md:text-lg lg:text-xl">
         {props.texts.p4}
       </p>

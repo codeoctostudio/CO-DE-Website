@@ -22,14 +22,14 @@ import AnnouncementBar from "../../msg/Announcements";
 import { useLanguage } from "@/hook/useLanguage";
 
 const Fundamental = () => {
-  const { langPath } = useLanguage();
+  const { dict, langPath } = useLanguage();
   const [announcementVisible, setAnnouncementVisible] = useState(false);
 
   const texts = {
-    p1: "The beginning of strong academic coding background",
-    p2: "Our fundamental coding class focuses on teaching the concept of coding theory, making it ideal for learners who have a specific purpose in mind for their future programming endeavors, or for those who need a strong foundational understanding of coding theory for future studies in coding programs.",
-    p3: "Strong basic is everything",
-    p4: "A strong foundation in coding is essential for programmers, and we understand this deeply. That's why our course focuses primarily on strengthening your fundamental skills. With diverse exercises and expert instructors with strong academic backgrounds, we aim to build your confidence in navigating the coding world.",
+    p1: dict.course_fundamental_1,
+    p2: dict.course_fundamental_2,
+    p3: dict.course_fundamental_3,
+    p4: dict.course_fundamental_4,
   };
 
   const coursesData = [

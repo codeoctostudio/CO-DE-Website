@@ -6,8 +6,11 @@ import bulb from "@/assets/CourseSkills/light/bulb.webp";
 import temp from "@/assets/CourseSkills/light/temp.webp";
 import camera from "@/assets/CourseSkills/light/camera.webp";
 import Image from "next/image";
+import "@/component/style.css";
+const { useLanguage } = require("@/hook/useLanguage");
 
 const Playground = () => {
+  const { dict, lang } = useLanguage();
   const features = [
     {
       logo: shape,
@@ -50,14 +53,11 @@ const Playground = () => {
   return (
     <>
       <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white ">
-        <p className=" w-[80%] text-center text-3xl md:text-4xl">
-          Environment that creates creative thinking
+        <p className={`w-[80%] text-center text-3xl ${lang === "th" ? "looped-text" : ""} md:text-4xl`}>
+          {dict.playground_1}
         </p>
         <p className="my-14 w-[80%] text-center text-lg md:text-xl">
-          We believe that a conducive environment fosters imagination and
-          creativity. Therefore, we prioritize the classroom setting to ensure
-          your child feels happy, relaxed, and stimulated for effective
-          learning.
+          {dict.playground_2}
         </p>
         <Image
           src={front}
