@@ -259,7 +259,7 @@ const WebCourse = () => {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/x8Rjqw6KFPk?"
+            src="https://www.youtube.com/embed/mPOJplu-6OQ"
             title="CO-DE : Web Development"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
