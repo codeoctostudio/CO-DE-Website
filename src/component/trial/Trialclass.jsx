@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image"; // 🌟 เพิ่ม Import ตัวนี้เพื่อป้องกัน Error: Image is not defined
+import Image from "next/image";
 import emailjs from "@emailjs/browser";
 
 import Jacob from "@/assets/randomimages/Jacob.webp";
@@ -15,29 +15,22 @@ const TrialClass = () => {
   const searchParams = useSearchParams();
   const formRef = useRef();
 
-  const contactTypeProp = searchParams.get("contactType") || "phone";
   const phoneProp = searchParams.get("phone") || "";
-  const emailProp = searchParams.get("email") || "";
 
   const [loading, setLoading] = useState(false);
   const [selectedAge, setSelectedAge] = useState(null);
 
-  const [contactType, setContactType] = useState(contactTypeProp);
   const [phone, setPhone] = useState(phoneProp);
-  const [email, setEmail] = useState(emailProp);
-
   const [studentName, setStudentName] = useState("");
   const [schoolName, setSchoolName] = useState("");
-
   const [phoneError, setPhoneError] = useState("");
-  const [emailError, setEmailError] = useState("");
 
   const isFormValid =
     studentName.trim() !== "" &&
     schoolName.trim() !== "" &&
     selectedAge !== null &&
-    ((contactType === "phone" && phone.length === 10 && !phoneError) ||
-      (contactType === "email" && email && !emailError));
+    phone.length === 10 &&
+    !phoneError;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +43,7 @@ const TrialClass = () => {
         "service_codeacademy",
         "template_uaoq44h",
         formRef.current,
-        "Dwq3JqPF8Lx4j4ZBG",
+        "Dwq3JqPF8Lx4j4ZBG"
       )
       .then(
         () => {
@@ -59,7 +52,7 @@ const TrialClass = () => {
         (error) => {
           console.log(error.text);
           setLoading(false);
-        },
+        }
       );
   };
 
@@ -131,93 +124,37 @@ const TrialClass = () => {
 
         {/* RIGHT */}
         <div className="order-1 w-full md:order-2 md:w-full">
-          <div className="w-full max-w-xl mx-auto md:mx-0">
+          <div className="mx-auto w-full max-w-xl md:mx-0">
             <h1 className="-mt-3 mb-4 text-center text-lg md:text-left md:text-[1.65rem]">
               {dict.trialcall_1}
             </h1>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              {/* Contact Type Toggle */}
+              {/* Phone Input */}
               <div>
                 <label className="mb-1 block text-sm opacity-80 md:text-lg">
-                  {dict.trialcall_2}
+                  {dict.trialcall_3}
                 </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setPhone(value);
 
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setContactType("phone")}
-                    className={`flex-1 rounded-md border py-2 text-sm transition md:text-lg ${
-                      contactType === "phone"
-                        ? "border-white bg-[#F8E27A] text-[#042451]"
-                        : "border-[#F8E27A] bg-white text-[#042451]"
-                    }`}
-                  >
-                    📞 {dict.trialcall_3}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setContactType("email")}
-                    className={`flex-1 rounded-md border py-2 text-sm transition md:text-lg ${
-                      contactType === "email"
-                        ? "border-white bg-[#F8E27A] text-[#042451]"
-                        : "border-[#F8E27A] bg-white text-[#042451]"
-                    }`}
-                  >
-                    📧 {dict.trialcall_5}
-                  </button>
-                </div>
-              </div>
-
-              {/* Dynamic Input (Phone/Email) */}
-              <div>
-                {contactType === "phone" ? (
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => {
-                      const value = e.target.value
-                        .replace(/\D/g, "")
-                        .slice(0, 10);
-                      setPhone(value);
-
-                      if (value && value.length !== 10) {
-                        setPhoneError("กรุณากรอกเบอร์โทรให้ครบ 10 หลัก");
-                      } else {
-                        setPhoneError("");
-                      }
-                    }}
-                    placeholder={dict.trialcall_4}
-                    className={`-mt-2 w-full bg-white rounded-md px-3 py-2 text-black ${
-                      phoneError
-                        ? "border border-red-500 focus:ring-red-500"
-                        : "border border-gray-300 focus:ring-[#F7C94B]"
-                    } focus:outline-none focus:ring-2`}
-                  />
-                ) : (
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setEmail(value);
-
-                      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                      if (value && !emailRegex.test(value)) {
-                        setEmailError("รูปแบบอีเมลไม่ถูกต้อง");
-                      } else {
-                        setEmailError("");
-                      }
-                    }}
-                    placeholder={dict.trialcall_6}
-                    className={`-mt-2 w-full bg-white rounded-md px-3 py-2 text-black ${
-                      emailError
-                        ? "border border-red-500 focus:ring-red-500"
-                        : "border border-gray-300 focus:ring-[#F7C94B]"
-                    } focus:outline-none focus:ring-2`}
-                  />
-                )}
+                    if (value && value.length !== 10) {
+                      setPhoneError("กรุณากรอกเบอร์โทรให้ครบ 10 หลัก");
+                    } else {
+                      setPhoneError("");
+                    }
+                  }}
+                  placeholder={dict.trialcall_4}
+                  className={`w-full rounded-md bg-white px-3 py-2 text-black ${
+                    phoneError
+                      ? "border border-red-500 focus:ring-red-500"
+                      : "border border-gray-300 focus:ring-[#F7C94B]"
+                  } focus:outline-none focus:ring-2`}
+                />
               </div>
 
               {/* Student Name */}
@@ -271,7 +208,9 @@ const TrialClass = () => {
                         key={age}
                         type="button"
                         onClick={() => setSelectedAge(age)}
-                        className={`rounded-full border py-2 text-sm transition sm:px-4 sm:py-1 ${lang === "en" ? "md:text-sm" : "md:text-lg"} 
+                        className={`rounded-full border py-2 text-sm transition sm:px-4 sm:py-1 ${
+                          lang === "en" ? "md:text-sm" : "md:text-lg"
+                        } 
                         ${
                           isSelected
                             ? "border-white bg-[#F8E27A] text-[#042451]"
@@ -287,7 +226,6 @@ const TrialClass = () => {
 
               {/* Hidden Inputs for EmailJS */}
               <input type="hidden" name="parent_number" value={phone || ""} />
-              <input type="hidden" name="email" value={email || ""} />
               <input
                 type="hidden"
                 name="student_age"
