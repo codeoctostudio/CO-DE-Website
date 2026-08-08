@@ -107,7 +107,7 @@ const Layer2 = () => {
                 >
                   {dict.layer2_6_5}
                 </button>
-                <p className="text-center text-[0.1rem] leading-tight opacity-70 md:text-sm md:leading-normal">
+                <p className="text-center text-[0.7rem] leading-tight opacity-70 md:text-sm md:leading-normal">
                   ⚡{dict.layer2_6_5_1}<br />
                   💖{dict.layer2_6_6}
                 </p>
