@@ -171,7 +171,7 @@ const Layer2 = () => {
                 height={400}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute left-0 top-0 h-[22%] w-[22%] -translate-x-[35%] -translate-y-[55%]">
+              <div className="absolute left-0 top-0 h-[22%] w-[22%] translate-x-[-35%] translate-y-[-55%]">
                 <Image
                   src={img3}
                   alt="แมวสีส้มแอบดู"
