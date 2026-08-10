@@ -14,25 +14,25 @@ const Playground = () => {
   const features = [
     {
       logo: shape,
-      title: "Curve and Shape",
-      desc: "Increase your imagination and creativity",
+      title: dict.playground_3,
+      desc: dict.playground_4,
     },
-    { logo: color, title: "Color", desc: "Stimulate eagerness for learning" },
-    { logo: head, title: "Fun", desc: "The desire of learning new things" },
+    { logo: color, title: dict.playground_5, desc: dict.playground_6 },
+    { logo: head, title: dict.playground_7, desc: dict.playground_8 },
     {
       logo: bulb,
-      title: "Lighting",
-      desc: "Warm white lights reduce eye strain.",
+      title: dict.playground_9,
+      desc: dict.playground_10,
     },
     {
       logo: temp,
-      title: "Temperature",
-      desc: "The best room temperature for productivity",
+      title: dict.playground_11,
+      desc: dict.playground_12,
     },
     {
       logo: camera,
-      title: "CCTV Safety",
-      desc: "Ensure appropriate behavior control.",
+      title: dict.playground_13,
+      desc: dict.playground_14,
     },
   ];
 
@@ -41,8 +41,18 @@ const Playground = () => {
       key={index}
       className="flex w-[35%] flex-col items-center text-center sm:w-[30%]"
     >
-      <Image src={feature.logo} className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20" loading="lazy" alt="Feature" sizes="(max-width: 768px) 100vw, 50vw" />
-      <p className="mb-5 text-sm font-bold text-[#EA587F] sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+      <Image
+        src={feature.logo}
+        className="-mb-6 md:-mb-11 lg:-mb-14 xl:-mb-20"
+        loading="lazy"
+        alt="Feature"
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+      <p
+        className={`mb-5 text-sm font-bold text-[#EA587F] ${
+          lang === "th" ? "font-looped" : ""
+        } sm:text-base md:text-lg lg:text-xl xl:text-2xl`}
+      >
         {feature.title}
       </p>
       <p className="text-sm md:text-base lg:text-lg xl:text-xl">
@@ -53,7 +63,9 @@ const Playground = () => {
   return (
     <>
       <main className="flex h-full w-full flex-col items-center bg-[#042451] pt-37.5 font-comfortaa text-white ">
-        <p className={`w-[80%] text-center text-3xl ${lang === "th" ? "looped-text" : ""} md:text-4xl`}>
+        <p
+          className={`w-[80%] text-center text-3xl ${lang === "th" ? "looped-text" : ""} md:text-4xl`}
+        >
           {dict.playground_1}
         </p>
         <p className="my-14 w-[80%] text-center text-lg md:text-xl">
