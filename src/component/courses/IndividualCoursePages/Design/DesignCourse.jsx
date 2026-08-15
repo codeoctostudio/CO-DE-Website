@@ -1,6 +1,7 @@
 "use client";
 import kid from "@/assets/CourseLogos/Design/main.webp";
 import designStat from "@/assets/CourseLogos/Design/designStat.webp";
+import designStatth from "@/assets/CourseLogos/Design/designStatth.webp";
 import check from "@/assets/CourseLogos/Design/check.webp";
 import episodes from "@/assets/CourseLogos/Design/episodes.webp";
 import designThinking from "@/assets/CourseLogos/Design/designThinking.webp";
@@ -19,11 +20,13 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useLanguage } from "@/hook/useLanguage";
 
 const DesignCourse = () => {
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
+  const { dict, lang } = useLanguage();
 
   const slideShowData = [img1, img2, img3, img4];
 
@@ -39,9 +42,12 @@ const DesignCourse = () => {
             loading="eager"
           />
 
-          <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "Spark creativity and logical thinking in your little ones, aligning
-            with their developmental milestones"
+          <p
+            className={`my-12 w-[90%] text-center text-xl lg:text-2xl xl:text-3xl ${
+              lang === "th" ? "looped-text" : ""
+            }`}
+          >
+            {dict?.course_nonecode_designthinking_10}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -58,47 +64,63 @@ const DesignCourse = () => {
 
       <section className="flex w-full flex-col bg-[#FEE397] md:flex-row">
         <Image
-          src={designStat}
-          alt="Course"
+          src={lang === "th" ? designStatth : designStat}
+          alt="Design Thinking Stat"
           className="w-full object-contain md:w-[55%]"
           loading="eager"
         />
 
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
-            <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+            <p
+              className={`}mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl ${
+                lang === "th" ? "looped-text" : ""
+              }`}
+            >
+              {dict?.course_nonecode_designthinking_11}
             </p>
 
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Gross motor skills</p>
-              </li>
-
-              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Fine motor skills</p>
-              </li>
-
-              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Language development</p>
-              </li>
-
-              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Cognitive abilities</p>
-              </li>
-
-              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Social-emotional and behavioral well-being
+                  {dict?.course_nonecode_designthinking_12}
                 </p>
               </li>
 
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Logical thinking and Sequencing</p>
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_13}
+                </p>
               </li>
 
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Basic introduction to Coding experience</p>
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_14}
+                </p>
+              </li>
+
+              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_15}
+                </p>
+              </li>
+
+              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_16}
+                </p>
+              </li>
+
+              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_17}
+                </p>
+              </li>
+
+              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
+                <p className="ml-2">
+                  {dict?.course_nonecode_designthinking_18}
+                </p>
               </li>
             </ul>
           </div>
@@ -115,7 +137,7 @@ const DesignCourse = () => {
               loading="lazy"
             />
 
-            <p>Beginner</p>
+            <p>{dict?.course_nonecode_designthinking_19}</p>
           </div>
 
           <div className="mb-3 flex w-[50%] items-center font-bold">
@@ -126,7 +148,7 @@ const DesignCourse = () => {
               loading="lazy"
             />
 
-            <p>Screen Free Coding</p>
+            <p>{dict?.course_nonecode_designthinking_20}</p>
           </div>
 
           <div className="mb-3 flex w-[50%] items-center font-bold">
@@ -137,7 +159,7 @@ const DesignCourse = () => {
               loading="lazy"
             />
 
-            <p>On-site</p>
+            <p>{dict?.course_nonecode_designthinking_21}</p>
           </div>
 
           <div className="mb-3 flex w-[50%] items-center font-bold">
@@ -148,7 +170,7 @@ const DesignCourse = () => {
               loading="lazy"
             />
 
-            <p>Private / Group Class</p>
+            <p>{dict?.course_nonecode_designthinking_22}</p>
           </div>
 
           <div className="mb-3 flex w-[50%] items-center font-bold">
@@ -159,81 +181,61 @@ const DesignCourse = () => {
               loading="lazy"
             />
 
-            <p>Learning Through Play</p>
+            <p>{dict?.course_nonecode_designthinking_23}</p>
           </div>
         </div>
       </section>
 
       <section className="flex w-full items-center justify-center bg-[#fddb7e] p-10 text-black">
         <div>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${
+              lang === "th" ? "looped-text" : ""
+            }`}
+          >
+            {dict?.course_nonecode_designthinking_1}
           </p>
 
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">Nurturing Growth in Crucial Areas: </li>
+            <li className={`font-bold ${lang === "th" ? "looped-text" : ""}`}>
+              {dict?.course_nonecode_designthinking_11}{" "}
+            </li>
 
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                The course aims to foster growth in five crucial areas: gross
-                motor skills, fine motor skills, language development, cognitive
-                abilities, and social-emotional and behavioral well-being.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_3}</li>
 
-              <li>
-                Each aspect is likely addressed through a combination of
-                activities, exercises, and projects tailored to the age and
-                developmental stage of the children involved.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_3_1}</li>
             </ul>
 
-            <li className="font-bold">Integration of 21st-century Skills:</li>
+            <li className={`font-bold ${lang === "th" ? "looped-text" : ""}`}>
+              {dict?.course_nonecode_designthinking_4}
+            </li>
 
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                The curriculum places a strong emphasis on 21st-century skills
-                such as coding and imagination. This likely involves hands-on
-                activities where children engage in coding exercises, explore
-                creative projects, and participate in imaginative play.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_5}</li>
 
-              <li>
-                The goal is to equip them with skills that are highly relevant
-                in today's digital age.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_5_1}</li>
             </ul>
 
-            <li className="font-bold">Storytelling and Coding Integration: </li>
+            <li className={`font-bold ${lang === "th" ? "looped-text" : ""}`}>
+              {dict?.course_nonecode_designthinking_6}
+            </li>
 
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                One distinctive feature of the course is the integration of
-                storytelling and coding. This combination serves multiple
-                purposes, including enhancing creativity, logical thinking,
-                language skills, and problem-solving abilities.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_7}</li>
 
-              <li>
-                Children may engage in storytelling activities where they create
-                narratives and then use coding tools or platforms to bring their
-                stories to life in a digital format.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_7_1}</li>
             </ul>
 
-            <li className="font-bold">Engagement and Enjoyment: </li>
+            <li className={`font-bold ${lang === "th" ? "looped-text" : ""}`}>
+              {dict?.course_nonecode_designthinking_8}
+            </li>
 
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                The course is designed to be enjoyable for children, ensuring
-                that they remain engaged and motivated throughout the learning
-                process.
-              </li>
+              <li>{dict?.course_nonecode_designthinking_9}</li>
 
               <li>
-                <p>
-                  This likely involves interactive activities, group projects,
-                  and opportunities for exploration and discovery.
-                </p>
+                <p>{dict?.course_nonecode_designthinking_9_1}</p>
               </li>
             </ul>
           </ul>
