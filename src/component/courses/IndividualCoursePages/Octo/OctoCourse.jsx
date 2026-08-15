@@ -20,11 +20,13 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useLanguage } from "@/hook/useLanguage";
 
 const OctoCourse = () => {
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
+  const { dict, lang } = useLanguage();
   const slideShowData = [img1, img2, img3, img4];
 
   return (
@@ -39,8 +41,12 @@ const OctoCourse = () => {
             decoding="async"
           />
 
-          <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "Ignite your passion for coding in a fun and interactive way."
+          <p
+            className={`my-12 w-[90%] text-center text-xl lg:text-2xl xl:text-3xl ${
+              lang === "th" ? "font-looped" : ""
+            }`}
+          >
+            {dict.course_blockcode_dino_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -64,33 +70,29 @@ const OctoCourse = () => {
         />
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
-            <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+            <p
+              className={`mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl ${
+                lang === "th" ? "font-looped" : ""
+              }`}
+            >
+              {dict.course_blockcode_dino_2}
             </p>
 
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  A Strong Imaginative Mind Through the Process of Storytelling
-                </p>
+                <p className="ml-2">{dict.course_blockcode_dino_3}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Programming Concepts with Block-Based Coding
-                </p>
+                <p className="ml-2">{dict.course_blockcode_dino_4}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Development of Sequencing and Logical Thinking Skills
-                </p>
+                <p className="ml-2">{dict.course_blockcode_dino_5}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Creativity and imagination through project-based learning
-                </p>
+                <p className="ml-2">{dict.course_blockcode_dino_6}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Gaining Familiarity with Technology</p>
+                <p className="ml-2">{dict.course_blockcode_dino_7}</p>
               </li>
             </ul>
           </div>
@@ -98,7 +100,11 @@ const OctoCourse = () => {
       </section>
 
       <section className="flex items-center justify-center bg-[#6CBA84] p-10">
-        <div className=" flex w-full flex-wrap text-sm sm:text-base  lg:text-lg xl:text-3xl ">
+        <div
+          className={`flex w-full flex-wrap text-sm sm:text-base  lg:text-lg xl:text-3xl ${
+            lang === "th" ? "font-looped" : ""
+          }`}
+        >
           <div className="mb-3 flex w-[50%] items-center font-bold ">
             <Image
               src={level1}
@@ -106,7 +112,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Beginner</p>
+            <p>{dict.course_blockcode_dino_7}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -115,7 +121,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Block-Based Code</p>
+            <p>{dict.course_blockcode_dino_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -124,7 +130,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site</p>
+            <p>{dict.course_blockcode_dino_9}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -133,7 +139,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_blockcode_dino_11}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -142,84 +148,71 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_blockcode_dino_12}</p>
           </div>
         </div>
       </section>
 
       <section className="flex w-full items-center justify-center bg-[#b7f5ca] p-10 text-black">
         <div>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${
+              lang === "th" ? "font-looped" : ""
+            }`}
+          >
+            {dict.course_blockcode_dino_12}
           </p>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Introducing the World of Imagination Brought to Life by Code
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${
+              lang === "th" ? "font-looped" : ""
+            }`}
+          >
+            {dict.course_blockcode_dino_13}
           </p>
           <p className="mb-5 text-xl  lg:text-2xl">
-            The Dino Code class is an adventure story of a young dinosaur that
-            introduces your child to the exciting world of coding in a fun and
-            imaginative way!
+            {dict.course_blockcode_dino_14}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">Imaginative Learning Goals:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_15}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                In this course, your child will embark on thrilling coding
-                adventures, where they'll learn to create animations, solve
-                puzzles, and bring their favorite stories to life through simple
-                coding concepts.
-              </li>
+              <li>{dict.course_blockcode_dino_16}</li>
             </ul>
 
-            <li className="font-bold">Creative Learning Resources: </li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_17}{" "}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Our curriculum is filled with captivating storytelling and
-                hands-on activities, making learning both enjoyable and
-                educational. Each lesson is carefully crafted to spark your
-                child's imagination and curiosity.
-              </li>
+              <li>{dict.course_blockcode_dino_18}</li>
             </ul>
 
-            <li className="font-bold">Playful Practice:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_19}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Through guided activities and games, your child will develop
-                essential coding skills while having a blast! They'll use
-                colorful blocks and friendly characters to code their own
-                creations, fostering a love for problem-solving and critical
-                thinking.
-              </li>
+              <li>{dict.course_blockcode_dino_20}</li>
             </ul>
 
-            <li className="font-bold">Reflective Feedback:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_21}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Regular feedback sessions provide valuable insights into your
-                child's progress and achievements. We believe in recognizing
-                every milestone, no matter how small, to inspire confidence and
-                a sense of accomplishment.
-              </li>
+              <li>{dict.course_blockcode_dino_22}</li>
             </ul>
 
-            <li className="font-bold">Engaging Challenges:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_23}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Our course is filled with exciting challenges and puzzles that
-                will keep your child engaged and motivated. They'll learn to
-                overcome obstacles, think creatively, and persevere through
-                trial and error.
-              </li>
+              <li>{dict.course_blockcode_dino_24}</li>
             </ul>
 
-            <li className="font-bold">Project Presentations:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_blockcode_dino_25}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                At the end of the course, your child will have the opportunity
-                to showcase their coding projects in a special presentation.
-                They'll share their creations with family and friends, building
-                confidence and communication skills in the process.
-              </li>
+              <li>{dict.course_blockcode_dino_26}</li>
             </ul>
           </ul>
           <p className="mb-5 text-base md:text-lg lg:text-xl">

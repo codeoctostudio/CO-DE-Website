@@ -67,7 +67,7 @@ const CourseList = (props) => {
       <section className="flex w-full flex-col items-center ">
         <p
           className={`w-[80%] text-center text-3xl md:text-4xl ${
-            lang === "th" ? "looped-text" : ""
+            lang === "th" ? "font-looped" : ""
           }`}
         >
           {dict?.course_1 ||
