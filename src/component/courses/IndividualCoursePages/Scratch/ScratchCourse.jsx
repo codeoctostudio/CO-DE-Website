@@ -2,6 +2,7 @@
 
 import kid from "@/assets/CourseLogos/Scratch/kid.webp";
 import scratchStat from "@/assets/CourseLogos/Scratch/scratchStat.webp";
+import scratchStatTH from "@/assets/CourseLogos/Scratch/scratchStatTH.webp";
 import check from "@/assets/CourseLogos/Scratch/check.webp";
 import episodes from "@/assets/CourseLogos/Scratch/episodes.webp";
 import blockcoder from "@/assets/CourseLogos/Scratch/blockcoder.webp";
@@ -13,6 +14,7 @@ import blockCode from "@/assets/CourseIcons/blockCode.webp";
 import img1 from "@/assets/CourseLogos/Scratch/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Scratch/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Scratch/images/img3.webp";
+import { useLanguage } from "@/hook/useLanguage";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,6 +24,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const ScratchCourse = () => {
+  const {lang} = useLanguage
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -57,7 +60,7 @@ const ScratchCourse = () => {
 
       <section className="flex w-full flex-col bg-[#ACEDBF] md:flex-row">
         <Image
-          src={scratchStat}
+          src={lang === "th" ? scratchStatTH : scratchStat}
           alt="Scratch Course"
           className="w-full object-contain md:w-[55%]"
           loading="eager"

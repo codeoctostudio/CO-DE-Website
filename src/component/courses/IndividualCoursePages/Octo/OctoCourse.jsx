@@ -1,6 +1,7 @@
 "use client";
 import kid from "@/assets/CourseLogos/Octo/main.webp";
 import octoStat from "@/assets/CourseLogos/Octo/octoStat.webp";
+import octoStatTH from "@/assets/CourseLogos/Octo/octoStatTH.webp";
 import check from "@/assets/CourseLogos/Octo/check.webp";
 import episodes from "@/assets/CourseLogos/Octo/episodes.webp";
 import dinocode from "@/assets/CourseLogos/Octo/dinocode.webp";
@@ -62,7 +63,7 @@ const OctoCourse = () => {
 
       <section className="flex w-full flex-col bg-[#ACEDBF] md:flex-row">
         <Image
-          src={octoStat}
+          src={lang === "th" ? octoStatTH : octoStat}
           alt="Dino Code Course"
           className="w-full object-contain md:w-[55%]"
           loading="eager"
@@ -86,13 +87,13 @@ const OctoCourse = () => {
                 <p className="ml-2">{dict.course_blockcode_dino_4}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
+                <p className="ml-2">{dict.course_blockcode_dino_4_1}</p>
+              </li>
+              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">{dict.course_blockcode_dino_5}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">{dict.course_blockcode_dino_6}</p>
-              </li>
-              <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">{dict.course_blockcode_dino_7}</p>
               </li>
             </ul>
           </div>
@@ -121,7 +122,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>{dict.course_blockcode_dino_8}</p>
+            <p>{dict.course_blockcode_dino_10}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -130,7 +131,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>{dict.course_blockcode_dino_9}</p>
+            <p>{dict.course_blockcode_dino_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -148,7 +149,7 @@ const OctoCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>{dict.course_blockcode_dino_12}</p>
+            <p>{dict.course_blockcode_dino_9}</p>
           </div>
         </div>
       </section>
@@ -216,10 +217,7 @@ const OctoCourse = () => {
             </ul>
           </ul>
           <p className="mb-5 text-base md:text-lg lg:text-xl">
-            Enroll your child in the Dino Code class today and watch as they
-            embark on a journey of discovery, creativity, and endless
-            possibilities! Give them the gift of coding and set them on the path
-            to a bright and promising future.
+            {dict.course_blockcode_dino_27}
           </p>
         </div>
       </section>

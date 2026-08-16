@@ -13,6 +13,7 @@ import textCode from "@/assets/CourseIcons/textCode.webp";
 import img1 from "@/assets/CourseLogos/Roblox/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Roblox/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Roblox/images/img3.webp";
+import { useLanguage } from "@/hook/useLanguage";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,6 +23,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const RobloxCourse = () => {
+  const { dict, lang } = useLanguage();
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -40,9 +42,12 @@ const RobloxCourse = () => {
             //{...{ fetchPriority: "high" }}
           />
 
-          <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "Where fun meets fundamentals. Learn coding through your child's
-            favorite game."
+          <p
+            className={`my-12 w-[90%] text-center text-xl ${
+              lang === "th" ? "font-looped" : ""
+            } lg:text-2xl xl:text-3xl`}
+          >
+            {dict.course_creative_roblox_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -67,28 +72,28 @@ const RobloxCourse = () => {
         />
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
-            <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+            <p
+              className={`mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl ${
+                lang === "th" ? "font-looped" : ""
+              }`}
+            >
+              {dict.course_creative_roblox_2}
             </p>
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Coding Principles with Lua Programming</p>
+                <p className="ml-2">{dict.course_creative_roblox_3}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Creativity and Imagination through Project-Based Learning
-                </p>
+                <p className="ml-2">{dict.course_creative_roblox_4}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Problem Solving and Logical Thinking Concepts
-                </p>
+                <p className="ml-2">{dict.course_creative_roblox_5}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Game Developer’s Mindset</p>
+                <p className="ml-2">{dict.course_creative_roblox_6}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Confidence in Public Presentation</p>
+                <p className="ml-2">{dict.course_creative_roblox_7}</p>
               </li>
             </ul>
           </div>
@@ -104,7 +109,7 @@ const RobloxCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Beginner</p>
+            <p>{dict.course_creative_roblox_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -113,7 +118,7 @@ const RobloxCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Text-Based Code</p>
+            <p>{dict.course_creative_roblox_9}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -122,7 +127,7 @@ const RobloxCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site / Online</p>
+            <p>{dict.course_creative_roblox_10}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -131,7 +136,7 @@ const RobloxCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_creative_roblox_11}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -140,93 +145,74 @@ const RobloxCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_creative_roblox_12}</p>
           </div>
         </div>
       </section>
 
       <section className="flex w-full items-center justify-center bg-[#fe7398] p-10 text-black">
         <div>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${
+              lang === "th" ? "font-looped" : ""
+            }`}
+          >
+            {dict.course_creative_roblox_13}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">Exploring the Interface:</li>
-            <ul className="mb-5 ml-7 list-square">
-              <li>Familiarize yourself with the Roblox Studio interface.</li>
-              <li>
-                Understand the tools and developer environment controls in
-                Roblox Studio.
-              </li>
-            </ul>
-
-            <li className="font-bold">Learning Lua:</li>
-            <ul className="mb-5 ml-7 list-square">
-              <li>
-                Begin by learning the basics of Lua programming, both specific
-                to Roblox and more general Lua programming principles.
-              </li>
-              <li>
-                Gain more experience in coding principles through gameplay.
-              </li>
-            </ul>
-
-            <li className="font-bold">Understanding the APIs:</li>
-            <ul className="mb-5 ml-7 list-square">
-              <li>
-                Familiarize yourself with the concept of APIs while applying
-                them through Roblox game development.
-              </li>
-              <li>
-                Take the time to understand these APIs and how to use them
-                effectively in your projects.
-              </li>
-            </ul>
-
-            <li className="font-bold">
-              Learning through Play with Simple Tasks:
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_14}
             </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Begin your coding journey by working on simple tasks in class.
-              </li>
-              <li>
-                Start with basic games or simulations that allow you to practice
-                your coding skills without feeling overwhelmed.
-              </li>
+              <li>{dict.course_creative_roblox_15}</li>
+              <li>{dict.course_creative_roblox_16}</li>
             </ul>
 
-            <li className="font-bold">Experimenting and Iterating:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_17}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                As you gain more confidence in your coding abilities, start
-                experimenting with more complex projects.
-              </li>
+              <li>{dict.course_creative_roblox_18}</li>
+              <li>{dict.course_creative_roblox_19}</li>
             </ul>
 
-            <li className="font-bold">Building Portfolio Projects:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_20}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                As you become more skilled in coding with Roblox Studio, start
-                working on portfolio projects that showcase your abilities.
-                These projects can be shared with others on the Roblox platform
-                for the world to see.
-              </li>
-              <li>
-                Experiment with advanced features and techniques in Scratch to
-                stretch your creativity and problem-solving abilities.
-              </li>
+              <li>{dict.course_creative_roblox_21}</li>
+              <li>{dict.course_creative_roblox_22}</li>
             </ul>
 
-            <li className="font-bold">Project Showcase:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_23}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Showcase your projects to the class or in a public exhibition.
-              </li>
-              <li>
-                Present your work, explain your creative process, and share
-                insights gained from the project.
-              </li>
+              <li>{dict.course_creative_roblox_24}</li>
+              <li>{dict.course_creative_roblox_25}</li>
+            </ul>
+
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_26}
+            </li>
+            <ul className="mb-5 ml-7 list-square">
+              <li>{dict.course_creative_roblox_27}</li>
+            </ul>
+
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_28}
+            </li>
+            <ul className="mb-5 ml-7 list-square">
+              <li>{dict.course_creative_roblox_29}</li>
+              <li>{dict.course_creative_roblox_30}</li>
+            </ul>
+
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_creative_roblox_31}
+            </li>
+            <ul className="mb-5 ml-7 list-square">
+              <li>{dict.course_creative_roblox_32}</li>
+              <li>{dict.course_creative_roblox_33}</li>
             </ul>
           </ul>
         </div>

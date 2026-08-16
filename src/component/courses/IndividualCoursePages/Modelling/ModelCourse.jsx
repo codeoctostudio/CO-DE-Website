@@ -2,6 +2,7 @@
 
 import kid from "@/assets/CourseLogos/Modelling/main.webp";
 import modelStat from "@/assets/CourseLogos/Modelling/modelStat.webp";
+import modelStatTH from "@/assets/CourseLogos/Modelling/modelStatTH.webp";
 import check from "@/assets/CourseLogos/Modelling/check.webp";
 import episodes from "@/assets/CourseLogos/Modelling/episodes.webp";
 import modelling from "@/assets/CourseLogos/Modelling/modelling.webp";
@@ -14,6 +15,8 @@ import img1 from "@/assets/CourseLogos/Modelling/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Modelling/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Modelling/images/img3.webp";
 
+import { useLanguage } from "@/hook/useLanguage";
+
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -22,6 +25,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const ModelCourse = () => {
+  const { dict, lang } = useLanguage();
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -40,9 +44,10 @@ const ModelCourse = () => {
             //{...{ fetchPriority: "high" }}
           />
 
-          <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "Unleash your creativity, learn the art of digital sculpting, and
-            bring your ideas to life"
+          <p
+            className={`my-12 w-[90%] text-center text-xl ${lang === "th" ? "font-looped" : ""} lg:text-2xl xl:text-3xl`}
+          >
+            {dict.course_mechanical_3modelling_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -59,40 +64,36 @@ const ModelCourse = () => {
 
       <section className="flex w-full flex-col bg-[#FFAE71] md:flex-row">
         <Image
-          src={modelStat}
+          src={lang === "th" ? modelStatTH : modelStat}
           alt="3D Modelling Course"
           className="w-full object-contain md:w-[55%]"
           loading="eager"
           decoding="async"
           //{...{ fetchPriority: "high" }}
         />
-        <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
+        <div
+          className={`flex w-full ${lang === "th" ? "font-looped" : ""} flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 `}
+        >
           <div>
             <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+              {dict.course_mechanical_3modelling_2}
             </p>
 
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Proficiency in geometry and spatial reasoning
-                </p>
+                <p className="ml-2">{dict.course_mechanical_3modelling_3}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Advanced 3D modeling skills</p>
+                <p className="ml-2">{dict.course_mechanical_3modelling_4}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Skills in character and asset creation for games
-                </p>
+                <p className="ml-2">{dict.course_mechanical_3modelling_5}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">
-                  Problem-solving abilities honed through real-world challenges
-                </p>
+                <p className="ml-2">{dict.course_mechanical_3modelling_6}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Cultivation of design and creativity</p>
+                <p className="ml-2">{dict.course_mechanical_3modelling_7}</p>
               </li>
             </ul>
           </div>
@@ -108,7 +109,7 @@ const ModelCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Beginner</p>
+            <p>{dict.course_mechanical_3modelling_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -117,7 +118,7 @@ const ModelCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site / Online </p>
+            <p>{dict.course_mechanical_3modelling_9}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -126,7 +127,7 @@ const ModelCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_mechanical_3modelling_10}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -135,7 +136,7 @@ const ModelCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>3D Printing Included</p>
+            <p>{dict.course_mechanical_3modelling_11}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -144,134 +145,104 @@ const ModelCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_mechanical_3modelling_12}</p>
           </div>
         </div>
       </section>
 
       <section className="flex w-full items-center justify-center bg-[#fa9f5a] p-10 text-black">
         <div>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${lang === "th" ? "font-looped" : ""}`}
+          >
+            {dict.course_mechanical_3modelling_13}
           </p>
-          <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Theory and Conceptual Understanding
+          <p
+            className={`mb-5 text-2xl font-bold lg:text-3xl ${lang === "th" ? "font-looped" : ""}`}
+          >
+            {dict.course_mechanical_3modelling_14}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">
-              Introduction to Geometry and Basic Shapes:
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_15}
             </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Understanding the fundamentals of geometry and basic shapes.
-              </li>
-              <li>Delving into the intricacies of three-dimensional shapes.</li>
-              <li>
-                Exploring concepts such as vertices, edges, and faces in 3D
-                space.
-              </li>
+              <li>{dict.course_mechanical_3modelling_16}</li>
+              <li>{dict.course_mechanical_3modelling_17}</li>
+              <li>{dict.course_mechanical_3modelling_18}</li>
             </ul>
 
-            <li className="font-bold">Advanced Modeling Techniques:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_19}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Transitioning from basic shapes to advanced modeling.</li>
-              <li>
-                Learning techniques to create complex models from simple
-                primitives.
-              </li>
-              <li>Exploring sculpting tools and modifiers to refine models.</li>
+              <li>{dict.course_mechanical_3modelling_20}</li>
+              <li>{dict.course_mechanical_3modelling_21}</li>
+              <li>{dict.course_mechanical_3modelling_22}</li>
             </ul>
 
-            <li className="font-bold">Basic Animation Creation:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_23}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Introduction to animation principles and keyframes.</li>
-              <li>
-                Learning to animate objects and characters within a 3D
-                environment.
-              </li>
-              <li>
-                Understanding animation curves and timing for fluid motion.
-              </li>
+              <li>{dict.course_mechanical_3modelling_24}</li>
+              <li>{dict.course_mechanical_3modelling_25}</li>
+              <li>{dict.course_mechanical_3modelling_26}</li>
             </ul>
           </ul>
 
-          <p className="mt-10 text-2xl font-bold lg:text-3xl">
-            Hands-on Practice
+          <p
+            className={`mt-10 text-2xl font-bold ${lang === "th" ? "font-looped" : ""} lg:text-3xl`}
+          >
+            {dict.course_mechanical_3modelling_27}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Guided exercises to apply theoretical knowledge into practical
-                modeling tasks.
-              </li>
-              <li>
-                Step-by-step tutorials to create models from basic to advanced
-                complexity.
-              </li>
+              <li>{dict.course_mechanical_3modelling_28}</li>
+              <li>{dict.course_mechanical_3modelling_29}</li>
             </ul>
 
-            <li className="font-bold">3D Printing and Tangible Design:</li>
-            <ul className="mb-5 ml-7 list-square">
-              <li>
-                Exploring the process of preparing models for 3D printing.
-              </li>
-              <li>
-                Understanding file formats and considerations for successful
-                printing.
-              </li>
-              <li>
-                Designing custom objects and prototypes for tangible
-                realization.
-              </li>
-            </ul>
-
-            <li className="font-bold">
-              Character and Asset Creation for Games:
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_30}
             </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Learning character modeling techniques for game development.
-              </li>
-              <li>
-                Designing custom tools and assets for use in game environments.
-              </li>
-              <li>
-                Exporting models to game engines like Unity or platforms like
-                Roblox.
-              </li>
+              <li>{dict.course_mechanical_3modelling_31}</li>
+              <li>{dict.course_mechanical_3modelling_32}</li>
+              <li>{dict.course_mechanical_3modelling_33}</li>
+            </ul>
+
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_34}
+            </li>
+            <ul className="mb-5 ml-7 list-square">
+              <li>{dict.course_mechanical_3modelling_35}</li>
+              <li>{dict.course_mechanical_3modelling_36}</li>
+              <li>{dict.course_mechanical_3modelling_37}</li>
             </ul>
           </ul>
 
-          <p className="mt-10 text-2xl font-bold lg:text-3xl">
-            Project-Based Learning
+          <p
+            className={`mt-10 text-2xl font-bold lg:text-3xl ${lang === "th" ? "font-looped" : ""}`}
+          >
+            {dict.course_mechanical_3modelling_38}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Assignments and projects to reinforce learning objectives.
-              </li>
-              <li>
-                Real-world scenarios and challenges to encourage problem-solving
-                skills.
-              </li>
+              <li>{dict.course_mechanical_3modelling_39}</li>
+              <li>{dict.course_mechanical_3modelling_40}</li>
             </ul>
 
-            <li className="font-bold">Application and Integration:</li>
+            <li className={`font-bold ${lang === "th" ? "font-looped" : ""}`}>
+              {dict.course_mechanical_3modelling_41}
+            </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>
-                Integrating learned skills into real-world applications such as
-                game development and 3D printing.
-              </li>
-              <li>
-                Opportunities for creativity and personalization in projects.
-              </li>
+              <li>{dict.course_mechanical_3modelling_42}</li>
+              <li>{dict.course_mechanical_3modelling_43}</li>
             </ul>
           </ul>
 
           <p className="my-10 text-base md:text-lg lg:text-xl">
-            Throughout the course, emphasis will be placed on fostering
-            creativity, critical thinking, and technical proficiency in 3D
-            modeling.
+            {dict.course_mechanical_3modelling_44}
           </p>
         </div>
       </section>
