@@ -168,24 +168,24 @@ const WebCourse = () => {
               <li>{dict.course_creative_fullstack_16}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_17}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_17}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_18}</li>
               <li>{dict.course_creative_fullstack_19}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_20}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_20}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_21}</li>
               <li>{dict.course_creative_fullstack_22}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_23}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_23}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_24}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_25}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_25}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_26}</li>
             </ul>
