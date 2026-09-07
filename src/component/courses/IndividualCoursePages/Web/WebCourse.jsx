@@ -14,6 +14,7 @@ import require from "@/assets/CourseIcons/require.webp";
 import img1 from "@/assets/CourseLogos/Web/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Web/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Web/images/img3.webp";
+import { useLanguage } from "@/hook/useLanguage";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,6 +24,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const WebCourse = () => {
+  const { dict } = useLanguage();
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -42,8 +44,7 @@ const WebCourse = () => {
           />
 
           <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "From design basics to coding magic - Start creating your own
-            website with Python."
+            {dict.course_creative_fullstack_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -69,25 +70,25 @@ const WebCourse = () => {
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
             <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+              {dict.course_creative_fullstack_2}
             </p>
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Frontend Problem-solving and Logical Thinking
+                  {dict.course_creative_fullstack_3}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
-                <p className="ml-2">Creative Frontend Design</p>
+                <p className="ml-2">{dict.course_creative_fullstack_4}</p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Understanding Frontend Development Concepts
+                  {dict.course_creative_fullstack_5}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Visualizing and Interacting with Web Content
+                  {dict.course_creative_fullstack_6}
                 </p>
               </li>
             </ul>
@@ -104,7 +105,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Intermediate</p>
+            <p>{dict.course_creative_fullstack_7}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -113,7 +114,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Required Basic Course</p>
+            <p>{dict.course_creative_fullstack_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -122,7 +123,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Text-Based Code</p>
+            <p>{dict.course_creative_fullstack_9}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -131,7 +132,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site / Online</p>
+            <p>{dict.course_creative_fullstack_10}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -140,7 +141,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_creative_fullstack_11}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -149,7 +150,7 @@ const WebCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_creative_fullstack_12}</p>
           </div>
         </div>
       </section>
@@ -157,85 +158,81 @@ const WebCourse = () => {
       <section className="flex w-full items-center justify-center bg-[#fe7398] p-10 text-black">
         <div>
           <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+            {dict.course_creative_fullstack_13}
           </p>
 
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">Bring Web to life with Python:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_14}</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Integrating Python with HTML</li>
-              <li>Learn Web Routing with Python using Flask</li>
+              <li>{dict.course_creative_fullstack_15}</li>
+              <li>{dict.course_creative_fullstack_16}</li>
             </ul>
 
-            <li className="font-bold">Introduction to Web Development:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_17}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Understand the basics and importance of web development.</li>
-              <li>Explore website components and their functions.</li>
+              <li>{dict.course_creative_fullstack_18}</li>
+              <li>{dict.course_creative_fullstack_19}</li>
             </ul>
 
-            <li className="font-bold">HTML & CSS Basics:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_20}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Master HTML for structuring web pages.</li>
-              <li>Learn CSS for styling and layout design.</li>
+              <li>{dict.course_creative_fullstack_21}</li>
+              <li>{dict.course_creative_fullstack_22}</li>
             </ul>
 
-            <li className="font-bold">Responsive Design:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_23}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Design websites for various devices.</li>
+              <li>{dict.course_creative_fullstack_24}</li>
             </ul>
 
-            <li className="font-bold">Advanced CSS Techniques:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_25}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Explore advanced CSS for dynamic designs.</li>
+              <li>{dict.course_creative_fullstack_26}</li>
             </ul>
 
-            <li className="font-bold">UX/UI Design:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_27}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Learn principles of user experience and interface design.</li>
-              <li>Create mockups for website planning.</li>
+              <li>{dict.course_creative_fullstack_28}</li>
+              <li>{dict.course_creative_fullstack_29}</li>
             </ul>
 
-            <li className="font-bold">Introduction to JavaScript:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_30}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Basics of JavaScript for interactivity.</li>
+              <li>{dict.course_creative_fullstack_31}</li>
             </ul>
 
-            <li className="font-bold">Frontend Frameworks:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_32}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Introduction to popular frontend frameworks..</li>
+              <li>{dict.course_creative_fullstack_33}</li>
             </ul>
 
-            <li className="font-bold">Feedback and Review with teacher:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_34}:</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Receive feedback from the instructor and peers on your projects.
+                {dict.course_creative_fullstack_35}
               </li>
               <li>
-                Reflect on your own work and identify areas for improvement
-                based on feedback received.
-              </li>
-            </ul>
-
-            <li className="font-bold">Challenges and Extensions:</li>
-            <ul className="mb-5 ml-7 list-square">
-              <li>
-                Take on challenges and extensions to deepen your understanding
-                and skills.
-              </li>
-              <li>
-                Experiment with Web development to stretch your creativity and
-                problem-solving abilities.
+                {dict.course_creative_fullstack_36}
               </li>
             </ul>
 
-            <li className="font-bold">Project Showcase:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_37}:</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Showcase your projects to the class or in a public exhibition.
+                {dict.course_creative_fullstack_38}
               </li>
               <li>
-                Present your work, explain your creative process, and share
-                insights gained from the project.
+                {dict.course_creative_fullstack_39}
+              </li>
+            </ul>
+
+            <li className="font-bold">{dict.course_creative_fullstack_40}:</li>
+            <ul className="mb-5 ml-7 list-square">
+              <li>
+                {dict.course_creative_fullstack_41}
+              </li>
+              <li>
+                {dict.course_creative_fullstack_42}
               </li>
             </ul>
           </ul>

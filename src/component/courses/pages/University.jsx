@@ -16,14 +16,14 @@ import AnnouncementBar from "../../msg/Announcements";
 import { useLanguage } from "@/hook/useLanguage";
 
 const University = () => {
-  const { langPath } = useLanguage();
+  const { dict, lang, langPath } = useLanguage();
   const [announcementVisible, setAnnouncementVisible] = useState(false);
 
   const texts = {
-    p1: "A compass for your Computer Science journey",
-    p2: "To gain acceptance into a computer science program at a university requires careful planning. For top-tier universities, a flawless plan is essential. This course serves as your roadmap to navigate smoothly toward your computer science or computer engineering classes. It not only advises you on the right path but also strengthens your academic preparedness for these classes. With support from our experienced team of teachers, you will be well-prepared to succeed in reaching your goals.",
-    p3: "A path to success in life",
-    p4: "Securing a place in a top-tier university sets the stage for a lifetime of success. It introduces your child to a community filled with future leaders and influential connections, laying a strong foundation for their academic and personal development. The experiences and networks they cultivate during their time at such a prestigious institution will shape their future endeavors and open doors to countless opportunities.",
+    p1: dict?.course_university_1 || "A compass for your Computer Science journey",
+    p2: dict?.course_university_2 || "To gain acceptance into a computer science program at a university requires careful planning. For top-tier universities, a flawless plan is essential. This course serves as your roadmap to navigate smoothly toward your computer science or computer engineering classes. It not only advises you on the right path but also strengthens your academic preparedness for these classes. With support from our experienced team of teachers, you will be well-prepared to succeed in reaching your goals.",
+    p3: dict?.course_university_3 || "A path to success in life",
+    p4: dict?.course_university_4 || "Securing a place in a top-tier university sets the stage for a lifetime of success. It introduces your child to a community filled with future leaders and influential connections, laying a strong foundation for their academic and personal development. The experiences and networks they cultivate during their time at such a prestigious institution will shape their future endeavors and open doors to countless opportunities.",
   };
 
   const coursesData = [

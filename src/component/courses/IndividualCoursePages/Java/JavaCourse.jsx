@@ -14,6 +14,7 @@ import img1 from "@/assets/CourseLogos/Python/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Python/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Python/images/img3.webp";
 
+import { useLanguage } from "@/hook/useLanguage";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,6 +24,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const JavaCourse = () => {
+  const { dict, lang } = useLanguage();
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -42,7 +44,7 @@ const JavaCourse = () => {
           />
 
           <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "A Desired class that empowers your basic fundamental Java skills."
+            {dict.course_fundamental_java_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -68,29 +70,27 @@ const JavaCourse = () => {
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
             <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+              {dict.course_fundamental_java_2}
             </p>
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  A solid understanding of programming concepts
+                  {dict.course_fundamental_java_3}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Be able to break down problems into smaller steps and design
-                  efficient algorithms to solve them.
+                  {dict.course_fundamental_java_4}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Strong problem-solving skills and Coding technique when
-                  dealing with Programming problem
+                  {dict.course_fundamental_java_5}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Be able to design and implement object-oriented solutions to
+                  {dict.course_fundamental_java_6}
                   problems
                 </p>
               </li>
@@ -108,7 +108,7 @@ const JavaCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Intermediate</p>
+            <p>{dict.course_fundamental_java_7}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -117,7 +117,7 @@ const JavaCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Text-Based Code</p>
+            <p>{dict.course_fundamental_java_8}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -126,7 +126,7 @@ const JavaCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site / Online</p>
+            <p>{dict.course_fundamental_java_9}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -135,7 +135,7 @@ const JavaCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_fundamental_java_10}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -144,7 +144,7 @@ const JavaCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_fundamental_java_11}</p>
           </div>
         </div>
       </section>
@@ -152,73 +152,69 @@ const JavaCourse = () => {
       <section className="flex w-full items-center justify-center bg-[#5dcff5] p-10 text-black">
         <div>
           <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+            {dict.course_fundamental_java_12}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
-            <li className="font-bold">Introduction to Java:</li>
+            <li className="font-bold">{dict.course_fundamental_java_13}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Gain an understanding of the concept of low-level language and
-                high-level language in coding.
+                {dict.course_fundamental_java_14}
               </li>
-              <li>Introduction to Java and its applications.</li>
-              <li>Explanation of Java syntax and its data types.</li>
+              <li>{dict.course_fundamental_java_15}</li>
+              <li>{dict.course_fundamental_java_16}</li>
             </ul>
 
-            <li className="font-bold">Control Flow and Functions:</li>
+            <li className="font-bold">{dict.course_fundamental_java_17}</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Understand conditional statements.</li>
-              <li>Explore the variation of loops in Java.</li>
-              <li>Introduction to methods and their importance.</li>
+              <li>{dict.course_fundamental_java_18}</li>
+              <li>{dict.course_fundamental_java_19}</li>
+              <li>{dict.course_fundamental_java_20}</li>
             </ul>
 
-            <li className="font-bold">Data Structures in Java:</li>
+            <li className="font-bold">{dict.course_fundamental_java_21}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Learn about organizing and storing data, along with its
-                advantages and use cases.
+                {dict.course_fundamental_java_22}
               </li>
             </ul>
 
-            <li className="font-bold">Error Handling:</li>
+            <li className="font-bold">{dict.course_fundamental_java_23}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Understand program bugs and the concept of error handling
-                techniques.
+                {dict.course_fundamental_java_24}
               </li>
             </ul>
 
             <li className="font-bold">
-              Introduction to Object-Oriented Programming (OOP):
+              {dict.course_fundamental_java_25}
             </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Introduction to OOP concepts: classes and objects.</li>
-              <li>Defining classes with attributes and methods.</li>
+              <li>{dict.course_fundamental_java_26}</li>
+              <li>{dict.course_fundamental_java_27}</li>
+              <li>{dict.course_fundamental_java_28}</li>
               <li>
-                Exploration of encapsulation, inheritance, and polymorphism.
+                {dict.course_fundamental_java_29}
               </li>
             </ul>
 
-            <li className="font-bold">Algorithm and Diagram Design:</li>
+            <li className="font-bold">{dict.course_fundamental_java_30}</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Learn about algorithm design principles.</li>
+              <li>{dict.course_fundamental_java_31}</li>
               <li>
-                Introduction to flowcharts and pseudocode for algorithm
-                visualization and design.
+                {dict.course_fundamental_java_32}
               </li>
             </ul>
 
-            <li className="font-bold"> Hands-on Project:</li>
+            <li className="font-bold"> {dict.course_fundamental_java_33}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Review and reinforce concepts covered in the previous weeks.
+                {dict.course_fundamental_java_34}
               </li>
               <li>
-                Encourage students to brainstorm ideas for their final project.
+                {dict.course_fundamental_java_35}
               </li>
               <li>
-                Students work on their final projects under supervision,
-                receiving assistance and guidance as needed.
+                {dict.course_fundamental_java_36}
               </li>
             </ul>
           </ul>
