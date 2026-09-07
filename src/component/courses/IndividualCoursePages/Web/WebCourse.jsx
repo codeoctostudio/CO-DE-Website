@@ -190,23 +190,23 @@ const WebCourse = () => {
               <li>{dict.course_creative_fullstack_26}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_27}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_27}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_28}</li>
               <li>{dict.course_creative_fullstack_29}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_30}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_30}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_31}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_32}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_32}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>{dict.course_creative_fullstack_33}</li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_34}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_34}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
                 {dict.course_creative_fullstack_35}
@@ -216,7 +216,7 @@ const WebCourse = () => {
               </li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_37}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_37}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
                 {dict.course_creative_fullstack_38}
@@ -226,7 +226,7 @@ const WebCourse = () => {
               </li>
             </ul>
 
-            <li className="font-bold">{dict.course_creative_fullstack_40}:</li>
+            <li className="font-bold">{dict.course_creative_fullstack_40}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
                 {dict.course_creative_fullstack_41}
