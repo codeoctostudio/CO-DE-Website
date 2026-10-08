@@ -630,11 +630,7 @@ export default function NewBlogPage() {
           : "สร้างบทความสำเร็จ! กำลังนำทาง...",
       );
       setShowPreview(false);
-      setTimeout(() => {
-        router.push(
-          `/th/blogs/${formData.categoryType}/${data.slug || formData.slug}`,
-        );
-      }, 1500);
+      setTimeout(() => {}, 1500);
     } catch (err) {
       setError(err.message);
       setShowPreview(false);

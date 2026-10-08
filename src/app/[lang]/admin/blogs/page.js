@@ -13,7 +13,6 @@ export default function BlogManagementPage() {
   const [deleteModal, setDeleteModal] = useState({ open: false, blog: null });
   const [isDeleting, setIsDeleting] = useState(false);
   const [updatingStatusSlug, setUpdatingStatusSlug] = useState(null);
-  // State สำหรับ User Session ปัจจุบัน
   const [currentUser, setCurrentUser] = useState(null);
 
   // State เพิ่มเติมสำหรับ Preview Modal
