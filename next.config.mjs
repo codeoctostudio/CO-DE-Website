@@ -19,6 +19,11 @@ const nextConfig = {
         port: "",
         pathname: "/vi/**",
       },
+      {
+        protocol: "https",
+        hostname: "admin.co-deacademy.com",
+        pathname: "/api/Blogs_Image/**",
+      },
     ],
   },
   async rewrites() {
