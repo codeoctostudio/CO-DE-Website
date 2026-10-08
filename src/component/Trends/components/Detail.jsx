@@ -21,7 +21,11 @@ const TrendsContent = () => {
         const data = await res.json();
 
         if (data.ok && Array.isArray(data.blogs)) {
-          const sortedBlogs = data.blogs.sort((a, b) => {
+          const approvedBlogs = data.blogs.filter(
+            (item) => item.status && item.status.toLowerCase() === "approved",
+          );
+
+          const sortedBlogs = approvedBlogs.sort((a, b) => {
             const dateA = new Date(a.updated_at || 0);
             const dateB = new Date(b.updated_at || 0);
             return dateB - dateA;

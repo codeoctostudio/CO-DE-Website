@@ -12,7 +12,7 @@ export default function BlogManagementPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [deleteModal, setDeleteModal] = useState({ open: false, blog: null });
   const [isDeleting, setIsDeleting] = useState(false);
-
+  const [updatingStatusSlug, setUpdatingStatusSlug] = useState(null);
   // State สำหรับ User Session ปัจจุบัน
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -20,6 +20,56 @@ export default function BlogManagementPage() {
   const [showPreview, setShowPreview] = useState(false);
   const [previewPayload, setPreviewPayload] = useState(null);
   const [previewLang, setPreviewLang] = useState("th");
+
+  const handleToggleStatus = async (blog) => {
+    if (!blog?.slug) return;
+
+    const currentStatus = String(blog.status || "pending").toLowerCase();
+
+    const nextStatus = currentStatus === "approved" ? "pending" : "approved";
+
+    setUpdatingStatusSlug(blog.slug);
+
+    try {
+      const res = await fetch("/api/blogs", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          slug: blog.slug,
+          status: nextStatus,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "ไม่สามารถเปลี่ยนสถานะบทความได้");
+      }
+
+      // Update เฉพาะ Blog ที่เปลี่ยนสถานะ
+      setBlogs((prev) =>
+        prev.map((item) =>
+          item.slug === blog.slug
+            ? {
+                ...item,
+                status: nextStatus,
+              }
+            : item,
+        ),
+      );
+    } catch (error) {
+      console.error("Update Blog Status Error:", error);
+
+      alert(
+        error.message || "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อเปลี่ยนสถานะได้",
+      );
+    } finally {
+      setUpdatingStatusSlug(null);
+    }
+  };
 
   // ดึงข้อมูล User ปัจจุบัน
   useEffect(() => {
@@ -187,6 +237,7 @@ export default function BlogManagementPage() {
                 <tr className="bg-gray-50 border-b border-gray-100 text-xs text-gray-500 uppercase">
                   <th className="py-4 px-6">บทความ</th>
                   <th className="py-4 px-4">หมวดหมู่</th>
+                  <th className="py-4 px-4">สถานะ</th>
                   <th className="py-4 px-4">ผู้บันทึก</th>
                   <th className="py-4 px-4">สร้างเมื่อ</th>
                   <th className="py-4 px-6 text-right">การจัดการ</th>
@@ -195,7 +246,7 @@ export default function BlogManagementPage() {
               <tbody className="divide-y divide-gray-100 text-sm">
                 {loading ? (
                   <tr>
-                    <td colSpan={5} className="py-12 text-center text-gray-400">
+                    <td colSpan={6} className="py-12 text-center text-gray-400">
                       กำลังโหลดข้อมูลบทความ...
                     </td>
                   </tr>
@@ -209,10 +260,24 @@ export default function BlogManagementPage() {
                           activeUserName.trim().toLowerCase());
 
                     // ดึงค่ารูปภาพ (รองรับ image_url)
-                    const imgUrl = blog.image_url || blog.imageUrl || "/images/fallback.webp";
-                    
+                    const imgUrl =
+                      blog.image_url ||
+                      blog.imageUrl ||
+                      "/images/fallback.webp";
+
                     // ดึงค่าหมวดหมู่ (รองรับ category_type)
-                    const category = blog.category_type || blog.categoryType || "ไม่มีหมวดหมู่";
+                    const category =
+                      blog.category_type ||
+                      blog.categoryType ||
+                      "ไม่มีหมวดหมู่";
+
+                    const blogStatus = String(
+                      blog.status || "pending",
+                    ).toLowerCase();
+
+                    const isApproved = blogStatus === "approved";
+
+                    const isUpdatingStatus = updatingStatusSlug === blog.slug;
 
                     // ดึงค่า วันที่สร้าง (รองรับ created_at)
                     const rawDate = blog.created_at || blog.createdAt;
@@ -255,6 +320,41 @@ export default function BlogManagementPage() {
                           <span className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-100">
                             {category}
                           </span>
+                        </td>
+
+                        {/* Status */}
+                        <td className="py-4 px-4">
+                          <button
+                            type="button"
+                            onClick={() => handleToggleStatus(blog)}
+                            disabled={!canManage || isUpdatingStatus}
+                            className={`relative inline-flex items-center h-7 w-14 rounded-full transition-all duration-300 focus:outline-none ${isApproved ? "bg-green-500" : "bg-gray-300"} ${!canManage || isUpdatingStatus ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                            title={
+                              !canManage
+                                ? "ไม่มีสิทธิ์เปลี่ยนสถานะบทความนี้"
+                                : isApproved
+                                  ? "ปิดการเผยแพร่"
+                                  : "เปิดการเผยแพร่"
+                            }
+                          >
+                            <span
+                              className={`inline-block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300 ${isApproved ? "translate-x-8" : "translate-x-1"}`}
+                            />
+
+                            {isUpdatingStatus && (
+                              <span className="absolute inset-0 flex items-center justify-center text-[9px]">
+                                ⏳
+                              </span>
+                            )}
+                          </button>
+
+                          <div className="mt-1">
+                            <span
+                              className={`text-[10px] font-semibold ${isApproved ? "text-green-600" : "text-gray-500"}`}
+                            >
+                              {isApproved ? "approved" : "pending"}
+                            </span>
+                          </div>
                         </td>
 
                         {/* Author */}
@@ -328,7 +428,7 @@ export default function BlogManagementPage() {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={5} className="py-12 text-center text-gray-400">
+                    <td colSpan={6} className="py-12 text-center text-gray-400">
                       ไม่พบบทความที่ค้นหา
                     </td>
                   </tr>
