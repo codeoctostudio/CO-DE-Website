@@ -176,7 +176,10 @@ export default function BlogManagementPage() {
 
   // ชื่อผู้ใช้งานปัจจุบันที่ Login อยู่
   const activeUserName = currentUser?.Nickname || currentUser?.user || "";
-  const isBoss = currentUser?.role?.toLowerCase() === "boss";
+  const isBoss =
+    String(currentUser?.Role ?? currentUser?.role ?? "")
+      .trim()
+      .toLowerCase() === "boss";
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-comfortaa">
@@ -237,7 +240,7 @@ export default function BlogManagementPage() {
                 <tr className="bg-gray-50 border-b border-gray-100 text-xs text-gray-500 uppercase">
                   <th className="py-4 px-6">บทความ</th>
                   <th className="py-4 px-4">หมวดหมู่</th>
-                  <th className="py-4 px-4">สถานะ</th>
+                  {isBoss && <th className="py-4 px-4">สถานะ</th>}
                   <th className="py-4 px-4">ผู้บันทึก</th>
                   <th className="py-4 px-4">สร้างเมื่อ</th>
                   <th className="py-4 px-6 text-right">การจัดการ</th>
@@ -323,39 +326,41 @@ export default function BlogManagementPage() {
                         </td>
 
                         {/* Status */}
-                        <td className="py-4 px-4">
-                          <button
-                            type="button"
-                            onClick={() => handleToggleStatus(blog)}
-                            disabled={!canManage || isUpdatingStatus}
-                            className={`relative inline-flex items-center h-7 w-14 rounded-full transition-all duration-300 focus:outline-none ${isApproved ? "bg-green-500" : "bg-gray-300"} ${!canManage || isUpdatingStatus ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-                            title={
-                              !canManage
-                                ? "ไม่มีสิทธิ์เปลี่ยนสถานะบทความนี้"
-                                : isApproved
-                                  ? "ปิดการเผยแพร่"
-                                  : "เปิดการเผยแพร่"
-                            }
-                          >
-                            <span
-                              className={`inline-block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300 ${isApproved ? "translate-x-8" : "translate-x-1"}`}
-                            />
-
-                            {isUpdatingStatus && (
-                              <span className="absolute inset-0 flex items-center justify-center text-[9px]">
-                                ⏳
-                              </span>
-                            )}
-                          </button>
-
-                          <div className="mt-1">
-                            <span
-                              className={`text-[10px] font-semibold ${isApproved ? "text-green-600" : "text-gray-500"}`}
+                        {isBoss && (
+                          <td className="py-4 px-4">
+                            <button
+                              type="button"
+                              onClick={() => handleToggleStatus(blog)}
+                              disabled={!canManage || isUpdatingStatus}
+                              className={`relative inline-flex items-center h-7 w-14 rounded-full transition-all duration-300 focus:outline-none ${isApproved ? "bg-green-500" : "bg-gray-300"} ${!canManage || isUpdatingStatus ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                              title={
+                                !canManage
+                                  ? "ไม่มีสิทธิ์เปลี่ยนสถานะบทความนี้"
+                                  : isApproved
+                                    ? "ปิดการเผยแพร่"
+                                    : "เปิดการเผยแพร่"
+                              }
                             >
-                              {isApproved ? "approved" : "pending"}
-                            </span>
-                          </div>
-                        </td>
+                              <span
+                                className={`inline-block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300 ${isApproved ? "translate-x-8" : "translate-x-1"}`}
+                              />
+
+                              {isUpdatingStatus && (
+                                <span className="absolute inset-0 flex items-center justify-center text-[9px]">
+                                  ⏳
+                                </span>
+                              )}
+                            </button>
+
+                            <div className="mt-1">
+                              <span
+                                className={`text-[10px] font-semibold ${isApproved ? "text-green-600" : "text-gray-500"}`}
+                              >
+                                {isApproved ? "approved" : "pending"}
+                              </span>
+                            </div>
+                          </td>
+                        )}
 
                         {/* Author */}
                         <td className="py-4 px-4 text-xs font-medium text-gray-700">
@@ -377,13 +382,17 @@ export default function BlogManagementPage() {
 
                         {/* Actions */}
                         <td className="py-4 px-6 text-right space-x-2">
-                          <Link
-                            href={`/admin/blogs/preview/${blog.slug}`}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPreviewPayload(blog);
+                              setShowPreview(true);
+                            }}
                             className="inline-flex items-center p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                             title="ดูตัวอย่าง (Preview)"
                           >
                             👁️
-                          </Link>
+                          </button>
 
                           {canManage ? (
                             <Link
@@ -484,6 +493,7 @@ export default function BlogManagementPage() {
         previewPayload={previewPayload}
         previewLang={previewLang}
         setPreviewLang={setPreviewLang}
+        Save={false}
       />
     </div>
   );

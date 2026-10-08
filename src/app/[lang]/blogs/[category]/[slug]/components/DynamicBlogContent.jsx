@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/hook/useLanguage";
+import "./style.css";
 
 const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
   const { langPath } = useLanguage();
+  console.log("blogData:", blogData);
 
   const categories = {
     tutorials: {
@@ -500,30 +502,37 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
           </div>
 
           {/* FAQ */}
-          {Array.isArray(localizedContent?.faqs) &&
-            localizedContent.faqs.length > 0 && (
+          {Array.isArray(blogData?.faqs) &&
+            blogData.faqs.filter((item) => {
+              const faqData = item?.[lang] || item?.th;
+              return faqData?.q && faqData.q.trim() !== "";
+            }).length > 0 && (
               <div className="rounded-3xl bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] sm:p-8 md:p-10 overflow-hidden">
                 <h3
                   className={`text-xl font-bold text-[#042451] sm:text-2xl wrap-break-word ${
                     lang === "th" ? "looped-text" : ""
                   }`}
                 >
-                  {localizedContent?.faqSectionTitle || "FAQs"}
+                  {blogData?.faqSectionTitle ||
+                    (lang === "th" ? "คำถามที่พบบ่อย" : "FAQs")}
                 </h3>
                 <div className="mt-6 space-y-4">
-                  {localizedContent.faqs.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="rounded-xl border border-gray-100 bg-[#fafcff] p-4 sm:p-5 wrap-break-word"
-                    >
-                      <p className="text-sm sm:text-base font-bold text-[#042451] wrap-break-word">
-                        {item?.q}
-                      </p>
-                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600 wrap-break-word">
-                        {item?.a}
-                      </p>
-                    </div>
-                  ))}
+                  {blogData.faqs
+                    .map((item) => item?.[lang] || item?.th) // ดึงข้อมูลตามภาษา (หรือ fallback ใช้ th)
+                    .filter((faq) => faq?.q && faq.q.trim() !== "") // แสดงเฉพาะที่มีคำถาม
+                    .map((faq, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-xl border border-gray-100 bg-[#fafcff] p-4 sm:p-5 wrap-break-word"
+                      >
+                        <p className="text-sm sm:text-base font-bold text-[#042451] wrap-break-word">
+                          {faq?.q}
+                        </p>
+                        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600 wrap-break-word whitespace-pre-line">
+                          {faq?.a}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}
@@ -552,7 +561,7 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
             </div>
             {localizedContent?.ctaFooterText && (
               <p
-                className={`mt-6 text-sm sm:text-lg font-semibold text-[#F7C94B] wrap-break-word ${
+                className={`mt-6 text-sm sm:text-lg font-semibold text-[#042451] wrap-break-word ${
                   lang === "th" ? "looped-text" : ""
                 }`}
               >

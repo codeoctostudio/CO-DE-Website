@@ -4,12 +4,29 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import BlogPreviewModal from "../components/BlogPreviewModal";
 
+// Endpoint สำหรับอัปโหลดรูป (ไฟล์ PHP บนโฮสต์ admin.co-deacademy.com)
+// ไฟล์จะถูกบันทึกที่ public_html/api/Blogs_Image แล้วได้ URL กลับมา
+const UPLOAD_API_URL =
+  "https://admin.co-deacademy.com/api/upload_blog_image.php";
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+];
+
 export default function NewBlogPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const editSlug = searchParams.get("slug");
 
+  const [draggedStepIndex, setDraggedStepIndex] = useState(null);
+  const [dragOverStepIndex, setDragOverStepIndex] = useState(null);
+
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -146,11 +163,12 @@ export default function NewBlogPage() {
             // Map Form Metadata & Intro
             setFormData({
               slug: b.slug || "",
-              categoryType: b.category_type || b.categoryType || "technology-trends",
-              mediaType: b.mediaType || "image",
-              imageUrl: b.imageUrl || "",
-              videoUrl: b.videoUrl || "",
-              ctaLink: b.ctaLink || "/contactUs",
+              categoryType:
+                b.category_type || b.categoryType || "technology-trends",
+              mediaType: b.mediaType || b.media_type || "image",
+              imageUrl: b.imageUrl || b.image_url || "",
+              videoUrl: b.videoUrl || b.video_url || "",
+              ctaLink: b.ctaLink || b.cta_link || "/contactUs",
               author: b.author || "",
               th: {
                 introTitle: b.th?.introTitle || "",
@@ -260,6 +278,55 @@ export default function NewBlogPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // อัปโหลดรูปไปที่เซิร์ฟเวอร์ แล้วเก็บ URL ที่ได้ไว้ใน formData.imageUrl
+  // (ค่านี้จะถูกส่งไปบันทึกที่คอลัมน์ image_url ของตาราง Blogs)
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // ให้เลือกไฟล์เดิมซ้ำได้
+    if (!file) return;
+
+    setImageUploadError("");
+
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      setImageUploadError("รองรับเฉพาะไฟล์ JPG, PNG, WEBP หรือ GIF เท่านั้น");
+      return;
+    }
+    if (file.size > MAX_IMAGE_SIZE) {
+      setImageUploadError("ไฟล์รูปต้องมีขนาดไม่เกิน 5MB");
+      return;
+    }
+
+    setUploadingImage(true);
+    try {
+      const fd = new FormData();
+      fd.append("image", file);
+      if (formData.slug) fd.append("slug", formData.slug);
+
+      const res = await fetch(UPLOAD_API_URL, {
+        method: "POST",
+        body: fd, // ห้ามตั้ง Content-Type เอง ให้ browser ใส่ boundary ให้
+        credentials: "include",
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok || !data.url) {
+        throw new Error(data.error || "อัปโหลดรูปไม่สำเร็จ");
+      }
+
+      setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+    } catch (err) {
+      console.error("Upload image error:", err);
+      setImageUploadError(err.message || "อัปโหลดรูปไม่สำเร็จ");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setFormData((prev) => ({ ...prev, imageUrl: "" }));
+    setImageUploadError("");
+  };
+
   const handleLangChange = (lang, field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -277,6 +344,55 @@ export default function NewBlogPage() {
     const updatedSteps = [...steps];
     updatedSteps[index][lang][field] = value;
     setSteps(updatedSteps);
+  };
+
+  const handleStepDragStart = (e, index) => {
+    setDraggedStepIndex(index);
+
+    // ทำให้ Browser รู้ว่าเป็นการลากเพื่อย้ายตำแหน่ง
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", String(index));
+  };
+
+  const handleStepDragOver = (e, index) => {
+    e.preventDefault();
+
+    if (draggedStepIndex === null || draggedStepIndex === index) {
+      return;
+    }
+
+    e.dataTransfer.dropEffect = "move";
+    setDragOverStepIndex(index);
+  };
+
+  const handleStepDrop = (e, targetIndex) => {
+    e.preventDefault();
+
+    const sourceIndex = draggedStepIndex;
+
+    if (sourceIndex === null || sourceIndex === targetIndex) {
+      setDraggedStepIndex(null);
+      setDragOverStepIndex(null);
+      return;
+    }
+
+    setSteps((prevSteps) => {
+      const updatedSteps = [...prevSteps];
+
+      const [movedStep] = updatedSteps.splice(sourceIndex, 1);
+
+      updatedSteps.splice(targetIndex, 0, movedStep);
+
+      return updatedSteps;
+    });
+
+    setDraggedStepIndex(null);
+    setDragOverStepIndex(null);
+  };
+
+  const handleStepDragEnd = () => {
+    setDraggedStepIndex(null);
+    setDragOverStepIndex(null);
   };
 
   const addStep = () => {
@@ -460,6 +576,10 @@ export default function NewBlogPage() {
 
   const handleOpenPreview = (e) => {
     e.preventDefault();
+    if (uploadingImage) {
+      setError("กรุณารอให้อัปโหลดรูปเสร็จก่อน");
+      return;
+    }
     const payload = preparePayload();
     setPreviewPayload(payload);
     setShowPreview(true);
@@ -482,7 +602,7 @@ export default function NewBlogPage() {
         method: apiMethod,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-        credentials: 'include',
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -588,9 +708,7 @@ export default function NewBlogPage() {
                   onChange={handleChange}
                   className="w-full rounded-xl border border-gray-300 p-3 outline-hidden"
                 >
-                  <option value="image">
-                    รูปภาพภาพหน้าปก (Web URL / Google / FB / IG)
-                  </option>
+                  <option value="image">รูปภาพหน้าปก (อัปโหลดไฟล์)</option>
                   <option value="video">
                     วิดีโอ (YouTube / Facebook / TikTok / IG)
                   </option>
@@ -598,18 +716,54 @@ export default function NewBlogPage() {
               </div>
 
               {formData.mediaType === "image" ? (
-                <div>
+                <div className="space-y-2">
                   <label className="block font-semibold mb-1 text-[#042451]">
-                    Image URL
+                    รูปภาพหน้าปก (อัปโหลดไฟล์)
                   </label>
                   <input
-                    type="url"
-                    name="imageUrl"
-                    placeholder="https://... หรือ /images/blogs/banner.webp"
-                    value={formData.imageUrl}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-gray-300 p-3 outline-hidden text-sm"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={handleImageUpload}
+                    disabled={uploadingImage}
+                    className="w-full rounded-xl border border-gray-300 bg-white p-2.5 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-blue-600 hover:file:bg-blue-100 disabled:opacity-60"
                   />
+                  <p className="text-[11px] text-gray-400">
+                    รองรับ JPG, PNG, WEBP, GIF ขนาดไม่เกิน 5MB
+                  </p>
+
+                  {uploadingImage && (
+                    <p className="text-xs text-blue-600">
+                      🔄 กำลังอัปโหลดรูป...
+                    </p>
+                  )}
+                  {imageUploadError && (
+                    <p className="text-xs text-red-600">
+                      ❌ {imageUploadError}
+                    </p>
+                  )}
+
+                  {formData.imageUrl && !uploadingImage && (
+                    <div className="rounded-xl border border-gray-200 bg-white p-2 space-y-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={formData.imageUrl}
+                        alt="ตัวอย่างรูปหน้าปก"
+                        className="max-h-48 w-full rounded-lg object-contain"
+                      />
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="truncate text-[11px] text-gray-500">
+                          {formData.imageUrl}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleRemoveImage}
+                          className="shrink-0 text-xs text-red-500 hover:underline"
+                        >
+                          ลบรูป
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div>
@@ -860,12 +1014,46 @@ export default function NewBlogPage() {
             {steps.map((step, sIdx) => (
               <div
                 key={sIdx}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-xs space-y-4"
+                onDragOver={(e) => handleStepDragOver(e, sIdx)}
+                onDrop={(e) => handleStepDrop(e, sIdx)}
+                className={`
+      rounded-2xl border bg-white p-5 shadow-xs space-y-4
+      transition-all duration-200
+      ${
+        dragOverStepIndex === sIdx && draggedStepIndex !== sIdx
+          ? "border-blue-500 border-2 bg-blue-50/30"
+          : "border-gray-200"
+      }
+    `}
               >
                 <div className="flex items-center justify-between bg-gray-50 p-2.5 rounded-xl">
-                  <span className="font-bold text-gray-700">
-                    บล็อกเนื้อหาที่ #{sIdx + 1}
-                  </span>
+                  {/* DRAG HANDLE */}
+                  <div
+                    draggable
+                    onDragStart={(e) => handleStepDragStart(e, sIdx)}
+                    onDragEnd={handleStepDragEnd}
+                    className={`
+          flex items-center gap-3
+          cursor-grab active:cursor-grabbing
+          select-none
+          transition-opacity
+          ${draggedStepIndex === sIdx ? "opacity-40" : ""}
+        `}
+                    title="กดค้างแล้วลากเพื่อเปลี่ยนลำดับ"
+                  >
+                    <span className="text-gray-400 text-xl leading-none">
+                      ⋮⋮
+                    </span>
+
+                    <span className="font-bold text-gray-700">
+                      บล็อกเนื้อหาที่ #{sIdx + 1}
+                    </span>
+
+                    <span className="hidden sm:inline text-[10px] text-gray-400">
+                      กดค้างแล้วลาก
+                    </span>
+                  </div>
+
                   <div className="flex items-center gap-3">
                     <label className="inline-flex items-center gap-1.5 text-xs text-gray-600">
                       <input
@@ -882,6 +1070,7 @@ export default function NewBlogPage() {
                       />
                       ขยายเต็มหน้าจอ
                     </label>
+
                     <button
                       type="button"
                       onClick={() => removeStep(sIdx)}
