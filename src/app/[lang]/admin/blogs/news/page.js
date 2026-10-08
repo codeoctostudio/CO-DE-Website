@@ -4,10 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import BlogPreviewModal from "../components/BlogPreviewModal";
 
-// Endpoint สำหรับอัปโหลดรูป (ไฟล์ PHP บนโฮสต์ admin.co-deacademy.com)
-// ไฟล์จะถูกบันทึกที่ public_html/api/Blogs_Image แล้วได้ URL กลับมา
-const UPLOAD_API_URL =
-  "https://admin.co-deacademy.com/api/upload_blog_image.php";
+// อัปโหลดตรงไปที่ PHP (เหมือน me.php) ไฟล์จะถูกบันทึกที่ public_html/api/Blogs_Image
+const UPLOAD_API_URL = "https://admin.co-deacademy.com/api/blogs.php";
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_IMAGE_TYPES = [
   "image/jpeg",
@@ -15,6 +13,41 @@ const ALLOWED_IMAGE_TYPES = [
   "image/webp",
   "image/gif",
 ];
+
+// ทำให้ทุก field เป็น string เสมอ เพื่อไม่ให้ input กลายเป็น uncontrolled
+// (ข้อมูลบล็อกเก่าในฐานข้อมูลอาจไม่มี field ครบ)
+const str = (v) => (v === undefined || v === null ? "" : String(v));
+
+const normSubPoint = (p = {}) => ({
+  borderColor: p.borderColor || "border-blue-400",
+  th: { label: str(p.th?.label ?? p.label), text: str(p.th?.text ?? p.text) },
+  en: { label: str(p.en?.label ?? p.label), text: str(p.en?.text ?? p.text) },
+});
+
+const normBox = (b = {}) => ({
+  bgClass: b.bgClass || "bg-blue-50/50 border-blue-100",
+  th: {
+    title: str(b.th?.title ?? b.title),
+    text: str(b.th?.text ?? b.text),
+    bold: str(b.th?.bold ?? b.bold),
+    suffix: str(b.th?.suffix ?? b.suffix),
+  },
+  en: {
+    title: str(b.en?.title ?? b.title),
+    text: str(b.en?.text ?? b.text),
+    bold: str(b.en?.bold ?? b.bold),
+    suffix: str(b.en?.suffix ?? b.suffix),
+  },
+});
+
+const normColumn = (c = {}) => ({
+  bgClass: c.bgClass || "bg-gray-50/50 border-gray-100",
+  th: { title: str(c.th?.title ?? c.title), desc: str(c.th?.desc ?? c.desc) },
+  en: { title: str(c.en?.title ?? c.title), desc: str(c.en?.desc ?? c.desc) },
+});
+
+const normList = (list, fn) =>
+  Array.isArray(list) && list.length > 0 ? list.map(fn) : [fn()];
 
 export default function NewBlogPage() {
   const router = useRouter();
@@ -221,28 +254,10 @@ export default function NewBlogPage() {
                   subPointsTitle:
                     st.subPointsTitle || st.en?.subPointsTitle || "",
                 },
-                subPoints: st.subPoints || [
-                  {
-                    borderColor: "border-blue-400",
-                    th: { label: "", text: "" },
-                    en: { label: "", text: "" },
-                  },
-                ],
-                boxes: st.boxes || [
-                  {
-                    bgClass: "bg-blue-50/50 border-blue-100",
-                    th: { title: "", text: "", bold: "", suffix: "" },
-                    en: { title: "", text: "", bold: "", suffix: "" },
-                  },
-                ],
-                columns: st.columns || [
-                  {
-                    bgClass: "bg-gray-50/50 border-gray-100",
-                    th: { title: "", desc: "" },
-                    en: { title: "", desc: "" },
-                  },
-                ],
-                th_mediaTitle1: st.th?.mediaTitle1 || "",
+                subPoints: normList(st.subPoints, normSubPoint),
+                boxes: normList(st.boxes, normBox),
+                columns: normList(st.columns, normColumn),
+                th_mediaTitle1: str(st.th?.mediaTitle1),
                 th_mediaTitle2: st.th?.mediaTitle2 || "",
                 th_textKey2: st.th?.text2 || "",
                 en_mediaTitle1: st.en?.mediaTitle1 || "",

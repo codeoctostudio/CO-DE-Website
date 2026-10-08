@@ -94,7 +94,7 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
 
   const getEmbedUrl = (step) => {
     try {
-      const url = step?.videoUrl || blogData?.videoUrl || "";
+      const url = step?.videoUrl || blogData?.videoUrl || blogData?.video_url || "";
       const videoId = step?.videoId || blogData?.videoId || "";
       const platform = (
         step?.platform ||
@@ -162,8 +162,10 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
    * ฟังก์ชันสำหรับ Render Media
    */
   const renderMediaContent = (step) => {
-    const mediaType = step?.mediaType || blogData?.video_url || "image";
-    const imageUrl = step?.imageUrl || blogData?.image_url;
+    const mediaType =
+      step?.mediaType || blogData?.mediaType || blogData?.media_type || "image";
+    const imageUrl =
+      step?.imageUrl || blogData?.imageUrl || blogData?.image_url;
 
     // กรณีเป็นรูปภาพ
     if (mediaType === "image" || !mediaType) {
