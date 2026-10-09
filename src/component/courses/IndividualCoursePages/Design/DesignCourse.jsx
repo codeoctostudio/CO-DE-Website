@@ -13,7 +13,7 @@ import learnPlay from "@/assets/CourseIcons/learnPlay.webp";
 import img1 from "@/assets/CourseLogos/Design/images/img1.webp";
 import img2 from "@/assets/CourseLogos/Design/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Design/images/img3.webp";
-import img4 from "@/assets/CourseLogos/Design/images/img4.webp";
+import img4 from "@/assets/CourseLogos/Design/images/img4_new09102026.webp";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";

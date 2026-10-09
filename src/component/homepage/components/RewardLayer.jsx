@@ -14,6 +14,16 @@ import img1 from "@/assets/reward/Reward_1.webp";
 import img2 from "@/assets/reward/Reward_2.webp";
 import img3 from "@/assets/reward/Reward_3.webp";
 import img4 from "@/assets/reward/Reward_Show.webp";
+import img5 from "@/assets/reward/Angpao.webp";
+import img6 from "@/assets/reward/Peyton.webp";
+import img7 from "@/assets/reward/Faith.webp";
+import img8 from "@/assets/reward/Loma.webp";
+import img9 from "@/assets/reward/Pleng.webp";
+import img10 from "@/assets/reward/Grace.webp";
+import img11 from "@/assets/reward/Boeing.webp";
+import img12 from "@/assets/reward/Pong.webp";
+import img13 from "@/assets/reward/Metta.webp";
+import img14 from "@/assets/reward/Athera.webp";
 
 const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
@@ -139,6 +149,66 @@ const RewardLayer = () => {
       title: dict.reward_detail_3,
       desc: dict.reward_detail_3_1,
       location: dict.reward_detail_3_2,
+    },
+    {
+      img: img5,
+      title: dict.reward_detail_4,
+      desc: dict.reward_detail_4_1,
+      location: dict.reward_detail_4_2,
+    },
+    {
+      img: img6,
+      title: dict.reward_detail_5,
+      desc: dict.reward_detail_5_1,
+      location: dict.reward_detail_5_2,
+    },
+    {
+      img: img7,
+      title: dict.reward_detail_6,
+      desc: dict.reward_detail_6_1,
+      location: dict.reward_detail_6_2,
+    },
+    {
+      img: img8,
+      title: dict.reward_detail_7,
+      desc: dict.reward_detail_7_1,
+      location: dict.reward_detail_7_2,
+    },
+    {
+      img: img9,
+      title: dict.reward_detail_8,
+      desc: dict.reward_detail_8_1,
+      location: dict.reward_detail_8_2,
+    },
+    {
+      img: img10,
+      title: dict.reward_detail_9,
+      desc: dict.reward_detail_9_1,
+      location: dict.reward_detail_9_2,
+    },
+    {
+      img: img11,
+      title: dict.reward_detail_10,
+      desc: dict.reward_detail_10_1,
+      location: dict.reward_detail_10_2,
+    },
+    {
+      img: img12,
+      title: dict.reward_detail_11,
+      desc: dict.reward_detail_11_1,
+      location: dict.reward_detail_11_2,
+    },
+    {
+      img: img13,
+      title: dict.reward_detail_12,
+      desc: dict.reward_detail_12_1,
+      location: dict.reward_detail_12_2,
+    },
+    {
+      img: img14,
+      title: dict.reward_detail_13,
+      desc: dict.reward_detail_13_1,
+      location: dict.reward_detail_13_2,
     },
   ];
 
@@ -351,14 +421,16 @@ const RewardLayer = () => {
                 <SwiperSlide key={index} className="bg-transparent">
                   {/* MOBILE VIEW CARD */}
                   <div className="flex md:hidden flex-col bg-white p-4 rounded-2xl shadow-md border border-gray-100">
-                    <div className="relative w-full h-44 shrink-0 overflow-hidden rounded-xl mb-3">
-                      <Image
-                        className="object-cover"
-                        src={first.img}
-                        alt={first.title || "ภาพรางวัล"}
-                        fill
-                        sizes="100vw"
-                      />
+                    <div className="relative w-full h-96 shrink-0 overflow-hidden rounded-xl mb-3">
+                      {first.img && (
+                        <Image
+                          className="object-cover"
+                          src={first.img}
+                          alt={first.title || "ภาพรางวัล"}
+                          fill
+                          sizes="100vw"
+                        />
+                      )}
                     </div>
                     <div className="flex flex-col gap-1">
                       <h4 className="font-bold text-base text-gray-900 line-clamp-1">
@@ -380,15 +452,19 @@ const RewardLayer = () => {
                         key={i}
                         className="flex w-1/2 gap-4 items-center bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition duration-300 min-h-45 border border-gray-100"
                       >
-                        <div className="relative w-[35%] h-32 shrink-0">
-                          <Image
-                            className="object-cover rounded-xl"
-                            src={item.img}
-                            alt={item.title || "ภาพรางวัล"}
-                            fill
-                            sizes="50vw"
-                          />
+                        <div className="flex w-[35%] h-36 shrink-0 translate-y-2 items-center justify-center bg-transparent">
+                          {item.img && (
+                            <Image
+                              className="max-h-full w-auto max-w-full rounded-4xl object-contain transition-transform duration-300 scale-120 hover:scale-105"
+                              src={item.img}
+                              alt={item.title || "ภาพรางวัล"}
+                              width={400}
+                              height={300}
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                            />
+                          )}
                         </div>
+
                         <div className="flex-1">
                           <h4 className="font-bold text-lg line-clamp-1">
                             {item.title}

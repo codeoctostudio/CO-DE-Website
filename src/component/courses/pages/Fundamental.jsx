@@ -10,7 +10,7 @@ import CourseSetup from "./components/CourseSetup";
 // Assets of Slideshow Images
 import img1 from "@/assets/slideImages/Fundamental/img1.webp";
 import img2 from "@/assets/slideImages/Fundamental/img2.webp";
-import img3 from "@/assets/slideImages/Fundamental/img3.webp";
+import img3 from "@/assets/slideImages/Fundamental/img3_new09102026.webp";
 import img4 from "@/assets/slideImages/Fundamental/img4.webp";
 import img5 from "@/assets/slideImages/Fundamental/img5.webp";
 import python from "@/assets/courseDetails/python.webp";

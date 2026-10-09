@@ -212,7 +212,7 @@ export default function NewBlogPage() {
                   ? b.th.introChecklist.join("\n")
                   : b.th?.introChecklist || "",
                 introTags: Array.isArray(b.th?.introTags)
-                  ? b.th.introTags.join(", ")
+                  ? b.th.introTags.join(" | ")
                   : b.th?.introTags || "",
                 ctaTitle: b.th?.ctaTitle || "",
                 ctaText3: b.th?.ctaText3 || "",
@@ -228,7 +228,7 @@ export default function NewBlogPage() {
                   ? b.en.introChecklist.join("\n")
                   : b.en?.introChecklist || "",
                 introTags: Array.isArray(b.en?.introTags)
-                  ? b.en.introTags.join(", ")
+                  ? b.en.introTags.join(" | ")
                   : b.en?.introTags || "",
                 ctaTitle: b.en?.ctaTitle || "",
                 ctaText3: b.en?.ctaText3 || "",
@@ -558,7 +558,7 @@ export default function NewBlogPage() {
         ...formData.th,
         introTags: formData.th.introTags
           ? formData.th.introTags
-              .split(",")
+              .split("|")
               .map((t) => t.trim())
               .filter(Boolean)
           : [],
@@ -573,7 +573,7 @@ export default function NewBlogPage() {
         ...formData.en,
         introTags: formData.en.introTags
           ? formData.en.introTags
-              .split(",")
+              .split("|")
               .map((t) => t.trim())
               .filter(Boolean)
           : [],
@@ -854,10 +854,10 @@ export default function NewBlogPage() {
                 </div>
                 <div>
                   <label className="block font-semibold text-xs mb-1">
-                    Tags ภาษาไทย (คั่นด้วยจุลภาค `,` )
+                    Tags ภาษาไทย (คั่นด้วยเครื่องหมาย `|` )
                   </label>
                   <textarea
-                    placeholder="เช่น โรนัลโด้, เมสซี่"
+                    placeholder="เช่น โรนัลโด้ | เมสซี่"
                     value={formData.th.introTags}
                     onChange={(e) => {
                       e.target.style.height = "auto";
@@ -956,10 +956,10 @@ export default function NewBlogPage() {
                 </div>
                 <div>
                   <label className="block font-semibold text-xs mb-1">
-                    Tags (Comma-separated `,` )
+                    Tags (Separated by `|` )
                   </label>
                   <textarea
-                    placeholder="e.g. Ronaldo, Messi"
+                    placeholder="e.g. Ronaldo | Messi"
                     value={formData.en.introTags}
                     onChange={(e) => {
                       e.target.style.height = "auto";

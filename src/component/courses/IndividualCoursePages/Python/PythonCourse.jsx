@@ -9,7 +9,7 @@ import level2 from "@/assets/CourseIcons/level2.webp";
 import laptop from "@/assets/CourseIcons/laptop.webp";
 import certificate from "@/assets/CourseIcons/certificate.webp";
 import textCode from "@/assets/CourseIcons/textCode.webp";
-import img1 from "@/assets/CourseLogos/Python/images/img1.webp";
+import img1 from "@/assets/CourseLogos/Python/images/img1_new09102026.webp";
 import img2 from "@/assets/CourseLogos/Python/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Python/images/img3.webp";
 

@@ -7,10 +7,10 @@ import Footer from "../../homepage/components/Footer";
 import Message from "../../msg/Message";
 import CourseSetup from "./components/CourseSetup";
 
-import img1 from "@/assets/slideImages/blockCode/img1.webp";
+import img1 from "@/assets/slideImages/blockCode/img1_new09102020.webp";
 import img2 from "@/assets/slideImages/blockCode/img2.webp";
 import img3 from "@/assets/slideImages/blockCode/img3.webp";
-import img4 from "@/assets/slideImages/blockCode/img4.webp";
+import img4 from "@/assets/slideImages/blockCode/img4_new09102026.webp";
 import octo from "@/assets/courseDetails/octo.webp";
 import scratch from "@/assets/courseDetails/scratch.webp";
 

@@ -11,7 +11,7 @@ import laptop from "@/assets/CourseIcons/laptop.webp";
 import certificate from "@/assets/CourseIcons/certificate.webp";
 import textCode from "@/assets/CourseIcons/textCode.webp";
 import require from "@/assets/CourseIcons/require.webp";
-import img1 from "@/assets/CourseLogos/Web/images/img1.webp";
+import img1 from "@/assets/CourseLogos/Web/images/img1_new09102026.webp";
 import img2 from "@/assets/CourseLogos/Web/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Web/images/img3.webp";
 import { useLanguage } from "@/hook/useLanguage";

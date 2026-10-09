@@ -486,7 +486,8 @@ export default function BlogManagementPage() {
         isOpen={showPreview}
         onClose={() => setShowPreview(false)}
         onConfirm={() => {
-          window.location.href = `/admin/blogs/edit/${previewPayload?.slug}`;
+          // window.location.href = `/admin/blogs/edit/${previewPayload?.slug}`;
+          window.location.href = `/admin/blogs/`;
         }}
         loading={false}
         previewPayload={previewPayload}
