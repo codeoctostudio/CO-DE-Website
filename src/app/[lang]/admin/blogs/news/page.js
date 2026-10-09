@@ -631,7 +631,7 @@ export default function NewBlogPage() {
       );
       setShowPreview(false);
       setTimeout(() => {
-        router.push("/admin/blogs");
+        router.push("/th/admin/blogs");
         router.refresh();
       }, 1500);
     } catch (err) {
