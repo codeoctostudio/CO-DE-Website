@@ -212,6 +212,13 @@ const RewardLayer = () => {
     },
   ];
 
+  const getAge = (title) => {
+    const match = String(title || "").match(/\d+/);
+    return match ? parseInt(match[0], 10) : 0;
+  };
+
+  slides.sort((a, b) => getAge(a.title) - getAge(b.title));
+
   const sectionRef = useRef(null);
   const playerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
