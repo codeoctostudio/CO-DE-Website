@@ -12,6 +12,7 @@ import textCode from "@/assets/CourseIcons/textCode.webp";
 import img1 from "@/assets/CourseLogos/Python/images/img1_new09102026.webp";
 import img2 from "@/assets/CourseLogos/Python/images/img2.webp";
 import img3 from "@/assets/CourseLogos/Python/images/img3.webp";
+import { useLanguage } from "@/hook/useLanguage";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,6 +22,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const PythonCourse = () => {
+  const { dict } = useLanguage();
   const listStyle = {
     listStyleImage: `url(${check})`,
   };
@@ -40,8 +42,7 @@ const PythonCourse = () => {
           />
 
           <p className="my-12 w-[90%] text-center text-xl  lg:text-2xl xl:text-3xl">
-            "A Desired class that empowers your basic fundamental Python
-            skills."
+            {dict.course_fundamental_python_1}
           </p>
 
           {/* Scratch + Kid Pic*/}
@@ -67,30 +68,27 @@ const PythonCourse = () => {
         <div className="flex w-full  flex-col items-center justify-center  p-5 text-black  md:w-[45%]  md:p-10 ">
           <div>
             <p className="mb-2 text-sm font-bold sm:text-base lg:text-lg xl:text-xl">
-              Skills Developed
+              {dict.course_fundamental_python_2}
             </p>
             <ul style={listStyle} className="ml-10 ">
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Solid understanding of programming concepts
+                  {dict.course_fundamental_python_3}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Be able to break down problems into smaller steps and design
-                  efficient algorithms to solve them.
+                  {dict.course_fundamental_python_4}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Strong problem-solving skills and Coding technique when
-                  dealing with Programming problem
+                  {dict.course_fundamental_python_5}
                 </p>
               </li>
               <li className="mb-2  text-left text-sm sm:text-base lg:text-lg xl:text-xl">
                 <p className="ml-2">
-                  Be able to design and implement object-oriented solutions to
-                  problems
+                  {dict.course_fundamental_python_6}
                 </p>
               </li>
             </ul>
@@ -107,7 +105,7 @@ const PythonCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Intermediate</p>
+            <p>{dict.course_fundamental_python_31}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -116,7 +114,7 @@ const PythonCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Text-Based Code</p>
+            <p>{dict.course_fundamental_python_33}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -125,7 +123,7 @@ const PythonCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>On-site / Online</p>
+            <p>{dict.course_fundamental_python_34}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -134,7 +132,7 @@ const PythonCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Private / Group Class</p>
+            <p>{dict.course_fundamental_python_35}</p>
           </div>
           <div className="mb-3 flex w-[50%] items-center font-bold">
             <Image
@@ -143,7 +141,7 @@ const PythonCourse = () => {
               className="mr-3 w-[15%]"
               loading="lazy"
             />
-            <p>Certificate Included</p>
+            <p>{dict.course_fundamental_python_36}</p>
           </div>
         </div>
       </section>
@@ -151,73 +149,68 @@ const PythonCourse = () => {
       <section className="flex w-full items-center justify-center bg-[#5dcff5] p-10 text-black">
         <div>
           <p className="mb-5 text-2xl font-bold lg:text-3xl">
-            Learning Process
+            {dict.course_fundamental_python_7}
           </p>
           <ul className="ml-4 list-disc text-base md:text-lg lg:text-xl">
             <li className="font-bold">Introduction to Python:</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Gain an understanding of the concept of low-level language and
-                high-level language in coding.
+                {dict.course_fundamental_python_8}
               </li>
-              <li>Introduction to Python and its applications.</li>
-              <li>Explanation of Python's syntax and its data types.</li>
+              <li>{dict.course_fundamental_python_9}</li>
+              <li>{dict.course_fundamental_python_10}</li>
             </ul>
 
             <li className="font-bold">Control Flow and Functions:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Understand conditional statements.</li>
-              <li>Explore the variation of loops in Python.</li>
-              <li>Introduction to functions and their importance.</li>
+              <li>{dict.course_fundamental_python_13}</li>
+              <li>{dict.course_fundamental_python_14}</li>
+              <li>{dict.course_fundamental_python_15}</li>
             </ul>
 
-            <li className="font-bold">Data Structures in Python:</li>
+            <li className="font-bold">{dict.course_fundamental_python_16}</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Learn about organizing and storing data, along with its
-                advantages and use cases.
+                {dict.course_fundamental_python_17}
               </li>
             </ul>
 
-            <li className="font-bold">Error Handling:</li>
+            <li className="font-bold">{dict.course_fundamental_python_18}:</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Understand program bugs and the concept of error handling
-                techniques.
+                {dict.course_fundamental_python_19}
               </li>
             </ul>
 
             <li className="font-bold">
-              Introduction to Object-Oriented Programming (OOP):
+              {dict.course_fundamental_python_20}:
             </li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Introduction to OOP concepts: classes and objects.</li>
-              <li>Defining classes with attributes and methods.</li>
+              <li>{dict.course_fundamental_python_21}</li>
+              <li>{dict.course_fundamental_python_22}</li>
               <li>
-                Exploration of encapsulation, inheritance, and polymorphism.
+                {dict.course_fundamental_python_23}
               </li>
             </ul>
 
-            <li className="font-bold">Algorithm and Diagram Design:</li>
+            <li className="font-bold">{dict.course_fundamental_python_24}:</li>
             <ul className="mb-5 ml-7 list-square">
-              <li>Learn about algorithm design principles.</li>
+              <li>{dict.course_fundamental_python_25}</li>
               <li>
-                Introduction to flowcharts and pseudocode for algorithm
-                visualization and design.
+                {dict.course_fundamental_python_26}
               </li>
             </ul>
 
-            <li className="font-bold"> Hands-on Project:</li>
+            <li className="font-bold">{dict.course_fundamental_python_27}:</li>
             <ul className="mb-5 ml-7 list-square">
               <li>
-                Review and reinforce concepts covered in the previous weeks.
+                {dict.course_fundamental_python_28}
               </li>
               <li>
-                Encourage students to brainstorm ideas for their final project.
+                {dict.course_fundamental_python_29}
               </li>
               <li>
-                Students work on their final projects under supervision,
-                receiving assistance and guidance as needed.
+                {dict.course_fundamental_python_30}
               </li>
             </ul>
           </ul>
