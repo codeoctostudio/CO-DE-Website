@@ -6,6 +6,64 @@ import Image from "next/image";
 import { useLanguage } from "@/hook/useLanguage";
 import "./style.css";
 
+/**
+ * Facebook Video/Reel Embed
+ * - ส่ง width/height ให้ Facebook Plugin ตรงกับขนาดกรอบจริง เพื่อไม่ให้เกิดพื้นที่สีดำด้านล่าง
+ * - Reel / Story = แนวตั้ง (9:16), วิดีโอทั่วไป = แนวนอน (16:9)
+ */
+const FacebookEmbed = ({ url }) => {
+  const wrapRef = useRef(null);
+  const [width, setWidth] = useState(320);
+
+  const isVertical = /\/reels?\/|\/stories\//i.test(url);
+  const ratio = isVertical ? 16 / 9 : 9 / 16; // height / width
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = Math.round(el.getBoundingClientRect().width);
+      if (w > 0) setWidth(w);
+    };
+    update();
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Facebook plugin รองรับความกว้าง 200 - 734px
+  const w = Math.max(200, Math.min(734, width));
+  const h = Math.round(w * ratio);
+
+  const src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+    url,
+  )}&width=${w}&height=${h}&show_text=false&autoplay=true&mute=true&t=0`;
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`w-full overflow-hidden rounded-2xl shadow-lg relative bg-black ${
+        isVertical ? "max-w-70 sm:max-w-[320px]" : "max-w-full sm:max-w-[420px]"
+      }`}
+      style={{ aspectRatio: isVertical ? "9 / 16" : "16 / 9" }}
+    >
+      <iframe
+        key={`${w}x${h}`}
+        src={src}
+        title="Facebook Video Player"
+        width={w}
+        height={h}
+        className="absolute inset-0 w-full h-full border-0"
+        style={{ border: "none", overflow: "hidden" }}
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowFullScreen
+        scrolling="no"
+      />
+    </div>
+  );
+};
+
 const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
   const { langPath } = useLanguage();
   console.log("blogData:", blogData);
@@ -94,7 +152,8 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
 
   const getEmbedUrl = (step) => {
     try {
-      const url = step?.videoUrl || blogData?.videoUrl || blogData?.video_url || "";
+      const url =
+        step?.videoUrl || blogData?.videoUrl || blogData?.video_url || "";
       const videoId = step?.videoId || blogData?.videoId || "";
       const platform = (
         step?.platform ||
@@ -143,15 +202,6 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
         }
       }
 
-      // 4. Facebook
-      if (platform === "facebook" || url.includes("facebook.com")) {
-        if (url) {
-          return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
-            url,
-          )}&show_text=false&autoplay=true`;
-        }
-      }
-
       return url || null;
     } catch {
       return null;
@@ -187,6 +237,24 @@ const DynamicBlogContent = ({ dict = {}, lang = "th", blogData = {} }) => {
 
     // กรณีเป็นวิดีโอ (YouTube, TikTok, Facebook, IG)
     if (mediaType === "video") {
+      const rawUrl =
+        step?.videoUrl || blogData?.videoUrl || blogData?.video_url || "";
+      const rawPlatform = (
+        step?.platform ||
+        blogData?.platform ||
+        ""
+      ).toLowerCase();
+
+      // Facebook: ใช้ component แยก เพื่อคุมขนาดให้พอดีกับวิดีโอ
+      if (
+        rawUrl &&
+        (rawPlatform === "facebook" ||
+          rawUrl.includes("facebook.com") ||
+          rawUrl.includes("fb.watch"))
+      ) {
+        return <FacebookEmbed url={rawUrl} />;
+      }
+
       const embedUrl = getEmbedUrl(step);
 
       if (!embedUrl) {
