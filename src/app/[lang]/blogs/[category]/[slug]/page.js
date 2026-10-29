@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { getDictionary } from "@/lib/dictionary";
 import BlogDetailContent from "./BlogDetailContent";
+
+const SITE = "https://www.co-deacademy.com";
+const DEFAULT_OG = `${SITE}/images/og/default.jpg`;
 
 // ฟังก์ชันดึงข้อมูลบทความตาม Slug จาก Database ผ่าน PHP API
 async function getBlogBySlug(slug) {
@@ -39,17 +43,50 @@ async function getBlogBySlug(slug) {
   }
 }
 
-export default async function DynamicBlogPage({ params }) {
+export async function generateMetadata({ params }) {
   const { lang, slug } = await params;
+  const blog = await getBlogBySlug(slug);
+  if (!blog) return {};
 
-  // ดึงข้อมูลบทความจาก Database ผ่าน PHP API
-  const blogData = await getBlogBySlug(slug);
+  const l = lang === "en" ? "en" : "th";
+  const c =
+    blog[l] && Object.keys(blog[l]).length ? blog[l] : blog.th || blog.en || {};
 
-  if (!blogData) {
-    notFound(); // ถ้าไม่พบข้อมูลใน DB ให้แสดงหน้า 404
-  }
+  const title = c.introTitle || c.ctaTitle || "CO-DE Academy";
+  const description =
+    c.metaDescription || c.introDesc || c.introSubtitle || c.ctaDesc || "";
 
-  const dict = await getDictionary(lang);
+  // เลือกรูปแชร์: og_image (ถ้าเพิ่มคอลัมน์ ดูข้อ 2) -> image_url -> default
+  const raw =
+    blog.og_image || (blog.media_type !== "video" && blog.image_url) || "";
+  const image = /^https?:\/\//.test(raw) ? raw : DEFAULT_OG;
 
-  return <BlogDetailContent lang={lang} dict={dict} blogData={blogData} />;
+  const url = `${SITE}/${lang}/blogs/${blog.category_type}/${blog.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        th: `${SITE}/th/blogs/${blog.category_type}/${blog.slug}`,
+        en: `${SITE}/en/blogs/${blog.category_type}/${blog.slug}`,
+      },
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      siteName: "CO-DE Academy",
+      locale: l === "en" ? "en_US" : "th_TH",
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
 }
