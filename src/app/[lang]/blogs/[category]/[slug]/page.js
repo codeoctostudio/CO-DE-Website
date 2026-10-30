@@ -8,6 +8,15 @@ const DEFAULT_OG = `${SITE}/images/og/default.jpg`;
 
 const str = (v) => (typeof v === "string" ? v : "");
 
+// [OG] รับเฉพาะรูปจากแหล่งที่เราควบคุมเอง (รูปที่อัปโหลดผ่าน blogs.php และรูปในเว็บ)
+// ถ้า og_image ของคุณมาจากที่อื่นด้วย ให้เพิ่ม prefix ที่นี่
+const ALLOWED_IMAGE_PREFIXES = [
+  "https://admin.co-deacademy.com/api/Blogs_Image/",
+  `${SITE}/`,
+];
+const isAllowedImage = (u) =>
+  ALLOWED_IMAGE_PREFIXES.some((p) => u.startsWith(p));
+
 const getBlogBySlug = cache(async (slug) => {
   try {
     const res = await fetch(
@@ -50,12 +59,18 @@ export async function generateMetadata({ params }) {
       str(c.introSubtitle) ||
       str(c.ctaDesc);
 
-    const raw =
-      str(blog.og_image) ||
-      (blog.media_type !== "video" ? str(blog.image_url) : "");
-    const image = /^https?:\/\//.test(raw) ? raw : DEFAULT_OG;
+    // [OG] ลำดับ: og_image → image_url (ถ้าไม่ใช่วิดีโอ) → ภาพ default
+    // ตรวจทีละตัว เพื่อให้ตัวที่ใช้ไม่ได้ไม่บังตัวถัดไป
+    const candidates = [
+      str(blog.og_image),
+      blog.media_type !== "video" ? str(blog.image_url) : "",
+    ];
+    const image = candidates.find((u) => u && isAllowedImage(u)) || DEFAULT_OG;
 
-    const url = `${SITE}/${lang}/blogs/${blog.category_type}/${blog.slug}`;
+    // [OG] ใช้ l (th/en ที่ตรวจแล้ว) และ encode ค่าที่มาจากผู้ใช้
+    const url = `${SITE}/${l}/blogs/${encodeURIComponent(
+      blog.category_type,
+    )}/${encodeURIComponent(blog.slug)}`;
 
     return {
       title,
@@ -67,7 +82,13 @@ export async function generateMetadata({ params }) {
         title,
         description,
         siteName: "CO-DE Academy",
-        images: [{ url: image, width: 1200, height: 630, alt: title }],
+        // [OG] ระบุ width/height เฉพาะภาพ default ที่รู้ขนาดแน่ ๆ
+        // รูปที่ผู้ใช้อัปโหลดขนาดไม่แน่นอน การระบุผิดทำให้ครอปเพี้ยน
+        images: [
+          image === DEFAULT_OG
+            ? { url: image, width: 1200, height: 630, alt: title }
+            : { url: image, alt: title },
+        ],
       },
       twitter: {
         card: "summary_large_image",
