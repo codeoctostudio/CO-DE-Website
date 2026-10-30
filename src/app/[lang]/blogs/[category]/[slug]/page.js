@@ -19,16 +19,26 @@ const isAllowedImage = (u) =>
   ALLOWED_IMAGE_PREFIXES.some((p) => u.startsWith(p));
 
 // [OG] เช็กว่าไฟล์รูปมีอยู่จริง (ไฟล์ถูกลบ/ชื่อผิด → ใช้ภาพ default แทน)
-// ตอบกลับมาแล้วไม่ใช่รูป = ถือว่าไม่มี / ถ้าเช็กไม่ได้เพราะเครือข่ายช้าหรือล่ม ให้เชื่อ URL ไปก่อน
+// ถือว่า "ไม่มี" เฉพาะกรณีชัดเจนเท่านั้น: 404/410 หรือได้เนื้อหาที่ไม่ใช่รูปกลับมา
+// กรณีอื่น (403, 405, 5xx, timeout, เครือข่ายล่ม) ให้เชื่อ URL ไปก่อน
+// เพราะเซิร์ฟเวอร์/WAF บางตัวบล็อกคำขอ HEAD หรือบอท ทั้งที่ไฟล์มีอยู่จริง
+// ใช้ GET + Range 1 ไบต์ แทน HEAD เพื่อให้เข้ากับเซิร์ฟเวอร์ได้กว้างกว่า
 const imageExists = cache(async (url) => {
   try {
     const res = await fetch(url, {
-      method: "HEAD",
+      method: "GET",
+      headers: { Range: "bytes=0-0" },
+      cache: "no-store",
       signal: AbortSignal.timeout(3000),
     });
-    if (!res.ok) return false;
+    res.body?.cancel();
+
+    if (res.status === 404 || res.status === 410) return false;
+
     const type = res.headers.get("content-type");
-    return !type || type.startsWith("image/");
+    if (res.ok && type && !type.startsWith("image/")) return false;
+
+    return true;
   } catch {
     return true;
   }
@@ -84,10 +94,20 @@ export async function generateMetadata({ params }) {
     ];
     let image = DEFAULT_OG;
     for (const u of candidates) {
-      if (u && isAllowedImage(u) && (await imageExists(u))) {
-        image = u;
-        break;
+      if (!u) continue;
+      if (!isAllowedImage(u)) {
+        console.warn("[OG] รูปไม่ผ่านการตรวจแหล่งที่มา:", u);
+        continue;
       }
+      if (!(await imageExists(u))) {
+        console.warn("[OG] ไม่พบไฟล์รูป:", u);
+        continue;
+      }
+      image = u;
+      break;
+    }
+    if (image === DEFAULT_OG) {
+      console.warn("[OG] ใช้ภาพ default ให้ slug:", slug);
     }
 
     // [OG] ใช้ l (th/en ที่ตรวจแล้ว) และ encode ค่าที่มาจากผู้ใช้
