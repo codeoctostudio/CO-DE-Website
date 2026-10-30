@@ -4,7 +4,8 @@ import { getDictionary } from "@/lib/dictionary";
 import BlogDetailContent from "./BlogDetailContent";
 
 const SITE = "https://www.co-deacademy.com";
-const DEFAULT_OG = `${SITE}/images/og/default.jpg`;
+// ภาพ default (โลโก้ CO-DE) = public/og-image.webp
+const DEFAULT_OG = `${SITE}/og-image.webp`;
 
 const str = (v) => (typeof v === "string" ? v : "");
 
@@ -16,6 +17,22 @@ const ALLOWED_IMAGE_PREFIXES = [
 ];
 const isAllowedImage = (u) =>
   ALLOWED_IMAGE_PREFIXES.some((p) => u.startsWith(p));
+
+// [OG] เช็กว่าไฟล์รูปมีอยู่จริง (ไฟล์ถูกลบ/ชื่อผิด → ใช้ภาพ default แทน)
+// ตอบกลับมาแล้วไม่ใช่รูป = ถือว่าไม่มี / ถ้าเช็กไม่ได้เพราะเครือข่ายช้าหรือล่ม ให้เชื่อ URL ไปก่อน
+const imageExists = cache(async (url) => {
+  try {
+    const res = await fetch(url, {
+      method: "HEAD",
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!res.ok) return false;
+    const type = res.headers.get("content-type");
+    return !type || type.startsWith("image/");
+  } catch {
+    return true;
+  }
+});
 
 const getBlogBySlug = cache(async (slug) => {
   try {
@@ -65,7 +82,13 @@ export async function generateMetadata({ params }) {
       str(blog.og_image),
       blog.media_type !== "video" ? str(blog.image_url) : "",
     ];
-    const image = candidates.find((u) => u && isAllowedImage(u)) || DEFAULT_OG;
+    let image = DEFAULT_OG;
+    for (const u of candidates) {
+      if (u && isAllowedImage(u) && (await imageExists(u))) {
+        image = u;
+        break;
+      }
+    }
 
     // [OG] ใช้ l (th/en ที่ตรวจแล้ว) และ encode ค่าที่มาจากผู้ใช้
     const url = `${SITE}/${l}/blogs/${encodeURIComponent(
