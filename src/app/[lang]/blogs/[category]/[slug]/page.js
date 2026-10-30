@@ -4,8 +4,10 @@ import { getDictionary } from "@/lib/dictionary";
 import BlogDetailContent from "./BlogDetailContent";
 
 const SITE = "https://www.co-deacademy.com";
-// ภาพ default (โลโก้ CO-DE) = public/og-image.webp
-const DEFAULT_OG = `${SITE}/og-image.webp`;
+// ภาพ default (โลโก้ CO-DE) ต้นฉบับ = public/og-image.webp
+// แต่ LINE ไม่แสดง webp จึงให้ route /og-default.png (app/og-default.png/route.js)
+// แปลงเป็น PNG 1200x630 ให้ แล้วใช้ URL นี้เป็น og:image
+const DEFAULT_OG = `${SITE}/og-default.png`;
 
 const str = (v) => (typeof v === "string" ? v : "");
 
